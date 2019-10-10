@@ -1,13 +1,14 @@
 /**
  * This file contains Header component for the header section of the page
  */
+import React from 'react';
 
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 
 const Header = () => {
     return (
         <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+            {/* <img src={logo} className="App-logo" alt="logo" /> */}
             <p>
                 Edit <code>src/App.js</code> and save to reload.
             </p>
