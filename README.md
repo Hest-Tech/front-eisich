@@ -1,5 +1,9 @@
 # FRONT-EISICH
 
+## Prerequisites
+
+NodeJS
+
 ## Installation
 
 1. Clone this repo `git clone https://github.com/Hest-Tech/front-eisich.git`

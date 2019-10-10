@@ -1,20 +1,90 @@
 /* navigation bar styles */
 
-.contact-policy-promo {
+.main-nav-bar-container {
     background: #F2F2F2;
     height: 40px;
     width: 100%;
+    display: flex;
+    align-items: center;
 }
 
-.contact-policy {
+.nav-bar-container, .nav-links {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-around;
+}
 
+.nav-bar-container li, .navbar-list, .navbar-list li {
+    display: inline-block;
+    font-size: 12px;
+    opacity: .6;
+}
+
+.start-selling {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+    opacity: .9;
+}
+
+.separate {
+    border-right: 1px solid #666;
+}
+
+.trust-policy li {
+    padding: 0 10px;
+}
+
+.start-selling button {
+    background: #2f5653;
+    border: 1px solid #2f5653;
+    border-radius: 3px;
+    font-size: 12px;
+    letter-spacing: .5px;
+    color: #fff;
+    height: 90%;
+    padding: 5px;
+}
+
+.trust-policy {
+    width: 50%;
 }
 
 .help-login {
-    
+    width: 25%;
+    display: flex;
+    justify-content: space-around;
 }
 
 svg {
     width: 0;
     height: 0;
+}
+
+.navbar {
+    width: 80%;
+    /* background: red; */
+    margin: 0 auto;
+    height: 90px;
+}
+
+.navbar-brand {
+    color: #2f5653;
+    font-size: 40px;
+}
+
+.nav-links {
+    width: 70%;
+}
+
+.nav-links li {
+    display: inline-block;
+}
+
+.nav-links-container {
+    width: 100%;
+    background: #F2F2F2;
+    padding: 5px;
 }
