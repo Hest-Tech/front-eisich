@@ -4,6 +4,13 @@
 
 import React from 'react';
 
+import '../../public/images/call.svg';
+import '../../public/images/policy.svg';
+import '../../public/images/save-money.svg';
+import '../../public/images/suitcase.svg';
+import '../../public/images/question-mark.svg';
+import '../../public/images/user.svg';
+
 const NavBar = () => {
     return (
         <nav className="main-nav-bar">
@@ -11,25 +18,34 @@ const NavBar = () => {
                 <div className="nav-bar-container">
                     <ul className="trust-policy">
                         <li className="separate contact">
-                            <svg></svg>
-                            <span>Call us +254 707 030 398</span>
+                            <img src="./call.svg" alt="cellphone" width="16px" height="16px"/>
+                            <span> Call us +254 707 030 398</span>
                         </li>
                         <li className="separate return">
-                            <svg></svg>
-                            <span>30 day return policy</span>
+                            <img src="./policy.svg" alt="policy" width="16px" height="16px"/>
+                            <span> 30 day return policy</span>
                         </li>
                         <li className="bulk">
-                            <svg></svg>
-                            <span>Buy in bulk - save up to 70%</span>
+                            <img src="./save-money.svg" alt="save money" width="16px" height="16px"/>
+                            <span> Buy in bulk - save up to 70%</span>
                         </li>
                     </ul>
                     <div className="start-selling">
                         <button>Start selling</button>
                     </div>
                     <ul className="help-login">
-                        <li className="jobs">Jobs</li>
-                        <li className="help">Help</li>
-                        <li className="login">Login</li>
+                        <li className="jobs">
+                            <img src="./suitcase.svg" alt="suitcase" width="16px" height="16px"/>
+                            Jobs
+                        </li>
+                        <li className="help">
+                            <img src="./question-mark.svg" alt="question-mark" width="16px" height="16px"/>
+                            Help
+                        </li>
+                        <li className="login">
+                            <img src="./user.svg" alt="user" width="16px" height="16px"/>
+                            Login
+                        </li>
                     </ul>
                 </div>
             </div>
