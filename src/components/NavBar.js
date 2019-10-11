@@ -4,54 +4,53 @@
 
 import React from 'react';
 
-
 const NavBar = () => {
     return (
-        <nav class="main-nav-bar">
-            <div class="main-nav-bar-container">
-                <div class="nav-bar-container">
-                    <ul class="trust-policy">
-                        <li class="separate contact">
+        <nav className="main-nav-bar">
+            <div className="main-nav-bar-container">
+                <div className="nav-bar-container">
+                    <ul className="trust-policy">
+                        <li className="separate contact">
                             <svg></svg>
                             <span>Call us +254 707 030 398</span>
                         </li>
-                        <li class="separate return">
+                        <li className="separate return">
                             <svg></svg>
                             <span>30 day return policy</span>
                         </li>
-                        <li class="bulk">
+                        <li className="bulk">
                             <svg></svg>
                             <span>Buy in bulk - save up to 70%</span>
                         </li>
                     </ul>
-                    <div class="start-selling">
+                    <div className="start-selling">
                         <button>Start selling</button>
                     </div>
-                    <ul class="help-login">
-                        <li class="jobs">Jobs</li>
-                        <li class="help">Help</li>
-                        <li class="login">Login</li>
+                    <ul className="help-login">
+                        <li className="jobs">Jobs</li>
+                        <li className="help">Help</li>
+                        <li className="login">Login</li>
                     </ul>
                 </div>
             </div>
-            <nav class="navbar">
-                <a class="navbar-brand" href="#">Eisich</a>
-                <ul class="navbar-list">
+            <nav className="navbar">
+                <a className="navbar-brand" href="#">Eisich</a>
+                <ul className="navbar-list">
                     <li>
-                        <div class="title">Create</div>
-                        <div class="description">Custom products</div>
+                        <div className="title">Create</div>
+                        <div className="description">Custom products</div>
                     </li>
                     <li>
-                        <div class="title">Shop</div>
-                        <div class="description">Marketplace Designs</div>
+                        <div className="title">Shop</div>
+                        <div className="description">Marketplace Designs</div>
                     </li>
                 </ul>
                 <input />
                 <button>Wishlist</button>
                 <button>Cart</button>
             </nav>
-            <div class="nav-links-container">
-                <ul class="nav-links">
+            <div className="nav-links-container">
+                <ul className="nav-links">
                     <li>Best Sellers</li>
                     <li>Men</li>
                     <li>Women</li>

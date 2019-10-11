@@ -1,4 +1,4 @@
-/* navigation bar styles */
+// navigation bar styles
 
 .main-nav-bar-container {
     background: #F2F2F2;
@@ -8,7 +8,8 @@
     align-items: center;
 }
 
-.nav-bar-container, .nav-links {
+.nav-bar-container,
+.nav-links {
     display: flex;
     align-items: center;
     width: 80%;
@@ -16,7 +17,9 @@
     justify-content: space-around;
 }
 
-.nav-bar-container li, .navbar-list, .navbar-list li {
+.nav-bar-container li,
+.navbar-list,
+.navbar-list li {
     display: inline-block;
     font-size: 12px;
     opacity: .6;
@@ -87,4 +90,15 @@ svg {
     width: 100%;
     background: #F2F2F2;
     padding: 5px;
+}
+
+
+/* Header styles */
+
+.header-slider {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ccc;
 }

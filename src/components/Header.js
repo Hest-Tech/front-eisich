@@ -8,7 +8,7 @@ import React from 'react';
 const Header = () => {
     return (
         <header className="App-header">
-            <div class="header-slider">Slider</div>
+            <div className="header-slider">Slider</div>
         </header>
     );
 }
