@@ -1,17 +1,46 @@
 .app-featured-categories {
     width: 100%;
     margin: 40px 0;
-    height: 50vh;
     // background: red;
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
+.category-icons {
+    display: flex;
+    flex-direction: column;
+    // width: 70%;
+    justify-content: center;
+}
+
+.icons-line {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.icon-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 40px;
+    opacity: .8;
+}
+
+.icon-div:hover {
+    opacity: .9;
+    cursor: pointer;
+}
+
+.category-icons img {
+}
+
 .featured-categories {
-    width: 80%;
+    width: 60%;
     height: 80%;
+    background: #F2F2F2;
     // background: green;
 }

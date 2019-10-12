@@ -202,6 +202,11 @@ svg {
 .nav-links li {
     display: inline-block;
     cursor: pointer;
+    opacity: .9;
+}
+
+.nav-links li:hover {
+    color: #2f5653;
 }
 
 .nav-links-container {
