@@ -10,6 +10,9 @@ import '../../public/images/save-money.svg';
 import '../../public/images/suitcase.svg';
 import '../../public/images/question-mark.svg';
 import '../../public/images/user.svg';
+import '../../public/images/arrow-down.svg';
+import '../../public/images/wishlist.svg';
+import '../../public/images/shopping-cart.svg';
 
 const NavBar = () => {
     return (
@@ -44,26 +47,38 @@ const NavBar = () => {
                         </li>
                         <li className="login">
                             <img src="./user.svg" alt="user" width="16px" height="16px"/>
-                            Login
+                            <p>Login</p>
+                            <img className="arrow-down" src="./arrow-down.svg" alt="arrow down" width="10px" height="10px" />
                         </li>
                     </ul>
                 </div>
             </div>
             <nav className="navbar">
                 <a className="navbar-brand" href="#">Eisich</a>
-                <ul className="navbar-list">
-                    <li>
-                        <div className="title">Create</div>
-                        <div className="description">Custom products</div>
-                    </li>
-                    <li>
-                        <div className="title">Shop</div>
-                        <div className="description">Marketplace Designs</div>
-                    </li>
-                </ul>
-                <input />
-                <button>Wishlist</button>
-                <button>Cart</button>
+                <div className="navbar-list">
+                    <ul className="navbar-list_wrapped">
+                        <li className="view-products">
+                            <h6 className="title-head products">Products</h6>
+                            <div className="description-page">View Products</div>
+                        </li>
+                        <li className="visit-shops">
+                            <h6 className="title-head">Shops</h6>
+                            <div className="description-page">Visit Shops</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="shopping-options">
+                    <form className="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Find product" aria-label="Search" />
+                    </form>
+                    <div className="shopping-icons">
+                        <span className="img-icons">
+                            <img src="./wishlist.svg" alt="question-mark" width="26px" height="26px"/>
+                            <img src="./shopping-cart.svg" alt="question-mark" width="26px" height="26px"/>
+                        </span>
+                    </div>
+                </div>
             </nav>
             <div className="nav-links-container">
                 <ul className="nav-links">
@@ -76,7 +91,6 @@ const NavBar = () => {
                     <li>Home & Living</li>
                     <li>Gifts</li>
                     <li>Collections</li>
-                    <li><button>Sale</button></li>
                 </ul>
             </div>
         </nav>

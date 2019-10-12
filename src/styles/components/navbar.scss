@@ -16,9 +16,7 @@
     justify-content: space-around;
 }
 
-.nav-bar-container li,
-.navbar-list,
-.navbar-list li {
+.nav-bar-container li {
     display: inline-block;
     font-size: 12px;
     opacity: .6;
@@ -59,7 +57,7 @@
 }
 
 .help-login {
-    width: 17%;
+    width: 20%;
     display: flex;
     justify-content: space-around;
 }
@@ -76,8 +74,9 @@
     border-right: 1px solid #2f5653;
 }
 
-.help-login li img {
-    // padding-right: 5px;    
+.login p {
+    padding: 0 5px;
+    margin: 0;
 }
 
 svg {
@@ -87,14 +86,113 @@ svg {
 
 .navbar {
     width: 80%;
-    /* background: red; */
+    // background: brown;
     margin: 0 auto;
     height: 90px;
+    display: flex;
+}
+
+.navbar-list li:hover {
+    .title-head {
+        color: #2f5653;
+    }
+    .description-page {
+        opacity: .8;
+    }
 }
 
 .navbar-brand {
     color: #2f5653;
     font-size: 40px;
+    flex: 10%;
+}
+
+.navbar-list {
+    // background: grey;
+    flex: 35%;
+    height: 95%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar-list_wrapped {
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+    // background: green;
+}
+
+.shopping-options {
+    // background: red;
+    flex: 40%;
+    display: flex;
+}
+
+.img-icons {
+    // background: grey;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: .8;
+}
+
+.img-icons img {
+    cursor: pointer;
+}
+
+.form-inline {
+    flex: 60%;
+}
+
+.form-inline .form-control {
+    width: 85%;
+}
+
+.shopping-icons {
+    // background: brown;
+    flex: 50%;
+    display: flex;
+}
+
+.active-cyan-4 {
+    background: red;
+    margin: 0;
+}
+
+.view-products {
+    // background: red;
+    border-bottom: 4px solid #2f5653;
+    // color: #2f5653;
+}
+
+.products {
+    color: #2f5653;
+}
+
+.visit-shops {
+    // background: blue;
+    opacity: .6;
+}
+
+.navbar-list li {
+    opacity: .9;
+    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.arrow-down {
+    margin: 0;
+    height: 100%;
+}
+
+.title-head {
+    letter-spacing: .7px;
+    font-size: 20px;
 }
 
 .nav-links {
@@ -103,6 +201,7 @@ svg {
 
 .nav-links li {
     display: inline-block;
+    cursor: pointer;
 }
 
 .nav-links-container {
