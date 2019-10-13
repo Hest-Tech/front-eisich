@@ -1,17 +1,17 @@
-.app-new-arrivals {
+@import '../base/settings';
+
+.app-top-selling {
     width: 100%;
-    margin: 40px 0;
+    margin: $xl-margin 0;
     height: 50vh;
-    // background: red;
-    border: 1px solid black;
+    border: .1rem solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.new-arrivals {
+.top-selling {
     width: 80%;
     height: 80%;
-    // background: green;
 }

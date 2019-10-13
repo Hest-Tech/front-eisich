@@ -1,33 +1,43 @@
+@import '../base/settings';
+
 .app-featured-categories {
     width: 100%;
-    margin: 40px 0;
-    // background: red;
+    margin: $xl-margin 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
+.featured-categories {
+    width: 60%;
+    height: 80%;
+    background: $off-white;
+}
+
 .category-icons {
     display: flex;
     flex-direction: column;
-    // width: 70%;
     justify-content: center;
 }
 
 .icons-line {
-    margin: 30px 0;
+    margin: $l-margin+1 0;
     display: flex;
     justify-content: center;
 }
 
 .icon-div {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    margin: 0 40px;
+    margin: 0 $xl-margin;
     opacity: .8;
+}
+
+.icon-div p {
+    padding: $m-padding 0;
 }
 
 .icon-div:hover {
@@ -35,12 +45,12 @@
     cursor: pointer;
 }
 
-.category-icons img {
+.icon-div__img {
+    width: $large-img;
+    height: $large-img;
 }
 
-.featured-categories {
-    width: 60%;
-    height: 80%;
-    background: #F2F2F2;
-    // background: green;
+.icon-div:hover {
+    width: $large-img + .5;
+    height: $large-img + .5;
 }

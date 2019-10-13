@@ -16,38 +16,38 @@ import '../../public/images/textile.svg';
 const FeaturedCategories = () => {
     return (
         <div className="app-featured-categories">
-            <h4>Featured Categories</h4>
+            <h2 className="display-4">Featured Categories</h2>
             <div className="featured-categories">
                 <div className="category-icons">
                     <div className="icons-line">
                         <div className="icon-div">
-                            <img src="kitchen.svg" height="70px" width="70px" />
+                            <img className="icon-div__img" src="kitchen.svg" />
                             <p>kitchen Appliances</p>
                         </div>
                         <div className="icon-div">
-                            <img src="computer.svg" height="70px" width="70px" />
-                            <p>Computers</p>
-                        </div>
-                        <div className="icon-div">
-                            <img src="living-room.svg" height="70px" width="70px" />
+                            <img className="icon-div__img" src="living-room.svg" />
                             <p>Home decor</p>
                         </div>
                         <div className="icon-div">
-                            <img src="shirt.svg" height="70px" width="70px" />
+                            <img className="icon-div__img" src="computer.svg" />
+                            <p>Computers</p>
+                        </div>
+                        <div className="icon-div">
+                            <img className="icon-div__img" src="shirt.svg" />
                             <p>Men fashion</p>
                         </div>
                     </div>
                     <div className="icons-line">
                         <div className="icon-div">
-                            <img src="smartphone.svg" height="70px" width="70px" />
+                            <img className="icon-div__img" src="smartphone.svg" />
                             <p>Smartphones</p>
                         </div>
                         <div className="icon-div">
-                            <img src="smartwatch.svg" height="70px" width="70px" />
+                            <img className="icon-div__img" src="smartwatch.svg" />
                             <p>Watches</p>
                         </div>
                         <div className="icon-div">
-                            <img src="textile.svg" height="70px" width="70px" />
+                            <img className="icon-div__img" src="textile.svg" />
                             <p>Textile</p>
                         </div>
                     </div>

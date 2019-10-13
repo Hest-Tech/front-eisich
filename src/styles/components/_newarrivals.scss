@@ -1,17 +1,17 @@
-.app-trending {
+@import '../base/settings';
+
+.app-new-arrivals {
     width: 100%;
-    margin: 40px 0;
+    margin: 4rem 0;
     height: 50vh;
-    // background: red;
-    border: 1px solid black;
+    border: .1rem solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.trending {
+.new-arrivals {
     width: 80%;
     height: 80%;
-    // background: green;
 }
