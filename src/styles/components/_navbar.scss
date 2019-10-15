@@ -33,7 +33,8 @@
     border-right: 1px solid $dark-grey;
 }
 
-.separate, .bulk {
+.separate,
+.bulk {
     cursor: pointer;
 }
 
@@ -156,6 +157,11 @@ svg {
     font-weight: 500;
 }
 
+.display-1:hover {
+    color: $base-color;
+    opacity: .9;
+}
+
 .navbar-list {
     flex: 35%;
     height: 95%;
@@ -182,6 +188,7 @@ svg {
     .title-head {
         color: $base-color;
     }
+
     // .description-page {
     //     opacity: .8;
     // }
@@ -243,3 +250,199 @@ svg {
     color: $black;
     opacity: .8;
 }
+
+.mobile {
+    display: none;
+}
+
+// media queries
+@media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
+
+    .start-selling,
+    .help-login,
+    .navbar-list,
+    .nav-links-container,
+    .trust-policy .return,
+    .trust-policy .bulk,
+    .form-inline {
+        display: none;
+    }
+
+    .mobile-menu-items {
+        width: 100%;
+        background: red;
+    }
+
+    .trust-policy {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $m-font-size;
+    }
+
+    .contact {
+        border: none;
+    }
+
+    .navbar {
+        width: 100%;
+        height: 6rem;
+    }
+
+    .shopping-options {
+        flex: 45%;
+        justify-content: space-between;
+    }
+
+    .display-1 {
+        flex: 45%;
+        text-align: left;
+        padding: 0 $l-padding;
+        font-size: $m-font-size + .9;
+    }
+
+    .img-icons {
+        justify-content: space-around;
+        width: 80%;
+    }
+
+    .shopping__icon-img {
+        height: $medium-img;
+    }
+
+    .mobile-menu-bar, .mobile-user-img {
+        width: $medium-img;
+        height: $medium-img;
+        cursor: pointer;
+        flex: 10%;
+        opacity: .8;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .form-control {
+        font-size: $s-font-size + .5;
+        outline: none;
+        color: $light-grey;
+        font-style: italic;
+    }
+
+    .mobile-search-bar {
+        padding: 0 $s-padding;
+    }
+
+    .glyphicon-search {
+        font-size: $s-font-size + .5;
+        color: $white;
+        cursor: pointer;
+    }
+
+    .btn-search {
+        background: $base-color;
+    }
+}
+
+@media screen and (min-width: $mobile-landscape-width) {}
+
+@media screen and (min-width: $small-tablet-width) {}
+
+@media screen and (min-width: $large-tablet-width) and (max-width: $large-tablet-landscape-width) {
+    
+    .start-selling,
+    .navbar-list,
+    .nav-links-container,
+    .help-login {
+        display: none;
+    }
+
+    .trust-policy, .navbar {
+        width: 100%;
+    }
+
+    .trust-policy {
+        text-align: center;
+    }
+
+    .shopping-options {
+        flex: 65%;
+    }
+
+    .shopping__icon-img {
+        height: $medium-img;
+    }
+
+    .mobile-menu-bar {
+        display: block;
+        width: $medium-img;
+        height: $medium-img;
+        opacity: .8;
+        flex: 12%;
+    }
+
+    .display-1 {
+        flex: 20%;
+        text-align: left;
+        padding: 0 $l-padding;
+        font-size: $m-font-size + .9;
+    }
+
+}
+
+@media screen and (min-width: $small-tablet-landscape-width) {}
+
+@media screen and (min-width: $large-tablet-landscape-width) and (max-width: $desktop-width) {
+    
+    .start-selling,
+    .navbar-list,
+    .nav-links-container,
+    .help-login {
+        display: flex;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    .shopping-options {
+        flex: 45%;
+        justify-content: space-around;
+    }
+
+    .navbar {
+        width: 75%;
+        height: 9rem;
+    }
+
+    .display-1 {
+        // font-size: $l-font-size;
+        flex: 10%;
+        text-align: center;
+        padding: 0;
+
+    }
+
+    .shopping__icon-img {
+        width: $medium-img;
+        height: 80%;
+        flex: 10%;
+    }
+
+    .start-selling {
+        justify-content: center;
+    }
+
+    .help-login {
+        justify-content: space-around;
+    }
+
+    .nav-links {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: $desktop-width) {}
+
+@media screen and (min-width: $wide-desktop-width) {}

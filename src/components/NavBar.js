@@ -12,6 +12,7 @@ import '../../public/images/question-mark.svg';
 import '../../public/images/user.svg';
 import '../../public/images/arrow-down.svg';
 import '../../public/images/wishlist.svg';
+import '../../public/images/menu.svg';
 import '../../public/images/shopping-cart.svg';
 
 const NavBar = () => {
@@ -54,6 +55,7 @@ const NavBar = () => {
                 </div>
             </div>
             <nav className="navbar">
+                <img className="mobile mobile-menu-bar" src="menu.svg" />
                 <a className="display-1" href="/">E-Isich</a>
                 <div className="navbar-list">
                     <ul className="navbar-list__wrapped">
@@ -76,10 +78,19 @@ const NavBar = () => {
                         <span className="img-icons">
                             <img className="shopping__icon-img" src="./wishlist.svg" alt="question-mark" />
                             <img className="shopping__icon-img" src="./shopping-cart.svg" alt="question-mark" />
+                            <img src="./user.svg" alt="user" className="mobile mobile-user-img" />
                         </span>
                     </div>
                 </div>
             </nav>
+            <div className="mobile mobile-search-bar">
+                <div className="input-group mb-4">
+                    <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon6" className="form-control" />
+                    <div className="input-group-append">
+                        <button id="button-addon6" type="submit" className="btn btn-search"><span className="glyphicon-search">&#x1F50D;</span></button>
+                    </div>
+                </div>
+            </div>
             <div className="dropdown nav-links-container">
                 <ul className="nav-links">
                     <li className="dropdown" data-toggle="dropdown" data-hover="dropdown">Best Sellers</li>
@@ -98,6 +109,16 @@ const NavBar = () => {
                     <li className="dropdown" data-toggle="dropdown" data-hover="dropdown">Home & Living</li>
                     <li className="dropdown" data-toggle="dropdown" data-hover="dropdown">Gifts</li>
                     <li className="dropdown" data-toggle="dropdown" data-hover="dropdown">Collections</li>
+                </ul>
+            </div>
+            <div className="mobile mobile-menu-items">
+                <ul className="menu-categories">
+                    {/* <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li> */}
                 </ul>
             </div>
         </nav>
