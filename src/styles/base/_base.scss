@@ -26,3 +26,13 @@ a {
   cursor: pointer;
   text-decoration: none;
 }
+
+.display-4 {
+    margin: $l-margin 0;
+}
+
+.help-page-container {
+  background: red;
+  position: absolute;
+  bottom: 50%;
+}
