@@ -2,7 +2,103 @@
 
 .app-footer {
     width: 100%;
-    margin-top: 4rem;
+    margin-top: $xl-margin;
+    padding-top: $l-padding;
+    padding-right: $l-padding;
+    padding-left: $l-padding;
     height: 50vh;
     background: $light-grey;
+}
+
+.footer-subscribe-sec {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-form {
+    flex: 20%;
+}
+
+.footer-subscribe {
+    flex: 60%;
+}
+
+.footer-input-group .form-control {
+    font-size: $s-font-size+.5;
+    height: 5rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-color: transparent;
+    border-radius: .5rem 0 0 .5rem;
+}
+
+.footer-input-group .form-control:focus {
+    box-shadow: none;
+    border-color: #243c4f;
+}
+
+.footer-input-group .btn {
+    font-size: $s-font-size+.5;
+    min-height: 5rem;
+    border-radius: 0 .5rem .5rem 0;
+    background: $base-color;
+    color: $white;
+}
+
+.payment-method-icon {
+    width: $medium-img+1.5;
+    height: $medium-img+1.5;
+    margin: 0 $s-margin;
+    cursor: pointer;
+}
+
+.footer-payments {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.footer-payment-heading {
+    width: 70%;
+    text-align: center;
+}
+
+.footer-payment-icons {
+    width: 70%;
+    margin: $m-margin 0;
+    text-align: center;
+}
+
+.contact-us {
+    margin: $m-margin 0;
+    text-align: left;
+}
+
+.contact-span {
+    display: flex;
+    align-items: center;
+}
+
+.contact-span img {
+    width: $small-img;
+    height: $small-img;
+    margin: 0 $m-margin;
+}
+
+.payment-lock, .social-media {
+    width: $medium-img;
+    height: $medium-img;
+    margin: 0 $m-margin;
+}
+
+.social-media {
+    cursor: pointer;
+}
+
+.subscribe-social-media {
+    margin: $m-margin 0;
+}
+
+.footer-form p {
+    margin: $m-margin 0;
+    // background: green;
 }

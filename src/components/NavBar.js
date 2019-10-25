@@ -69,16 +69,16 @@ export default class NavBar extends React.Component {
                     <NavLink className="display-1" to="/">Muslim</NavLink>
                     <div className="navbar-list">
                         <ul className="navbar-list__wrapped">
-                            <NavLink activeClassName="is-active" to="/products">
+                            <NavLink className="nav-link products-link" activeClassName="is-active" to="/products" style={{ textDecoration: 'none' }} >
                                 <li className="view-products">
                                     <h6 className="title-head products">Products</h6>
-                                    <div className="description-page">View Products</div>
+                                    <div className="title-description">View Products</div>
                                 </li>
                             </NavLink>
-                            <NavLink activeClassName="is-active" to="/shops">
+                            <NavLink className="nav-link about-us-link" activeClassName="is-active" to="/shops" style={{ textDecoration: 'none' }}>
                                 <li className="visit-shops">
-                                    <h6 className="title-head">Shops</h6>
-                                    <div className="description-page">Visit Shops</div>
+                                    <h6 className="title-head">About Us</h6>
+                                    <div className="title-description">Our Goal</div>
                                 </li>
                             </NavLink>
                         </ul>

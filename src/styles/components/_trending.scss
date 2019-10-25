@@ -20,14 +20,14 @@
 
 .trending {
     width: 100%;
-    height: 60vh;
+    height: 55vh;
 }
 
 .trending__container {
     width: 100%;
     display: flex;
     justify-content: center;
-    height: 100%;
+    height: 90%;
     position: relative;
 }
 
@@ -47,13 +47,16 @@
 }
 
 .img-overlay {
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .trending-img-item {
     width: 100%;
-    height: 100%;
+    height: 85%;
 }
 
 .arrow {

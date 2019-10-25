@@ -214,14 +214,24 @@ svg {
     padding: $m-padding 0;
 }
 
-.navbar-list li:hover {
+.title-description {
+    opacity: .8;
+}
+
+.nav-link:hover {
     .title-head {
         color: $base-color;
     }
 
-    // .description-page {
-    //     opacity: .8;
-    // }
+    .title-description {
+        opacity: 1;
+        color: $black;
+    }
+}
+
+.nav-link {
+    color: $black;
+    opacity: .8;
 }
 
 .is-active {
