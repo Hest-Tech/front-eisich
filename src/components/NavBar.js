@@ -66,7 +66,7 @@ export default class NavBar extends React.Component {
                 </div>
                 <nav className="navbar">
                     <img className="mobile mobile-menu-bar" src="menu.svg" />
-                    <NavLink className="display-1" to="/">Muslim</NavLink>
+                    <NavLink className="display-1" to="/">E-Isich</NavLink>
                     <div className="navbar-list">
                         <ul className="navbar-list__wrapped">
                             <NavLink className="nav-link products-link" activeClassName="is-active" to="/products" style={{ textDecoration: 'none' }} >
