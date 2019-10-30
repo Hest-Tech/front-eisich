@@ -2,12 +2,12 @@
 
 .app-footer {
     width: 100%;
-    margin-top: $xl-margin;
-    padding-top: $l-padding;
-    padding-right: $l-padding;
-    padding-left: $l-padding;
-    height: 50vh;
+    // margin-top: $xl-margin;
+    padding: $l-padding;
+    // height: 50vh;
     background: $light-grey;
+    position: relative;
+    top: $m-navbar-height;
 }
 
 .footer-subscribe-sec {

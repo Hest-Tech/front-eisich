@@ -38,10 +38,10 @@ const Footer = () => {
                     </div>
                     <div className="footer-form">
                         <p>Subscribe for our Newsletter:</p>
-                        <div class="footer-input-group input-group">
-                            <input type="email" class="form-control" placeholder="Enter your email" />
-                            <span class="input-group-btn">
-                                <button class="btn btn-theme" type="submit">Subscribe</button>
+                        <div className="footer-input-group input-group">
+                            <input type="email" className="form-control" placeholder="Enter your email" />
+                            <span className="input-group-btn">
+                                <button className="btn btn-theme" type="submit">Subscribe</button>
                             </span>
                         </div>
                         <div className="subscribe-social-media">

@@ -75,8 +75,8 @@ export default class NavBar extends React.Component {
                                     <div className="title-description">View Products</div>
                                 </li>
                             </NavLink>
-                            <NavLink className="nav-link about-us-link" activeClassName="is-active" to="/shops" style={{ textDecoration: 'none' }}>
-                                <li className="visit-shops">
+                            <NavLink className="nav-link about-us-link" activeClassName="is-active" to="/about" style={{ textDecoration: 'none' }}>
+                                <li className="about-link">
                                     <h6 className="title-head">About Us</h6>
                                     <div className="title-description">Our Goal</div>
                                 </li>
