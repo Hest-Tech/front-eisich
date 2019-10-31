@@ -102,6 +102,7 @@ select {
     width: 20%;
     background: $white;
     border-radius: .2rem;
+    cursor: pointer;
 }
 
 .product-items {
@@ -114,7 +115,6 @@ select {
     margin: $l-margin $l-margin;
     width: 28%;
     height: 35rem;
-    background: blue;
     position: relative;
     cursor: pointer;
 }

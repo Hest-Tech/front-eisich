@@ -20,13 +20,15 @@ const Trending = () => (
                             <div className="img-overlay">
                                 <img src="shoes.jpg" className="trending-img-item" />
                             </div>
-                            <div className="trending-img-content"></div>
+                            <div className="trending-img-content">
+                                adfl;dfal;asldfkj
+                            </div>
                         </div>
                         <div className="trending-img">
                             <div className="img-overlay">
                                 <img src="shoes.jpg" className="trending-img-item" />
                             </div>
-                            <div className="trending-img-content"></div>
+                            <div className="trending-img-content">sdfgsdgf</div>
                         </div>
                         <div className="trending-img">
                             <div className="img-overlay">
