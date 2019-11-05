@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import '../../public/images/hijab.jpg';
 import '../../public/images/add-wishlist.svg';
@@ -39,14 +40,14 @@ const ProductsPage = () => (
                 <div className="color-container">
                     <b className="filter-name">COLORS</b>
                     <div className="color-pallete">
-                        <span className="color-item pink" style={{background: 'pink'}}></span>
-                        <span className="color-item purple" style={{background: 'purple'}}></span>
-                        <span className="color-item red" style={{background: 'red'}}></span>
-                        <span className="color-item orange" style={{background: 'orange'}}></span>
-                        <span className="color-item blue" style={{background: 'blue'}}></span>
-                        <span className="color-item green" style={{background: 'green'}}></span>
-                        <span className="color-item grey" style={{background: 'grey'}}></span>
-                        <span className="color-item black" style={{background: 'black'}}></span>
+                        <span className="color-item pink" style={{ background: 'pink' }}></span>
+                        <span className="color-item purple" style={{ background: 'purple' }}></span>
+                        <span className="color-item red" style={{ background: 'red' }}></span>
+                        <span className="color-item orange" style={{ background: 'orange' }}></span>
+                        <span className="color-item blue" style={{ background: 'blue' }}></span>
+                        <span className="color-item green" style={{ background: 'green' }}></span>
+                        <span className="color-item grey" style={{ background: 'grey' }}></span>
+                        <span className="color-item black" style={{ background: 'black' }}></span>
                     </div>
                 </div>
             </div>
@@ -62,7 +63,7 @@ const ProductsPage = () => (
                 <span>page: <b className="current-page">1</b> of <b className="total-pages">120</b></span>
             </div>
             <div className="product-items">
-                <div className="product">
+                <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
                     <img src="hijab.jpg" className="product-img" />
                     <span className="add-wishlist">
                         <img src="add-wishlist.svg" />
@@ -77,8 +78,8 @@ const ProductsPage = () => (
                             </div>
                         </span>
                     </div>
-                </div>
-                <div className="product">
+                </NavLink>
+                <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
                     <img src="hijab.jpg" className="product-img" />
                     <span className="add-wishlist">
                         <img src="add-wishlist.svg" />
@@ -93,8 +94,8 @@ const ProductsPage = () => (
                             </div>
                         </span>
                     </div>
-                </div>
-                <div className="product">
+                </NavLink>
+                <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
                     <img src="hijab.jpg" className="product-img" />
                     <span className="add-wishlist">
                         <img src="add-wishlist.svg" />
@@ -109,8 +110,8 @@ const ProductsPage = () => (
                             </div>
                         </span>
                     </div>
-                </div>
-                <div className="product">
+                </NavLink>
+                <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
                     <img src="hijab.jpg" className="product-img" />
                     <span className="add-wishlist">
                         <img src="add-wishlist.svg" />
@@ -125,8 +126,8 @@ const ProductsPage = () => (
                             </div>
                         </span>
                     </div>
-                </div>
-                <div className="product">
+                </NavLink>
+                <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
                     <img src="hijab.jpg" className="product-img" />
                     <span className="add-wishlist">
                         <img src="add-wishlist.svg" />
@@ -141,8 +142,8 @@ const ProductsPage = () => (
                             </div>
                         </span>
                     </div>
-                </div>
-                <div className="product">
+                </NavLink>
+                <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
                     <img src="hijab.jpg" className="product-img" />
                     <span className="add-wishlist">
                         <img src="add-wishlist.svg" />
@@ -157,8 +158,8 @@ const ProductsPage = () => (
                             </div>
                         </span>
                     </div>
-                </div>
-                <div className="product">
+                </NavLink>
+                <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
                     <img src="hijab.jpg" className="product-img" />
                     <span className="add-wishlist">
                         <img src="add-wishlist.svg" />
@@ -173,8 +174,8 @@ const ProductsPage = () => (
                             </div>
                         </span>
                     </div>
-                </div>
-                <div className="product">
+                </NavLink>
+                <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
                     <img src="hijab.jpg" className="product-img" />
                     <span className="add-wishlist">
                         <img src="add-wishlist.svg" />
@@ -189,8 +190,8 @@ const ProductsPage = () => (
                             </div>
                         </span>
                     </div>
-                </div>
-                <div className="product">
+                </NavLink>
+                <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
                     <img src="hijab.jpg" className="product-img" />
                     <span className="add-wishlist">
                         <img src="add-wishlist.svg" />
@@ -205,7 +206,7 @@ const ProductsPage = () => (
                             </div>
                         </span>
                     </div>
-                </div>
+                </NavLink>
             </div>
             <nav aria-label="Page navigation example" className="pagination">
                 <ul className="pagination justify-content-center">

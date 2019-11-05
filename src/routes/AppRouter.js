@@ -8,6 +8,7 @@ import NotFoundPage from '../components/NotFoundPage';
 import ProductsPage from '../components/ProductsPage';
 import AboutPage from '../components/AboutPage';
 import Footer from '../components/Footer';
+import ProductItemPage from '../components/ProductItemPage';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -18,7 +19,7 @@ const AppRouter = () => (
                     <Route path="/" component={App} exact={true} />  
                     <Route path="/products" component={ProductsPage} />  
                     <Route path="/about" component={AboutPage} />  
-                    {/* <Route path="/edit/:id" component={EditExpensePage} /> */}
+                    <Route path="/product" component={ProductItemPage} />
                     <Route path="/help" component={HelpPage} />
                     <Route component={NotFoundPage} />
                 </Switch>

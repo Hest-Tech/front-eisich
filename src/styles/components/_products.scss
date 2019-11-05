@@ -113,10 +113,16 @@ select {
 
 .product {
     margin: $l-margin $l-margin;
+    color: $black;
+    opacity: .9;
     width: 28%;
     height: 35rem;
     position: relative;
     cursor: pointer;
+}
+
+.product:hover {
+    color: $black;
 }
 
 .product-img {

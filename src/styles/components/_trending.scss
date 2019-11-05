@@ -64,14 +64,16 @@
     height: 20%;
     opacity: .9;
     width: 90%;
-    color: $white;
+    color: $light-grey;
     padding: $m-padding;
+    background: $black;
 }
 
 .promo-info {
     position: absolute;
     top: $s-padding;
     width: 90%;
+    color: $light-grey;
     text-align: right;
 }
 
