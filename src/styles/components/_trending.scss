@@ -64,7 +64,22 @@
     height: 20%;
     opacity: .9;
     width: 90%;
-    background: $light-grey;
+    color: $white;
+    padding: $m-padding;
+}
+
+.promo-info {
+    position: absolute;
+    top: $s-padding;
+    width: 90%;
+    text-align: right;
+}
+
+.promo-info span {
+    background: $base-color;
+    width: 20%;
+    padding: $s-padding;
+    color: $white;
 }
 
 .img-overlay {
