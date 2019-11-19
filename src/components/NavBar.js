@@ -15,6 +15,7 @@ import '../../public/images/arrow-down.svg';
 import '../../public/images/wishlist.svg';
 import '../../public/images/menu.svg';
 import '../../public/images/shopping-cart.svg';
+import LoginPage from './LoginPage';
 
 
 export default class NavBar extends React.Component {
@@ -81,6 +82,7 @@ export default class NavBar extends React.Component {
                                     <div className="title-description">Our Goal</div>
                                 </li>
                             </NavLink>
+                            <LoginPage />
                         </ul>
                     </div>
 
