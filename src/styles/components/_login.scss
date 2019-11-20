@@ -1,0 +1,31 @@
+@import '../base/settings';
+
+
+.modal-dialog {
+    max-width: 60% !important;
+}
+
+.modal-header {
+    display: block;
+}
+
+.close span, .close {
+    font-size: $l-font-size;
+}
+
+.modal-title, .m-font-size {
+    font-size: 1.7rem;
+}
+
+.forgot-pass {
+    color: darkcyan;
+    opacity: .7;
+    outline: none;
+    border: none;
+}
+
+.forgot-pass:hover {
+    opacity: 1;
+    color: darkcyan;
+    background: $white;
+}

@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import 'normalize.css/normalize.css'; // reset css
 
 import AppRouter from './routes/AppRouter';
-import App from './App';
 import '../public/favicon.ico';
 import * as serviceWorker from './serviceWorker';
 

@@ -21,8 +21,21 @@ import LoginPage from './LoginPage';
 export default class NavBar extends React.Component {
 
     constructor(props) {
-        super(props)
+        super(props);
+        this.toggleLoginPopUp = this.toggleLoginPopUp.bind(this);
+        this.hideLoginPopUp = this.hideLoginPopUp.bind(this);
 
+        this.state = {
+            loginPopUp: undefined
+        };
+    }
+
+    toggleLoginPopUp() {
+        this.setState((prevState) => ({ loginPopUp: !prevState.loginPopUp }))
+    }
+
+    hideLoginPopUp() {
+        this.setState(() => ({ loginPopUp: undefined }))
     }
 
     componentDidMount() { }
@@ -56,7 +69,10 @@ export default class NavBar extends React.Component {
                                     <img src="./question-mark.svg" alt="question-mark" className="navbar__icon-img" />
                                     <p>Help</p>
                                 </span>
-                                <span className="login">
+                                <span
+                                    className="login"
+                                    onClick={this.toggleLoginPopUp}    
+                                >
                                     <img src="./user.svg" alt="user" className="navbar__icon-img" />
                                     <p>Login</p>
                                     <img className="arrow-down" src="./arrow-down.svg" alt="arrow down" width="10px" height="10px" />
@@ -82,7 +98,10 @@ export default class NavBar extends React.Component {
                                     <div className="title-description">Our Goal</div>
                                 </li>
                             </NavLink>
-                            <LoginPage />
+                            <LoginPage
+                                loginPopUp={this.state.loginPopUp}
+                                hideLoginPopUp={this.hideLoginPopUp}
+                            />
                         </ul>
                     </div>
 
