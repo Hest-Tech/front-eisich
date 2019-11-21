@@ -5,8 +5,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import '../../public/images/hijab.jpg';
-import '../../public/images/add-wishlist.svg';
+import '../images/hijab.jpg';
+import '../images/add-wishlist.svg';
 
 const ProductsPage = () => (
     <div className="products-container">

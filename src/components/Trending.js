@@ -4,8 +4,8 @@
  */
 import React from 'react';
 
-import '../../public/images/arrow-left.svg';
-import '../../public/images/arrow-right.svg';
+import '../images/arrow-left.svg';
+import '../images/arrow-right.svg';
 
 const Trending = () => (
     <div className="app-trending">

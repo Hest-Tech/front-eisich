@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css'; // reset css
 
 import AppRouter from './routes/AppRouter';
-import '../public/favicon.ico';
+// import '../public/favicon.ico';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<AppRouter />, document.getElementById('root'));

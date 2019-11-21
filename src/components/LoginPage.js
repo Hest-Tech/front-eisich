@@ -5,39 +5,19 @@ export default class LoginPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.showRegisterForm = this.showRegisterForm.bind(this);
-    }
-
-    onFormChange() {
-        console.log('here')
-    }
-
-    showRegisterForm() {
-        console.log('clicked')
     }
 
     render() {
         return (
             <div>
-                <div className="modal-header">
-                    <button
-                        type="button"
-                        className="close"
-                        data-dismiss="modal"
-                        onClick={this.props.hideLoginPopUp}
-                    >
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <h4 className="modal-title" id="myModalLabel">Login to E-Isich</h4>
-                </div>
                 <div className="modal-body">
                     <div className="row">
                         <div className="col-xs-6">
                             <div className="well">
                                 <form
                                     id="loginForm"
-                                    method="POST"
-                                    action="/login/"
+                                    // method="POST"
+                                    // action="/login/"
                                     noValidate="novalidate"
                                     onChange={this.onFormChange}
                                 >
@@ -67,7 +47,12 @@ export default class LoginPage extends React.Component {
                                         </label>
                                         <p className="help-block">(if this is a private computer)</p>
                                     </div>
-                                    <button type="submit" className="btn btn-success btn-block m-font-size">Login</button>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-success btn-block m-font-size"
+                                    >
+                                        Login
+                                    </button>
                                     <a href="/forgot/" className="btn btn-default btn-block m-font-size forgot-pass">Forgot password?</a>
                                 </form>
                             </div>
@@ -80,13 +65,14 @@ export default class LoginPage extends React.Component {
                                 <li><span className="fa fa-check text-success"></span> Save your favorites</li>
                                 <li><span className="fa fa-check text-success"></span> Fast checkout</li><br />
                             </ul>
-                            <p onClick={this.showRegisterForm}>
-                                <a
-                                    href="/new-customer/"
+                            <p
+                                className="register-btn"
+                                onClick={this.props.handleToggleAuth}>
+                                <button
                                     className="btn btn-info btn-block m-font-size"
                                 >
                                     Register now!
-                                </a>
+                                </button>
                             </p>
                         </div>
                     </div>

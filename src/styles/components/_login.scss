@@ -1,20 +1,12 @@
 @import '../base/settings';
 
 
-.modal-dialog {
-    max-width: 60% !important;
-}
-
-.modal-header {
-    display: block;
-}
-
-.close span, .close {
-    font-size: $l-font-size;
-}
-
-.modal-title, .m-font-size {
+.m-font-size {
     font-size: 1.7rem;
+}
+
+.btn-info {
+    color: $white;
 }
 
 .forgot-pass {

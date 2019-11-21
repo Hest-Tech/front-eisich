@@ -7,7 +7,7 @@ module.exports = {
     entry: './src/index.js',
     output: {
         filename: 'main.js',
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, 'public/dist'),
         publicPath: '/',
     },
     module: {
@@ -42,8 +42,8 @@ module.exports = {
     ],
     devtool: 'cheap-module-eval-source-map',
     devServer: {
-        contentBase: path.join(__dirname, '/public/dist'),
+        contentBase: path.resolve(__dirname, '/public/dist'),
         historyApiFallback: true,
-        // compress: true,
+        compress: true,
     }
 };

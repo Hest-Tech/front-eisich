@@ -4,16 +4,16 @@
  */
 import React from 'react';
 
-import '../../public/images/visa.svg';
-import '../../public/images/mastercard.svg';
-import '../../public/images/paypal.svg';
-import '../../public/images/secure.svg';
-import '../../public/images/facebook.svg';
-import '../../public/images/twitter.svg';
-import '../../public/images/pinterest.svg';
-import '../../public/images/instagram.svg';
-import '../../public/images/email.svg';
-import '../../public/images/telephone.svg';
+import '../images/visa.svg';
+import '../images/mastercard.svg';
+import '../images/paypal.svg';
+import '../images/secure.svg';
+import '../images/facebook.svg';
+import '../images/twitter.svg';
+import '../images/pinterest.svg';
+import '../images/instagram.svg';
+import '../images/email.svg';
+import '../images/telephone.svg';
 
 const Footer = () => {
     return (
@@ -23,16 +23,17 @@ const Footer = () => {
                     <div className="footer-subscribe">
                         <div className="footer-payments">
                             <span className="footer-payment-heading">
-                                <img className="payment-lock" src="secure.svg" />
+                                <img className="payment-lock" src="secure.svg" alt="secure" />
                                 <b>All Secure payment Methods</b>
                             </span>
                             <div className="footer-payment-icons">
-                                <img className="payment-method-icon" src="visa.svg" />
-                                <img className="payment-method-icon" src="mastercard.svg" />
-                                <img className="payment-method-icon" src="paypal.svg" />
-                            </div>                          <div className="contact-us">
-                                <span className="contact-span"><img src="email.svg" /><p>Email us at: webdev@hestechinnovators.com</p></span>
-                                <span className="contact-span"><img src="telephone.svg" /><p>Call us at: 0717459546</p></span>
+                                <img className="payment-method-icon" src="visa.svg" alt="visa" />
+                                <img className="payment-method-icon" src="mastercard.svg" alt="mastercard" />
+                                <img className="payment-method-icon" src="paypal.svg" alt="paypal" />
+                            </div>
+                            <div className="contact-us">
+                                <span className="contact-span"><img src="email.svg" alt="email" /><p>Email us at: webdev@hestechinnovators.com</p></span>
+                                <span className="contact-span"><img src="telephone.svg" alt="telephone" /><p>Call us at: 0717459546</p></span>
                             </div>
                         </div>
                     </div>
@@ -46,10 +47,10 @@ const Footer = () => {
                         </div>
                         <div className="subscribe-social-media">
                             <p>Check our social media:</p>
-                            <img className="social-media" src="facebook.svg" />
-                            <img className="social-media" src="twitter.svg" />
-                            <img className="social-media" src="instagram.svg" />
-                            <img className="social-media" src="pinterest.svg" />
+                            <img className="social-media" src="facebook.svg" alt="facebook" />
+                            <img className="social-media" src="twitter.svg" alt="twitter" />
+                            <img className="social-media" src="instagram.svg" alt="instagram" />
+                            <img className="social-media" src="pinterest.svg" alt="pinterest" />
                         </div>
                     </div>
                 </div>

@@ -5,9 +5,9 @@
 
 import React from 'react';
 
-import '../../public/images/textile.svg';
-import '../../public/images/good-quality.svg';
-import '../../public/images/size.svg';
+import '../images/textile.svg';
+import '../images/good-quality.svg';
+import '../images/size.svg';
 
 const Services = () => {
     return (

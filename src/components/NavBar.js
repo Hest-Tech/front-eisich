@@ -5,17 +5,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import '../../public/images/call.svg';
-import '../../public/images/policy.svg';
-import '../../public/images/save-money.svg';
-import '../../public/images/suitcase.svg';
-import '../../public/images/question-mark.svg';
-import '../../public/images/user.svg';
-import '../../public/images/arrow-down.svg';
-import '../../public/images/wishlist.svg';
-import '../../public/images/menu.svg';
-import '../../public/images/shopping-cart.svg';
-import LoginPage from './LoginPage';
+import '../images/call.svg';
+import '../images/policy.svg';
+import '../images/save-money.svg';
+import '../images/suitcase.svg';
+import '../images/question-mark.svg';
+import '../images/user.svg';
+import '../images/arrow-down.svg';
+import '../images/wishlist.svg';
+import '../images/menu.svg';
+import '../images/shopping-cart.svg';
+import AuthenticationModal from './AuthenticationModal';
 
 
 export default class NavBar extends React.Component {
@@ -98,7 +98,7 @@ export default class NavBar extends React.Component {
                                     <div className="title-description">Our Goal</div>
                                 </li>
                             </NavLink>
-                            <LoginPage
+                            <AuthenticationModal
                                 loginPopUp={this.state.loginPopUp}
                                 hideLoginPopUp={this.hideLoginPopUp}
                             />

@@ -3,9 +3,9 @@
  */
 import React from 'react';
 
-import '../../public/images/bags.jpg';
-import '../../public/images/electronics.jpg';
-import '../../public/images/shoes.jpg';
+import '../images/bags.jpg';
+import '../images/electronics.jpg';
+import '../images/shoes.jpg';
 
 
 const Header = () => (

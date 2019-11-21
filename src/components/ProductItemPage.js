@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../public/images/hijab.jpg';
+import '../images/hijab.jpg';
 
 export default class ProductItemPage extends React.Component {
 

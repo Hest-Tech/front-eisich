@@ -6,7 +6,7 @@ export default class SignupPage extends React.Component {
         this.showLoginForm = this.showLoginForm.bind(this);
 
         this.state = {
-            
+
         }
     }
 
@@ -17,87 +17,64 @@ export default class SignupPage extends React.Component {
 
     render() {
         return (
-            <div className="mask rgba-black-light d-flex justify-content-center align-items-center">
-                <div className="container">
-                    <div className="row wow fadeIn">
-                        <div className="col-md-6 mb-4 white-text text-center text-md-left">
-                            <h1 className="display-4 font-weight-bold">Sign UP</h1>
-                            <hr className="hr-light" />
-                            <p>
-                                <strong>For the more information</strong>
-                            </p>
-                            <p className="mb-4 d-none d-md-block">
-                            <strong>Quickly get information from new leads and customers by signing up .WIth their information, you can funnel them into new accounts in an instant.Follow us on FACEBOOK</strong>
-                            </p>
-                            <a href="http:/www.facebook.com" target="_blank"  className="btn btn-indigo btn-lg">Facebook
-                                <i className="fa fa-facebook ml-2"></i>
-                            </a>
+            <div className="sign-up-container">
+                <div className="sign-up__extra-content">
+                    <h3>E-ISICH</h3>
+                    <b>For the more information</b>
+                    <p>Quickly get information from new leads and customers by signing up .With their information, you can funnel them into new accounts in an instant. Check out our social media</p><br />
+                    <div className="subscribe-social-media">
+                        <img className="social-media" src="facebook.svg" alt="facebook" />
+                        <img className="social-media" src="twitter.svg" alt="twitter" />
+                        <img className="social-media" src="instagram.svg" alt="instagram" />
+                        <img className="social-media" src="pinterest.svg" alt="pinterest" />
+                    </div>
+                </div>
+                <div className="sign-up__details">
+                    <b className="sign-up__title">Sign Up</b>
+                    <form action="" className="sign-up__form">
+                        <div className="form-row">
+                            <div class="form-group col-md-6">
+                                <input id="login-username" type="text" class="form-control" name="first-name" value="" placeholder="First Name" required />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input id="login-username" type="text" class="form-control" name="last-name" value="" placeholder="Last Name" required />
+                            </div>
                         </div>
-                        <div className="col-md-6 col-xl-5 mb-4">
-                            <div className="card">
-                                <div className="card-body">
-                                    <form>
-                                        <p className="h4 text-center mb-4">Sign up</p>
-                                        <div className="md-form">
-                                            <i className="fa fa-user prefix grey-text"></i>
-                                            <input type="text" id="materialFormRegisterNameEx" className="form-control" />
-                                            <label htmlFor="materialFormRegisterNameEx">Your name</label>
-                                        </div>
-                                        <div className="md-form">
-                                            <i className="fa fa-envelope prefix grey-text"></i>
-                                            <input type="email" id="materialFormRegisterEmailEx" className="form-control" />
-                                            <label htmlFor="materialFormRegisterEmailEx">Your email</label>
-                                        </div>
-                                        <div className="md-form">
-                                            <i className="fa fa-exclamation-triangle prefix grey-text"></i>
-                                            <input type="email" id="materialFormRegisterConfirmEx" className="form-control" />
-                                            <label htmlFor="materialFormRegisterConfirmEx">Confirm your email</label>
-                                        </div>
-                                        <div className="md-form">
-                                            <i className="fa fa-lock prefix grey-text"></i>
-                                            <input type="password" id="materialFormRegisterPasswordEx" className="form-control" />
-                                            <label htmlFor="materialFormRegisterPasswordEx">Your password</label>
-                                        </div>
-                                        <div className="md-form">
-                                            <i className="fa fa-exclamation-triangle prefix grey-text"></i>
-                                            <input type="password" id="materialFormRegisterConfirmEx" className="form-control" />
-                                            <label htmlFor="materialFormRegisterPasswordEx">Confirm Your password</label>
-                                        </div>
-                                        <div className="form-check">
-                                            <input className="form-check-input" type="checkbox" id="defaultCheck12" />
-                                            <label htmlFor="defaultCheck12" className="grey-text">Accept the
-                                                <a href="#" className="blue-text"> Terms and Conditions</a>
-                                            </label>
-                                        </div>
-                                        <div className="text-center mt-4">
-                                            <button className="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">Register</button>
-                                            <a
-                                                href=""
-                                                onClick={this.showLoginForm}
-                                            >
-                                                back to login
-                                            </a>
-                                            <div className="modal fade" id="myModal" role="dialog">
-                                                <div className="modal-dialog"> 
-                                                    <div className="modal-content">
-                                                        <div className="modal-header">
-                                                            <h4 className="modal-title">OOPS!</h4>
-                                                            <button type="button" className="close" data-dismiss="modal">×</button>
-                                                        </div>
-                                                        <div className="modal-body">
-                                                            <p>Connection ERROR.........!</p>
-                                                        </div>
-                                                        <div className="modal-footer">
-                                                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form> 
+                        <div className="form-row">
+                            <div class="form-group col-md-6">
+                                <input id="login-username" type="email" class="form-control" name="email" value="" placeholder="Email" required />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input id="login-username" type="number" class="form-control" name="phonenumber" value="" placeholder="Phonenumber" required />
+                            </div>
+                        </div>
+                        <div className="form-row">
+                            <div class="form-group col-md-6">
+                                <input id="login-username" type="password" class="form-control" name="password" value="" placeholder="Password" required />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input id="login-username" type="password" class="form-control" name="confirm-password" value="" placeholder="Confirm password" required />
+                            </div>
+                        </div>
+                        <div className="form-row">
+                            <div className="form-group col-md-6">
+                                <button type="submit" class="btn btn-primary col-md-6">Sign in</button>
+                            </div>
+                        </div>
+                        <div className="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="or-seperator"><i>or</i></div>
+                                <p class="text-center">Sign up with your social media account</p>
+                                <div class="text-center social-btn">
+                                    <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+                                    <a href="#" class="btn btn-info"><i class="fa fa-twitter"></i>&nbsp; Twitter</a>
+                                    <a href="#" class="btn btn-danger"><i class="fa fa-google"></i>&nbsp; Google</a>
                                 </div>
                             </div>
                         </div>
+                    </form>
+                    <div className="switch-to-login">
+                        <p>Already have an account? <a href="" onClick={this.props.handleToggleAuth}>Login</a> instead</p>
                     </div>
                 </div>
             </div>
