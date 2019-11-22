@@ -41,7 +41,6 @@ export default class NavBar extends React.Component {
     componentDidMount() { }
 
     render() {
-
         return (
             <nav className="main-nav-bar">
                 <div className="main-nav-bar__container">

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import clientStorage from '../utils/clientStorage';
+
 
 export default class LoginPage extends React.Component {
 
@@ -8,6 +10,7 @@ export default class LoginPage extends React.Component {
     }
 
     render() {
+        console.log(new clientStorage())
         return (
             <div>
                 <div className="modal-body">

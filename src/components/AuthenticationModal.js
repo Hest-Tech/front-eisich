@@ -23,6 +23,7 @@ export default class AuthenticationModal extends React.Component {
         this.state = {
             loginPopUp: true
         }
+        console.log({...this.state})
     }
 
     handleToggleAuth(e) {
