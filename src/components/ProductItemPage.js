@@ -1,3 +1,8 @@
+/**
+ * This file contains the Product Item Page component
+ */
+
+
 import React from 'react';
 
 import '../images/hijab.jpg';

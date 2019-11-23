@@ -15,18 +15,24 @@ const ProductsPage = () => (
                 <div className="check-selection">
                     <b className="selection-title">YOUR SELECTION</b>
                     <form className="check-selection__form">
-                        <span>
-                            <input type="checkbox" className="selection-checkbox" />
-                            <label>Women</label>
-                        </span>
-                        <span>
-                            <input type="checkbox" className="selection-checkbox" />
-                            <label>Teens</label>
-                        </span>
-                        <span>
-                            <input type="checkbox" className="selection-checkbox" />
-                            <label>Kids</label>
-                        </span>
+                        <div>
+                            <span>
+                                <input type="checkbox" className="form-selection-checkbox" />
+                                <label>Women</label>
+                            </span>
+                        </div>
+                        <div>
+                            <span>
+                                <input type="checkbox" className="form-selection-checkbox" />
+                                <label>Teens</label>
+                            </span>
+                        </div>
+                        <div>
+                            <span>
+                                <input type="checkbox" className="form-selection-checkbox" />
+                                <label>Kids</label>
+                            </span>
+                        </div>
                     </form>
                 </div>
                 <div className="brand-container">

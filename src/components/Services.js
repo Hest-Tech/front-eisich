@@ -1,6 +1,5 @@
 /**
- * This file contains NewArrivals component 
- * for the New Arrivals section of the page
+ * This file contains the Services component
  */
 
 import React from 'react';

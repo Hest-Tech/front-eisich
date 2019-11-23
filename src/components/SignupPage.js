@@ -1,18 +1,17 @@
+/**
+ * This file contains the Sign up Page component
+ */
+
+
 import React from 'react';
 
 export default class SignupPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showLoginForm = this.showLoginForm.bind(this);
 
         this.state = {
 
         }
-    }
-
-    showLoginForm(e) {
-        e.preventDefault();
-        console.log('clicked')
     }
 
     render() {
@@ -74,7 +73,7 @@ export default class SignupPage extends React.Component {
                         </div>
                     </form>
                     <div className="switch-to-login">
-                        <p>Already have an account? <a href="" onClick={this.props.handleToggleAuth}>Login</a> instead</p>
+                        <p>Already have an account? <a href="" onClick={this.props.handleSwithAuth}>Login</a> instead</p>
                     </div>
                 </div>
             </div>

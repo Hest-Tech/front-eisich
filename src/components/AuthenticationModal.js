@@ -1,9 +1,15 @@
+/**
+ * This file contains the Authentication modal
+ */
+
+
 import React from 'react';
 import Modal from 'react-modal';
 import SignupPage from './SignupPage';
 import LoginPage from './LoginPage';
 
 
+// Custom styles for the authentication modal
 const customStyles = {
     overlay: { zIndex: 1000 },
     content: {
@@ -18,7 +24,7 @@ export default class AuthenticationModal extends React.Component {
 
     constructor(props) {
         super(props);
-        this.handleToggleAuth = this.handleToggleAuth.bind(this);
+        this.handleSwithAuth = this.handleSwithAuth.bind(this);
 
         this.state = {
             loginPopUp: true
@@ -26,7 +32,7 @@ export default class AuthenticationModal extends React.Component {
         console.log({...this.state})
     }
 
-    handleToggleAuth(e) {
+    handleSwithAuth(e) {
         e.preventDefault();
         this.setState((prevState) => ({
             loginPopUp: !prevState.loginPopUp
@@ -57,10 +63,10 @@ export default class AuthenticationModal extends React.Component {
                         <h4 className="modal-title" id="myModalLabel">{this.state.loginPopUp ? 'Login to E-Isich' : 'Create E-Isich account'}</h4>
                     </div>
                     {this.state.loginPopUp ? <LoginPage
-                        handleToggleAuth={this.handleToggleAuth}
+                        handleSwithAuth={this.handleSwithAuth}
                         hideLoginPopUp={this.props.hideLoginPopUp}
                     /> : <SignupPage
-                        handleToggleAuth={this.handleToggleAuth}
+                        handleSwithAuth={this.handleSwithAuth}
                     />}
                 </div>
             </Modal>

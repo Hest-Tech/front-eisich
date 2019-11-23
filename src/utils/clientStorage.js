@@ -1,5 +1,11 @@
+/**
+ * This file contains the class for client storage
+ */
+
+
 export default class clientStorage {
 
+    // create and set cookie valuesc
     set setCookie([cname, cvalue, exdays]) {
         let d = new Date();
 
@@ -8,6 +14,7 @@ export default class clientStorage {
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
+    // fetch cookie values
     getCookie(cname) {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
@@ -25,7 +32,20 @@ export default class clientStorage {
         return "";
     }
 
-    set eraseCookie(name) {   
-        document.cookie = name+'=; Max-Age=-99999999;';  
+    // delete a cookie
+    set eraseCookie(cname) {
+        document.cookie = cname + '=; Max-Age=-99999999;';
+    }
+
+    // check for an existing cookie
+    checkCookie(cname) {
+        let user = getCookie(cname);
+        if (user != "") {
+            // Check if token is still valid - onload
+            // check if the token exists in the database
+            // Automatically log in the user
+        } else {
+            // logout user
+        }
     }
 }

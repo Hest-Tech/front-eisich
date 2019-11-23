@@ -1,7 +1,8 @@
 /**
- * This file contains Trending component 
- * for the Trending products section of the page
+ * This file contains the Trending component
  */
+
+
 import React from 'react';
 
 import '../images/arrow-left.svg';

@@ -1,3 +1,8 @@
+/**
+* This file contains styles for the products component
+*/
+
+
 .products-container {
     width: 80%;
     margin: $l-margin auto;
@@ -34,18 +39,27 @@
     flex-direction: column;
 }
 
-.check-selection__form span {
+.check-selection__form div {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin: $s-margin 0;
     cursor: pointer;
+    height: 100%;
 }
 
-.selection-checkbox {
+.check-selection__form div span {
+    margin: auto 0;
+}
+
+.check-selection__form span label {
+    height: 100%;
+    margin: 0 $m-margin;
+}
+
+.form-selection-checkbox {
     width: 2rem;
     height: 2rem;
-    margin: 0 $m-margin;
 }
 
 .brand-container {

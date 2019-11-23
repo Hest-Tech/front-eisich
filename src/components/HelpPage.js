@@ -1,3 +1,8 @@
+/**
+ * This file contains the Help Page component
+ */
+
+
 import React from 'react';
 
 const HelpPage = () => (

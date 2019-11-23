@@ -1,3 +1,8 @@
+/**
+* This file contains styles for the navbar component
+*/
+
+
 @import '../base/settings';
 
 
@@ -173,6 +178,7 @@ svg {
     height: 9rem;
     display: flex;
     justify-content: center;
+    padding: 0;
 }
 
 .display-1 {
@@ -191,7 +197,7 @@ svg {
 
 .navbar-list {
     flex: 35%;
-    height: 95%;
+    height: 100%;
     display: flex;
     justify-content: space-around;
 }
@@ -211,7 +217,7 @@ svg {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    padding: $m-padding 0;
+    // padding: $m-padding 0;
 }
 
 .title-description {
@@ -232,6 +238,10 @@ svg {
 .nav-link {
     color: $black;
     opacity: .8;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .is-active {
@@ -251,10 +261,6 @@ svg {
 .title-head {
     letter-spacing: .07rem;
     font-size: $m-font-size;
-}
-
-.nav-links {
-    width: 70%;
 }
 
 .nav-links li {

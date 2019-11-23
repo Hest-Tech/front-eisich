@@ -1,3 +1,8 @@
+/**
+* This file contains the routing setup for the site
+*/
+
+
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 /**
- * This file contains Footer component 
- * for the Footer section of the page
+ * This file contains the Footer component
  */
+
 import React from 'react';
 
 import '../images/visa.svg';

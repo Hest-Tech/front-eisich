@@ -1,5 +1,5 @@
 /**
- * This file contains Navbar component for the navigation bar
+ * This file contains the Navigation bar component
  */
 
 import React from 'react';
@@ -22,7 +22,7 @@ export default class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.toggleLoginPopUp = this.toggleLoginPopUp.bind(this);
+        this.showLoginPopUp = this.showLoginPopUp.bind(this);
         this.hideLoginPopUp = this.hideLoginPopUp.bind(this);
 
         this.state = {
@@ -30,15 +30,15 @@ export default class NavBar extends React.Component {
         };
     }
 
-    toggleLoginPopUp() {
+    // Display log in pop up modal
+    showLoginPopUp() {
         this.setState((prevState) => ({ loginPopUp: !prevState.loginPopUp }))
     }
 
+    // Hide log in pop up modal
     hideLoginPopUp() {
         this.setState(() => ({ loginPopUp: undefined }))
     }
-
-    componentDidMount() { }
 
     render() {
         return (
@@ -70,7 +70,7 @@ export default class NavBar extends React.Component {
                                 </span>
                                 <span
                                     className="login"
-                                    onClick={this.toggleLoginPopUp}    
+                                    onClick={this.showLoginPopUp}    
                                 >
                                     <img src="./user.svg" alt="user" className="navbar__icon-img" />
                                     <p>Login</p>

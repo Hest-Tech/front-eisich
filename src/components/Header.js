@@ -1,6 +1,7 @@
 /**
- * This file contains Header component for the header section of the page
+ * This file contains the Header component
  */
+
 import React from 'react';
 
 import '../images/bags.jpg';
