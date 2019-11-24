@@ -5,7 +5,7 @@
 
 import React from 'react';
 import Modal from 'react-modal';
-import SignupPage from './SignupPage';
+import FormikSignUp from './FormikSignUp';
 import LoginPage from './LoginPage';
 
 
@@ -65,7 +65,7 @@ export default class AuthenticationModal extends React.Component {
                     {this.state.loginPopUp ? <LoginPage
                         handleSwithAuth={this.handleSwithAuth}
                         hideLoginPopUp={this.props.hideLoginPopUp}
-                    /> : <SignupPage
+                    /> : <FormikSignUp
                         handleSwithAuth={this.handleSwithAuth}
                     />}
                 </div>

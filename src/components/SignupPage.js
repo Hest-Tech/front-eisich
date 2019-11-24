@@ -4,8 +4,46 @@
 
 
 import React from 'react';
+import { Formik, Form, Field, ErrorMessage, withFormik } from "formik";
+import * as Yup from "yup";
 
-export default class SignupPage extends React.Component {
+
+// const LoginSchema = Yup.object().shape({
+//     firstName: Yup.string()
+//         .min(2, 'Too Short!')
+//         .max(50, 'Too Long!')
+//         .required('First name is required'),
+//     lastName: Yup.string()
+//         .min(2, 'Too Short!')
+//         .max(50, 'Too Long!')
+//         .required('Last name is required'),
+//     phoneNumber: Yup.number()
+//         .min(8, 'Too Short!')
+//         .max(11, 'Too Long!')
+//         .required("Email is required"),
+//     email: Yup.string()
+//         .email("Invalid email address format")
+//         .required("Email is required"),
+//     password: Yup.string()
+//         .min(3, "Password must be 3 characters at minimum")
+//         .required("Password is required"),
+//     confirmPassword: Yup.string()
+//         .email("Invalid email address format")
+//         .required("Email is required")
+//         .test(
+//             'passwords-match',
+//             "Passwords don't match",
+//             value => this.parent.password === value
+//         ),
+//     agreeToTerms: Yup.boolean()
+//         .test(
+//             'is-true',
+//             'Must agree to terms to continue',
+//             value => value === true
+//         ),
+// });
+
+class SignupPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -30,48 +68,153 @@ export default class SignupPage extends React.Component {
                 </div>
                 <div className="sign-up__details">
                     <b className="sign-up__title">Sign Up</b>
-                    <form action="" className="sign-up__form">
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                                <input id="login-username" type="text" className="form-control" name="first-name" value="" placeholder="First Name" required />
-                            </div>
-                            <div className="form-group col-md-6">
-                                <input id="login-username" type="text" className="form-control" name="last-name" value="" placeholder="Last Name" required />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                                <input id="login-username" type="email" className="form-control" name="email" value="" placeholder="Email" required />
-                            </div>
-                            <div className="form-group col-md-6">
-                                <input id="login-username" type="number" className="form-control" name="phonenumber" value="" placeholder="Phonenumber" required />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                                <input id="login-username" type="password" className="form-control" name="password" value="" placeholder="Password" required />
-                            </div>
-                            <div className="form-group col-md-6">
-                                <input id="login-username" type="password" className="form-control" name="confirm-password" value="" placeholder="Confirm password" required />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                                <button type="submit" className="btn btn-primary col-md-6">Sign in</button>
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-12">
-                                <div className="or-seperator"><i>or</i></div>
-                                <p className="text-center">Sign up with your social media account</p>
-                                <div className="text-center social-btn">
-                                    <a href="#" className="btn btn-primary"><i className="fa fa-facebook"></i>&nbsp; Facebook</a>
-                                    <a href="#" className="btn btn-info"><i className="fa fa-twitter"></i>&nbsp; Twitter</a>
-                                    <a href="#" className="btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a>
+                    <Formik
+                        initialValues={{
+                            firstName: "",
+                            lastname: "",
+                            email: "",
+                            phoneNumber: "",
+                            password: "",
+                            confirmPassword: "",
+                            agreeToTerms: false
+                        }}
+                        validationSchema={LoginSchema}
+                        onSubmit={({ setSubmitting }) => {
+                            alert("Form is validated! Submitting the form...");
+                            setSubmitting(false);
+                        }}
+                    >
+                        <Form className="sign-up__form">
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <Field
+
+                                        type="text"
+                                        className={`form-control ${
+                                            touched.firstName && errors.firstName ? "is-invalid" : ""
+                                            }`}
+                                        name="first-name" value=""
+                                        placeholder="First Name"
+                                    />
+                                    <ErrorMessage
+                                        component="div"
+                                        name="firstName"
+                                        className="invalid-feedback"
+                                    />
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <Field
+                                        type="text"
+                                        name="lasName"
+                                        placeholder="Last Name"
+                                        className={`form-control ${
+                                            touched.lastName && errors.lastName ? "is-invalid" : ""
+                                            }`}
+                                    />
+                                    <ErrorMessage
+                                        component="div"
+                                        name="lastName"
+                                        className="invalid-feedback"
+                                    />
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <Field
+                                        type="email"
+                                        name="email"
+                                        placeholder="Email"
+                                        className={`form-control${
+                                            touched.email && errors.email ? "is-invalid" : ""
+                                            }`}
+                                    />
+                                    <ErrorMessage
+                                        component="div"
+                                        name="email"
+                                        className="invalid-feedback"
+                                    />
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <Field
+                                        type="number"
+                                        name="phonenumber"
+                                        placeholder="Phonenumber"
+                                        className={`form-control${
+                                            touched.phoneNumber && errors.phoneNumber ? "is-invalid" : ""
+                                            }`}
+                                    />
+                                    <ErrorMessage
+                                        component="div"
+                                        name="phoneNumber"
+                                        className="invalid-feedback"
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <Field
+                                        type="password"
+                                        name="password"
+                                        placeholder="Password"
+                                        className={`form-control${
+                                            touched.password && errors.password ? "is-invalid" : ""
+                                            }`}
+                                    />
+                                    <ErrorMessage
+                                        component="div"
+                                        name="password"
+                                        className="invalid-feedback"
+                                    />
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <Field
+                                        type="password"
+                                        name="confirm-password"
+                                        placeholder="Confirm password"
+                                        className={`form-control${
+                                            touched.confirmPassword && errors.confirmPassword ? "is-invalid" : ""
+                                            }`}
+                                    />
+                                    <ErrorMessage
+                                        component="div"
+                                        name="confirmPassword"
+                                        className="invalid-feedback"
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary col-md-6"
+                                        disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? "Please wait..." : "Sign in"}
+                                    </button>
+                                </div>
+                            </div>
+                            <label>
+                                <Field
+                                    type="checkbox"
+                                    name="remember"
+                                    id="remember"
+                                // formikKey="agreeToTerms"
+                                // formikProps={formikProps}
+                                /> I agree to terms of service
+                            </label>
+                            <div className="form-row">
+                                <div className="form-group col-md-12">
+                                    <div className="or-seperator"><i>or</i></div>
+                                    <p className="text-center">Sign up with your social media account</p>
+                                    <div className="text-center social-btn">
+                                        <a href="#" className="btn btn-primary"><i className="fa fa-facebook"></i>&nbsp; Facebook</a>
+                                        <a href="#" className="btn btn-info"><i className="fa fa-twitter"></i>&nbsp; Twitter</a>
+                                        <a href="#" className="btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </Form>
+                    </Formik>
                     <div className="switch-to-login">
                         <p>Already have an account? <a href="" onClick={this.props.handleSwithAuth}>Login</a> instead</p>
                     </div>
@@ -80,3 +223,7 @@ export default class SignupPage extends React.Component {
         );
     }
 }
+
+export const FormikSignUp = withFormik({
+    mapPropsToValues
+})(SignupPage)
