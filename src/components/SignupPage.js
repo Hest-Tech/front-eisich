@@ -5,40 +5,13 @@
 
 import React from 'react';
 import { Form, Field, Formik, ErrorMessage } from "formik";
-import * as Yup from "yup";
 
-
-const signupValidationSchema = Yup.object().shape({
-    firstName: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('First name is required'),
-    lastName: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Last name is required'),
-    phoneNumber: Yup.number()
-        .min(8, 'Too Short!')
-        .required("Phone number is required"),
-    email: Yup.string()
-        .email("Invalid email address format")
-        .required("Email is required"),
-    password: Yup.string()
-        .min(3, "Password must be 3 characters at minimum")
-        .required("Password is required"),
-    confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], "Your passwords don't match")
-        .required('Confirm password is required')
-})
+import { validationSchema } from '../utils/validate';
 
 
 export default class SignupPage extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-
-        }
     }
 
     render() {
@@ -78,7 +51,7 @@ const FormikSignUp = () => (
             confirmPassword: "",
             terms: false
         }}
-        validationSchema={signupValidationSchema}
+        validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
             alert("Form is validated! Submitting the form...");
             setSubmitting(false);

@@ -70,14 +70,17 @@ export default class AuthenticationModal extends React.Component {
                         {/**
                          * Switch between sign up, login and reset-password titles dynamically
                          */}
-                        {this.state.resetTitle ? <h4 className="modal-title" id="myModalLabel"><span className="glyphicon glyphicon-lock"></span> Reset your Password!</h4> : <h4 className="modal-title" id="myModalLabel">{this.state.loginPopUp ? 'Login to E-Isich' : 'Create E-Isich account'}</h4>}
+                         
+                        <h4 className="modal-title" id="myModalLabel">
+                            {(!!this.state.resetTitle && <span><span className="glyphicon glyphicon-lock"></span> Reset your Password!</span>) || (!!this.state.loginPopUp && 'Login to E-Isich') || (this.state.loginPopUp === false && 'Create E-Isich account')}
+                        </h4>
                     </div>
                     {this.state.loginPopUp ? <LoginPage
                         handleSwithAuth={this.handleSwithAuth}
                         handleResetPassword={this.handleResetPassword}
                     /> : <SignupPage
-                        handleSwithAuth={this.handleSwithAuth}
-                    />/* Toggle between sign up and login */ }
+                            handleSwithAuth={this.handleSwithAuth}
+                        />/* Toggle between sign up and login */}
                 </div>
             </Modal>
         );

@@ -5,20 +5,10 @@
 
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 
 import clientStorage from '../utils/clientStorage';
 import ForgotPassword from './ForgotPassword';
-
-
-const loginValidationSchema = Yup.object().shape({
-    email: Yup.string()
-        .email("Invalid email address format")
-        .required("Email is required"),
-    password: Yup.string()
-        .min(3, "Password must be 3 characters at minimum")
-        .required("Password is required")
-});
+import { validationSchema } from '../utils/validate';
 
 export default class LoginPage extends React.Component {
 
@@ -30,6 +20,10 @@ export default class LoginPage extends React.Component {
         this.state = {
             resetPopUp: undefined
         }
+    }
+
+    componentWillUnmount() {
+        this.props.handleResetPassword(undefined);
     }
 
     // reset password
@@ -49,7 +43,6 @@ export default class LoginPage extends React.Component {
     }
 
     render() {
-        console.log(new clientStorage())
         return (
             <div>
                 {this.state.resetPopUp ? <ForgotPassword hideResetPassword={this.hideResetPassword} /> : <div
@@ -59,7 +52,7 @@ export default class LoginPage extends React.Component {
                             <div className="well">
                                 <Formik
                                     initialValues={{ email: "", password: "", remember: false }}
-                                    validationSchema={loginValidationSchema}
+                                    validationSchema={validationSchema}
                                     onSubmit={(values, { setSubmitting }) => {
                                         alert("Form is validated! Submitting the form...");
                                         setSubmitting(false);
