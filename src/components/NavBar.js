@@ -23,7 +23,7 @@ export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.showLoginPopUp = this.showLoginPopUp.bind(this);
-        this.hideLoginPopUp = this.hideLoginPopUp.bind(this);
+        this.hideAuthPopUp = this.hideAuthPopUp.bind(this);
 
         this.state = {
             loginPopUp: undefined
@@ -36,7 +36,8 @@ export default class NavBar extends React.Component {
     }
 
     // Hide log in pop up modal
-    hideLoginPopUp() {
+    hideAuthPopUp(e) {
+        e.preventDefault();
         this.setState(() => ({ loginPopUp: undefined }))
     }
 
@@ -99,7 +100,7 @@ export default class NavBar extends React.Component {
                             </NavLink>
                             <AuthenticationModal
                                 loginPopUp={this.state.loginPopUp}
-                                hideLoginPopUp={this.hideLoginPopUp}
+                                hideAuthPopUp={this.hideAuthPopUp}
                             />
                         </ul>
                     </div>

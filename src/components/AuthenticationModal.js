@@ -26,13 +26,15 @@ export default class AuthenticationModal extends React.Component {
     constructor(props) {
         super(props);
         this.handleSwithAuth = this.handleSwithAuth.bind(this);
+        this.handleResetPassword = this.handleResetPassword.bind(this);
 
         this.state = {
-            loginPopUp: true
+            loginPopUp: true,
+            resetTitle: undefined
         }
-        console.log({...this.state})
     }
 
+    // Toggle between sign up and login
     handleSwithAuth(e) {
         e.preventDefault();
         this.setState((prevState) => ({
@@ -40,13 +42,17 @@ export default class AuthenticationModal extends React.Component {
         }))
     }
 
+    // Hide reset password
+    handleResetPassword(resetTitle) {
+        this.setState(() => ({ resetTitle }));
+    }
+
     render() {
         return (
             <Modal
                 style={customStyles}
                 isOpen={!!this.props.loginPopUp}
-                // isOpen={true}
-                onRequestClose={this.props.hideLoginPopUp}
+                onRequestClose={this.props.hideAuthPopUp}
                 contentLabel="Login details"
                 id="login-overlay"
                 className="modal-dialog"
@@ -57,18 +63,21 @@ export default class AuthenticationModal extends React.Component {
                             type="button"
                             className="close"
                             data-dismiss="modal"
-                            onClick={this.props.hideLoginPopUp}
+                            onClick={this.props.hideAuthPopUp}
                         >
                             <span aria-hidden="true">×</span>
                         </button>
-                        <h4 className="modal-title" id="myModalLabel">{this.state.loginPopUp ? 'Login to E-Isich' : 'Create E-Isich account'}</h4>
+                        {/**
+                         * Switch between sign up, login and reset-password titles dynamically
+                         */}
+                        {this.state.resetTitle ? <h4 className="modal-title" id="myModalLabel"><span className="glyphicon glyphicon-lock"></span> Reset your Password!</h4> : <h4 className="modal-title" id="myModalLabel">{this.state.loginPopUp ? 'Login to E-Isich' : 'Create E-Isich account'}</h4>}
                     </div>
                     {this.state.loginPopUp ? <LoginPage
                         handleSwithAuth={this.handleSwithAuth}
-                        hideLoginPopUp={this.props.hideLoginPopUp}
+                        handleResetPassword={this.handleResetPassword}
                     /> : <SignupPage
                         handleSwithAuth={this.handleSwithAuth}
-                    />}
+                    />/* Toggle between sign up and login */ }
                 </div>
             </Modal>
         );

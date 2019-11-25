@@ -4,8 +4,32 @@
 
 
 import React from 'react';
-import { Form, Field, withFormik } from "formik";
+import { Form, Field, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
+
+
+const signupValidationSchema = Yup.object().shape({
+    firstName: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('First name is required'),
+    lastName: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Last name is required'),
+    phoneNumber: Yup.number()
+        .min(8, 'Too Short!')
+        .required("Phone number is required"),
+    email: Yup.string()
+        .email("Invalid email address format")
+        .required("Email is required"),
+    password: Yup.string()
+        .min(3, "Password must be 3 characters at minimum")
+        .required("Password is required"),
+    confirmPassword: Yup.string()
+        .oneOf([Yup.ref('password'), null], "Your passwords don't match")
+        .required('Confirm password is required')
+})
 
 
 export default class SignupPage extends React.Component {
@@ -43,164 +67,188 @@ export default class SignupPage extends React.Component {
     }
 }
 
-const App = ({ values, errors, touched }) => (
-    <Form className="sign-up__form">
-        <div className="form-row">
-            <div className="form-group col-md-6">
-                <div>
-                    <Field
-                        value={values.firstName}
-                        type="text"
-                        className="form-control"
-                        name="firstName"
-                        placeholder="First Name"
-                    />
-                    {touched.firstName && errors.firstName && <p className="error-paragraph">{errors.firstName}</p>}
+const FormikSignUp = () => (
+    <Formik
+        initialValues = {{
+            firstName:  "",
+            lastName: "",
+            phoneNumber: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            terms: false
+        }}
+        validationSchema={signupValidationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+            alert("Form is validated! Submitting the form...");
+            setSubmitting(false);
+            console.log(values);
+        }}
+    >
+        {({ values, errors, touched, isSubmitting }) => (
+            <Form className="sign-up__form">
+                <div className="form-row">
+                    <div className="form-group col-md-6">
+                        <div>
+                            <Field
+                                type="text"
+                                name="firstName"
+                                placeholder="First Name"
+                                className={`form-control ${
+                                    touched.firstName && errors.firstName ? "is-invalid" : ""
+                                    }`}
+                            />
+                            <ErrorMessage
+                                component="div"
+                                name="firstName"
+                                className="invalid-feedback"
+                            />
+                        </div>
+                    </div>
+                    <div className="form-group col-md-6">
+                        <div>
+                            <Field
+                                type="text"
+                                name="lastName"
+                                placeholder="Last Name"
+                                className={`form-control ${
+                                    touched.lastName && errors.lastName ? "is-invalid" : ""
+                                }`}
+                            />
+                            <ErrorMessage
+                                component="div"
+                                name="lastName"
+                                className="invalid-feedback"
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="form-group col-md-6">
-                <div>
-                    <Field
-                        type="text"
-                        name="lastName"
-                        placeholder="Last Name"
-                        className="form-control"
-                    />
-                    {touched.lastName && errors.lastName && <p className="error-paragraph">{errors.lastName}</p>}
+                <div className="form-row">
+                    <div className="form-group col-md-6">
+                        <div>
+                            <Field
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                className={`form-control ${
+                                    touched.email && errors.email ? "is-invalid" : ""
+                                    }`}
+                            />
+                            <ErrorMessage
+                                component="div"
+                                name="email"
+                                className="invalid-feedback"
+                            />
+                        </div>
+                    </div>
+                    <div className="form-group col-md-6">
+                        <div>
+                            <Field
+                                type="number"
+                                name="phoneNumber"
+                                placeholder="Phonenumber"
+                                className={`form-control ${
+                                    touched.phoneNumber && errors.phoneNumber ? "is-invalid" : ""
+                                    }`}
+                            />
+                            <ErrorMessage
+                                component="div"
+                                name="phoneNumber"
+                                className="invalid-feedback"
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div className="form-row">
-            <div className="form-group col-md-6">
-                <div>
-                    <Field
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        className="form-control"
-                    />
-                    {touched.email && errors.email && <p className="error-paragraph">{errors.email}</p>}
+                <div className="form-row">
+                    <div className="form-group col-md-6">
+                        <div>
+                            <Field
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                className={`form-control ${
+                                    touched.password && errors.password ? "is-invalid" : ""
+                                    }`}
+                            />
+                            <ErrorMessage
+                                component="div"
+                                name="password"
+                                className="invalid-feedback"
+                            />
+                        </div>
+                    </div>
+                    <div className="form-group col-md-6">
+                        <div>
+                            <Field
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="Confirm password"
+                                className={`form-control ${
+                                    touched.confirmPassword && errors.confirmPassword ? "is-invalid" : ""
+                                    }`}
+                            />
+                            <ErrorMessage
+                                component="div"
+                                name="confirmPassword"
+                                className="invalid-feedback"
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="form-group col-md-6">
-                <div>
-                    <Field
-                        type="number"
-                        name="phoneNumber"
-                        placeholder="Phonenumber"
-                        className="form-control"
-                    />
-                    {touched.phoneNumber && errors.phoneNumber && <p className="error-paragraph">{errors.phoneNumber}</p>}
+                <div className="form-row">
+                    <div className="form-group col-md-6">
+                        <button
+                            type="submit"
+                            className="btn btn-primary col-md-6"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? "Please wait..." : "Sign up"}
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div className="form-row">
-            <div className="form-group col-md-6">
-                <div>
-                    <Field
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        className="form-control"
-                    />
-                    {touched.password && errors.password && <p className="error-paragraph">{errors.password}</p>}
+                <label className="terms-checkbox">
+                    <div>
+                        <Field
+                            type="checkbox"
+                            name="terms"
+                            checked={values.terms}
+                        /> I agree to terms of service
+                    </div>
+                </label>
+                <div className="form-row">
+                    <div className="form-group col-md-12">
+                        <div className="or-seperator"><i>or</i></div>
+                        <p className="text-center">Sign up with your social media account</p>
+                        <div className="text-center social-btn">
+                            <a href="#" className="btn btn-primary"><i className="fa fa-facebook"></i>&nbsp; Facebook</a>
+                            <a href="#" className="btn btn-info"><i className="fa fa-twitter"></i>&nbsp; Twitter</a>
+                            <a href="#" className="btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="form-group col-md-6">
-                <div>
-                    <Field
-                        type="password"
-                        name="confirm-password"
-                        placeholder="Confirm password"
-                        className="form-control"
-                    />
-                    {touched.confirmPassword && errors.confirmPassword && <p className="error-paragraph">{errors.confirmPassword}</p>}
-                </div>
-            </div>
-        </div>
-        <div className="form-row">
-            <div className="form-group col-md-6">
-                <button
-                    type="submit"
-                    className="btn btn-primary col-md-6"
-                >
-                    Sign in
-                </button>
-            </div>
-        </div>
-        <label className="terms-checkbox">
-            <div>
-                <Field
-                    type="checkbox"
-                    name="terms"
-                    checked={values.terms}
-                /> I agree to terms of service
-                {touched.terms && errors.terms && <p className="error-paragraph">{errors.terms}</p>}
-            </div>
-        </label>
-        <div className="form-row">
-            <div className="form-group col-md-12">
-                <div className="or-seperator"><i>or</i></div>
-                <p className="text-center">Sign up with your social media account</p>
-                <div className="text-center social-btn">
-                    <a href="#" className="btn btn-primary"><i className="fa fa-facebook"></i>&nbsp; Facebook</a>
-                    <a href="#" className="btn btn-info"><i className="fa fa-twitter"></i>&nbsp; Twitter</a>
-                    <a href="#" className="btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a>
-                </div>
-            </div>
-        </div>
-    </Form>
+            </Form>
+        )}
+    </Formik>
 );
 
-const FormikSignUp = withFormik({
-    mapPropsToValues({
-        firstName,
-        lastName,
-        phoneNumber,
-        email,
-        password,
-        confirmPassword,
-        terms
-    }) {
-        return {
-            firstName: firstName || "",
-            lastName: lastName || "",
-            phoneNumber: phoneNumber || "",
-            email: email || "",
-            password: password || "",
-            confirmPassword: confirmPassword || "",
-            terms: terms || false
-        }
-    },
-    validationSchema: Yup.object().shape({
-        firstName: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required('First name is required'),
-        lastName: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required('Last name is required'),
-        phoneNumber: Yup.number()
-            .min(8, 'Too Short!')
-            .required("Phone number is required"),
-        email: Yup.string()
-            .email("Invalid email address format")
-            .required("Email is required"),
-        password: Yup.string()
-            .min(3, "Password must be 3 characters at minimum")
-            .required("Password is required"),
-        confirmPassword: Yup.string()
-            .oneOf([Yup.ref('password'), null], "Does not match with field1!")
-            .required('Required'),
-        agreeToTerms: Yup.boolean()
-            .test(
-                'is-true',
-                'Must agree to terms to continue',
-                value => value === true
-            ),
-    }),
-    handleSubmit(values) {
-        console.log(values)
-    }
-})(App)
+// const FormikSignUp = withFormik({
+//     mapPropsToValues({
+//         firstName,
+//         lastName,
+//         phoneNumber,
+//         email,
+//         password,
+//         confirmPassword,
+//         terms
+//     }) {
+//         return {
+//             firstName: firstName || "",
+//             lastName: lastName || "",
+//             phoneNumber: phoneNumber || "",
+//             email: email || "",
+//             password: password || "",
+//             confirmPassword: confirmPassword || "",
+//             terms: terms || false
+//         }
+//     },
+// })(App)

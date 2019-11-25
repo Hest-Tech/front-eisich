@@ -8,9 +8,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import clientStorage from '../utils/clientStorage';
+import ForgotPassword from './ForgotPassword';
 
 
-const LoginSchema = Yup.object().shape({
+const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
         .email("Invalid email address format")
         .required("Email is required"),
@@ -23,25 +24,49 @@ export default class LoginPage extends React.Component {
 
     constructor(props) {
         super(props);
+        this.resetPassword = this.resetPassword.bind(this);
+        this.hideResetPassword = this.hideResetPassword.bind(this);
+
+        this.state = {
+            resetPopUp: undefined
+        }
+    }
+
+    // reset password
+    resetPassword(e) {
+        e.preventDefault();
+        this.props.handleResetPassword(true);
+        this.setState((prevState) => ({
+            resetPopUp: !prevState.resetPopUp
+        }));
+    }
+
+    // hide reset password
+    hideResetPassword(e) {
+        e.preventDefault();
+        this.props.handleResetPassword(undefined);
+        this.setState(() => ({ resetPopUp: undefined }));
     }
 
     render() {
         console.log(new clientStorage())
         return (
             <div>
-                <div className="modal-body">
+                {this.state.resetPopUp ? <ForgotPassword hideResetPassword={this.hideResetPassword} /> : <div
+                    className="modal-body">
                     <div className="row">
                         <div className="col-xs-6">
                             <div className="well">
                                 <Formik
-                                    initialValues={{ email: "", password: "" }}
-                                    validationSchema={LoginSchema}
-                                    onSubmit={({ setSubmitting }) => {
+                                    initialValues={{ email: "", password: "", remember: false }}
+                                    validationSchema={loginValidationSchema}
+                                    onSubmit={(values, { setSubmitting }) => {
                                         alert("Form is validated! Submitting the form...");
                                         setSubmitting(false);
+                                        console.log(values);
                                     }}
                                 >
-                                    {({ touched, errors, isSubmitting }) => (
+                                    {({ touched, errors, isSubmitting, values }) => (
                                         <Form>
                                             <div className="form-group">
                                                 <label htmlFor="email" className="control-label">Email</label>
@@ -49,7 +74,7 @@ export default class LoginPage extends React.Component {
                                                     type="email"
                                                     name="email"
                                                     placeholder="Enter your email"
-                                                    className={`m-font-size form-control ${
+                                                    className={`form-control ${
                                                         touched.email && errors.email ? "is-invalid" : ""
                                                     }`}
                                                 />
@@ -77,7 +102,12 @@ export default class LoginPage extends React.Component {
                                             </div>
                                             <div className="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="remember" id="remember" /> Remember login
+                                                    <Field
+                                                        type="checkbox"
+                                                        name="remember"
+                                                        id="remember"
+                                                        checked={values.remember}
+                                                    /> Remember login
                                                 </label>
                                                 <p className="help-block">(if this is a private computer)</p>
                                             </div>
@@ -88,7 +118,11 @@ export default class LoginPage extends React.Component {
                                             >
                                                 {isSubmitting ? "Please wait..." : "Login"}
                                             </button>
-                                            <a href="/forgot/" className="btn btn-default btn-block m-font-size forgot-pass">Forgot password?</a>
+                                            <a
+                                                href=""
+                                                className="btn btn-default btn-block forgot-pass"
+                                                onClick={this.resetPassword}
+                                            >Forgot password?</a>
                                         </Form>
                                     )}
                                 </Formik>
@@ -113,7 +147,7 @@ export default class LoginPage extends React.Component {
                             </p>
                         </div>
                     </div>
-                </div>
+                </div>}
             </div>
         );
     }
