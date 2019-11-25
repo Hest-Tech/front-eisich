@@ -1,5 +1,9 @@
-import React from 'react';
+/**
+ * This file contains forgot password component
+ */
 
+
+import React from 'react';
 
 export default class ForgotPassword extends React.Component {
 
@@ -29,7 +33,7 @@ export default class ForgotPassword extends React.Component {
                     <p>Remember Password ? <a
                         id="loginModal1"
                         href=""
-                        onClick={this.props.hideResetPassword}
+                        onClick={this.props.hideResetPassword} // back to login
                     >Login Here!</a></p>
                 </div>
 

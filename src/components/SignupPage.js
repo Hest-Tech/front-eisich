@@ -41,6 +41,8 @@ export default class SignupPage extends React.Component {
 }
 
 const FormikSignUp = () => (
+    /** formik validation form */
+    
     <Formik
         initialValues = {{
             firstName:  "",
@@ -203,25 +205,3 @@ const FormikSignUp = () => (
         )}
     </Formik>
 );
-
-// const FormikSignUp = withFormik({
-//     mapPropsToValues({
-//         firstName,
-//         lastName,
-//         phoneNumber,
-//         email,
-//         password,
-//         confirmPassword,
-//         terms
-//     }) {
-//         return {
-//             firstName: firstName || "",
-//             lastName: lastName || "",
-//             phoneNumber: phoneNumber || "",
-//             email: email || "",
-//             password: password || "",
-//             confirmPassword: confirmPassword || "",
-//             terms: terms || false
-//         }
-//     },
-// })(App)

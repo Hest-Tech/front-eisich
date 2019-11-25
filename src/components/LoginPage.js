@@ -23,10 +23,10 @@ export default class LoginPage extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.handleResetPassword(undefined);
+        this.props.handleResetPassword(undefined); // set resetTitle to undefined
     }
 
-    // reset password
+    // show reset password
     resetPassword(e) {
         e.preventDefault();
         this.props.handleResetPassword(true);
