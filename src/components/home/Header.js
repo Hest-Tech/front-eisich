@@ -4,9 +4,9 @@
 
 import React from 'react';
 
-import bags from '../assets/images/bags.jpg';
-import electronics from '../assets/images/electronics.jpg';
-import shoes from '../assets/images/shoes.jpg';
+import bags from '../../assets/images/bags.jpg';
+import electronics from '../../assets/images/electronics.jpg';
+import shoes from '../../assets/images/shoes.jpg';
 
 
 const Header = () => (

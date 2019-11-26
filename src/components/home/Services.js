@@ -4,9 +4,9 @@
 
 import React from 'react';
 
-import textile from '../assets/images/textile.svg';
-import goodQuality from '../assets/images/good-quality.svg';
-import size from '../assets/images/size.svg';
+import textile from '../../assets/images/textile.svg';
+import goodQuality from '../../assets/images/good-quality.svg';
+import size from '../../assets/images/size.svg';
 
 const Services = () => {
     return (

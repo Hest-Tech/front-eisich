@@ -6,9 +6,8 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-import clientStorage from '../utils/clientStorage';
-import ForgotPassword from './ForgotPassword';
-import { validationSchema } from '../utils/validate';
+import ForgotPassword from '../ForgotPassword';
+import { validationSchema } from '../../utils/validate';
 
 export default class LoginPage extends React.Component {
 

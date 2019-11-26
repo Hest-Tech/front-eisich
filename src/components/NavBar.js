@@ -15,7 +15,7 @@ import arrow from '../assets/images/arrow-down.svg';
 import wishlist from '../assets/images/wishlist.svg';
 import menu from '../assets/images/menu.svg';
 import shopping from '../assets/images/shopping-cart.svg';
-import AuthenticationModal from './AuthenticationModal';
+import AuthenticationModal from './authentication/AuthenticationModal';
 
 
 export default class NavBar extends React.Component {

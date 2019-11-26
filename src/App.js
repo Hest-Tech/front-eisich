@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Header from './components/Header';
-import Trending from './components/Trending';
-import Services from './components/Services';
+import Header from './components/home/Header';
+import Trending from './components/home/Trending';
+import Services from './components/home/Services';
 
 
 function App() {

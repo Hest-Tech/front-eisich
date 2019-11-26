@@ -5,9 +5,9 @@
 
 import React from 'react';
 
-import arrowLeft from '../assets/images/arrow-left.svg';
-import arrowRight from '../assets/images/arrow-right.svg';
-import shoes from '../assets/images/shoes.jpg';
+import arrowLeft from '../../assets/images/arrow-left.svg';
+import arrowRight from '../../assets/images/arrow-right.svg';
+import shoes from '../../assets/images/shoes.jpg';
 
 const Trending = () => (
     <div className="app-trending">
