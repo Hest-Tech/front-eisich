@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-import '../images/hijab.jpg';
+import hijab from '../assets/images/hijab.jpg';
 
 export default class ProductItemPage extends React.Component {
 
@@ -19,7 +19,7 @@ export default class ProductItemPage extends React.Component {
             <div className="product-item-container">
                 <div className="product-item-customizations">
                     <div className="product-item-photo">
-                        <img src="hijab.jpg" className="photo-item" />
+                        <img src={hijab} alt="hijab" className="photo-item" />
                         <span>
                             <button>cart</button>
                             <i>wishlist</i>

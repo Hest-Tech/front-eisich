@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './App.scss';
 import Header from './components/Header';
 import Trending from './components/Trending';
 import Services from './components/Services';
