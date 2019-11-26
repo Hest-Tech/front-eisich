@@ -39,7 +39,7 @@ export default class clientStorage {
 
     // check for an existing cookie
     checkCookie(cname) {
-        let user = getCookie(cname);
+        let user = this.getCookie(cname);
         if (user != "") {
             // Check if token is still valid - onload
             // check if the token exists in the database
