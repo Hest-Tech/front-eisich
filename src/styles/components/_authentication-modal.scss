@@ -1,0 +1,27 @@
+/**
+* This file contains styles for the authentication modal
+*/
+
+
+@import '../base/settings';
+
+
+.modal-dialog {
+    max-width: 70% !important;
+    opacity: .9;
+}
+
+.modal-header {
+    display: block;
+}
+
+.close span {
+    line-height: 0 !important;
+    font-size: $l-font-size;
+}
+
+.close {
+    outline: 0 !important;
+    display: flex;
+    flex-direction: column;
+}

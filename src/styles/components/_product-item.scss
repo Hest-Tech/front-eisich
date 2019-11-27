@@ -1,0 +1,66 @@
+/**
+* This file contains styles for the product item component
+*/
+
+
+@import '../base/settings';
+
+
+.product-item-container {
+    background: blue;
+    width: 70%;
+    margin: $xl-margin auto;
+    position: relative;
+    top: $m-navbar-height;
+}
+
+.product-item-customizations {
+    display: flex;
+    height: 70vh;
+    background: $light-grey;
+}
+
+.photo-item {
+    width: 100%;
+    height: 100%;
+}
+
+.product-item-photo {
+    flex: 65%;
+}
+
+.product-item-customizations__sec {
+    flex: 35%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-item-color-pallete {
+    flex: 50%;
+    width: 100%;
+    display: flex;
+    // background: grey;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-color-pallete {
+    // background: brown;
+    width: 80%;
+    height: 100%;
+}
+
+.color-item {
+    margin: .2rem;
+}
+
+.product-color-container {
+    margin: 0 auto;
+    width: 80%;
+    height: 80%;
+}
+
+.product-item-sizes {
+    background: green;
+    flex: 50%;
+}

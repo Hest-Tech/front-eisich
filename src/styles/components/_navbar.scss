@@ -1,0 +1,487 @@
+/**
+* This file contains styles for the navbar component
+*/
+
+
+@import '../base/settings';
+
+
+.main-nav-bar {
+    position: fixed;
+    // height: $navbar-height;
+    background: $white;
+    box-shadow: 0 5px 8px -2px rgba(0,0,0,.2);
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.main-nav-bar__container {
+    background: $off-white;
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar-container,
+.nav-links {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+
+.nav-bar-container li {
+    display: inline-block;
+    font-size: $s-font-size;
+    opacity: .6;
+}
+
+.start-selling {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.separate {
+    border-right: 1px solid $dark-grey;
+}
+
+.separate,
+.bulk {
+    cursor: pointer;
+}
+
+.trust-policy li {
+    padding: 0 $m-padding;
+}
+
+.start-selling button {
+    background: $base-color;
+    border: 1px solid $base-color;
+    border-radius: .3rem;
+    font-size: $s-font-size;
+    letter-spacing: .05rem;
+    color: $white;
+    height: 90%;
+    padding: $s-padding;
+    opacity: .9;
+}
+
+.start-selling button:hover {
+    opacity: 1;
+}
+
+.trust-policy {
+    width: 50%;
+}
+
+.help-login {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    height: 20%;
+    opacity: .6;
+    font-size: $s-font-size;
+    letter-spacing: .05rem;
+}
+
+.help-login__wrapped {
+    width: 63%;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.help-login__wrapped span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.help-login__wrapped span p {
+    padding: 0 $s-padding;
+}
+
+.navbar__icon-img {
+    width: $small-img;
+    height: $small-img;
+}
+
+.shopping-options {
+    display: flex;
+    flex: 40%;
+}
+
+.shopping__icon-img {
+    width: $medium-img;
+    height: 80%;
+    flex: 10%;
+}
+
+.form-inline {
+    flex: 90%;
+}
+
+.form-inline .form-control {
+    width: 85%;
+    height: 3.7rem;
+    font-size: $s-font-size + .4;
+}
+
+.shopping-options {
+    // width: 40%;
+    flex: 45%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.shopping-icons {
+    flex: 40%;
+    // display: flex;
+}
+
+.img-icons {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: .8;
+}
+
+.img-icons img {
+    cursor: pointer;
+}
+
+.jobs {
+    border-right: .1rem solid $base-color;
+}
+
+.login p {
+    padding: 0 $s-padding;
+    margin: 0;
+}
+
+svg {
+    width: 0;
+    height: 0;
+}
+
+.navbar {
+    width: 75%;
+    margin: 0 auto;
+    height: 9rem;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.display-1 {
+    color: $base-color;
+    font-size: $l-font-size;
+    flex: 10%;
+    text-align: center;
+    text-decoration: none !important;
+    font-weight: 500;
+}
+
+.display-1:hover {
+    color: $base-color;
+    opacity: .9;
+}
+
+.navbar-list {
+    flex: 35%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar-list__wrapped {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar-list__wrapped li {
+    opacity: .9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    // padding: $m-padding 0;
+}
+
+.title-description {
+    opacity: .8;
+}
+
+.nav-link:hover {
+    .title-head {
+        color: $base-color;
+    }
+
+    .title-description {
+        opacity: 1;
+        color: $black;
+    }
+}
+
+.nav-link {
+    color: $black;
+    opacity: .8;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.is-active {
+    border-bottom: .4rem solid $base-color;
+    text-decoration: none;
+}
+
+.active-cyan-4 {
+    margin: 0;
+}
+
+.arrow-down {
+    margin: 0;
+    height: 100%;
+}
+
+.title-head {
+    letter-spacing: .07rem;
+    font-size: $m-font-size;
+}
+
+.nav-links li {
+    display: inline-block;
+    cursor: pointer;
+    opacity: .9;
+    padding: $m-padding;
+    height: 100%;
+}
+
+.nav-links li:hover {
+    color: $base-color;
+}
+
+.nav-links-container {
+    width: 100%;
+    background: $off-white;
+}
+
+.dropdown-menu li {
+    display: block;
+    font-size: $m-font-size;
+}
+
+.dropdown-menu li a {
+    color: $black;
+    opacity: .8;
+}
+
+.mobile {
+    display: none;
+}
+
+// media queries
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+
+    .start-selling,
+    .help-login,
+    .navbar-list,
+    .nav-links-container,
+    .trust-policy .return,
+    .trust-policy .bulk,
+    .form-inline {
+        display: none;
+    }
+
+    .mobile-menu-items {
+        width: 100%;
+        background: red;
+    }
+
+    .trust-policy {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $m-font-size;
+    }
+
+    .contact {
+        border: none;
+    }
+
+    .navbar {
+        width: 100%;
+        height: 6rem;
+    }
+
+    .shopping-options {
+        flex: 45%;
+        justify-content: space-between;
+    }
+
+    .display-1 {
+        flex: 45%;
+        text-align: left;
+        padding: 0 $l-padding;
+        font-size: $m-font-size + .9;
+    }
+
+    .img-icons {
+        justify-content: space-around;
+        width: 80%;
+    }
+
+    .shopping__icon-img {
+        height: $medium-img;
+    }
+
+    .mobile-menu-bar, .mobile-user-img {
+        width: $medium-img;
+        height: $medium-img;
+        cursor: pointer;
+        flex: 10%;
+        opacity: .8;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .form-control {
+        font-size: $s-font-size + .5;
+        outline: none;
+        color: $light-grey;
+        font-style: italic;
+    }
+
+    .mobile-search-bar {
+        padding: 0 $s-padding;
+    }
+
+    .glyphicon-search {
+        font-size: $s-font-size + .5;
+        color: $white;
+        cursor: pointer;
+    }
+
+    .btn-search {
+        background: $base-color;
+    }
+}
+
+@media screen and (min-width: $mobile-landscape-width) {}
+
+@media screen and (min-width: $small-tablet-width) {}
+
+@media screen and (min-width: $large-tablet-width) and (max-width: $large-tablet-landscape-width) {
+    
+    .start-selling,
+    .navbar-list,
+    .nav-links-container,
+    .help-login {
+        display: none;
+    }
+
+    .trust-policy, .navbar {
+        width: 100%;
+    }
+
+    .trust-policy {
+        text-align: center;
+    }
+
+    .shopping-options {
+        flex: 65%;
+    }
+
+    .shopping__icon-img {
+        height: $medium-img;
+    }
+
+    .mobile-menu-bar {
+        display: block;
+        width: $medium-img;
+        height: $medium-img;
+        opacity: .8;
+        flex: 12%;
+    }
+
+    .display-1 {
+        flex: 20%;
+        text-align: left;
+        padding: 0 $l-padding;
+        font-size: $m-font-size + .9;
+    }
+
+}
+
+@media screen and (min-width: $small-tablet-landscape-width) {}
+
+@media screen and (min-width: $large-tablet-landscape-width) and (max-width: $desktop-width) {
+    
+    .start-selling,
+    .navbar-list,
+    .nav-links-container,
+    .help-login {
+        display: flex;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    .shopping-options {
+        flex: 45%;
+        justify-content: space-around;
+    }
+
+    .navbar {
+        width: 75%;
+        height: 9rem;
+    }
+
+    .display-1 {
+        // font-size: $l-font-size;
+        flex: 10%;
+        text-align: center;
+        padding: 0;
+
+    }
+
+    .shopping__icon-img {
+        width: $medium-img;
+        height: 80%;
+        flex: 10%;
+    }
+
+    .start-selling {
+        justify-content: center;
+    }
+
+    .help-login {
+        justify-content: space-around;
+    }
+
+    .nav-links {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: $desktop-width) {}
+
+@media screen and (min-width: $wide-desktop-width) {}

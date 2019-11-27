@@ -1,0 +1,84 @@
+/**
+* This file contains settings variables for the elements
+*/
+
+
+/**
+* colors
+*/
+$base-color: #E9BD4C;
+$off-white: #F2F2F2;
+$dark-grey: #595959;
+$white: #fff;
+$black: #000;
+$light-grey: #ddd;
+
+/**
+* font sizes
+*/
+// small
+$s-font-size: 1.2rem;
+// medium
+$m-font-size: 2rem;
+// large
+$l-font-size: 4rem;
+// base
+$base-font-size: 1.6rem;
+
+
+/**
+* Spacing
+*/
+
+// padding
+
+// small
+$s-padding: .5rem;
+// medium
+$m-padding: 1rem;
+// large
+$l-padding: 2rem;
+
+// margin
+
+// small
+$s-margin: .5rem;
+// medium
+$m-margin: 1rem;
+// large
+$l-margin: 2rem;
+// extra large
+$xl-margin: 4rem;
+
+/**
+* Images
+*/
+
+// small
+$small-img: 1.6rem;
+// medium
+$medium-img: 2.6rem;
+// large
+$large-img: 7rem;
+// xl-large
+$xl-large-img: 10rem;
+
+
+// header margin
+$s-navbar-height: 12rem;
+$m-navbar-height: 13rem;
+$l-navbar-height: 15rem;
+$xl-navbar-height: 17.4rem;
+
+/**
+* media queries
+*/
+
+$mobile-width: 20em;
+$mobile-landscape-width: 30em;
+$small-tablet-width: 37.5em;
+$large-tablet-width: 48em;
+$small-tablet-landscape-width: 50em;
+$large-tablet-landscape-width: 64em;
+$desktop-width: 80em;
+$wide-desktop-width: 90em;

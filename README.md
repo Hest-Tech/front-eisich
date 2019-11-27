@@ -1,14 +1,24 @@
 # FRONT-EISICH
+Front end application for the E-Isich site
 
 ## Prerequisites
 
 NodeJS
+Git
 
 ## Installation
 
 1. Clone this repo `git clone https://github.com/Hest-Tech/front-eisich.git`
-2. cd into the project folder and run `npm install`
-3. Run server `npm start`
+2. cd into the project folder and run `yarn install`
+3. Run server `yarn run dev-server`
+4. Test `yarn run test`
+
+
+
+
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
