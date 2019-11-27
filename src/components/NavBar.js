@@ -1,70 +1,132 @@
 /**
- * This file contains Navbar component for the navigation bar
+ * This file contains the Navigation bar component
  */
 
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const NavBar = () => {
-    return (
-        <nav className="main-nav-bar">
-            <div className="main-nav-bar-container">
-                <div className="nav-bar-container">
-                    <ul className="trust-policy">
-                        <li className="separate contact">
-                            <svg></svg>
-                            <span>Call us +254 707 030 398</span>
-                        </li>
-                        <li className="separate return">
-                            <svg></svg>
-                            <span>30 day return policy</span>
-                        </li>
-                        <li className="bulk">
-                            <svg></svg>
-                            <span>Buy in bulk - save up to 70%</span>
-                        </li>
-                    </ul>
-                    <div className="start-selling">
-                        <button>Start selling</button>
+import '../images/call.svg';
+import '../images/policy.svg';
+import '../images/save-money.svg';
+import '../images/suitcase.svg';
+import '../images/question-mark.svg';
+import '../images/user.svg';
+import '../images/arrow-down.svg';
+import '../images/wishlist.svg';
+import '../images/menu.svg';
+import '../images/shopping-cart.svg';
+import AuthenticationModal from './AuthenticationModal';
+
+
+export default class NavBar extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.showLoginPopUp = this.showLoginPopUp.bind(this);
+        this.hideAuthPopUp = this.hideAuthPopUp.bind(this);
+
+        this.state = {
+            loginPopUp: undefined
+        };
+    }
+
+    // Display log in pop up modal
+    showLoginPopUp() {
+        this.setState((prevState) => ({ loginPopUp: !prevState.loginPopUp }))
+    }
+
+    // Hide log in pop up modal
+    hideAuthPopUp(e) {
+        e.preventDefault();
+        this.setState(() => ({ loginPopUp: undefined }))
+    }
+
+    render() {
+        return (
+            <nav className="main-nav-bar">
+                <div className="main-nav-bar__container">
+                    <div className="nav-bar-container">
+                        <ul className="trust-policy">
+                            <li className="separate contact">
+                                <img src="./call.svg" alt="cellphone" className="navbar__icon-img" />
+                                <span> Call us +254 707 030 398</span>
+                            </li>
+                            <li className="separate return">
+                                <img src="./policy.svg" alt="policy" className="navbar__icon-img" />
+                                <span> 30 day return policy</span>
+                            </li>
+                            <li className="bulk">
+                                <img src="./save-money.svg" alt="save money" className="navbar__icon-img" />
+                                <span> Buy in bulk - save up to 70%</span>
+                            </li>
+                        </ul>
+                        <div className="start-selling">
+                            <button>Start selling</button>
+                        </div>
+                        <div className="help-login">
+                            <div className="help-login__wrapped">
+                                <span className="help">
+                                    <img src="./question-mark.svg" alt="question-mark" className="navbar__icon-img" />
+                                    <p>Help</p>
+                                </span>
+                                <span
+                                    className="login"
+                                    onClick={this.showLoginPopUp}    
+                                >
+                                    <img src="./user.svg" alt="user" className="navbar__icon-img" />
+                                    <p>Login</p>
+                                    <img className="arrow-down" src="./arrow-down.svg" alt="arrow down" width="10px" height="10px" />
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <ul className="help-login">
-                        <li className="jobs">Jobs</li>
-                        <li className="help">Help</li>
-                        <li className="login">Login</li>
-                    </ul>
                 </div>
-            </div>
-            <nav className="navbar">
-                <a className="navbar-brand" href="#">Eisich</a>
-                <ul className="navbar-list">
-                    <li>
-                        <div className="title">Create</div>
-                        <div className="description">Custom products</div>
-                    </li>
-                    <li>
-                        <div className="title">Shop</div>
-                        <div className="description">Marketplace Designs</div>
-                    </li>
-                </ul>
-                <input />
-                <button>Wishlist</button>
-                <button>Cart</button>
+                <nav className="navbar">
+                    <img className="mobile mobile-menu-bar" src="menu.svg" />
+                    <NavLink className="display-1" to="/">E-Isich</NavLink>
+                    <div className="navbar-list">
+                        <ul className="navbar-list__wrapped">
+                            <NavLink className="nav-link products-link" activeClassName="is-active" to="/products" style={{ textDecoration: 'none' }} >
+                                <li className="view-products">
+                                    <h6 className="title-head products">Products</h6>
+                                    <div className="title-description">View Products</div>
+                                </li>
+                            </NavLink>
+                            <NavLink className="nav-link about-us-link" activeClassName="is-active" to="/about" style={{ textDecoration: 'none' }}>
+                                <li className="about-link">
+                                    <h6 className="title-head">About Us</h6>
+                                    <div className="title-description">Our Goal</div>
+                                </li>
+                            </NavLink>
+                            <AuthenticationModal
+                                loginPopUp={this.state.loginPopUp}
+                                hideAuthPopUp={this.hideAuthPopUp}
+                            />
+                        </ul>
+                    </div>
+
+                    <div className="shopping-options">
+                        <form className="form-inline">
+                            <input className="form-control mr-sm-2" type="search" placeholder="Find product" aria-label="Search" />
+                        </form>
+                        <div className="shopping-icons">
+                            <span className="img-icons">
+                                <img className="shopping__icon-img" src="./wishlist.svg" alt="question-mark" />
+                                <img className="shopping__icon-img" src="./shopping-cart.svg" alt="question-mark" />
+                                <img src="./user.svg" alt="user" className="mobile mobile-user-img" />
+                            </span>
+                        </div>
+                    </div>
+                </nav>
+                <div className="mobile mobile-search-bar">
+                    <div className="input-group mb-4">
+                        <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon6" className="form-control" />
+                        <div className="input-group-append">
+                            <button id="button-addon6" type="submit" className="btn btn-search"><span className="glyphicon-search">&#x1F50D;</span></button>
+                        </div>
+                    </div>
+                </div>
             </nav>
-            <div className="nav-links-container">
-                <ul className="nav-links">
-                    <li>Best Sellers</li>
-                    <li>Men</li>
-                    <li>Women</li>
-                    <li>Kids & Babies</li>
-                    <li>Accessories</li>
-                    <li>Posters</li>
-                    <li>Home & Living</li>
-                    <li>Gifts</li>
-                    <li>Collections</li>
-                    <li><button>Sale</button></li>
-                </ul>
-            </div>
-        </nav>
-    );
+        );
+    }
 }
-        
-export default NavBar;

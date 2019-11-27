@@ -7,7 +7,7 @@ module.exports = {
     entry: './src/index.js',
     output: {
         filename: 'main.js',
-        path: path.join(__dirname, '/public/dist'),
+        path: path.resolve(__dirname, 'public/dist'),
         publicPath: '/',
     },
     module: {
@@ -19,7 +19,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 use: [
                     'style-loader',
                     'css-loader',
@@ -44,6 +44,6 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, '/public/dist'),
         historyApiFallback: true,
-        // compress: true,
+        compress: true,
     }
 };

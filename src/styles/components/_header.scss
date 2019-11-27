@@ -1,0 +1,26 @@
+/**
+* This file contains styles for the header component
+*/
+
+
+.App-header {
+    position: relative;
+    top: $m-navbar-height;
+}
+
+.carousel-item img {
+    height: 80vh;
+    width: 100%;
+}
+
+@media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
+    .App-header {
+        top: $m-navbar-height;
+    }
+}
+
+@media screen and (min-width: $small-tablet-landscape-width) and (min-width: $large-tablet-landscape-width) {
+    .App-header {
+        top: $s-navbar-height;
+    }
+}

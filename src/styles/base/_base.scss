@@ -1,0 +1,43 @@
+/**
+* This file contains all base styles for the elements
+*/
+
+
+@import '../base/settings';
+
+html {
+  font-size: 62.5%; // root size
+}
+
+p, ul, body {
+  margin: 0
+}
+
+body {
+  font-size: $base-font-size;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+button,
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.display-4 {
+    margin: $l-margin 0;
+}
+
+.help-page-container {
+  background: red;
+  position: absolute;
+  bottom: 50%;
+}
