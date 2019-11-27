@@ -4,9 +4,9 @@
 
 import React from 'react';
 
-import '../images/bags.jpg';
-import '../images/electronics.jpg';
-import '../images/shoes.jpg';
+import bags from '../../assets/images/bags.jpg';
+import electronics from '../../assets/images/electronics.jpg';
+import shoes from '../../assets/images/shoes.jpg';
 
 
 const Header = () => (
@@ -19,13 +19,13 @@ const Header = () => (
             </ol>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img className="d-block w-100" src="electronics.jpg" alt="First slide" />
+                    <img className="d-block w-100" src={electronics} alt="First slide" />
                 </div>
                 <div className="carousel-item">
-                    <img className="d-block w-100" src="shoes.jpg" alt="Second slide" />
+                    <img className="d-block w-100" src={shoes} alt="Second slide" />
                 </div>
                 <div className="carousel-item">
-                    <img className="d-block w-100" src="bags.jpg" alt="Third slide" />
+                    <img className="d-block w-100" src={bags} alt="Third slide" />
                 </div>
             </div>
             <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

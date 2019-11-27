@@ -5,8 +5,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import '../images/hijab.jpg';
-import '../images/add-wishlist.svg';
+import hijab from '../assets/images/hijab.jpg';
+import addWishlist from '../assets/images/add-wishlist.svg';
 
 const ProductsPage = () => (
     <div className="products-container">
@@ -70,9 +70,9 @@ const ProductsPage = () => (
             </div>
             <div className="product-items">
                 <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                    <img src="hijab.jpg" className="product-img" />
+                    <img src={hijab} alt="hijab" className="product-img" />
                     <span className="add-wishlist">
-                        <img src="add-wishlist.svg" />
+                        <img src={addWishlist} alt="wishlist" />
                     </span>
                     <div className="product-details">
                         <b>Long sleeve Abaya</b>
@@ -86,9 +86,9 @@ const ProductsPage = () => (
                     </div>
                 </NavLink>
                 <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                    <img src="hijab.jpg" className="product-img" />
+                    <img src={hijab} alt="hijab" className="product-img" />
                     <span className="add-wishlist">
-                        <img src="add-wishlist.svg" />
+                        <img src={addWishlist} alt="wishlist" />
                     </span>
                     <div className="product-details">
                         <b>Long sleeve Abaya</b>
@@ -102,9 +102,9 @@ const ProductsPage = () => (
                     </div>
                 </NavLink>
                 <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                    <img src="hijab.jpg" className="product-img" />
+                    <img src={hijab} alt="hijab"className="product-img" />
                     <span className="add-wishlist">
-                        <img src="add-wishlist.svg" />
+                        <img src={addWishlist} alt="wishlist" />
                     </span>
                     <div className="product-details">
                         <b>Long sleeve Abaya</b>
@@ -118,9 +118,9 @@ const ProductsPage = () => (
                     </div>
                 </NavLink>
                 <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                    <img src="hijab.jpg" className="product-img" />
+                    <img src={hijab} alt="hijab" className="product-img" />
                     <span className="add-wishlist">
-                        <img src="add-wishlist.svg" />
+                        <img src={addWishlist} alt="wishlist" />
                     </span>
                     <div className="product-details">
                         <b>Long sleeve Abaya</b>
@@ -134,9 +134,9 @@ const ProductsPage = () => (
                     </div>
                 </NavLink>
                 <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                    <img src="hijab.jpg" className="product-img" />
+                    <img src={hijab} alt="hijab" className="product-img" />
                     <span className="add-wishlist">
-                        <img src="add-wishlist.svg" />
+                        <img src={addWishlist} alt="wishlist" />
                     </span>
                     <div className="product-details">
                         <b>Long sleeve Abaya</b>
@@ -150,9 +150,9 @@ const ProductsPage = () => (
                     </div>
                 </NavLink>
                 <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                    <img src="hijab.jpg" className="product-img" />
+                    <img src={hijab} alt="hijab" className="product-img" />
                     <span className="add-wishlist">
-                        <img src="add-wishlist.svg" />
+                        <img src={addWishlist} alt="wishlist" />
                     </span>
                     <div className="product-details">
                         <b>Long sleeve Abaya</b>
@@ -166,9 +166,9 @@ const ProductsPage = () => (
                     </div>
                 </NavLink>
                 <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                    <img src="hijab.jpg" className="product-img" />
+                    <img src={hijab} alt="hijab"className="product-img" />
                     <span className="add-wishlist">
-                        <img src="add-wishlist.svg" />
+                        <img src={addWishlist} alt="wishlist" />
                     </span>
                     <div className="product-details">
                         <b>Long sleeve Abaya</b>
@@ -182,9 +182,9 @@ const ProductsPage = () => (
                     </div>
                 </NavLink>
                 <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                    <img src="hijab.jpg" className="product-img" />
+                    <img src={hijab} alt="hijab"className="product-img" />
                     <span className="add-wishlist">
-                        <img src="add-wishlist.svg" />
+                        <img src={addWishlist} alt="wishlist" />
                     </span>
                     <div className="product-details">
                         <b>Long sleeve Abaya</b>
@@ -198,9 +198,9 @@ const ProductsPage = () => (
                     </div>
                 </NavLink>
                 <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                    <img src="hijab.jpg" className="product-img" />
+                    <img src={hijab} alt="hijab" className="product-img" />
                     <span className="add-wishlist">
-                        <img src="add-wishlist.svg" />
+                        <img src={addWishlist} alt="wishlist" />
                     </span>
                     <div className="product-details">
                         <b>Long sleeve Abaya</b>

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css'; // reset css
+import './App.scss';
 
 import AppRouter from './routes/AppRouter';
 // import '../public/favicon.ico';

@@ -6,7 +6,7 @@
 import React from 'react';
 import { Form, Field, Formik, ErrorMessage } from "formik";
 
-import { validationSchema } from '../utils/validate';
+import { validationSchema } from '../../utils/validate';
 
 
 export default class SignupPage extends React.Component {

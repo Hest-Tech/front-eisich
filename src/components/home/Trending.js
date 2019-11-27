@@ -5,8 +5,9 @@
 
 import React from 'react';
 
-import '../images/arrow-left.svg';
-import '../images/arrow-right.svg';
+import arrowLeft from '../../assets/images/arrow-left.svg';
+import arrowRight from '../../assets/images/arrow-right.svg';
+import shoes from '../../assets/images/shoes.jpg';
 
 const Trending = () => (
     <div className="app-trending">
@@ -14,12 +15,12 @@ const Trending = () => (
             <h4 className="display-4">Trending</h4>
             <div className="trending">
                 <div className="trending__container">
-                    <img src="arrow-left.svg" className="arrow arrow-left" />
-                    <img src="arrow-right.svg" className="arrow arrow-right" />
+                    <img src={arrowLeft} alt="arrow left" className="arrow arrow-left" />
+                    <img src={arrowRight} alt="arrow right" className="arrow arrow-right" />
                     <div className="trending-img-slider__container">
                         <div className="trending-img">
                             <div className="img-overlay">
-                                <img src="shoes.jpg" className="trending-img-item" />
+                                <img src={shoes} alt="shoes" className="trending-img-item" />
                             </div>
                             <div className="promo-info">
                                 <span>NEW</span>
@@ -34,7 +35,7 @@ const Trending = () => (
                         </div>
                         <div className="trending-img">
                             <div className="img-overlay">
-                                <img src="shoes.jpg" className="trending-img-item" />
+                                <img src={shoes} alt="shoes" className="trending-img-item" />
                             </div>
                             <div className="promo-info">
                                 <span>20% OFF</span>
@@ -49,7 +50,7 @@ const Trending = () => (
                         </div>
                         <div className="trending-img">
                             <div className="img-overlay">
-                                <img src="shoes.jpg" className="trending-img-item" />
+                                <img src={shoes} alt="shoes" className="trending-img-item" />
                             </div>
                             <div className="promo-info">
                                 <span>NEW</span>
@@ -64,7 +65,7 @@ const Trending = () => (
                         </div>
                         <div className="trending-img">
                             <div className="img-overlay">
-                                <img src="shoes.jpg" className="trending-img-item" />
+                                <img src={shoes} alt="shoes" className="trending-img-item" />
                             </div>
                             <div className="promo-info">
                                 <span>20% OFF</span>
