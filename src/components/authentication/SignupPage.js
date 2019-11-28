@@ -7,12 +7,13 @@ import { Form, Field, Formik, ErrorMessage } from "formik";
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import TwitterLogin from 'react-twitter-auth';
+import { connect } from 'react-redux';
 
 import { validationSchema } from '../../utils/validate';
 import { registerSuccess } from '../../actions/authentication';
 
 
-export default class SignupPage extends React.Component {
+class SignupPage extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -24,6 +25,7 @@ export default class SignupPage extends React.Component {
                     <h3>E-ISICH</h3>
                     <b>For the more information</b>
                     <p>Quickly get information from new leads and customers by signing up .With their information, you can funnel them into new accounts in an instant. Check out our social media</p><br />
+
                     <div className="subscribe-social-media">
                         <img className="social-media" src="facebook.svg" alt="facebook" />
                         <img className="social-media" src="twitter.svg" alt="twitter" />
@@ -74,11 +76,12 @@ const FormikSignUp = () => (
             alert("Form is validated! Submitting the form...");
             setSubmitting(false);
             console.log(values);
-            registerSuccess(values); // dispatch
+            // registerSuccess(values); // dispatch
         }}
     >
-        {({ values, errors, touched, isSubmitting }) => (
+        {({ values, errors, touched, isSubmitting, filters }) => (
             <Form className="sign-up__form">
+                {console.log(filters)}
                 <div className="form-row">
                     <div className="form-group col-md-6">
                         <div>
@@ -263,3 +266,11 @@ const FormikSignUp = () => (
         )}
     </Formik >
 );
+
+const ConnectedFormikSignUp = connect((state) => {
+    return {
+        filters: state.filters
+    }
+})(SignupPage);
+
+export default ConnectedFormikSignUp;

@@ -4,11 +4,16 @@
 
 
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default class ForgotPassword extends React.Component {
+class ForgotPassword extends React.Component {
 
     constructor(props) {
         super(props)
+    }
+
+    componentDidMount() {
+        console.log(this.props.filters.text)
     }
 
     render() {
@@ -16,6 +21,7 @@ export default class ForgotPassword extends React.Component {
             <div id="forgot-password-modal-content">
 
                 <div className="modal-body">
+                                        
                     <form method="post" id="Forgot-Password-Form" role="form">
                         <div className="form-group">
                             <div className="input-group">
@@ -41,3 +47,11 @@ export default class ForgotPassword extends React.Component {
         );
     }
 }
+
+const ConnectedForgotPassword = connect((state) => {
+    return {
+        filters: state.filters
+    }
+})(ForgotPassword);
+
+export default ConnectedForgotPassword;
