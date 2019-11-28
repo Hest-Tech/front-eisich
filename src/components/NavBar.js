@@ -8,7 +8,6 @@ import { NavLink } from 'react-router-dom';
 import call from '../assets/images/call.svg';
 import policy from '../assets/images/policy.svg';
 import save from '../assets/images/save-money.svg';
-import suitcase from '../assets/images/suitcase.svg';
 import question from '../assets/images/question-mark.svg';
 import user from '../assets/images/user.svg';
 import arrow from '../assets/images/arrow-down.svg';

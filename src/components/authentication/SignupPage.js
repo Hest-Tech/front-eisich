@@ -2,11 +2,14 @@
  * This file contains the Sign up Page component
  */
 
-
 import React from 'react';
 import { Form, Field, Formik, ErrorMessage } from "formik";
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import TwitterLogin from 'react-twitter-auth';
 
 import { validationSchema } from '../../utils/validate';
+import { registerSuccess } from '../../actions/authentication';
 
 
 export default class SignupPage extends React.Component {
@@ -40,12 +43,25 @@ export default class SignupPage extends React.Component {
     }
 }
 
+
+const responseGoogle = (response) => {
+    console.log(response);
+};
+
+const responseFacebook = (response) => {
+    console.log(response);
+};
+
+const twitterResponse = (response) => {
+    console.log(response);
+};
+
 const FormikSignUp = () => (
     /** formik validation form */
-    
+
     <Formik
-        initialValues = {{
-            firstName:  "",
+        initialValues={{
+            firstName: "",
             lastName: "",
             phoneNumber: "",
             email: "",
@@ -58,6 +74,7 @@ const FormikSignUp = () => (
             alert("Form is validated! Submitting the form...");
             setSubmitting(false);
             console.log(values);
+            registerSuccess(values); // dispatch
         }}
     >
         {({ values, errors, touched, isSubmitting }) => (
@@ -88,7 +105,7 @@ const FormikSignUp = () => (
                                 placeholder="Last Name"
                                 className={`form-control ${
                                     touched.lastName && errors.lastName ? "is-invalid" : ""
-                                }`}
+                                    }`}
                             />
                             <ErrorMessage
                                 component="div"
@@ -195,13 +212,54 @@ const FormikSignUp = () => (
                         <div className="or-seperator"><i>or</i></div>
                         <p className="text-center">Sign up with your social media account</p>
                         <div className="text-center social-btn">
-                            <a href="#" className="btn btn-primary"><i className="fa fa-facebook"></i>&nbsp; Facebook</a>
-                            <a href="#" className="btn btn-info"><i className="fa fa-twitter"></i>&nbsp; Twitter</a>
-                            <a href="#" className="btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a>
+                            <a href="#" >
+                                <FacebookLogin
+                                    appId=""
+                                    autoLoad
+                                    callback={responseFacebook}
+                                    render={renderProps => (
+                                        <button
+                                            onClick={renderProps.onClick}
+                                            className="btn btn-primary"
+                                        >
+                                            <i className="fa fa-facebook"></i>&nbsp; Facebook
+                                    </button>
+                                    )}
+                                />
+                            </a>
+                            <a href="#">
+                                <TwitterLogin
+                                    loginUrl="http://localhost:4000/api/v1/auth/twitter"
+                                    onFailure={twitterResponse}
+                                    onSuccess={twitterResponse}
+                                    className="btn btn-info"
+                                    requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse"
+                                >
+                                    <i className="fa fa-twitter"></i>&nbsp; Twitter
+                                </TwitterLogin>
+                            </a>
+                            <a href="#">
+                                <GoogleLogin
+                                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                                    render={renderProps => (
+                                        <button
+                                            onClick={renderProps.onClick}
+                                            disabled={renderProps.disabled}
+                                            className="btn btn-danger"
+                                        >
+                                            <i className="fa fa-google"></i>&nbsp; Google
+                                        </button>
+                                    )}
+                                    buttonText="Login"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                                />
+                            </a>
                         </div>
                     </div>
                 </div>
             </Form>
         )}
-    </Formik>
+    </Formik >
 );
