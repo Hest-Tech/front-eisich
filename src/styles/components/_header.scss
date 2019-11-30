@@ -4,12 +4,19 @@
 
 
 .App-header {
-    position: relative;
-    top: $m-navbar-height;
+    z-index: 1000;
+    margin-top: -3rem;
+}
+
+.carousel-slider {
+    flex: 40%;
+}
+
+.carousel-inner {
+    border-radius: .25rem;
 }
 
 .carousel-item img {
-    height: 80vh;
     width: 100%;
 }
 

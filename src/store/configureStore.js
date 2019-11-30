@@ -2,23 +2,22 @@
  * Store creation
  */
 
-import { createStore, combineReducers } from 'redux';
-import authentication from '../reducers/authentication';
-import products from '../reducers/products';
-import errors from '../reducers/errors';
-import filters from '../reducers/filters';
+import thunk from 'redux-thunk';
 
-// store creation
+import { createStore, compose, applyMiddleware } from 'redux';
+import rootReducer from '../reducers/rootReducers';
+
+const initialState = {};
+
+const middleWare = [thunk];
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () => {
     const store = createStore(
-        combineReducers({
-            authentication,
-            products,
-            filters,
-            errors
-        }),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        rootReducer,
+        initialState,
+        composeEnhancers(applyMiddleware(...middleWare))
     );
     return store;
 };

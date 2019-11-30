@@ -8,6 +8,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from 'react-redux';
 
 import { validationSchema } from '../../utils/validate';
+import ForgotPassword from './ForgotPassword';
 
 class LoginPage extends React.Component {
 

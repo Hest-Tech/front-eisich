@@ -4,6 +4,9 @@
 
 import { returnErrors } from './errors';
 import clientStorage from '../utils/clientStorage';
+import { setTextFilter } from './filters';
+
+import fetch from 'cross-fetch'
 
 import {
     USER_LOADED,
@@ -51,35 +54,57 @@ export const registerSuccess = ({
     email,
     phoneNumber,
     password,
-} = {}) => async dispatch => {
-    const body = json.stringify({
-        firstName,
-        lastName,
+} = {}) => dispatch => {
+    let body = JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
         email,
-        phoneNumber,
+        username: firstName,
+        image: "",
         password,
+        confirm_password: password
     });
 
-    try {
-        const req = await fetch(url, {
-            method: 'POST',
-            body,
-            headers: { 'Content-Type': 'application/json' }
-        });
-        const res = await req.json();
-        dispatch({
-            type: REGISTER_SUCCESS,
-            payload: res.data,
-            setCookie: clientStorage.setCookie
-        });
-        console.log('Success:', res.data);
-    } catch (err) {
-        dispatch(
-            returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
-        );
-        dispatch({ type: REGISTER_FAIL });
-        console.error('Error:', err);
-    }
+    return fetch('https://flask-blog-api.herokuapp.com/api/v1/auth/signup', {
+        method: 'POST',
+        body,
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(
+            response => response.json()
+        )
+        .then(json =>
+                // We can dispatch many times!
+                // Here, we update the app state with the results of the API call.
+                
+                dispatch({
+                    type: REGISTER_SUCCESS,
+                    payload: json.data,
+                    setCookie: clientStorage.setCookie
+                })
+            )
+    // try {
+    //     console.log('67 -->', body);
+    //     const req = await fetch('https://flask-blog-api.herokuapp.com/api/v1/auth/signup', {
+    //         method: 'POST',
+    //         body,
+    //         headers: { 'Content-Type': 'application/json' }
+    //     });
+    //     const res = await req.json();
+    //     console.log('74 -->', res);
+    //     dispatch({
+    //         type: REGISTER_SUCCESS,
+    //         payload: res.data,
+    //         setCookie: clientStorage.setCookie
+    //     });
+    //     console.log('Success:', res.data);
+    // } catch (err) {
+    //     dispatch(
+    //         returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
+    //     );
+    //     dispatch({ type: REGISTER_FAIL });
+    //     console.error('Error:', err);
+    // }
 };
 
 // login success
@@ -106,7 +131,7 @@ export const loginUser = ({ email, password }) => async dispatch => {
             type: LOGIN_FAIL
         });
         console.error('Error:', err);
-    }    
+    }
 };
 
 // logout success

@@ -6,31 +6,34 @@
 @import '../base/settings';
 
 .app-trending {
-    margin-top: $xl-navbar-height;
-    height: 85vh;
-    width: 100%;
+    // margin-top: $xl-navbar-height;
+    height: auto;
+    // width: 88%;
+    margin: 2rem auto;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.display-4 {
-    text-align: center;
+.display-5 {
+    text-align: left;
+    width: 100%;
+    padding: $m-padding;
 }
 
 .app-trending__container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    width: 80%;
     height: 100%;
     flex-direction: column;
 }
 
 .trending {
     width: 100%;
-    height: 70vh;
+    height: 100%;
+    // background: blue;
 }
 
 .trending__container {
@@ -38,14 +41,14 @@
     display: flex;
     justify-content: center;
     height: 90%;
-    margin: 4rem 0;
-    position: relative;
+    background: $white;
+    // margin: 4rem 0;
 }
 
 .trending-img-slider__container {
     display: flex;
-    justify-content: space-around;
-    width: 90%;
+    justify-content: space-between;
+    width: 100%;
     height: 100%;
 }
 
@@ -55,28 +58,36 @@
 
 .trending-img {
     cursor: pointer;
-    width: 100%;
+    flex: 20%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid $light-grey;
+    border-radius: .2rem;
     position: relative;
+    margin: 1rem;
 }
 
 .trending-img-content {
-    position: absolute;
     bottom: 0;
-    height: 20%;
     opacity: .9;
-    width: 90%;
-    color: $light-grey;
-    padding: $m-padding;
-    background: $black;
+    width: 100%;
+    color: $dark-grey;
+    padding: $s-padding;
+    background: $off-white;
+    font-family: sans-serif;
+}
+
+.trending-img-content p {
+    font-size: $s-font-size+.4;
+
 }
 
 .promo-info {
     position: absolute;
-    top: $s-padding;
+    top: 0;
+    right: 0;
     width: 90%;
     color: $light-grey;
     text-align: right;
@@ -91,11 +102,14 @@
 
 .img-overlay {
     width: 90%;
+    padding: $m-padding;
+    display: flex;
+    justify-content: center;
 }
 
-.trending-img-item {
-    width: 100%;
-    height: 100%;
+.img-overlay img {
+    width: 50%;
+    height: 10rem;
 }
 
 .arrow {

@@ -15,6 +15,7 @@ import wishlist from '../assets/images/wishlist.svg';
 import menu from '../assets/images/menu.svg';
 import shopping from '../assets/images/shopping-cart.svg';
 import AuthenticationModal from './authentication/AuthenticationModal';
+import unitedStates from '../assets/images/united-states.png';
 
 
 export default class NavBar extends React.Component {
@@ -70,58 +71,87 @@ export default class NavBar extends React.Component {
                                 </span>
                                 <span
                                     className="login"
-                                    onClick={this.showLoginPopUp}    
+                                    onClick={this.showLoginPopUp}
                                 >
                                     <img src={user} alt="user" className="navbar__icon-img" />
                                     <p>Login</p>
-                                    <img className="arrow-down" src={arrow} alt="arrow down" width="10px" height="10px" />
+                                    <i class="fas fa-chevron-down login-arrow"></i>
+                                </span>
+                                <span className="language">
+                                    <label className="language__label">Language: </label>
+                                    <select class="language__select" id="languageSelect">
+                                        <img src={unitedStates} alt="American flag" /><option>ENGLISH</option>
+                                        <option>SWAHILI</option>
+                                        <option>SPANISH</option>
+                                        <option>FRENCH</option>
+                                    </select>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <nav className="navbar">
-                    <img className="mobile mobile-menu-bar" src={menu} alt="menu" />
-                    <NavLink className="display-1" to="/">E-Isich</NavLink>
-                    <div className="navbar-list">
-                        <ul className="navbar-list__wrapped">
-                            <NavLink className="nav-link products-link" activeClassName="is-active" to="/products" style={{ textDecoration: 'none' }} >
-                                <li className="view-products">
-                                    <h6 className="title-head products">Products</h6>
-                                    <div className="title-description">View Products</div>
-                                </li>
-                            </NavLink>
-                            <NavLink className="nav-link about-us-link" activeClassName="is-active" to="/about" style={{ textDecoration: 'none' }}>
-                                <li className="about-link">
-                                    <h6 className="title-head">About Us</h6>
-                                    <div className="title-description">Our Goal</div>
-                                </li>
-                            </NavLink>
-                            <AuthenticationModal
-                                loginPopUp={this.state.loginPopUp}
-                                hideAuthPopUp={this.hideAuthPopUp}
-                            />
-                        </ul>
-                    </div>
-
-                    <div className="shopping-options">
-                        <form className="form-inline">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Find product" aria-label="Search" />
-                        </form>
-                        <div className="shopping-icons">
-                            <span className="img-icons">
-                                <img className="shopping__icon-img" src={wishlist} alt="question-mark" />
-                                <img className="shopping__icon-img" src={shopping} alt="question-mark" />
-                                <img src={user} alt="user" className="mobile mobile-user-img" />
-                            </span>
+                <div className="navbar" data-spy="affix" data-offset-top="60">
+                    <div className="navbar__container">
+                        <img className="mobile mobile-menu-bar" src={menu} alt="menu" />
+                        <NavLink
+                            className="display-1"
+                            to="/"
+                            style={{ textDecoration: 'none' }}
+                            activeStyle={{ color: '#E9BD4C' }}
+                        >
+                            E-Isich
+                        </NavLink>
+                        <div className="navbar-list">
+                            <ul className="navbar-list__wrapped">
+                                <NavLink
+                                    className="nav-link products-link"
+                                    activeClassName="is-active"
+                                    to="/products"
+                                    style={{ textDecoration: 'none' }}
+                                    activeStyle={{ color: '#302f2f' }}
+                                >
+                                    <li className="view-products">
+                                        <h6 className="title-head products">Products</h6>
+                                        <div className="title-description">View Products</div>
+                                    </li>
+                                </NavLink>
+                                <NavLink
+                                    className="nav-link about-us-link"
+                                    activeClassName="is-active"
+                                    to="/about"
+                                    style={{ textDecoration: 'none' }}
+                                    activeStyle={{ color: '#302f2f' }}
+                                >
+                                    <li className="about-link">
+                                        <h6 className="title-head">About Us</h6>
+                                        <div className="title-description">Our Goal</div>
+                                    </li>
+                                </NavLink>
+                                <AuthenticationModal
+                                    loginPopUp={this.state.loginPopUp}
+                                    hideAuthPopUp={this.hideAuthPopUp}
+                                />
+                            </ul>
                         </div>
-                    </div>
-                </nav>
-                <div className="mobile mobile-search-bar">
-                    <div className="input-group mb-4">
-                        <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon6" className="form-control" />
-                        <div className="input-group-append">
-                            <button id="button-addon6" type="submit" className="btn btn-search"><span className="glyphicon-search">&#x1F50D;</span></button>
+
+                        <div className="shopping-options">
+                            <form className="form-inline">
+                                <input className="form-control mr-sm-2" type="search" placeholder="Find product" aria-label="Search" />
+                            </form>
+                            <div className="shopping-icons">
+                                <span className="img-icons">
+                                    <i class='far fa-heart shopping__icon'></i>
+                                    <i class='fas fa-cart-plus shopping__icon'></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="mobile mobile-search-bar">
+                            <div className="input-group mb-4">
+                                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon6" className="form-control" />
+                                <div className="input-group-append">
+                                    <button id="button-addon6" type="submit" className="btn btn-search"><span className="glyphicon-search">&#x1F50D;</span></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

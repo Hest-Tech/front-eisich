@@ -7,17 +7,25 @@ import React from 'react';
 import bags from '../../assets/images/bags.jpg';
 import electronics from '../../assets/images/electronics.jpg';
 import shoes from '../../assets/images/shoes.jpg';
-
+import MenuBar from './MenuBar';
+import SideBar from './SideBar';
 
 const Header = () => (
-    <header className="App-header">
-        <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+    <header className="container d-flex App-header">
+        <MenuBar />
+        <div
+            id="carouselExampleIndicators"
+            className="carousel slide col-sm-8"
+            data-ride="carousel"
+            style={{height: '38rem'}}
+        >
+
             <ol className="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li style={{marginRight:'.5rem'}} data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
+                <li style={{marginRight:'.5rem'}} data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li style={{marginRight:'.5rem'}} data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-            <div className="carousel-inner">
+            <div className="carousel-inner" style={{height: '38rem'}}>
                 <div className="carousel-item active">
                     <img className="d-block w-100" src={electronics} alt="First slide" />
                 </div>
@@ -37,6 +45,7 @@ const Header = () => (
                 <span className="sr-only">Next</span>
             </a>
         </div>
+        <SideBar />
     </header>
 );
 

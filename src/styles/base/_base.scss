@@ -2,15 +2,17 @@
 * This file contains all base styles for the elements
 */
 
-
-@import '../base/settings';
+@import "../base/settings";
 
 html {
   font-size: 62.5%; // root size
 }
 
-p, ul, body {
-  margin: 0
+p,
+ul,
+body {
+  margin: 0;
+  position: relative;
 }
 
 body {
@@ -33,7 +35,7 @@ a {
 }
 
 .display-4 {
-    margin: $l-margin 0;
+  margin: $l-margin 0;
 }
 
 .help-page-container {

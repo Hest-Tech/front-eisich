@@ -30,7 +30,7 @@ export default (state = autheticationReducerDefaultState, action) => {
             };
         case 'REGISTER_SUCCESS':
         case 'LOGIN_SUCCESS':
-            action.setCookie('token', action.payload.token, 24);
+            action.setCookie('auth_token', action.payload.auth_token, 24);
             return {
                 ...state,
                 ...action.payload,

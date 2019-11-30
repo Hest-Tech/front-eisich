@@ -6,8 +6,7 @@
 @import '../base/settings';
 
 .app-services {
-    margin-top: $medium-img;
-    width: 100%;
+    margin: 2rem auto;
     height: 85vh;
     display: flex;
     justify-content: center;
@@ -17,7 +16,6 @@
 
 .app-services__container {
     display: flex;
-    width: 80%;
     height: 100%;
     justify-content: center;
     align-items: center;
