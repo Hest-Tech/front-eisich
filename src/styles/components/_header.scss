@@ -8,6 +8,17 @@
     margin-top: -3rem;
 }
 
+.header-sec-container {
+    background: red;
+    display: flex;
+    justify-content: space-between;
+    height: 38rem;
+}
+
+.slide {
+    flex: 50%;
+}
+
 .carousel-slider {
     flex: 40%;
 }

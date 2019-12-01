@@ -6,6 +6,15 @@
 
 .menu-container {
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.menu-bar-wrapper {
+  // width: 100%;
+  flex: 25%;
 }
 
 .container-fluid__container {
@@ -27,6 +36,5 @@
 }
 
 .container-fluid {
-  width: 21rem;
   background: $white;
 }

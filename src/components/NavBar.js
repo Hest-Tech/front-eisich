@@ -75,12 +75,13 @@ export default class NavBar extends React.Component {
                                 >
                                     <img src={user} alt="user" className="navbar__icon-img" />
                                     <p>Login</p>
-                                    <i class="fas fa-chevron-down login-arrow"></i>
+                                    <i className="fas fa-chevron-down login-arrow"></i>
                                 </span>
                                 <span className="language">
                                     <label className="language__label">Language: </label>
-                                    <select class="language__select" id="languageSelect">
-                                        <img src={unitedStates} alt="American flag" /><option>ENGLISH</option>
+                                    {/* <img src={unitedStates} alt="American flag" /> */}
+                                    <select className="language__select" id="languageSelect">
+                                        <option>ENGLISH</option>
                                         <option>SWAHILI</option>
                                         <option>SPANISH</option>
                                         <option>FRENCH</option>
@@ -140,8 +141,8 @@ export default class NavBar extends React.Component {
                             </form>
                             <div className="shopping-icons">
                                 <span className="img-icons">
-                                    <i class='far fa-heart shopping__icon'></i>
-                                    <i class='fas fa-cart-plus shopping__icon'></i>
+                                    <i className='far fa-heart shopping__icon'></i>
+                                    <i className='fas fa-cart-plus shopping__icon'></i>
                                 </span>
                             </div>
                         </div>

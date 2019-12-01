@@ -1,0 +1,16 @@
+@import '../base/settings';
+
+
+.women-fashion {
+    margin: 2rem auto;
+}
+
+.women-fashion__container {
+    background: $white;
+    padding: $m-padding;
+    display: flex;
+}
+
+.women-fashion-menu {
+    flex: 25%;
+}

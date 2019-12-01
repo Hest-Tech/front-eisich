@@ -2,7 +2,6 @@
  * This file contains the Trending component
  */
 
-
 import React from 'react';
 
 // import arrowLeft from '../../assets/images/arrow-left.svg';
@@ -12,11 +11,15 @@ import shirt from '../../assets/images/shirt.png';
 import iphone from '../../assets/images/iphone.png';
 import sofa from '../../assets/images/sofa.png';
 import dress from '../../assets/images/dress.png';
+import menFashion from '../../assets/images/men-fashion.jpg';
+import headphones from '../../assets/images/headphones.jpg';
+import camera from '../../assets/images/camera.jpg';
+
 
 const Trending = () => (
     <div className="container app-trending">
         <div className="app-trending__container">
-            <h4 className="display-5">Trending</h4>
+            <h4 className="display-5">See what's Trending</h4>
             <div className="trending">
                 <div className="trending__container">
                     {/* <img src={arrowLeft} alt="arrow left" className="arrow arrow-left" />
@@ -97,6 +100,43 @@ const Trending = () => (
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="app-menu-ads">
+            <div className="menu-ads-img-slider__container">
+                <div className="menu-ads-img">
+                    <div className="menu-img-overlay menu-img-1">
+                        <img src={headphones} alt="shoes" className="menu-ads-img-item" />
+                        <div className="menu-img-overlay-div"></div>
+                    </div>
+                    <div className="menu-ads-img-content">
+                        <p>Super Base Headphones</p>
+                        <b>ON SALE UPTO 30% OFF</b><br />
+                        <button className="btn btn-warning buy-action-btn">Buy Now</button>
+                    </div>
+                </div>
+                <div className="menu-ads-img">
+                    <div className="menu-img-overlay menu-img-2">
+                        <img src={menFashion} alt="shoes" className="menu-ads-img-item" />
+                        <div className="menu-img-overlay-div"></div>
+                    </div>
+                    <div className="menu-ads-img-content">
+                        <p>Men Fashion</p>
+                        <b>ON SALE UPTO 20% OFF</b><br />
+                        <button className="btn btn-warning buy-action-btn">Buy Now</button>
+                    </div>
+                </div>
+                <div className="menu-ads-img">
+                    <div className="menu-img-overlay menu-img-3">
+                        <img src={camera} alt="shoes" className="menu-ads-img-item" />
+                        <div className="menu-img-overlay-div"></div>
+                    </div>
+                    <div className="menu-ads-img-content">
+                        <p>Digital Camera</p>
+                        <b>ON SALE UPTO 40% OFF</b><br />
+                        <button className="btn btn-warning buy-action-btn">Buy Now</button>
                     </div>
                 </div>
             </div>

@@ -7,47 +7,47 @@ export default class MenuBar extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid menu-container">
+            <div className="container-fluid menu-container menu-bar-wrapper">
                 <nav className="container-fluid__container">
                     <div className="menu-bar-div">
                         <i className="fa fa-bar-chart mr-2"></i>
-                        Action here
+                        Phones & Tablets
                     </div>
                     <div className="menu-bar-div">
                         <i className="fa fa-pie-chart mr-2"></i>
-                        Another action
+                        Computing
                     </div>
                     <div className="menu-bar-div">
                         <i className="fa fa-line-chart mr-2"></i>
-                        Active link
+                        Furniture
                     </div>
                     <div className="menu-bar-div">
                         <i className="fa fa-area-chart mr-2"></i>
-                        Action here
+                        Jewelery
                     </div>
                     <div className="menu-bar-div">
                         <i className="fa fa-area-chart mr-2"></i>
-                        Disabled link
+                        Home & Living
                     </div>
                     <div className="menu-bar-div">
                         <i className="fa fa-bar-chart mr-2"></i>
-                        Action here
+                        Industrial Supply
                     </div>
                     <div className="menu-bar-div">
                         <i className="fa fa-pie-chart mr-2"></i>
-                        Another action
+                        Kitchen Appliances
                     </div>
                     <div className="menu-bar-div">
                         <i className="fa fa-line-chart mr-2"></i>
-                        Active link
+                        Fashion
                     </div>
                     <div className="menu-bar-div">
                         <i className="fa fa-area-chart mr-2"></i>
-                        Action here
+                        Baby Products
                     </div>
                     <div className="menu-bar-div">
                         <i className="fa fa-area-chart mr-2"></i>
-                        Disabled link
+                        Sports
                     </div>
                 </nav>
             </div>

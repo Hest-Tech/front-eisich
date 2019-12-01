@@ -2,8 +2,8 @@ import React from 'react';
 
 import Header from './Header';
 import Trending from './Trending';
-import Services from './Services';
-import MenuAds from './MenuAds';
+import MenFashion from './MenFashion';
+import WomenFashion from './WomenFashion';
 
 
 function HomePage() {
@@ -11,8 +11,8 @@ function HomePage() {
 		<div className="App jumbotron">
 			<Header />
 			<Trending />
-			<MenuAds />
-			<Services />
+			<MenFashion />
+			<WomenFashion />
 		</div>
 	);
 }
