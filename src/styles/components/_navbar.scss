@@ -110,10 +110,6 @@
     padding: 0 $s-padding;
 }
 
-.language {
-    // background: blue;
-}
-
 .language__select {
     width: auto;
 }
@@ -128,14 +124,45 @@
     height: $small-img;
 }
 
-.shopping-options {
-    display: flex;
-    flex: 40%;
+#custom-search-input{
+    padding: .3rem;
+    border: solid 1px #E4E4E4;
+    border-radius: .6rem;
+    background-color: #fff;
+    width: 100%;
 }
 
-.shopping__icon {
-    font-size: 2.5rem;
-    cursor: pointer;
+.search-input {
+    height: 100%;
+    flex: 70%;
+    display: flex;
+    align-items: center;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: .2rem 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 .8rem 0 1rem;
+    border-left: solid .1rem #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid .1rem #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+    color: $base-color
 }
 
 .form-inline {
@@ -149,17 +176,17 @@
 }
 
 .shopping-options {
-    // width: 40%;
-    flex: 45%;
+    flex: 15%;
     display: flex;
     justify-content: space-around;
 }
 
 .shopping-icons {
-    // background: blue;
     flex: 40%;
     display: flex;
     justify-content: center;
+    font-size: 2.5rem;
+    cursor: pointer;
 }
 
 .img-icons {
@@ -178,10 +205,6 @@
 
 .jobs {
     border-right: .1rem solid $base-color;
-}
-
-.login {
-    // background: grey;
 }
 
 .login p {
@@ -207,7 +230,7 @@ svg {
 }
 
 .navbar__container {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     height: 9rem;
     display: flex;
@@ -218,7 +241,7 @@ svg {
 .display-1 {
     color: $base-color;
     font-size: $l-font-size;
-    flex: 10%;
+    flex: 20%;
     align-items: center;
     display: flex;
     text-align: center;

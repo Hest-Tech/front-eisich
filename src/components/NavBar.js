@@ -102,56 +102,28 @@ export default class NavBar extends React.Component {
                         >
                             E-Isich
                         </NavLink>
-                        <div className="navbar-list">
-                            <ul className="navbar-list__wrapped">
-                                <NavLink
-                                    className="nav-link products-link"
-                                    activeClassName="is-active"
-                                    to="/products"
-                                    style={{ textDecoration: 'none' }}
-                                    activeStyle={{ color: '#302f2f' }}
-                                >
-                                    <li className="view-products">
-                                        <h6 className="title-head products">Products</h6>
-                                        <div className="title-description">View Products</div>
-                                    </li>
-                                </NavLink>
-                                <NavLink
-                                    className="nav-link about-us-link"
-                                    activeClassName="is-active"
-                                    to="/about"
-                                    style={{ textDecoration: 'none' }}
-                                    activeStyle={{ color: '#302f2f' }}
-                                >
-                                    <li className="about-link">
-                                        <h6 className="title-head">About Us</h6>
-                                        <div className="title-description">Our Goal</div>
-                                    </li>
-                                </NavLink>
-                                <AuthenticationModal
-                                    loginPopUp={this.state.loginPopUp}
-                                    hideAuthPopUp={this.hideAuthPopUp}
-                                />
-                            </ul>
+                        <AuthenticationModal
+                            loginPopUp={this.state.loginPopUp}
+                            hideAuthPopUp={this.hideAuthPopUp}
+                        />
+                        <div className="search-input">
+                            <div id="custom-search-input">
+                                <div class="input-group col-md-12">
+                                    <input type="text" class="form-control input-lg" placeholder="What're you searching for?" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info btn-lg" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-
                         <div className="shopping-options">
-                            <form className="form-inline">
-                                <input className="form-control mr-sm-2" type="search" placeholder="Find product" aria-label="Search" />
-                            </form>
                             <div className="shopping-icons">
                                 <span className="img-icons">
                                     <i className='far fa-heart shopping__icon'></i>
                                     <i className='fas fa-cart-plus shopping__icon'></i>
                                 </span>
-                            </div>
-                        </div>
-                        <div className="mobile mobile-search-bar">
-                            <div className="input-group mb-4">
-                                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon6" className="form-control" />
-                                <div className="input-group-append">
-                                    <button id="button-addon6" type="submit" className="btn btn-search"><span className="glyphicon-search">&#x1F50D;</span></button>
-                                </div>
                             </div>
                         </div>
                     </div>
