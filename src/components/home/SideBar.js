@@ -7,8 +7,8 @@ export default class SideBar extends React.Component {
 
     render() {
         return (
-            <div className="menu-container">
-                <div className="container-fluid side-menu-container">
+            <div className="side-menu-container">
+                <div className="container-fluid side-menu-container" id="menu-container">
                     <nav className="container-fluid__container">
                         <div className="menu-bar-div">
                             <i className="fa fa-bar-chart mr-2"></i>
@@ -32,7 +32,7 @@ export default class SideBar extends React.Component {
                         </div>
                     </nav>
                 </div><br />
-                <div className="container-fluid menu-container">
+                <div className="container-fluid side-menu-container">
                     <nav className="container-fluid__container">
                         <div className="menu-bar-div">
                             <i className="fa fa-bar-chart mr-2"></i>

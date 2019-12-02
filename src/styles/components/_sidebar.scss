@@ -1,8 +1,17 @@
 
 
-.menu-container {
-  width: 21rem;
-  border-radius: .3rem;
+.side-menu-container {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: .5rem;
+}
+
+#menu-container {
+  box-shadow: 0 .1rem 1rem #ddd;
+
 }
 
 .side-menu-container {
