@@ -4,8 +4,10 @@
 
 
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import hijab from '../assets/images/hijab.jpg';
+import dress from '../assets/images/women-dress-removebg.png';
+import NavBar from './NavBar';
 
 export default class ProductItemPage extends React.Component {
 
@@ -16,37 +18,25 @@ export default class ProductItemPage extends React.Component {
     render() {
         console.log(this.props);
         return (
-            <div className="product-item-container">
-                <div className="product-item-customizations">
-                    <div className="product-item-photo">
-                        <img src={hijab} alt="hijab" className="photo-item" />
-                        <span>
-                            <button>cart</button>
-                            <i>wishlist</i>
+            <div className="App">
+                <NavBar />
+                <div className="product-item">
+                    <nav className="product-nav-breadcrumb">
+                        <span class="nav-breadcrumb__span">
+                            <NavLink className="breadcrumb-text" to="/">Home</NavLink>
+                            <i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
+                            <NavLink className="breadcrumb-text" to="/products">Women's Fashion</NavLink>
+                            <i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
+                            <NavLink className="breadcrumb-text" to="/">Clothing</NavLink>
+                            <i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
+                            <p class="breadcrumb-item active">Dress</p>
                         </span>
+                    </nav>
+                    <div className="product-item-container">
+                        <div className="product-item__img"></div>
+                        <div className="product-item__details"></div>
                     </div>
-                    <div className="product-item-customizations__sec">
-                        <div className="product-item-color-pallete">
-                            <div className="product-color-container color-container">
-                                <b className="filter-name">COLORS</b>
-                                <div className="product-color-pallete color-pallete">
-                                    <span className="product-color-item color-item pink" style={{ background: 'pink' }}></span>
-                                    <span className="product-color-item color-item purple" style={{ background: 'purple' }}></span>
-                                    <span className="product-color-item color-item red" style={{ background: 'red' }}></span>
-                                    <span className="product-color-item color-item orange" style={{ background: 'orange' }}></span>
-                                    <span className="product-color-item color-item blue" style={{ background: 'blue' }}></span>
-                                    <span className="product-color-item color-item green" style={{ background: 'green' }}></span>
-                                    <span className="product-color-item color-item grey" style={{ background: 'grey' }}></span>
-                                    <span className="product-color-item color-item black" style={{ background: 'black' }}></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="product-item-sizes"></div>
-                    </div>
-                </div>
-                <div className="product-item-details">
-                    <h4 className="display-3">Product Details</h4>
-                    <p>lorem lorem lorem lorem lorem</p>
+                    <div className="product-specifications"></div>
                 </div>
             </div>
         );
