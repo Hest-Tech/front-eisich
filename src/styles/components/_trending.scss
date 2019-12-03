@@ -2,13 +2,12 @@
 * This file contains styles for the trending component
 */
 
-
 @import '../base/settings';
 
+
 .app-trending {
-    // margin-top: $xl-navbar-height;
     height: auto;
-    // width: 88%;
+    width: $base-size;
     margin: 2rem auto;
     display: flex;
     justify-content: center;

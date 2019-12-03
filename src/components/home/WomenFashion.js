@@ -13,7 +13,7 @@ export default class MenuBar extends React.Component {
 
     render() {
         return (
-            <div className="container women-fashion">
+            <div className="women-fashion">
                 <h4 className="display-5">Women's Fashion</h4>
                 <div className="women-fashion__container">
                     <nav className="container-fluid__container women-fashion-menu">

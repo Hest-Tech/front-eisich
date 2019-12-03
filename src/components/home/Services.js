@@ -10,7 +10,7 @@ import size from '../../assets/images/size.svg';
 
 const Services = () => {
     return (
-        <div className="container app-services">
+        <div className="app-services">
             <div className="app-services__container">
                 <h4 className="display-5">Services</h4>
                 <div className="services">

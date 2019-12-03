@@ -17,7 +17,7 @@ import camera from '../../assets/images/camera.jpg';
 
 
 const Trending = () => (
-    <div className="container app-trending">
+    <div className="app-trending">
         <div className="app-trending__container">
             <h4 className="display-5">See what's Trending</h4>
             <div className="trending">

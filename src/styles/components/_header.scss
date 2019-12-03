@@ -1,15 +1,19 @@
 /**
 * This file contains styles for the header component
 */
+@import '../base/settings';
 
 
 .App-header {
     z-index: 1000;
-    margin-top: -3rem;
+    margin: -3rem auto 0 auto;
+    width: $base-size;
 }
 
 .App {
     margin-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .header-sec-container {

@@ -1,7 +1,13 @@
+@import '../base/settings';
+
 
 .fashion-img {
     flex: 75%;
     display: flex;
+}
+
+.men-fashion, .women-fashion {
+    width: $base-size;
 }
 
 .fashion-img__item {

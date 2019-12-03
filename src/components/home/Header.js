@@ -33,7 +33,7 @@ export default class Header extends React.Component {
 
     render() {
         return (
-            <header className="container d-flex App-header">
+            <header className="d-flex App-header">
                 <div className="header-sec-container">
                     <MenuBar toggleDisplay={this.toggleDisplay} />
                     <div className="carousel-wrapper">
