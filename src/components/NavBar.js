@@ -93,9 +93,9 @@ export default class NavBar extends React.Component {
                 </div>
                 <div className="navbar" data-spy="affix" data-offset-top="60">
                     <div className="navbar__container">
-                        <img className="mobile mobile-menu-bar" src={menu} alt="menu" />
+                        {/* <img className="mobile mobile-menu-bar" src={menu} alt="menu" /> */}
                         <NavLink
-                            className="display-1"
+                            className="display-1 main-title"
                             to="/"
                             style={{ textDecoration: 'none' }}
                             activeStyle={{ color: '#E9BD4C' }}
@@ -109,7 +109,7 @@ export default class NavBar extends React.Component {
                         <div className="search-input">
                             <div id="custom-search-input">
                                 <div className="input-group col-md-12">
-                                    <input type="text" className="form-control input-lg" placeholder="What're you searching for?" />
+                                    <input type="text" className="form-control" placeholder="What're you searching for?" />
                                     <span className="input-group-btn">
                                         <button className="btn btn-info btn-lg" type="button">
                                             <i className="glyphicon glyphicon-search"></i>

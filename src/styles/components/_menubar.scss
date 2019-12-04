@@ -13,8 +13,8 @@
 .menu-bar-wrapper {
   // width: 100%;
   flex: 9%;
-  border-radius: .5rem;
-  box-shadow: 0 .1rem 1rem #ddd;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.1rem 1rem #ddd;
 }
 
 .container-fluid__container {
@@ -23,13 +23,13 @@
 }
 
 .menu-bar-div {
-  font-size: $s-font-size+.2;
+  font-size: $s-font-size + 0.2;
   padding-bottom: 1rem;
   width: 100%;
 }
 
 .mr-2 {
-  padding: .6rem .5rem .5rem 1rem;
+  padding: 0.6rem 0.5rem 0.5rem 1rem;
 }
 
 .menu-bar-div:hover {
@@ -42,5 +42,16 @@
 }
 
 .menu-bar-wrapper:hover {
-  border-radius: .5rem 0 0 .5rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+// media queries
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+	.menu-bar-container {
+		display: none;
+	}
+
+  .block-mobile {
+    display: block;
+  }
 }
