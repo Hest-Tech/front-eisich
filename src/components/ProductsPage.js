@@ -15,12 +15,12 @@ const ProductsPage = () => (
 
         <div className="products-container">
             <nav className="nav-breadcrumb">
-                <span class="nav-breadcrumb__span">
+                <span className="nav-breadcrumb__span">
                     <NavLink className="breadcrumb-text" to="/">Home</NavLink>
-                    <i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
+                    <i className="fas fa-angle-right mx-2" aria-hidden="true"></i>
                     <NavLink className="breadcrumb-text" to="/">Women's Fashion</NavLink>
-                    <i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
-                    <p class="breadcrumb-item active">Products</p>
+                    <i className="fas fa-angle-right mx-2" aria-hidden="true"></i>
+                    <p className="breadcrumb-item active">Products</p>
                 </span>
             </nav>
             <div className="products-container__wrapped">
@@ -158,34 +158,34 @@ const ProductsPage = () => (
                     <div className="products-filter-options">
                         <div className="products-title">
                             <h3 className="display-6">WOMEN'S CLOTHING</h3>
-                            <small class="text-muted">34 products found</small>
+                            <small className="text-muted">34 products found</small>
                         </div>
                         <div className="products-filter">
                             <nav className="title-sec-paginator">
                                 <small>
-                                    <ul class="text-sm">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1">1</a>
+                                    <ul className="text-sm">
+                                        <li className="page-item disabled">
+                                            <a className="page-link" href="#" tabindex="-1">1</a>
                                         </li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li className="page-item"><a className="page-link" href="#">2</a></li>
+                                        <li className="page-item"><a className="page-link" href="#">3</a></li>
                                     </ul>
                                 </small>
                             </nav>
-                            <form class="multi-range-field-option">
-                                <input type="text" class="form-control" value="0" />
+                            <form className="multi-range-field-option">
+                                <input type="text" className="form-control" value="0" />
                                 <input
                                     id="multi"
-                                    class="multi-range"
+                                    className="multi-range"
                                     type="range"
                                     min="0"
                                     max="250000"
                                     step="1500"
                                 />
-                                <input type="text" class="form-control" value="KSH12,500" />
+                                <input type="text" className="form-control" value="KSH12,500" />
                             </form>
                             <label>Sort by:
-                            <select class="select-dropdown text-muted small">
+                            <select className="select-dropdown text-muted small">
                                     <option className="text-muted small" selected>All items</option>
                                     <option className="text-muted small" value="size">Size</option>
                                     <option className="text-muted small" value="price">Price</option>

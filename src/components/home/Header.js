@@ -27,7 +27,7 @@ export default class Header extends React.Component {
 
     toggleDisplayState(state) {
         return {
-            display: !state.display,
+            display: !state.display
         };
     }
 

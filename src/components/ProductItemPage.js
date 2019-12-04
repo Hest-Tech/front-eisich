@@ -5,31 +5,49 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Modal from 'react-modal';
 
 import dress from '../assets/images/dress.png';
 import NavBar from './NavBar';
+import SizeChart from './SizeChart';
+
 
 export default class ProductItemPage extends React.Component {
 
     constructor(props) {
         super(props);
+        this.toggleChartPopUp = this.toggleChartPopUp.bind(this);
+
+        this.state = {
+            chartPopUp: false
+        };
+    }
+
+    toggleChartPopUp() {
+        this.setState(this.toggleChartPopupState)
+        console.log(this.state.chartPopUp)
+    }
+
+    toggleChartPopupState(state) {
+        return {
+            chartPopUp: !state.chartPopUp
+        }
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="App">
                 <NavBar />
                 <div className="product-item">
                     <nav className="product-nav-breadcrumb">
-                        <span class="nav-breadcrumb__span">
+                        <span className="nav-breadcrumb__span">
                             <NavLink className="breadcrumb-text" to="/">Home</NavLink>
-                            <i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
+                            <i className="fas fa-angle-right mx-2" aria-hidden="true"></i>
                             <NavLink className="breadcrumb-text" to="/products">Women's Fashion</NavLink>
-                            <i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
+                            <i className="fas fa-angle-right mx-2" aria-hidden="true"></i>
                             <NavLink className="breadcrumb-text" to="/">Clothing</NavLink>
-                            <i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
-                            <p class="breadcrumb-item active">Dress</p>
+                            <i className="fas fa-angle-right mx-2" aria-hidden="true"></i>
+                            <p className="breadcrumb-item active">Dress</p>
                         </span>
                     </nav>
                     <div className="product-item-container">
@@ -70,12 +88,20 @@ export default class ProductItemPage extends React.Component {
                                         <mark>-25%</mark>
                                     </span>
                                 </div>
+                                {this.state.chartPopUp && <SizeChart
+                                    isOpen={this.state.chartPopUp}
+                                    toggleChartPopUp={this.toggleChartPopUp}
+                                />}
                                 <div className="specification-variation">
                                     <span className="size-check">
                                         <p>SELECT SIZE:</p>
-                                        <NavLink className="breadcrumb-text" to="/">
+                                        <a
+                                            className="breadcrumb-text"
+                                            href="#"
+                                            onClick={this.toggleChartPopUp}
+                                        >
                                             Size Guide
-                                        </NavLink>
+                                        </a>
                                     </span>
                                     <div className="size-range">
                                         <div className="size_ small">S</div>
@@ -113,9 +139,9 @@ export default class ProductItemPage extends React.Component {
                                         <p>SELECT SIZE:</p>
                                     </span>
                                     <div className="size-range qty">
-                                        <button class="btn btn-sm"><i class="fas fa-minus"></i></button>
+                                        <button className="btn btn-sm"><i className="fas fa-minus"></i></button>
                                         <p className="text-qty">1</p>
-                                        <button class="btn btn-sm"><i class="fas fa-plus"></i></button>
+                                        <button className="btn btn-sm"><i className="fas fa-plus"></i></button>
                                         <p className="text-muted small item-pieces">2000 pieces available</p>
                                     </div>
                                     <div className="action-btn">
@@ -129,22 +155,17 @@ export default class ProductItemPage extends React.Component {
                     <div className="product-specifications">
                         <div className="specification-links">
                             <div className="btn-warning">Product Details</div>
-                            <div>Reviews</div>
+                            <div className="basic">Reviews</div>
                         </div>
                         <div className="product-specifications__background">
                             2019nbspWomen Summer Dress Boho Style Floral Print Chiffon Beach Dress Tunic Sundress Loose Mini Party Dress Vestidos Plus Size 5XL
     
-                            Items: Summer chiffon dress
-    
-                            Size: S M L XL XXL XXXL 4XL 5XL
-    
-                            Sleeve: Bow 3/4 sleeve
-    
-                            Collar: O-neck
-    
-                            Season: Summer dress
-    
-                            Pattern:Floral print
+                            <p>Items: Summer chiffon dress</p>
+                            <p>Size: S M L XL XXL XXXL 4XL 5XL</p>
+                            <p>Sleeve: Bow 3/4 sleeve</p>
+                            <p>Collar: O-neck</p>
+                            <p>Season: Summer dress</p>
+                            <p>Pattern:Floral print</p>
                         </div>
                     </div>
                 </div>

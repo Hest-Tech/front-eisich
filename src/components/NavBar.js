@@ -108,11 +108,11 @@ export default class NavBar extends React.Component {
                         />
                         <div className="search-input">
                             <div id="custom-search-input">
-                                <div class="input-group col-md-12">
-                                    <input type="text" class="form-control input-lg" placeholder="What're you searching for?" />
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-info btn-lg" type="button">
-                                            <i class="glyphicon glyphicon-search"></i>
+                                <div className="input-group col-md-12">
+                                    <input type="text" className="form-control input-lg" placeholder="What're you searching for?" />
+                                    <span className="input-group-btn">
+                                        <button className="btn btn-info btn-lg" type="button">
+                                            <i className="glyphicon glyphicon-search"></i>
                                         </button>
                                     </span>
                                 </div>
