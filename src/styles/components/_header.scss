@@ -22,8 +22,8 @@
 }
 
 .carousel-wrapper {
-  flex: 50%;
   position: relative;
+  flex: 50%;
 }
 
 .slide {
@@ -110,9 +110,9 @@ hr {
     height: 12rem;
     width: 100%;
   }
-  
+
   .carousel-inner {
-      border-radius: .8rem;
+    border-radius: 0.8rem;
   }
 
   .carousel-item {

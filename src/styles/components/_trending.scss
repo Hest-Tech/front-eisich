@@ -108,7 +108,6 @@
 }
 
 .app-menu-ads {
-    // background: blue;
     margin: 4rem auto 0 auto;
 }
 
@@ -120,12 +119,13 @@
 .menu-ads-img-content {
     font-size: $s-font-size;
     position: absolute;
-    // background: red;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     font-weight: bold;
+    z-index: 1000;
+    color: $off-white;
 }
 
 .menu-img-overlay-div {
@@ -165,11 +165,6 @@
     opacity: 1;
 }
 
-.menu-ads-img-content {
-    z-index: 1000;
-    color: $off-white;
-}
-
 .menu-img-2 {
     margin: 0 .25rem;
 }
@@ -185,7 +180,52 @@
 
 @media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
     .trending-img-slider__container {
-        overflow-x: scroll;
-        width: 50%;
+        overflow-x: hidden;
+    }
+    
+    .app-trending {
+        width: 100%;
+    }
+
+    .app-menu-ads {
+        width: 95%;
+        margin: 0;
+    }
+
+    .menu-ads-img-item {
+        height: 15rem;
+        border-radius: 0.8rem;
+    }
+    
+    .menu-img-overlay-div {
+        border-radius: 0.8rem;
+    }
+
+    .menu-ads-img-slider__container {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .menu-ads-img {
+        margin-bottom: $l-margin;
+        border-radius: 0.8rem;
+    }
+
+    .menu-img-1,
+    .menu-img-2,
+    .menu-img-3 {
+        margin: 0;
+    } 
+
+    .app-trending__container, .men-fashion, .women-fashion {
+        display: none;
+    }
+
+    .menu-ads-img-content b {
+        font-size: $s-font-size*.8;
+    }
+    
+    .menu-ads-img-content p {
+        font-size: $m-font-size*.8;
     }
 }

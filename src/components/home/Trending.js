@@ -112,7 +112,7 @@ const Trending = () => (
                         <div className="menu-img-overlay-div"></div>
                     </div>
                     <div className="menu-ads-img-content">
-                        <p>Super Base Headphones</p>
+                        <p>Super Bass Headphones</p>
                         <b>ON SALE UPTO 30% OFF</b><br />
                         <button className="btn btn-warning buy-action-btn">Buy Now</button>
                     </div>

@@ -18,19 +18,19 @@ const MobileMenu = () => {
                 <div className="menu-category">
                     <img src={category} alt="all category" className="category-img" />
                     <div className="category-details">
-                        <p className="text-muted">All categories</p>
+                        <p className="text-muted">Search all categories</p>
                     </div>
                 </div>
                 <div className="menu-category">
                     <img src={dressCategory} alt="women fashion category" className="category-img" />
                     <div className="category-details">
-                        <p className="text-muted">Women fashion</p>
+                        <p className="text-muted">Women & fashion</p>
                     </div>
                 </div>
                 <div className="menu-category">
                     <img src={shirtCategory} alt="Men fashion category" className="category-img" />
                     <div className="category-details">
-                        <p className="text-muted">Men fashion</p>
+                        <p className="text-muted">Men & fashion</p>
                     </div>
                 </div>
                 <div className="menu-category">
@@ -45,10 +45,11 @@ const MobileMenu = () => {
                         <p className="text-muted">Computers & Gaming</p>
                     </div>
                 </div>
+                <div style={{padding:'.5rem', width:'100%'}}></div>
                 <div className="menu-category">
                     <img src={houseCategory} alt="Home category" className="category-img" />
                     <div className="category-details">
-                        <p className="text-muted">Home & living</p>
+                        <p className="text-muted">Home & lifestyle</p>
                     </div>
                 </div>
                 <div className="menu-category">

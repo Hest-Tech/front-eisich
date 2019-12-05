@@ -38,7 +38,8 @@
     
     .category-details {
         width: 85%;
-        height: 4rem;
+        display: flex;
+        align-items: center;
     }
     
     .category-details .text-muted {
@@ -47,6 +48,8 @@
         white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        height: 100%;
+        margin: 0;
     }
     
     .menu-category {
