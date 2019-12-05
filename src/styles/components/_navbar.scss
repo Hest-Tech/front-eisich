@@ -352,12 +352,6 @@ svg {
 // media queries
 @media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
 
-    .main-nav-bar__container,
-    .shopping-options
-    {
-        display: none;
-    }
-
     .main-nav-bar {
         background: blue;
         height: auto;

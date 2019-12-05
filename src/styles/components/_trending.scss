@@ -181,3 +181,11 @@
 .menu-img-3 {
     margin-left: .5rem;
 }
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
+    .trending-img-slider__container {
+        overflow-x: scroll;
+        width: 50%;
+    }
+}

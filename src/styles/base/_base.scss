@@ -44,6 +44,26 @@ a {
   bottom: 50%;
 }
 
-h3, h2 {
-  margin: 0
+h3,
+h2 {
+  margin: 0;
+}
+
+@media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
+  .app-footer,
+  .menu-bar-container,
+  .carousel-control-next,
+  .carousel-control-prev,
+  .main-nav-bar__container,
+  .shopping-options,
+  .side-menu-container {
+    display: none;
+  }
+  .flex-mobile {
+    display: flex;
+  }
+
+  .block-mobile {
+    display: block;
+  }
 }

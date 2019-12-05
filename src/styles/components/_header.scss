@@ -106,10 +106,6 @@ hr {
 }
 
 @media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
-
-  .carousel-control-next, .carousel-control-prev {
-    display: none;
-  }
   .header-sec-container {
     height: 12rem;
     width: 100%;

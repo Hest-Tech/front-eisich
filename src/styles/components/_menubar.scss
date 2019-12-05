@@ -47,11 +47,4 @@
 
 // media queries
 @media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
-	.menu-bar-container {
-		display: none;
-	}
-
-  .block-mobile {
-    display: block;
-  }
 }
