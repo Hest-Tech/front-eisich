@@ -39,7 +39,7 @@ export default class AuthenticationModal extends React.Component {
         e.preventDefault();
         this.setState((prevState) => ({
             loginPopUp: !prevState.loginPopUp
-        }))
+        }))gff@ss.co
     }
 
     // Hide reset password

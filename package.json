@@ -15,6 +15,7 @@
     "react-scripts": "3.2.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
+    "yarn": "^1.19.2",
     "yup": "^0.27.0"
   },
   "scripts": {
@@ -27,7 +28,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js", "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
+      "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
     }
   },
   "eslintConfig": {
