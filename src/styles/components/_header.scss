@@ -2,25 +2,127 @@
 * This file contains styles for the header component
 */
 
-
 .App-header {
-    position: relative;
-    top: $m-navbar-height;
+  z-index: 1000;
+  margin: -3rem auto 0 auto;
+  width: $base-size;
+}
+
+.App {
+  margin-bottom: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.header-sec-container {
+  display: flex;
+  justify-content: space-between;
+  height: 38rem;
+  width: 100%;
+}
+
+.carousel-wrapper {
+  position: relative;
+  flex: 50%;
+}
+
+.slide {
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.carousel-inner {
+  border-radius: 0.5rem;
+  // border-radius: .25rem;
+}
+
+.carousel-item {
+  height: 38rem;
 }
 
 .carousel-item img {
-    height: 80vh;
-    width: 100%;
+  width: 100%;
+}
+
+.extended-menu-bar {
+  position: absolute;
+  background: $white;
+  top: 0;
+  height: 100%;
+  z-index: 1000;
+  width: 97.51%;
+  border-left: 1px solid #ddd;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0 1%;
+  display: flex;
+}
+
+.extended-menu-bar__container {
+  display: flex;
+  width: 100%;
+}
+
+.table-column {
+  width: 33%;
+  height: 100%;
+  padding: 0 $m-padding;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-row {
+  margin: $m-margin 0;
+}
+
+.table-row-list {
+  font-size: $s-font-size + 0.1;
+}
+
+.table-row-list li {
+  line-height: $m-font-size;
+  opacity: 0.8;
+}
+
+.table-row-list li,
+.th {
+  cursor: pointer;
+}
+
+.table-row-list li:hover,
+.th:hover {
+  opacity: 1;
+  color: $base-color;
+}
+
+.th {
+  font-weight: 400;
+  // background: blue;
+  width: 100%;
+}
+
+hr {
+  margin: $s-margin 0;
 }
 
 @media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
-    .App-header {
-        top: $m-navbar-height;
-    }
+  .header-sec-container {
+    height: 12rem;
+    width: 100%;
+  }
+
+  .carousel-inner {
+    border-radius: 0.8rem;
+  }
+
+  .carousel-item {
+    height: 12rem;
+  }
+
+  .App-header {
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: $small-tablet-landscape-width) and (min-width: $large-tablet-landscape-width) {
-    .App-header {
-        top: $s-navbar-height;
-    }
 }

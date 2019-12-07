@@ -5,8 +5,8 @@
 
 export default class clientStorage {
 
-    // create and set cookie valuesc
-    set setCookie([cname, cvalue, exdays]) {
+    // create and set cookie values
+    setCookie(cname, cvalue, exdays) {
         let d = new Date();
 
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -33,13 +33,13 @@ export default class clientStorage {
     }
 
     // delete a cookie
-    set eraseCookie(cname) {
+    eraseCookie(cname = 'token') {
         document.cookie = cname + '=; Max-Age=-99999999;';
     }
 
     // check for an existing cookie
     checkCookie(cname) {
-        let user = getCookie(cname);
+        let user = this.getCookie(cname);
         if (user != "") {
             // Check if token is still valid - onload
             // check if the token exists in the database
