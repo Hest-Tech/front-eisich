@@ -5,11 +5,12 @@
 
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { connect } from 'react-redux';
 
-import ForgotPassword from '../ForgotPassword';
 import { validationSchema } from '../../utils/validate';
+import ForgotPassword from './ForgotPassword';
 
-export default class LoginPage extends React.Component {
+class LoginPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,6 +20,10 @@ export default class LoginPage extends React.Component {
         this.state = {
             resetPopUp: undefined
         }
+    }
+
+    componentWillMount() {
+        console.log(this.props.filters);
     }
 
     componentWillUnmount() {
@@ -58,7 +63,7 @@ export default class LoginPage extends React.Component {
                                         console.log(values);
                                     }}
                                 >
-                                    {({ touched, errors, isSubmitting, values }) => (
+                                    {({ touched, errors, isSubmitting, values, filters }) => (
                                         <Form>
                                             <div className="form-group">
                                                 <label htmlFor="email" className="control-label">Email</label>
@@ -144,3 +149,11 @@ export default class LoginPage extends React.Component {
         );
     }
 };
+
+const ConnectedLoginPage = connect((state) => {
+    return {
+        filters: state.filters
+    }
+})(LoginPage);
+
+export default ConnectedLoginPage;

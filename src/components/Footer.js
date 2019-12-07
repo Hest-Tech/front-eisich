@@ -17,7 +17,7 @@ import telephone from '../assets/images/telephone.svg';
 
 const Footer = () => {
     return (
-        <div className="app-footer">
+        <footer className="app-footer bg-dark text-light font-weight-normal">
             <div className="footer">
                 <div className="footer-subscribe-sec">
                     <div className="footer-subscribe">
@@ -32,7 +32,7 @@ const Footer = () => {
                                 <img className="payment-method-icon" src={paypal} alt="paypal" />
                             </div>
                             <div className="contact-us">
-                                <span className="contact-span"><img src={email} alt="email" /><p>Email us at: webdev@hestechinnovators.com</p></span>
+                                <span className="contact-span"><img src={email} alt="email" /><p>Email us at: webdev@hestechinnovator.com</p></span>
                                 <span className="contact-span"><img src={telephone} alt="telephone" /><p>Call us at: 0717459546</p></span>
                             </div>
                         </div>
@@ -55,7 +55,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
     );
 }
 

@@ -1,0 +1,13 @@
+.men-fashion {
+    margin: 2rem auto;
+}
+
+.men-fashion__container {
+    background: $white;
+    padding: $m-padding;
+    display: flex;
+}
+
+.men-fashion-menu {
+    flex: 25%;
+}

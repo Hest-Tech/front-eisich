@@ -1,5 +1,4 @@
 @import './styles/base/settings';
-@import './styles/base/base';
 @import './styles/components/navbar.scss';
 @import './styles/components/login.scss';
 @import './styles/components/signup.scss';
@@ -9,4 +8,13 @@
 @import './styles/components/footer.scss';
 @import './styles/components/services.scss';
 @import './styles/components/products.scss';
+@import './styles/components/menubar.scss';
+@import './styles/components/sidebar.scss';
+@import './styles/components/fashion.scss';
+@import './styles/components/womenfashion.scss';
+@import './styles/components/menfashion.scss';
+@import './styles/components/sizechart.scss';
+@import './styles/components/mobilemenu.scss';
+@import './styles/components/mobilenav.scss';
 @import './styles/components/product-item.scss';
+@import './styles/base/base';

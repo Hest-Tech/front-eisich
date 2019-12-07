@@ -6,8 +6,7 @@ import React from 'react';
 
 const AboutPage = () => (
     <div className="help-page-container">
-        This is the AboutPage!
-
+        About Us
     </div>
 );
 

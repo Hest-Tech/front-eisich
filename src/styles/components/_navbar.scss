@@ -2,20 +2,22 @@
 * This file contains styles for the navbar component
 */
 
+.block-mobile {
+    display: none;
+}
 
-@import '../base/settings';
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+}
 
+.affix ~ .navbar {
+    padding-top: 7rem;
+}
 
 .main-nav-bar {
-    position: fixed;
-    // height: $navbar-height;
-    background: $white;
-    box-shadow: 0 5px 8px -2px rgba(0,0,0,.2);
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
+    height: $m-navbar-height;
 }
 
 .main-nav-bar__container {
@@ -30,7 +32,7 @@
 .nav-links {
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     justify-content: space-around;
 }
@@ -42,9 +44,9 @@
 }
 
 .start-selling {
-    width: 25%;
+    width: 15%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .separate {
@@ -81,20 +83,22 @@
 }
 
 .help-login {
-    width: 20%;
+    width: 25%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     height: 20%;
     opacity: .6;
     font-size: $s-font-size;
     letter-spacing: .05rem;
+    // background: green;
 }
 
 .help-login__wrapped {
-    width: 63%;
+    width: 100%;
     cursor: pointer;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    // background: red;
 }
 
 .help-login__wrapped span {
@@ -107,20 +111,59 @@
     padding: 0 $s-padding;
 }
 
+.language__select {
+    width: auto;
+}
+
+.language__label {
+    margin: 0 .5rem;
+    font-weight: 400;
+}
+
 .navbar__icon-img {
     width: $small-img;
     height: $small-img;
 }
 
-.shopping-options {
-    display: flex;
-    flex: 40%;
+#custom-search-input{
+    padding: .3rem;
+    border: solid 1px #E4E4E4;
+    border-radius: .6rem;
+    background-color: #fff;
+    width: 100%;
 }
 
-.shopping__icon-img {
-    width: $medium-img;
-    height: 80%;
-    flex: 10%;
+.search-input {
+    height: 100%;
+    flex: 70%;
+    display: flex;
+    align-items: center;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: .2rem 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 .8rem 0 1rem;
+    border-left: solid .1rem #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid .1rem #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+    color: $base-color
 }
 
 .form-inline {
@@ -134,19 +177,22 @@
 }
 
 .shopping-options {
-    // width: 40%;
-    flex: 45%;
+    flex: 15%;
     display: flex;
     justify-content: space-around;
 }
 
 .shopping-icons {
     flex: 40%;
-    // display: flex;
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
+    cursor: pointer;
 }
 
 .img-icons {
-    width: 90%;
+    // background: red;
+    width: 50%;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -173,7 +219,19 @@ svg {
 }
 
 .navbar {
-    width: 75%;
+    background: $white;
+    box-shadow: 0 5px 8px -2px rgba(0,0,0,.2);
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    padding: 0;   
+    margin-bottom: 0px;
+}
+
+.navbar__container {
+    width: 85%;
     margin: 0 auto;
     height: 9rem;
     display: flex;
@@ -184,7 +242,9 @@ svg {
 .display-1 {
     color: $base-color;
     font-size: $l-font-size;
-    flex: 10%;
+    flex: 20%;
+    align-items: center;
+    display: flex;
     text-align: center;
     text-decoration: none !important;
     font-weight: 500;
@@ -253,11 +313,6 @@ svg {
     margin: 0;
 }
 
-.arrow-down {
-    margin: 0;
-    height: 100%;
-}
-
 .title-head {
     letter-spacing: .07rem;
     font-size: $m-font-size;
@@ -297,91 +352,30 @@ svg {
 // media queries
 @media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
 
-    .start-selling,
-    .help-login,
-    .navbar-list,
-    .nav-links-container,
-    .trust-policy .return,
-    .trust-policy .bulk,
-    .form-inline {
-        display: none;
+    .main-nav-bar {
+        background: blue;
+        height: auto;
+        margin-bottom: $m-margin;
     }
 
-    .mobile-menu-items {
-        width: 100%;
-        background: red;
-    }
-
-    .trust-policy {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: $m-font-size;
-    }
-
-    .contact {
-        border: none;
-    }
-
-    .navbar {
-        width: 100%;
-        height: 6rem;
-    }
-
-    .shopping-options {
-        flex: 45%;
-        justify-content: space-between;
-    }
-
-    .display-1 {
-        flex: 45%;
-        text-align: left;
-        padding: 0 $l-padding;
-        font-size: $m-font-size + .9;
-    }
-
-    .img-icons {
-        justify-content: space-around;
-        width: 80%;
-    }
-
-    .shopping__icon-img {
-        height: $medium-img;
-    }
-
-    .mobile-menu-bar, .mobile-user-img {
-        width: $medium-img;
-        height: $medium-img;
-        cursor: pointer;
-        flex: 10%;
-        opacity: .8;
-    }
-
-    .mobile {
+    .block-mobile {
         display: block;
     }
 
-    .form-control {
-        font-size: $s-font-size + .5;
-        outline: none;
-        color: $light-grey;
-        font-style: italic;
+    .navbar {
+        box-shadow: 0 2px 6px -2px #b3b2b2;
     }
 
-    .mobile-search-bar {
-        padding: 0 $s-padding;
+    .navbar__container {
+        width: 100%;
+        height: 6rem;
+        padding: $m-padding;
     }
 
-    .glyphicon-search {
-        font-size: $s-font-size + .5;
-        color: $white;
-        cursor: pointer;
+    .main-title {
+        display: none;
     }
 
-    .btn-search {
-        background: $base-color;
-    }
 }
 
 @media screen and (min-width: $mobile-landscape-width) {}
@@ -409,10 +403,9 @@ svg {
         flex: 65%;
     }
 
-    .shopping__icon-img {
-        height: $medium-img;
+    .shopping__icon {
+        font-size: 3rem;
     }
-
     .mobile-menu-bar {
         display: block;
         width: $medium-img;
@@ -463,10 +456,8 @@ svg {
 
     }
 
-    .shopping__icon-img {
-        width: $medium-img;
-        height: 80%;
-        flex: 10%;
+    .shopping__icon {
+        font-size: 3rem;
     }
 
     .start-selling {
