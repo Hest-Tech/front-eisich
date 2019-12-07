@@ -1,0 +1,21 @@
+.side-menu-container {
+  padding: 0;
+  color: $dark-grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: .5rem;
+}
+
+#menu-container {
+  box-shadow: 0 .1rem 1rem #ddd;
+
+}
+
+.side-menu-container {
+    flex: 10%;
+}
+
+// media queries
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {}

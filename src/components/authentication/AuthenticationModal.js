@@ -2,7 +2,6 @@
  * This file contains the Authentication modal
  */
 
-
 import React from 'react';
 import Modal from 'react-modal';
 

@@ -12,7 +12,7 @@ const Services = () => {
     return (
         <div className="app-services">
             <div className="app-services__container">
-                <h4 className="display-4">Services</h4>
+                <h4 className="display-5">Services</h4>
                 <div className="services">
                     <div className="services__container">
                         <div className="services-img-div good-quality">

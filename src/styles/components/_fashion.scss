@@ -1,0 +1,85 @@
+.fashion-img {
+    flex: 75%;
+    display: flex;
+}
+
+.men-fashion, .women-fashion {
+    width: $base-size;
+}
+
+.fashion-img__item {
+    flex: 30%;
+    margin: 0 $s-margin;
+    width: 30%;
+    position: relative;
+}
+
+.img-fashion-content {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 50%;
+}
+
+.img-fashion-content-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 800;
+}
+
+.img-fashion-content-item p {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.img-fashion-content p {
+    font-family: 'Fredoka One', cursive;
+    color: $off-white
+}
+
+.img-fashion-content b {
+    color: $base-color;
+}
+
+.fashion-2 p {
+    font-size: 3.5rem;
+    font-family: 'Bangers', cursive;
+    color: $white;
+}
+
+.fashion-pic {
+    height: 100%;
+    width: 100%;
+}
+
+.fashion-img__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.fashion-img__brand {
+    flex: 50%;
+    height: 40%;
+    background: $light-grey;
+    margin: $m-margin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $m-padding;
+}
+
+.fashion-brand {
+    height: 40%;
+    width: 25%;
+    // background: blue;
+    flex: 50%;
+}
