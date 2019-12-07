@@ -8,6 +8,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import ForgotPassword from '../ForgotPassword';
 import { validationSchema } from '../../utils/validate';
+import firebase from '../../config/firebase';
 
 export default class LoginPage extends React.Component {
 
@@ -24,6 +25,7 @@ export default class LoginPage extends React.Component {
     componentWillUnmount() {
         this.props.handleResetPassword(undefined); // set resetTitle to undefined
     }
+
 
     // show reset password
     resetPassword(e) {
@@ -56,7 +58,17 @@ export default class LoginPage extends React.Component {
                                         alert("Form is validated! Submitting the form...");
                                         setSubmitting(false);
                                         console.log(values);
-                                    }}
+                                        const { email, password } = values
+                                        firebase.auth()
+                                            .signInWithEmailAndPassword(email, password)
+                                            .then(res => {
+                                                this.props.history.push("/")
+                                            })
+                                            .catch(error => {
+                                                this.props.changeAuth(false)
+                                                console.log("error occurred");
+                                            })
+                                    } }
                                 >
                                     {({ touched, errors, isSubmitting, values }) => (
                                         <Form>
