@@ -9,6 +9,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import TwitterLogin from 'react-twitter-auth';
 import { connect } from 'react-redux';
 
+import fire from '../../firebase/firebase';
 import { validationSchema } from '../../utils/validate';
 import { registerSuccess } from '../../actions/authentication';
 
@@ -63,6 +64,26 @@ class SignupPage extends React.Component {
                         onSubmit={(values, { setSubmitting }) => {
                             // console.log("Form is validated! Submitting the form...");
                             setSubmitting(false);
+                            fire.auth()
+                                .createUserWithEmailAndPassword(values.email, values.password)
+                                .then(function(user) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                    var ref = fire.database().ref().child("user");
+                                    var data = {
+                                        email: values.email,
+                                        password: values.password,
+                                        firstName: values.firstName,
+                                        lastName: values.lastName,
+                                        id: user.uid
+                                    }
+                                    ref.child(user.uid).set(data).then(function(ref) {
+                                        console.log('saved');
+                                    }, function(error){
+                                        console.log(error);
+                                    });
+                                }).catch(function(error) {
+                                    console.log(error.message);
+                                    console.log(error);
+                                });
                             console.log('-->', values);
                             // return registerSuccess(values); // dispatch
                         }}
