@@ -64,7 +64,7 @@ class SignupPage extends React.Component {
                             // console.log("Form is validated! Submitting the form...");
                             setSubmitting(false);
                             console.log('-->', values);
-                            return registerSuccess(values); // dispatch
+                            // return registerSuccess(values); // dispatch
                         }}
                     >
                         {({ values, errors, touched, isSubmitting, filters }) => (
