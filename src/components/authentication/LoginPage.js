@@ -7,7 +7,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from 'react-redux';
 
-import { validationSchema } from '../../utils/validate';
+import { LoginSchema } from '../../utils/validate';
 import ForgotPassword from './ForgotPassword';
 
 class LoginPage extends React.Component {
@@ -56,9 +56,9 @@ class LoginPage extends React.Component {
                             <div className="well">
                                 <Formik
                                     initialValues={{ email: "", password: "", remember: false }}
-                                    validationSchema={validationSchema}
+                                    validationSchema={LoginSchema}
                                     onSubmit={(values, { setSubmitting }) => {
-                                        alert("Form is validated! Submitting the form...");
+                                        // alert("Form is validated! Submitting the form...");
                                         setSubmitting(false);
                                         console.log(values);
                                     }}
