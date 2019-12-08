@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 import { LoginSchema } from '../../utils/validate';
 import ForgotPassword from './ForgotPassword';
+import fire from '../../firebase/firebase';
 
 class LoginPage extends React.Component {
 
@@ -60,6 +61,12 @@ class LoginPage extends React.Component {
                                     onSubmit={(values, { setSubmitting }) => {
                                         // alert("Form is validated! Submitting the form...");
                                         setSubmitting(false);
+                                        fire.auth().signInWithEmailAndPassword(values.email, values.password).then(res => {
+                                            console.log("logged in ");
+                                        })
+                                        .catch(error =>{
+                                            console.log(error.message);
+                                        })
                                         console.log(values);
                                     }}
                                 >
