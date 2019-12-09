@@ -21,7 +21,7 @@ export const validationSchema = Yup.object().shape({
         .email("Invalid email address format")
         .required("Email is required"),
     password: Yup.string()
-        .min(3, "Password must be 3 characters at minimum")
+        .min(6, "Password must be 6 characters at minimum")
         .required("Password is required"),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], "Your passwords don't match")
@@ -33,6 +33,6 @@ export const LoginSchema = Yup.object().shape({
       .email("Invalid email address format")
       .required("Email is required"),
     password: Yup.string()
-      .min(3, "Password must be 3 characters at minimum")
+      .min(6, "Password must be 6 characters at minimum")
       .required("Password is required")
   });

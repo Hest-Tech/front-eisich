@@ -16,6 +16,7 @@ import menu from '../assets/images/menu.svg';
 import shopping from '../assets/images/shopping-cart.svg';
 import AuthenticationModal from './authentication/AuthenticationModal';
 import unitedStates from '../assets/images/united-states.png';
+import fire from '../firebase/firebase';
 
 
 export default class NavBar extends React.Component {
@@ -26,7 +27,8 @@ export default class NavBar extends React.Component {
         this.hideAuthPopUp = this.hideAuthPopUp.bind(this);
 
         this.state = {
-            loginPopUp: undefined
+            loginPopUp: undefined,
+            userIsLoggedIn: fire.auth().currentUser
         };
     }
 
@@ -42,6 +44,7 @@ export default class NavBar extends React.Component {
     }
 
     render() {
+        console.log('--->', this.state.userIsLoggedIn)
         return (
             <nav className="main-nav-bar">
                 <div className="main-nav-bar__container">
@@ -69,14 +72,23 @@ export default class NavBar extends React.Component {
                                     <img src={question} alt="question-mark" className="navbar__icon-img" />
                                     <p>Help</p>
                                 </span>
-                                <span
+                                {this.state.userIsLoggedIn == false && <span
                                     className="login"
                                     onClick={this.showLoginPopUp}
                                 >
                                     <img src={user} alt="user" className="navbar__icon-img" />
                                     <p>Login</p>
                                     <i className="fas fa-chevron-down login-arrow"></i>
-                                </span>
+                                </span>}
+                                {true && <span
+                                    className="login"
+                                    onClick={this.showLoginPopUp}
+                                >
+                                    <img src={user} alt="user" className="navbar__icon-img" />
+                                    <p>User</p>
+                                    <i className="fas fa-chevron-down login-arrow"></i>
+                                </span>}
+
                                 <span className="language">
                                     <label className="language__label">Language: </label>
                                     {/* <img src={unitedStates} alt="American flag" /> */}

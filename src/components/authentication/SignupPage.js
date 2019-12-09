@@ -4,9 +4,6 @@
 
 import React from 'react';
 import { Form, Field, Formik, ErrorMessage } from "formik";
-import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import TwitterLogin from 'react-twitter-auth';
 import { connect } from 'react-redux';
 
 import fire from '../../firebase/firebase';
@@ -17,19 +14,11 @@ import { registerSuccess } from '../../actions/authentication';
 class SignupPage extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            error: null
+        }
     }
-
-    responseGoogle(response) {
-        // console.log(response);
-    };
-
-    responseFacebook(response) {
-        // console.log(response);
-    };
-
-    twitterResponse(response) {
-        // console.log(response);
-    };
 
     render() {
         return (
@@ -47,6 +36,9 @@ class SignupPage extends React.Component {
                     </div>
                 </div>
                 <div className="sign-up__details">
+                    {this.state.error && <div className="alert alert-danger" role="alert">
+                        {this.state.error}
+                    </div>}
                     <b className="sign-up__title">Sign Up</b>
                     {/** formik validation form */}
 
@@ -61,27 +53,35 @@ class SignupPage extends React.Component {
                             terms: false
                         }}
                         validationSchema={validationSchema}
-                        onSubmit={(values, { setSubmitting }) => {
+                        onSubmit={(values, { setSubmitting, resetForm }) => {
                             // console.log("Form is validated! Submitting the form...");
-                            setSubmitting(false);
+                            setSubmitting(true);
+                            let that = this
                             fire.auth()
                                 .createUserWithEmailAndPassword(values.email, values.password)
-                                .then(function(user) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-                                    var ref = fire.database().ref().child("user");
-                                    var data = {
+                                .then(function (user) {
+                                    let ref = fire.database().ref().child(`user`);
+                                    let data = {
                                         email: values.email,
                                         password: values.password,
+                                        phoneNumber: values.phoneNumber.toString(),
                                         firstName: values.firstName,
                                         lastName: values.lastName,
-                                        id: user.uid
+                                        id: authenticatedUser.user.uid
                                     }
-                                    ref.child(user.uid).set(data).then(function(ref) {
+                                    ref.child(user.uid).set(data).then(function (ref) {
                                         console.log('saved');
-                                    }, function(error){
+                                        setSubmitting(false);
+                                        that.setState(() => ({ error: null }));
+                                        resetForm();
+                                        this.props.handleSwithAuth();
+                                    }, function (error) {
                                         console.log(error);
                                     });
-                                }).catch(function(error) {
-                                    console.log(error.message);
+                                }).catch(function (error) {
+                                    // that.setState(() => ({ error: error.message }));
+                                    setSubmitting(false);
+                                    console.log('---->', error.message);
                                     console.log(error);
                                 });
                             console.log('-->', values);
@@ -205,7 +205,7 @@ class SignupPage extends React.Component {
                                             className="btn btn-primary col-md-6"
                                             disabled={isSubmitting}
                                         >
-                                            {isSubmitting ? "Please wait..." : "Sign up"}
+                                            {isSubmitting ? <div className="spinner-border text-warning"></div> : "Sign up"}
                                         </button>
                                     </div>
                                 </div>
@@ -218,61 +218,35 @@ class SignupPage extends React.Component {
                                         /> I agree to terms of service
                                     </div>
                                 </label>
-                                <div className="form-row">
-                                    <div className="form-group col-md-12">
-                                        <div className="or-seperator"><i>or</i></div>
-                                        <p className="text-center">Sign up with your social media account</p>
-                                        <div className="text-center social-btn">
-                                            <a href="#" >
-                                                <FacebookLogin
-                                                    appId=""
-                                                    autoLoad
-                                                    callback={this.responseFacebook}
-                                                    render={renderProps => (
-                                                        <button
-                                                            onClick={renderProps.onClick}
-                                                            className="btn btn-primary"
-                                                        >
-                                                            <i className="fa fa-facebook"></i>&nbsp; Facebook
-                                                        </button>
-                                                    )}
-                                                />
-                                            </a>
-                                            <a href="#">
-                                                <TwitterLogin
-                                                    loginUrl="http://localhost:4000/api/v1/auth/twitter"
-                                                    onFailure={this.twitterResponse}
-                                                    onSuccess={this.twitterResponse}
-                                                    className="btn btn-info"
-                                                    requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse"
-                                                >
-                                                    <i className="fa fa-twitter"></i>&nbsp; Twitter
-                                                </TwitterLogin>
-                                            </a>
-                                            <a href="#">
-                                                <GoogleLogin
-                                                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-                                                    render={renderProps => (
-                                                        <button
-                                                            onClick={renderProps.onClick}
-                                                            disabled={renderProps.disabled}
-                                                            className="btn btn-danger"
-                                                        >
-                                                            <i className="fa fa-google"></i>&nbsp; Google
-                                                        </button>
-                                                    )}
-                                                    buttonText="Login"
-                                                    onSuccess={this.responseGoogle}
-                                                    onFailure={this.responseGoogle}
-                                                    cookiePolicy={'single_host_origin'}
-                                                />
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
                             </Form>
                         )}
                     </Formik >
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <div className="or-seperator"><i>or</i></div>
+                            <p className="text-center">Sign up with your social media account</p>
+                            <div className="text-center social-btn">
+                                <button
+                                    // onClick={renderProps.onClick}
+                                    className="btn btn-primary"
+                                >
+                                    <i className="fa fa-facebook"></i>&nbsp; Facebook
+                                </button>
+                                <button
+                                    // onClick={renderProps.onClick}
+                                    className="btn btn-info"
+                                >
+                                    <i className="fa fa-twitter"></i>&nbsp; Twitter
+                                </button>
+                                <button
+                                    // onClick={renderProps.onClick}
+                                    className="btn btn-danger"
+                                >
+                                    <i className="fa fa-google" aria-hidden="true"></i> Google
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div className="switch-to-login">
                         <p>Already have an account? <a href="" onClick={this.props.handleSwithAuth}>Login</a> instead</p>
                     </div>

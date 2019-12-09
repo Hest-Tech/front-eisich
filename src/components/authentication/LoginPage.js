@@ -19,7 +19,8 @@ class LoginPage extends React.Component {
         this.hideResetPassword = this.hideResetPassword.bind(this);
 
         this.state = {
-            resetPopUp: undefined
+            resetPopUp: undefined,
+            error: null
         }
     }
 
@@ -55,19 +56,29 @@ class LoginPage extends React.Component {
                     <div className="row">
                         <div className="col-xs-6">
                             <div className="well">
+                                {this.state.error && <div className="alert alert-danger" role="alert">
+                                    {this.state.error}
+                                </div>}
+
                                 <Formik
                                     initialValues={{ email: "", password: "", remember: false }}
                                     validationSchema={LoginSchema}
-                                    onSubmit={(values, { setSubmitting }) => {
+                                    onSubmit={(values, { setSubmitting, resetForm }) => {
                                         // alert("Form is validated! Submitting the form...");
-                                        setSubmitting(false);
+                                        setSubmitting(true);
                                         fire.auth().signInWithEmailAndPassword(values.email, values.password).then(res => {
                                             console.log("logged in ");
+                                            setSubmitting(false);
+                                            this.setState(() => ({ error: null }));
+                                            resetForm();
                                         })
-                                        .catch(error =>{
-                                            console.log(error.message);
-                                        })
+                                            .catch(error => {
+                                                this.setState(() => ({ error: error.message }));
+                                                console.log('-->', this.state.error);
+                                                setSubmitting(false);
+                                            })
                                         console.log(values);
+
                                     }}
                                 >
                                     {({ touched, errors, isSubmitting, values, filters }) => (
@@ -80,7 +91,7 @@ class LoginPage extends React.Component {
                                                     placeholder="Enter your email"
                                                     className={`form-control ${
                                                         touched.email && errors.email ? "is-invalid" : ""
-                                                    }`}
+                                                        }`}
                                                 />
                                                 <ErrorMessage
                                                     component="div"
@@ -96,7 +107,7 @@ class LoginPage extends React.Component {
                                                     placeholder="Enter your password"
                                                     className={`form-control ${
                                                         touched.password && errors.password ? "is-invalid" : ""
-                                                    }`}
+                                                        }`}
                                                 />
                                                 <ErrorMessage
                                                     component="div"
@@ -120,7 +131,7 @@ class LoginPage extends React.Component {
                                                 className="btn btn-success btn-block m-font-size"
                                                 disabled={isSubmitting}
                                             >
-                                                {isSubmitting ? "Please wait..." : "Login"}
+                                                {isSubmitting ? <div className="spinner-border text-warning"></div> : "Login"}
                                             </button>
                                             <a
                                                 href=""

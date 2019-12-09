@@ -33,7 +33,7 @@ const SizeChart = (props) => (
                 <h2>Size Chart</h2>
             </div>
             <table className="table table-bordered">
-                <thead class="thead-dark">
+                <thead className="thead-dark">
                     <tr>
                         <th scope="col">Tag size</th>
                         <th scope="col">US</th>
