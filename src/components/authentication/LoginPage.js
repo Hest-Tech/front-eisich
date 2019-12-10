@@ -2,14 +2,16 @@
  * This file contains the Login Page component
  */
 
-
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from 'react-redux';
 
 import { LoginSchema } from '../../utils/validate';
+import { loginUser } from '../../actions/authentication';
+import { returnMessages } from '../../actions/resMessages';
 import ForgotPassword from './ForgotPassword';
 import fire from '../../firebase/firebase';
+
 
 class LoginPage extends React.Component {
 
@@ -48,6 +50,12 @@ class LoginPage extends React.Component {
         this.setState(() => ({ resetPopUp: undefined }));
     }
 
+	handleHideMsg() {
+		setTimeout(() => {
+			this.props.dispatch(clearMessages())
+		}, 5000);
+	}
+
     render() {
         return (
             <div>
@@ -59,6 +67,10 @@ class LoginPage extends React.Component {
                                 {this.state.error && <div className="alert alert-danger" role="alert">
                                     {this.state.error}
                                 </div>}
+                                {this.handleHideMsg()}
+                                {this.props.resMessages.msg && <div className="alert alert-success home-page-alert" role="alert">
+                                    {this.props.resMessages.msg}
+                                </div>}
 
                                 <Formik
                                     initialValues={{ email: "", password: "", remember: false }}
@@ -69,8 +81,13 @@ class LoginPage extends React.Component {
                                         fire.auth().signInWithEmailAndPassword(values.email, values.password).then(res => {
                                             console.log("logged in ");
                                             setSubmitting(false);
+
                                             this.setState(() => ({ error: null }));
+
+                                            // console.log((this.props.dispatch(loginUser(values, 'You have been successfully logged in'))));
+                                            this.props.dispatch(returnMessages('You have been successfully logged in'));
                                             resetForm();
+                                            this.props.hidePopUp()
                                         })
                                             .catch(error => {
                                                 this.setState(() => ({ error: error.message }));
@@ -168,10 +185,9 @@ class LoginPage extends React.Component {
     }
 };
 
-const ConnectedLoginPage = connect((state) => {
-    return {
-        filters: state.filters
-    }
-})(LoginPage);
+const mapStateToProps = (state) => ({
+    authentication: state.authentication,
+    resMessages: state.resMessages
+});
 
-export default ConnectedLoginPage;
+export default connect(mapStateToProps)(LoginPage);

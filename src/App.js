@@ -9,6 +9,8 @@ import './App.scss';
 import AppRouter from './routes/AppRouter';
 import configureStore from './store/configureStore';
 import { setTextFilter } from './actions/filters';
+import { loginUser } from './actions/authentication';
+import { returnMessages } from './actions/resMessages';
 
 
 const store = configureStore();
@@ -21,8 +23,9 @@ fire.auth().onAuthStateChanged(function (user) {
     }
 });
 
-console.log(store.dispatch(setTextFilter('Price')));
+// console.log(store.dispatch(loginUser({email:'demo@email.com',password:'password'},'Successfully logged in')));
 // store.dispatch(sortByAmount(user));
+// store.dispatch(returnMessages('Logged in successfully'));
 
 const jsx = (
     <Provider store={store}>

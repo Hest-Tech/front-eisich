@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 import fire from '../../firebase/firebase';
 import { validationSchema } from '../../utils/validate';
-import { registerSuccess } from '../../actions/authentication';
+import { returnMessages } from '../../actions/resMessages';
 
 
 class SignupPage extends React.Component {
@@ -74,7 +74,8 @@ class SignupPage extends React.Component {
                                         setSubmitting(false);
                                         that.setState(() => ({ error: null }));
                                         resetForm();
-                                        this.props.handleSwithAuth();
+                                        this.props.handleSwithAuth()
+                                        this.props.dispatch(returnMessages('Account created. Please Log in'));
                                     }, function (error) {
                                         console.log(error);
                                     });
@@ -84,7 +85,6 @@ class SignupPage extends React.Component {
                                     console.log('---->', error.message);
                                     console.log(error);
                                 });
-                            console.log('-->', values);
                             // return registerSuccess(values); // dispatch
                         }}
                     >
@@ -256,10 +256,8 @@ class SignupPage extends React.Component {
     }
 }
 
-const ConnectedFormikSignUp = connect((state) => {
-    return {
-        filters: state.filters
-    }
-})(SignupPage);
+const mapStateToProps = (state) => ({
+    filters: state.filters
+})
 
-export default ConnectedFormikSignUp;
+export default connect(mapStateToProps)(SignupPage);

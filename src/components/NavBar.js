@@ -39,7 +39,7 @@ export default class NavBar extends React.Component {
 
     // Hide log in pop up modal
     hideAuthPopUp(e) {
-        e.preventDefault();
+        // e.preventDefault();
         this.setState(() => ({ loginPopUp: undefined }))
     }
 
