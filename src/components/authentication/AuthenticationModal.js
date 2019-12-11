@@ -35,7 +35,7 @@ export default class AuthenticationModal extends React.Component {
 
     // Toggle between sign up and login
     handleSwithAuth(e) {
-        // e.preventDefault();
+        e.preventDefault();
         this.setState((prevState) => ({
             loginPopUp: !prevState.loginPopUp
         }))
@@ -80,6 +80,7 @@ export default class AuthenticationModal extends React.Component {
                         hidePopUp={this.props.hideAuthPopUp}
                     /> : <SignupPage
                             handleSwithAuth={this.handleSwithAuth}
+                            hidePopUp={this.props.hideAuthPopUp}
                         />/* Toggle between sign up and login */}
                 </div>
             </Modal>

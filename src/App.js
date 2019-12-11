@@ -9,16 +9,17 @@ import './App.scss';
 import AppRouter from './routes/AppRouter';
 import configureStore from './store/configureStore';
 import { setTextFilter } from './actions/filters';
-import { loginUser } from './actions/authentication';
+import { loadUser } from './actions/authentication';
 import { returnMessages } from './actions/resMessages';
 
 
 const store = configureStore();
 
 // console.log(store.getState());
-fire.auth().onAuthStateChanged(function (user) {
+fire.auth().onAuthStateChanged(user => {
     if (user) {
-        console.log('---> ', user.displayName)
+        store.dispatch(loadUser());
+        console.log('---> ', user.uid)
         // User is signed in.
     }
 });

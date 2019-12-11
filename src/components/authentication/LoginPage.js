@@ -5,10 +5,11 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from 'react-redux';
+import clientStorage from '../../utils/clientStorage';
 
 import { LoginSchema } from '../../utils/validate';
 import { loginUser } from '../../actions/authentication';
-import { returnMessages } from '../../actions/resMessages';
+import { returnMessages, clearMessages } from '../../actions/resMessages';
 import ForgotPassword from './ForgotPassword';
 import fire from '../../firebase/firebase';
 
@@ -27,7 +28,7 @@ class LoginPage extends React.Component {
     }
 
     componentWillMount() {
-        console.log(this.props.filters);
+        console.log(this.props.authentication);
     }
 
     componentWillUnmount() {
@@ -51,11 +52,11 @@ class LoginPage extends React.Component {
         this.setState(() => ({ resetPopUp: undefined }));
     }
 
-	handleHideMsg() {
-		setTimeout(() => {
-			this.props.dispatch(clearMessages())
-		}, 5000);
-	}
+    handleHideMsg() {
+        setTimeout(() => {
+            this.props.dispatch(clearMessages())
+        }, 5000);
+    }
 
     render() {
         return (
@@ -83,103 +84,108 @@ class LoginPage extends React.Component {
                                             console.log("logged in ");
                                             setSubmitting(false);
 
-                                            this.setState(() => ({ error: null }));
+                                            // Wesley
 
-                                            // console.log((this.props.dispatch(loginUser(values, 'You have been successfully logged in'))));
-                                            this.props.dispatch(returnMessages('You have been successfully logged in'));
-                                            resetForm();
-                                            this.props.hidePopUp()
-                                        })
+                                            // fetch logged in user from db
+                                            // console.log the user
+                               
+                                            this.setState(() => ({error: null }));
+
+                                // console.log((this.props.dispatch(loginUser(values, 'You have been successfully logged in'))));
+                                this.props.dispatch(returnMessages('You have been successfully logged in'));
+                                resetForm();
+                                this.props.hidePopUp()
+                            })
                                             .catch(error => {
-                                                this.setState(() => ({ error: error.message }));
-                                                console.log('-->', this.state.error);
-                                                setSubmitting(false);
-                                            })
-                                        console.log(values);
+                                    this.setState(() => ({ error: error.message }));
+                                console.log('-->', this.state.error);
+                                setSubmitting(false);
+                            })
+                        console.log(values);
 
-                                    }}
-                                >
+                    }}
+                >
                                     {({ touched, errors, isSubmitting, values, filters }) => (
-                                        <Form>
-                                            <div className="form-group">
-                                                <label htmlFor="email" className="control-label">Email</label>
+                                    <Form>
+                                        <div className="form-group">
+                                            <label htmlFor="email" className="control-label">Email</label>
+                                            <Field
+                                                type="email"
+                                                name="email"
+                                                placeholder="Enter your email"
+                                                className={`form-control ${
+                                                    touched.email && errors.email ? "is-invalid" : ""
+                                                    }`}
+                                            />
+                                            <ErrorMessage
+                                                component="div"
+                                                name="email"
+                                                className="invalid-feedback"
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="password" className="control-label">Password</label>
+                                            <Field
+                                                type="password"
+                                                name="password"
+                                                placeholder="Enter your password"
+                                                className={`form-control ${
+                                                    touched.password && errors.password ? "is-invalid" : ""
+                                                    }`}
+                                            />
+                                            <ErrorMessage
+                                                component="div"
+                                                name="password"
+                                                className="invalid-feedback"
+                                            />
+                                        </div>
+                                        <div className="checkbox">
+                                            <label>
                                                 <Field
-                                                    type="email"
-                                                    name="email"
-                                                    placeholder="Enter your email"
-                                                    className={`form-control ${
-                                                        touched.email && errors.email ? "is-invalid" : ""
-                                                        }`}
-                                                />
-                                                <ErrorMessage
-                                                    component="div"
-                                                    name="email"
-                                                    className="invalid-feedback"
-                                                />
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="password" className="control-label">Password</label>
-                                                <Field
-                                                    type="password"
-                                                    name="password"
-                                                    placeholder="Enter your password"
-                                                    className={`form-control ${
-                                                        touched.password && errors.password ? "is-invalid" : ""
-                                                        }`}
-                                                />
-                                                <ErrorMessage
-                                                    component="div"
-                                                    name="password"
-                                                    className="invalid-feedback"
-                                                />
-                                            </div>
-                                            <div className="checkbox">
-                                                <label>
-                                                    <Field
-                                                        type="checkbox"
-                                                        name="remember"
-                                                        id="remember"
-                                                        checked={values.remember}
-                                                    /> Remember login
+                                                    type="checkbox"
+                                                    name="remember"
+                                                    id="remember"
+                                                    checked={values.remember}
+                                                /> Remember login
                                                 </label>
-                                                <p className="help-block">(if this is a private computer)</p>
-                                            </div>
-                                            <button
-                                                type="submit"
-                                                className="btn btn-success btn-block m-font-size"
-                                                disabled={isSubmitting}
-                                            >
-                                                {isSubmitting ? <div className="spinner-border text-warning"></div> : "Login"}
-                                            </button>
-                                            <a
-                                                href=""
-                                                className="btn btn-default btn-block forgot-pass"
-                                                onClick={this.resetPassword}
-                                            >Forgot password?</a>
-                                        </Form>
-                                    )}
+                                            <p className="help-block">(if this is a private computer)</p>
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            className="btn btn-success btn-block"
+                                            disabled={isSubmitting}
+                                        >
+                                            {isSubmitting ? <div className="spinner-border text-warning"></div> : "Login"}
+                                        </button>
+                                        <a
+                                            href=""
+                                            className="btn btn-default btn-block forgot-pass"
+                                            onClick={this.resetPassword}
+                                        >Forgot password?</a>
+                                    </Form>
+                                )}
                                 </Formik>
-                            </div>
-                        </div>
-                        <div className="col-xs-6">
-                            <p className="lead">Register now for <span className="text-success">FREE</span></p>
-                            <ul className="list-unstyled" style={{ lineHeight: 2 }}>
-                                <li><span className="fa fa-check text-success"></span> See all your orders</li>
-                                <li><span className="fa fa-check text-success"></span> Fast re-order</li>
-                                <li><span className="fa fa-check text-success"></span> Save your favorites</li>
-                                <li><span className="fa fa-check text-success"></span> Fast checkout</li><br />
-                            </ul>
-                            <p
-                                className="register-btn"
-                                onClick={this.props.handleSwithAuth}>
-                                <button
-                                    className="btn btn-info btn-block m-font-size"
-                                >
-                                    Register now!
-                                </button>
-                            </p>
                         </div>
                     </div>
+                    <div className="col-xs-6">
+                        <p className="lead">Register now for <span className="text-success">FREE</span></p>
+                        <ul className="list-unstyled" style={{ lineHeight: 2 }}>
+                            <li><span className="fa fa-check text-success"></span> See all your orders</li>
+                            <li><span className="fa fa-check text-success"></span> Fast re-order</li>
+                            <li><span className="fa fa-check text-success"></span> Save your favorites</li>
+                            <li><span className="fa fa-check text-success"></span> Fast checkout</li><br />
+                        </ul>
+                        <p
+                            className="register-btn"
+                            onClick={this.props.handleSwithAuth}>
+                            <button
+                                className="btn btn-info btn-block m-font-size"
+                            >
+                                Register now!
+                                </button>
+                        </p>
+                    </div>
+                </div>
                 </div>}
             </div>
         );

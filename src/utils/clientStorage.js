@@ -11,7 +11,7 @@ export default class clientStorage {
 
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"; // add secure flag in prod env
     }
 
     // fetch cookie values

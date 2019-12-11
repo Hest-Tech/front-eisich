@@ -9,15 +9,15 @@ const cookieStorage = new clientStorage();
 
 const autheticationReducerDefaultState = {
     isAuthenticated: null,
-    user: null,
+    user: null
 }
 
 export default (state = autheticationReducerDefaultState, action) => {
     switch (action.type) {
-        case 'USER_LOADING':
+        case 'LOAD_USER':
             return {
                 ...state,
-                isLoading: true
+                isAuthenticated: true
             };
         case 'USER_LOADED':
             return {

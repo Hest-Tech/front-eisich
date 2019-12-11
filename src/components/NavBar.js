@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import call from '../assets/images/call.svg';
 import policy from '../assets/images/policy.svg';
@@ -17,24 +18,37 @@ import shopping from '../assets/images/shopping-cart.svg';
 import AuthenticationModal from './authentication/AuthenticationModal';
 import unitedStates from '../assets/images/united-states.png';
 import fire from '../firebase/firebase';
+import clientStorage from '../utils/clientStorage';
 
 
-export default class NavBar extends React.Component {
+class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
         this.showLoginPopUp = this.showLoginPopUp.bind(this);
         this.hideAuthPopUp = this.hideAuthPopUp.bind(this);
+        this.toggleAuthDropDown = this.toggleAuthDropDown.bind(this);
 
         this.state = {
             loginPopUp: undefined,
-            userIsLoggedIn: fire.auth().currentUser
+            authDropDown: undefined,
+            authenticatedUser: undefined
         };
     }
 
     // Display log in pop up modal
     showLoginPopUp() {
-        this.setState((prevState) => ({ loginPopUp: !prevState.loginPopUp }))
+        this.setState(prevState => ({ loginPopUp: !prevState.loginPopUp }))
+    }
+
+    toggleAuthDropDown() {
+        this.setState(this.toggleAuthDropDownState);
+    }
+
+    toggleAuthDropDownState(state) {
+        return {
+            authDropDown: !state.authDropDown
+        }
     }
 
     // Hide log in pop up modal
@@ -43,8 +57,20 @@ export default class NavBar extends React.Component {
         this.setState(() => ({ loginPopUp: undefined }))
     }
 
+    componentDidMount() {
+        let fetchUser = new clientStorage();
+        let user = fetchUser.getCookie('user');
+
+        if (user) {
+            let authUser = JSON.parse(user);
+            this.setState(() => ({ authenticatedUser: authUser }))
+        } else {
+            this.setState(() => ({ authenticatedUser: undefined }));
+        }
+        console.log('ran here');
+    }
+
     render() {
-        console.log('--->', this.state.userIsLoggedIn)
         return (
             <nav className="main-nav-bar">
                 <div className="main-nav-bar__container">
@@ -72,7 +98,7 @@ export default class NavBar extends React.Component {
                                     <img src={question} alt="question-mark" className="navbar__icon-img" />
                                     <p>Help</p>
                                 </span>
-                                {this.state.userIsLoggedIn == false && <span
+                                {this.state.authenticatedUser === undefined && <span
                                     className="login"
                                     onClick={this.showLoginPopUp}
                                 >
@@ -80,15 +106,6 @@ export default class NavBar extends React.Component {
                                     <p>Login</p>
                                     <i className="fas fa-chevron-down login-arrow"></i>
                                 </span>}
-                                {true && <span
-                                    className="login"
-                                    onClick={this.showLoginPopUp}
-                                >
-                                    <img src={user} alt="user" className="navbar__icon-img" />
-                                    <p>User</p>
-                                    <i className="fas fa-chevron-down login-arrow"></i>
-                                </span>}
-
                                 <span className="language">
                                     <label className="language__label">Language: </label>
                                     {/* <img src={unitedStates} alt="American flag" /> */}
@@ -133,7 +150,19 @@ export default class NavBar extends React.Component {
                         <div className="shopping-options">
                             <div className="shopping-icons">
                                 <span className="img-icons">
-                                    <i className='far fa-heart shopping__icon'></i>
+                                    {this.state.authenticatedUser ? <div className="dropdown authenticated-user">
+                                        <span className="dropdown-toggle authenticated-user__btn" data-toggle="dropdown">
+                                            <img src={user} alt="user" className="navbar__icon-img" />
+                                            <p>{this.state.authenticatedUser.firstName}</p>
+                                        </span>
+                                        <div className="dropdown-menu authenticated-user-dropdown">
+                                            <a className="dropdown-item" href="#">Link 1</a>
+                                            <a className="dropdown-item" href="#">Link 2</a>
+                                            <a className="dropdown-item" href="#">Link 3</a>
+                                            <div className="dropdown-divider"></div>
+                                            <a className="dropdown-item" href="#">Log out</a>
+                                        </div>
+                                    </div> : <i className='far fa-heart shopping__icon'></i>}
                                     <i className='fas fa-cart-plus shopping__icon'></i>
                                 </span>
                             </div>
@@ -144,3 +173,9 @@ export default class NavBar extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    authentication: state.authentication
+});
+
+export default connect(mapStateToProps)(NavBar);

@@ -14,11 +14,6 @@ import {
 } from './types';
 
 
-// Check token & load user
-export const loadUser = () => async (dispatch, getState) => {
-    dispatch({ type: USER_LOADING });
-};
-
 // register success
 export const registerSuccess = ({} = {}) => dispatch => {
     return;
@@ -27,6 +22,11 @@ export const registerSuccess = ({} = {}) => dispatch => {
 
 
 
+
+// Check token & load user
+export const loadUser = () => ({
+    type: 'LOAD_USER'
+});
 
 // login success
 export const loginUser = (payload) => ({

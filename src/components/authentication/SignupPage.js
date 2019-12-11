@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 import fire from '../../firebase/firebase';
 import { validationSchema } from '../../utils/validate';
+import clientStorage from '../../utils/clientStorage';
 import { returnMessages } from '../../actions/resMessages';
 
 
@@ -54,13 +55,13 @@ class SignupPage extends React.Component {
                         }}
                         validationSchema={validationSchema}
                         onSubmit={(values, { setSubmitting, resetForm }) => {
-                            // console.log("Form is validated! Submitting the form...");
                             setSubmitting(true);
                             let that = this
                             fire.auth()
                                 .createUserWithEmailAndPassword(values.email, values.password)
-                                .then(function (user) {
-                                    let ref = fire.database().ref().child(`user`);
+                                .then(() => {
+                                    let user = fire.auth().currentUser;
+                                    let ref = fire.database().ref().child(`users`);
                                     let data = {
                                         email: values.email,
                                         password: values.password,
@@ -68,18 +69,27 @@ class SignupPage extends React.Component {
                                         firstName: values.firstName,
                                         lastName: values.lastName
                                     }
-                                    ref.child(user.uid).set(data).then(function (ref) {
+                                    ref.child(user.uid).set(data).then(ref => {
                                         console.log('saved');
                                         setSubmitting(false);
                                         that.setState(() => ({ error: null }));
                                         resetForm();
-                                        this.props.handleSwithAuth()
-                                        this.props.dispatch(returnMessages('Account created. Please Log in'));
-                                    }, function (error) {
-                                        console.log(error);
-                                    });
-                                }).catch(function (error) {
-                                    // that.setState(() => ({ error: error.message }));
+                                        this.props.dispatch(returnMessages('Account created. Successfully Log in'));
+                                        this.props.hidePopUp();
+
+                                        let userData = {
+                                            email: values.email,
+                                            phoneNumber: values.phoneNumber.toString(),
+                                            firstName: values.firstName,
+                                            lastName: values.lastName
+                                        }
+                                        let storeUser = new clientStorage();
+                                        let user = JSON.stringify(userData);
+                                        storeUser.setCookie('user', user, 1);
+                                    }, error => console.log(error));
+                                })
+                                .catch(error => {
+                                    that.setState(() => ({ error: error.message }));
                                     setSubmitting(false);
                                     console.log('---->', error.message);
                                     console.log(error);
