@@ -66,8 +66,7 @@ class SignupPage extends React.Component {
                                         password: values.password,
                                         phoneNumber: values.phoneNumber.toString(),
                                         firstName: values.firstName,
-                                        lastName: values.lastName,
-                                        id: authenticatedUser.user.uid
+                                        lastName: values.lastName
                                     }
                                     ref.child(user.uid).set(data).then(function (ref) {
                                         console.log('saved');
