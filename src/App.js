@@ -3,19 +3,29 @@ import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css'; // reset css
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
+import fire from './firebase/firebase';
 
 import './App.scss';
 import AppRouter from './routes/AppRouter';
 import configureStore from './store/configureStore';
 import { setTextFilter } from './actions/filters';
+import { loginUser } from './actions/authentication';
+import { returnMessages } from './actions/resMessages';
 
 
 const store = configureStore();
 
 // console.log(store.getState());
+fire.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        console.log('---> ', user.displayName)
+        // User is signed in.
+    }
+});
 
-console.log(store.dispatch(setTextFilter('Price')));
+// console.log(store.dispatch(loginUser({email:'demo@email.com',password:'password'},'Successfully logged in')));
 // store.dispatch(sortByAmount(user));
+// store.dispatch(returnMessages('Logged in successfully'));
 
 const jsx = (
     <Provider store={store}>

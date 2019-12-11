@@ -1026,11 +1026,20 @@
   dependencies:
     "@firebase/app-types" "0.4.9"
 
+<<<<<<< HEAD
 "@firebase/database@0.5.14":
   version "0.5.14"
   resolved "https://registry.yarnpkg.com/@firebase/database/-/database-0.5.14.tgz#758bc5cc6f50736e31c5fb41f6c95c1ac5052311"
   integrity sha512-5CeBp8m89m7JdbQl//D2ceww6mqoSnp0Qi/clU3SJ934GZFeI84ehApBNn1OpFPSqhDwxG7k/56EcoQs8nka0w==
   dependencies:
+=======
+"@firebase/database@0.5.15":
+  version "0.5.15"
+  resolved "https://registry.yarnpkg.com/@firebase/database/-/database-0.5.15.tgz#1d88d169368b01d745956720776eb2312110d4e8"
+  integrity sha512-6GsZGDOoRbAaeBQjjbcKTCscEMV+qDXS1UWPmRYI0UBdhgCY05S1z5aNkjF2B3pFgkr35zDbVAdsQC+JhRCzLQ==
+  dependencies:
+    "@firebase/component" "0.1.0"
+>>>>>>> 423e68ccd16f963f82a37fe1d558fde9174dacd4
     "@firebase/database-types" "0.4.9"
     "@firebase/logger" "0.1.32"
     "@firebase/util" "0.2.35"
@@ -1637,11 +1646,18 @@
   integrity sha512-u/SJDyXwuihpwjXy7hOOghagLEV1KdAST6syfnOk6QZAMzZuWZqXy5aYYZbh8Jdpd4escVFP0MvftHNDb9pruA==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 423e68ccd16f963f82a37fe1d558fde9174dacd4
 "@types/node@^10.1.0":
   version "10.17.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.6.tgz#1aaabd6f6470a6ac3824ab1e94d731ca1326d93d"
   integrity sha512-0a2X6cgN3RdPBL2MIlR6Lt0KlM7fOFsutuXcdglcOq6WvLnYXgPQSh0Mx6tO1KCAE8MxbHSOSTWDoUxRq+l3DA==
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> 423e68ccd16f963f82a37fe1d558fde9174dacd4
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
@@ -4834,16 +4850,27 @@ findup-sync@3.0.0:
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
 
+<<<<<<< HEAD
 firebase@^7.5.1:
   version "7.5.1"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-7.5.1.tgz#baa04583ad31179e84636c8ca823c74f3ae3b20c"
   integrity sha512-iG+o0WvnAxlxjKbN5fiAUcyt1Q1qvguMGgy46r52ks8sX34VN+BZDNJrVY0ktPD/Ty45jaVegjfFRmtThPt3jw==
+=======
+firebase@^7.5.2:
+  version "7.5.2"
+  resolved "https://registry.yarnpkg.com/firebase/-/firebase-7.5.2.tgz#6b711a09d5a880b37e5ce5b97eba4ef7ec408c0d"
+  integrity sha512-G1hJ59CoV/gdNulBAFKiGD8EIDKCeQS16tc3TQ/sBCb87urDuaYKv7/n/CgK8llSt+pWJjPc6U0F223zt0OdKA==
+>>>>>>> 423e68ccd16f963f82a37fe1d558fde9174dacd4
   dependencies:
     "@firebase/analytics" "0.2.8"
     "@firebase/app" "0.4.26"
     "@firebase/app-types" "0.4.9"
     "@firebase/auth" "0.13.2"
+<<<<<<< HEAD
     "@firebase/database" "0.5.14"
+=======
+    "@firebase/database" "0.5.15"
+>>>>>>> 423e68ccd16f963f82a37fe1d558fde9174dacd4
     "@firebase/firestore" "1.8.1"
     "@firebase/functions" "0.4.27"
     "@firebase/installations" "0.3.7"
@@ -7645,6 +7672,14 @@ node-fetch@2.6.0:
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
   integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
 >>>>>>> ef609d56b4c4f3e9baa75dd87ec96fcdb2e4967d
+
+node-fetch@^1.0.1:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
+  integrity sha512-NhZ4CsKx7cYm2vSrBAr2PvFOe6sWDf0UYLRqA6svUYg7+/TSfVAu49jYC4BvQ4Sms9SZgdqGBgroqfDhJdTyKQ==
+  dependencies:
+    encoding "^0.1.11"
+    is-stream "^1.0.1"
 
 node-forge@0.9.0:
   version "0.9.0"
@@ -11824,8 +11859,17 @@ whatwg-fetch@2.0.3:
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
   integrity sha1-nITsLc9oGH/wC8ZOEnS0QhduHIQ=
 
+<<<<<<< HEAD
 whatwg-fetch@3.0.0:
 >>>>>>> ef609d56b4c4f3e9baa75dd87ec96fcdb2e4967d
+=======
+whatwg-fetch@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
+  integrity sha512-dcQ1GWpOD/eEQ97k66aiEVpNnapVj90/+R+SXTPYGHpYBBypfKJEQjLrvMZ7YXbKm21gXd4NcuxUTjiv1YtLng==
+
+whatwg-fetch@3.0.0, whatwg-fetch@>=0.10.0:
+>>>>>>> 423e68ccd16f963f82a37fe1d558fde9174dacd4
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
   integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==

@@ -8,10 +8,8 @@ import clientStorage from '../utils/clientStorage';
 const cookieStorage = new clientStorage();
 
 const autheticationReducerDefaultState = {
-    token: cookieStorage.getCookie('token'), // data can be `string` or {object}!
     isAuthenticated: null,
-    isLoading: false,
-    user: null
+    user: null,
 }
 
 export default (state = autheticationReducerDefaultState, action) => {
@@ -30,12 +28,10 @@ export default (state = autheticationReducerDefaultState, action) => {
             };
         case 'REGISTER_SUCCESS':
         case 'LOGIN_SUCCESS':
-            action.setCookie('auth_token', action.payload.auth_token, 24);
             return {
                 ...state,
-                ...action.payload,
                 isAuthenticated: true,
-                isLoading: false
+                user: action.payload
             };
         case 'AUTH_ERROR':
         case 'REGISTER_FAIL':

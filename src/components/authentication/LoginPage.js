@@ -2,14 +2,16 @@
  * This file contains the Login Page component
  */
 
-
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from 'react-redux';
 
-import { validationSchema } from '../../utils/validate';
-import firebase from '../../config/firebase';
+import { LoginSchema } from '../../utils/validate';
+import { loginUser } from '../../actions/authentication';
+import { returnMessages } from '../../actions/resMessages';
 import ForgotPassword from './ForgotPassword';
+import fire from '../../firebase/firebase';
+
 
 class LoginPage extends React.Component {
 
@@ -19,7 +21,8 @@ class LoginPage extends React.Component {
         this.hideResetPassword = this.hideResetPassword.bind(this);
 
         this.state = {
-            resetPopUp: undefined
+            resetPopUp: undefined,
+            error: null
         }
     }
 
@@ -48,6 +51,12 @@ class LoginPage extends React.Component {
         this.setState(() => ({ resetPopUp: undefined }));
     }
 
+	handleHideMsg() {
+		setTimeout(() => {
+			this.props.dispatch(clearMessages())
+		}, 5000);
+	}
+
     render() {
         return (
             <div>
@@ -56,24 +65,39 @@ class LoginPage extends React.Component {
                     <div className="row">
                         <div className="col-xs-6">
                             <div className="well">
+                                {this.state.error && <div className="alert alert-danger" role="alert">
+                                    {this.state.error}
+                                </div>}
+                                {this.handleHideMsg()}
+                                {this.props.resMessages.msg && <div className="alert alert-success home-page-alert" role="alert">
+                                    {this.props.resMessages.msg}
+                                </div>}
+
                                 <Formik
                                     initialValues={{ email: "", password: "", remember: false }}
-                                    validationSchema={validationSchema}
-                                    onSubmit={(values, { setSubmitting }) => {
-                                        alert("Form is validated! Submitting the form...");
-                                        setSubmitting(false);
-                                        console.log(values);
-                                        const { email, password } = values
-                                        firebase.auth()
-                                            .signInWithEmailAndPassword(email, password)
-                                            .then(res => {
-                                                this.props.history.push("/")
-                                            })
+                                    validationSchema={LoginSchema}
+                                    onSubmit={(values, { setSubmitting, resetForm }) => {
+                                        // alert("Form is validated! Submitting the form...");
+                                        setSubmitting(true);
+                                        fire.auth().signInWithEmailAndPassword(values.email, values.password).then(res => {
+                                            console.log("logged in ");
+                                            setSubmitting(false);
+
+                                            this.setState(() => ({ error: null }));
+
+                                            // console.log((this.props.dispatch(loginUser(values, 'You have been successfully logged in'))));
+                                            this.props.dispatch(returnMessages('You have been successfully logged in'));
+                                            resetForm();
+                                            this.props.hidePopUp()
+                                        })
                                             .catch(error => {
-                                                this.props.changeAuth(false)
-                                                console.log("error occurred");
+                                                this.setState(() => ({ error: error.message }));
+                                                console.log('-->', this.state.error);
+                                                setSubmitting(false);
                                             })
-                                    } }
+                                        console.log(values);
+
+                                    }}
                                 >
                                     {({ touched, errors, isSubmitting, values, filters }) => (
                                         <Form>
@@ -85,7 +109,7 @@ class LoginPage extends React.Component {
                                                     placeholder="Enter your email"
                                                     className={`form-control ${
                                                         touched.email && errors.email ? "is-invalid" : ""
-                                                    }`}
+                                                        }`}
                                                 />
                                                 <ErrorMessage
                                                     component="div"
@@ -101,7 +125,7 @@ class LoginPage extends React.Component {
                                                     placeholder="Enter your password"
                                                     className={`form-control ${
                                                         touched.password && errors.password ? "is-invalid" : ""
-                                                    }`}
+                                                        }`}
                                                 />
                                                 <ErrorMessage
                                                     component="div"
@@ -125,7 +149,7 @@ class LoginPage extends React.Component {
                                                 className="btn btn-success btn-block m-font-size"
                                                 disabled={isSubmitting}
                                             >
-                                                {isSubmitting ? "Please wait..." : "Login"}
+                                                {isSubmitting ? <div className="spinner-border text-warning"></div> : "Login"}
                                             </button>
                                             <a
                                                 href=""
@@ -162,10 +186,9 @@ class LoginPage extends React.Component {
     }
 };
 
-const ConnectedLoginPage = connect((state) => {
-    return {
-        filters: state.filters
-    }
-})(LoginPage);
+const mapStateToProps = (state) => ({
+    authentication: state.authentication,
+    resMessages: state.resMessages
+});
 
-export default ConnectedLoginPage;
+export default connect(mapStateToProps)(LoginPage);

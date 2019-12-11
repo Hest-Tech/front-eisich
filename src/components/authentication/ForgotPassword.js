@@ -48,10 +48,8 @@ class ForgotPassword extends React.Component {
     }
 }
 
-const ConnectedForgotPassword = connect((state) => {
-    return {
-        filters: state.filters
-    }
-})(ForgotPassword);
+const mapStateToProps = (state) => ({
+    filters: state.filters
+})
 
-export default ConnectedForgotPassword;
+export default connect(mapStateToProps)(ForgotPassword);

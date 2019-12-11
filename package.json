@@ -6,11 +6,8 @@
     "@babel/cli": "^7.6.4",
     "cross-fetch": "^3.0.4",
     "css-loader": "^3.2.0",
-<<<<<<< HEAD
-    "firebase": "^7.5.1",
-=======
     "enzyme-to-json": "^3.4.3",
->>>>>>> ef609d56b4c4f3e9baa75dd87ec96fcdb2e4967d
+    "firebase": "^7.5.2",
     "formik": "^2.0.6",
     "node-sass": "^4.13.0",
     "normalize.css": "^8.0.1",
@@ -38,15 +35,6 @@
     "test": "jest --config=jest.config.json",
     "eject": "react-scripts eject"
   },
-<<<<<<< HEAD
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
-      "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
-    }
-  },
-=======
->>>>>>> ef609d56b4c4f3e9baa75dd87ec96fcdb2e4967d
   "eslintConfig": {
     "extends": "react-app"
   },
