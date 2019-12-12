@@ -10,6 +10,7 @@ import Modal from 'react-modal';
 import dress from '../assets/images/dress.png';
 import NavBar from './NavBar';
 import SizeChart from './SizeChart';
+import CheckoutPage from './CheckoutPage';
 
 
 export default class ProductItemPage extends React.Component {
@@ -145,7 +146,11 @@ export default class ProductItemPage extends React.Component {
                                         <p className="text-muted small item-pieces">2000 pieces available</p>
                                     </div>
                                     <div className="action-btn">
-                                        <button className="btn btn-lg btn-danger">Buy Now</button>
+                                        <button className="btn btn-lg btn-danger">
+                                            <NavLink className="" to="/checkout">
+                                                Buy Now
+                                            </NavLink>
+                                        </button>
                                         <button className="btn btn-lg btn-warning">Add to Cart</button>
                                     </div>
                                 </div>
@@ -159,7 +164,7 @@ export default class ProductItemPage extends React.Component {
                         </div>
                         <div className="product-specifications__background">
                             2019nbspWomen Summer Dress Boho Style Floral Print Chiffon Beach Dress Tunic Sundress Loose Mini Party Dress Vestidos Plus Size 5XL
-    
+
                             <p>Items: Summer chiffon dress</p>
                             <p>Size: S M L XL XXL XXXL 4XL 5XL</p>
                             <p>Sleeve: Bow 3/4 sleeve</p>
