@@ -13,6 +13,7 @@ import CheckoutPage from '../components/CheckoutPage';
 import ProductsPage from '../components/ProductsPage';
 import AboutPage from '../components/AboutPage';
 import Footer from '../components/Footer';
+import CartPage from '../components/CartPage';
 import ProductItemPage from '../components/ProductItemPage';
 
 const AppRouter = () => (
@@ -21,6 +22,7 @@ const AppRouter = () => (
             <Switch>
                 <Route path="/" component={HomePage} exact={true} />
                 <Route path="/products" component={ProductsPage} />
+                <Route path="/cart" component={CartPage} />
                 <Route path="/checkout" component={CheckoutPage} />
                 <Route path="/about" component={AboutPage} />
                 <Route path="/product" component={ProductItemPage} />

@@ -118,7 +118,7 @@
 }
 
 .action-btn .btn-danger {
-    margin-right: $s-margin;
+    margin-right: $m-margin;
 }
 
 .action-btn .btn-warning {
@@ -126,8 +126,18 @@
 }
 
 .action-btn button {
-    flex: 10%;
     box-shadow: 2px 2px 3px #aaa;
+    width: 100%;
+}
+
+.buy-now, .add-to-cart {
+    flex: 50%;
+    color: $white;
+    text-decoration: none !important;
+}
+
+.buy-now:hover, .add-to-cart:hover {
+    color: $white;
 }
 
 .product-img-color-selector {

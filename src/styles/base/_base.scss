@@ -39,7 +39,6 @@ a {
 }
 
 .help-page-container {
-  background: red;
   position: absolute;
   bottom: 50%;
 }
@@ -48,6 +47,11 @@ h3,
 h2 {
   margin: 0;
 }
+
+.jumbotron {
+  margin-bottom: 0;
+}
+
 
 @media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
   .app-footer,

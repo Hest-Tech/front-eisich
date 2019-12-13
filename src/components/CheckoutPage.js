@@ -131,16 +131,26 @@ export default class CheckoutPage extends React.Component {
                                     <div className="payment-options">
                                         <div className="payment-options__background">
                                             <div className="form-check-item">
-                                                <input class="form-check-input-radio" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
+                                                <input class="form-check-input-radio payment-radio" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
                                                 <div className="payment-option-det">
                                                     <label class="form-check-label-radio" for="exampleRadios1">Jenga: Airtel Money, Mpesa, Cards</label>
-                                                    
+                                                    <p>This is a PREPAID order. Detailed payment instructions will be provided at the next step.</p>
+                                                    <ol>
+                                                        <li>Your Money is SAFE! We will refund you within 48 hours if your delivery fails or the product is faulty. For more details check our Return Policy</li>
+
+                                                        <li>Please check beforehand if you have money on your Credit/Debit card or Mpesa/EazzyPay</li>
+
+                                                        <li>If you do not complete the check-out step on the next screen, your order will not go through</li>
+                                                    </ol>
                                                 </div>
                                             </div>
                                             <div className="form-check-item">
-                                                <input class="form-check-input-radio" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+                                                <input class="form-check-input-radio payment-radio" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
                                                 <div className="payment-option-det">
                                                     <label class="form-check-label-radio" for="exampleRadios2">Cash On Delivery</label>
+                                                    <p>If you select Cash On Delivery, you can pay for your package when our Delivery Associates bring it to your door step or when you pick it up at one of our Pickup Stations.</p><br />
+                                                    <p><strong>IMPORTANT: </strong>Please carry the exact amount in Kenyan Shillings as our Delivery Associates and Pickup Station staff do not carry petty cash.</p>
+                                                    <p>We encourage you to Pay Online - it saves you time & money</p>
                                                 </div>
                                             </div>
                                         </div>

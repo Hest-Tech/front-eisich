@@ -146,12 +146,18 @@ export default class ProductItemPage extends React.Component {
                                         <p className="text-muted small item-pieces">2000 pieces available</p>
                                     </div>
                                     <div className="action-btn">
-                                        <button className="btn btn-lg btn-danger">
-                                            <NavLink className="" to="/checkout">
-                                                Buy Now
-                                            </NavLink>
-                                        </button>
-                                        <button className="btn btn-lg btn-warning">Add to Cart</button>
+                                        <NavLink
+                                            className="buy-now"
+                                            to="/checkout"
+                                        >
+                                            <button className="btn btn-lg btn-danger">Buy Now</button>
+                                        </NavLink>
+                                        <NavLink
+                                            className="add-to-cart"
+                                            to="/cart"
+                                        >
+                                            <button className="btn btn-lg btn-warning">Add to Cart</button>
+                                        </NavLink>
                                     </div>
                                 </div>
                             </div>

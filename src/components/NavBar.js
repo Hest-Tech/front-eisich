@@ -163,7 +163,14 @@ class NavBar extends React.Component {
                                             <a className="dropdown-item" href="#">Log out</a>
                                         </div>
                                     </div> : <i className='far fa-heart shopping__icon'></i>}
-                                    <i className='fas fa-cart-plus shopping__icon'></i>
+                                    <NavLink
+                                        to="/cart"
+                                    >
+                                        <i
+                                            className='fas fa-cart-plus shopping__icon'
+                                            style={{color: '#000'}}
+                                        ></i>
+                                    </NavLink>
                                 </span>
                             </div>
                         </div>

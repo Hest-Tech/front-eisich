@@ -64,17 +64,22 @@
 }
 
 .payment-options__background {
-    // display: flex;
-    // flex-direction: column;
-    background: red;
     width: 90%
 }
 
 .form-check-item {
-    width: 90%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
-    background: blue;
+    margin: 1rem;
+}
+
+.payment-radio {
+    margin-right: $m-margin !important;
+}
+
+.form-check-label-radio {
+    cursor: pointer;
 }
 
 .payment-option-det {
