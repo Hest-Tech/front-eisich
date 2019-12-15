@@ -17,7 +17,7 @@ import telephone from '../assets/images/telephone.svg';
 
 const Footer = () => {
     return (
-        <footer className="app-footer bg-dark text-light font-weight-normal">
+        <footer className="text-small app-footer bg-dark text-light font-weight-normal">
             <div className="footer">
                 <div className="footer-subscribe-sec">
                     <div className="footer-subscribe">

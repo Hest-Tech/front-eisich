@@ -11,15 +11,26 @@ import configureStore from './store/configureStore';
 import { setTextFilter } from './actions/filters';
 import { loadUser } from './actions/authentication';
 import { returnMessages } from './actions/resMessages';
+import clientStorage from './utils/clientStorage';
 
 
 const store = configureStore();
 
-// console.log(store.getState());
 fire.auth().onAuthStateChanged(user => {
     if (user) {
-        store.dispatch(loadUser());
-        console.log('---> ', user.uid)
+        console.log('---> ', user)
+        let userId = user.uid;
+        return fire.database()
+            .ref('/users/' + userId)
+            .once('value')
+            .then(snapshot => {
+                let userData = snapshot.val();
+                let storeUser = new clientStorage();
+                let user = JSON.stringify(userData);
+                storeUser.setCookie('user', user, 1);
+                console.log(userData)
+            });
+        // store.dispatch(loadUser());
         // User is signed in.
     }
 });
@@ -33,9 +44,8 @@ const jsx = (
         <AppRouter />
     </Provider>
 );
-
+console.log('mounted')
 ReactDOM.render(jsx, document.getElementById('root'));
-
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

@@ -19,6 +19,7 @@ import AuthenticationModal from './authentication/AuthenticationModal';
 import unitedStates from '../assets/images/united-states.png';
 import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
+import { logoutUser } from '../actions/authentication';
 
 
 class NavBar extends React.Component {
@@ -28,11 +29,15 @@ class NavBar extends React.Component {
         this.showLoginPopUp = this.showLoginPopUp.bind(this);
         this.hideAuthPopUp = this.hideAuthPopUp.bind(this);
         this.toggleAuthDropDown = this.toggleAuthDropDown.bind(this);
+        this.handleSignOut = this.handleSignOut.bind(this);
+
+        const fetchUser = new clientStorage();
+        let userCookie = fetchUser.getCookie('user');
 
         this.state = {
             loginPopUp: undefined,
             authDropDown: undefined,
-            authenticatedUser: undefined
+            authenticatedUser: userCookie ? JSON.parse(userCookie) : undefined
         };
     }
 
@@ -57,9 +62,22 @@ class NavBar extends React.Component {
         this.setState(() => ({ loginPopUp: undefined }))
     }
 
-    componentDidMount() {
-        let fetchUser = new clientStorage();
-        let user = fetchUser.getCookie('user');
+    handleSignOut() {
+        fire.auth().signOut()
+            .then(() => {
+                let storeUser = new clientStorage();
+                storeUser.eraseCookie('user');
+                this.props.dispatch(logoutUser());
+                console.log('Signed out')
+                window.location.reload()
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        console.log('sign out')
+    }
+
+    handleLoadUser() {
 
         if (user) {
             let authUser = JSON.parse(user);
@@ -67,10 +85,23 @@ class NavBar extends React.Component {
         } else {
             this.setState(() => ({ authenticatedUser: undefined }));
         }
-        console.log('ran here');
+    }
+
+    componentDidMount() {
+        console.log('--> Window object', window.location.href)
+    }
+
+    componentWillUnmount() {
+        console.log('navbar unmouted')
+    }
+
+    componentDidUpdate() {
+        
+        console.log('Component just updated');
     }
 
     render() {
+        // {this.handleLoadUser()}
         return (
             <nav className="main-nav-bar">
                 <div className="main-nav-bar__container">
@@ -98,17 +129,8 @@ class NavBar extends React.Component {
                                     <img src={question} alt="question-mark" className="navbar__icon-img" />
                                     <p>Help</p>
                                 </span>
-                                {this.state.authenticatedUser === undefined && <span
-                                    className="login"
-                                    onClick={this.showLoginPopUp}
-                                >
-                                    <img src={user} alt="user" className="navbar__icon-img" />
-                                    <p>Login</p>
-                                    <i className="fas fa-chevron-down login-arrow"></i>
-                                </span>}
                                 <span className="language">
                                     <label className="language__label">Language: </label>
-                                    {/* <img src={unitedStates} alt="American flag" /> */}
                                     <select className="language__select" id="languageSelect">
                                         <option>ENGLISH</option>
                                         <option>SWAHILI</option>
@@ -122,7 +144,6 @@ class NavBar extends React.Component {
                 </div>
                 <div className="navbar" data-spy="affix" data-offset-top="60">
                     <div className="navbar__container">
-                        {/* <img className="mobile mobile-menu-bar" src={menu} alt="menu" /> */}
                         <NavLink
                             className="display-1 main-title"
                             to="/"
@@ -150,33 +171,59 @@ class NavBar extends React.Component {
                         <div className="shopping-options">
                             <div className="shopping-icons">
                                 <span className="img-icons">
-                                    {this.state.authenticatedUser ? <div className="dropdown authenticated-user">
+                                    <div
+                                        className="dropdown authenticated-user"
+                                    >
                                         <span className="dropdown-toggle authenticated-user__btn" data-toggle="dropdown">
-                                            <img src={user} alt="user" className="navbar__icon-img" />
-                                            <p>{this.state.authenticatedUser.firstName}</p>
+                                            {this.props.authentication.isAuthenticated || this.state.authenticatedUser ? <p><small>Hi, {this.state.authenticatedUser && this.state.authenticatedUser.firstName}</small></p> : <div className="non-authenticated-user">
+                                                <i className="far fa-user"></i>
+                                                <small className="text-muted">login</small>
+                                            </div>}
                                         </span>
-                                        <div className="dropdown-menu authenticated-user-dropdown">
+                                        <div className="dropdown-menu authenticated-user-dropdown" style={{ opacity: 1 }}>
                                             <a className="dropdown-item" href="#">Link 1</a>
                                             <a className="dropdown-item" href="#">Link 2</a>
                                             <a className="dropdown-item" href="#">Link 3</a>
                                             <div className="dropdown-divider"></div>
-                                            <a className="dropdown-item" href="#">Log out</a>
+                                            <span className="login-btn-background">
+                                                {this.props.authentication.isAuthenticated || this.state.authenticatedUser ? <button
+                                                    className="btn btn-warning dropdown-item"
+                                                    onClick={this.handleSignOut}
+                                                >
+                                                    Logout
+                                                </button> : <button
+                                                        className="btn btn-warning dropdown-item"
+                                                        onClick={this.showLoginPopUp}
+                                                    >
+                                                        Log In
+                                                </button>}
+                                            </span>
                                         </div>
-                                    </div> : <i className='far fa-heart shopping__icon'></i>}
+                                    </div>
+                                    {/* {this.state.authenticatedUser === undefined && <span
+                                        className="login"
+                                        onClick={this.showLoginPopUp}
+                                    >
+                                        <img src={user} alt="user" className="navbar__icon-img" />
+                                        <p>Login</p>
+                                        <i className="fas fa-chevron-down login-arrow"></i>
+                                    </span>} */}
                                     <NavLink
                                         to="/cart"
+                                        className="link-to-cart"
                                     >
                                         <i
                                             className='fas fa-cart-plus shopping__icon'
-                                            style={{color: '#000'}}
+                                            style={{ color: '#000' }}
                                         ></i>
+                                        <span className="badge bg-warning cart-pill">2</span>
                                     </NavLink>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </nav>
+            </nav >
         );
     }
 }

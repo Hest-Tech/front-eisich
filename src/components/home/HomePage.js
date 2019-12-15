@@ -18,22 +18,33 @@ class HomePage extends React.Component {
 		this.handleHideMsg = this.handleHideMsg.bind(this);
 
 		this.state = {
-			popMsg: true
+			popMsg: this.props.resMessages && this.props.resMessages.msg
 		}
 	}
 
+	handleShowMsg() {
+		this.setState((prevState) => ({ popMsg: !prevState.popMsg }))
+	}
+
 	handleHideMsg() {
-		setTimeout(() => {
-			this.props.dispatch(clearMessages())
-		}, 10000);
+		// window.location.reload();
+		this.setState((prevState) => ({ popMsg: !prevState.popMsg }))
+
+		// setTimeout(() => {
+		// 	this.props.dispatch(clearMessages())
+		// }, 15000);
+	}
+
+	componentDidUpdate() {
+		console.log(this.state)
 	}
 
 	render() {
 		return (
 			<div className="App">
-				{this.handleHideMsg()}
-				{this.props.resMessages.msg && <div className="alert alert-success home-page-alert" role="alert">
-					{this.props.resMessages.msg}
+				{/* {this.handleHideMsg()} */}
+				{this.state.popMsg && <div className="alert alert-success home-page-alert" role="alert">
+					{this.state.popMsg}
 				</div>}
 				<NavBar />
 				<div className="App jumbotron">

@@ -24,7 +24,7 @@ export default class CheckoutPage extends React.Component {
                     <div className="container">
 
                         <div className="row">
-                            <div className="col-md-4 order-md-2 mb-4">
+                            <div className="col-md-4 order-md-2 mb-4 cart-info-side">
                                 <h4 className="d-flex justify-content-between align-items-center mb-3">
                                     <span className="text-muted">Your cart</span>
                                     <span className="badge badge-secondary badge-pill">2</span>
@@ -131,9 +131,9 @@ export default class CheckoutPage extends React.Component {
                                     <div className="payment-options">
                                         <div className="payment-options__background">
                                             <div className="form-check-item">
-                                                <input class="form-check-input-radio payment-radio" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
+                                                <input className="form-check-input-radio payment-radio" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
                                                 <div className="payment-option-det">
-                                                    <label class="form-check-label-radio" for="exampleRadios1">Jenga: Airtel Money, Mpesa, Cards</label>
+                                                    <label className="form-check-label-radio" for="exampleRadios1">Jenga: Airtel Money, Mpesa, Cards</label>
                                                     <p>This is a PREPAID order. Detailed payment instructions will be provided at the next step.</p>
                                                     <ol>
                                                         <li>Your Money is SAFE! We will refund you within 48 hours if your delivery fails or the product is faulty. For more details check our Return Policy</li>
@@ -145,9 +145,9 @@ export default class CheckoutPage extends React.Component {
                                                 </div>
                                             </div>
                                             <div className="form-check-item">
-                                                <input class="form-check-input-radio payment-radio" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+                                                <input className="form-check-input-radio payment-radio" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
                                                 <div className="payment-option-det">
-                                                    <label class="form-check-label-radio" for="exampleRadios2">Cash On Delivery</label>
+                                                    <label className="form-check-label-radio" for="exampleRadios2">Cash On Delivery</label>
                                                     <p>If you select Cash On Delivery, you can pay for your package when our Delivery Associates bring it to your door step or when you pick it up at one of our Pickup Stations.</p><br />
                                                     <p><strong>IMPORTANT: </strong>Please carry the exact amount in Kenyan Shillings as our Delivery Associates and Pickup Station staff do not carry petty cash.</p>
                                                     <p>We encourage you to Pay Online - it saves you time & money</p>
@@ -159,16 +159,16 @@ export default class CheckoutPage extends React.Component {
                                 </form>
                             </div>
                         </div>
-                        <footer className="my-5 pt-5 text-muted text-center text-small">
-                            <p className="mb-1">&copy; 2017-2018 Company Name</p>
-                            <ul className="list-inline">
-                                <li className="list-inline-item"><a href="#">Privacy</a></li>
-                                <li className="list-inline-item"><a href="#">Terms</a></li>
-                                <li className="list-inline-item"><a href="#">Support</a></li>
-                            </ul>
-                        </footer>
                     </div>
                 </div>
+                <footer className="checkout-mobile-footer bg-dark text-light text-center text-small">
+                    <p className="mb-1">&copy; 2017-2019 All rights reserved</p>
+                    <ul className="list-inline">
+                        <li className="list-inline-item"><a href="#">Privacy</a></li>
+                        <li className="list-inline-item"><a href="#">Terms</a></li>
+                        <li className="list-inline-item"><a href="#">Support</a></li>
+                    </ul>
+                </footer>
             </div>
 
         );

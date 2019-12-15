@@ -86,3 +86,13 @@
     display: flex;
     flex-direction: column;
 }
+
+.checkout-mobile-footer {
+    display: none;
+    margin-top: $l-margin;
+}
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+    
+}

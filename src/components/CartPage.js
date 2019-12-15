@@ -14,7 +14,7 @@ export default class CartPage extends React.Component {
         return (
             <div>
                 <NavBar />
-                <div class="jumbotron">
+                <div className="jumbotron">
                     <div className="container cart-page-container">
                         <div className="cart-item-background">
                             <h3>Cart (2 Items)</h3>
@@ -34,8 +34,8 @@ export default class CartPage extends React.Component {
                                             <small className="text-muted"> Seller: John Doe</small>
                                             <p className="cart-text"><small>S7 - 8GB - 1GB RAM (8MP+5 MP) Camera - Dual Sim - Black</small></p>
                                             <div className="cart-action-btn">
-                                                <small className="cart-action add-to-wishlist"><i class="far fa-heart"></i>MOVE TO WISHLIST</small>
-                                                <small className="cart-action remove-from-cart"><i class="fas fa-trash-alt"></i>REMOVE</small>
+                                                <small className="cart-action add-to-wishlist"><i className="far fa-heart"></i>MOVE TO WISHLIST</small>
+                                                <small className="cart-action remove-from-cart"><i className="fas fa-trash-alt"></i>REMOVE</small>
                                             </div>
                                         </div>
                                     </div>
@@ -71,8 +71,8 @@ export default class CartPage extends React.Component {
                                             <small className="text-muted">Seller: Jane Doe</small>
                                             <p className="cart-text"><small>Summer Dress Boho Style Floral Print Chiffon</small></p>
                                             <div className="cart-action-btn">
-                                                <small className="cart-action add-to-wishlist"><i class="far fa-heart"></i>MOVE TO WISHLIST</small>
-                                                <small className="cart-action remove-from-cart"><i class="fas fa-trash-alt"></i>REMOVE</small>
+                                                <small className="cart-action add-to-wishlist"><i className="far fa-heart"></i>MOVE TO WISHLIST</small>
+                                                <small className="cart-action remove-from-cart"><i className="fas fa-trash-alt"></i>REMOVE</small>
                                             </div>
                                         </div>
                                     </div>
@@ -126,13 +126,13 @@ export default class CartPage extends React.Component {
                             <NavLink
                                 to="/"
                             >
-                                <button type="button" class="btn btn-lg action-btn-cart continue-shopping">CONTINUE SHOPPING</button>
+                                <button type="button" className="btn btn-lg action-btn-cart continue-shopping">CONTINUE SHOPPING</button>
                             </NavLink>
                             <NavLink
                                 to="/checkout"
                                 className="checkout-link"
                             >
-                                <button type="button" class="btn btn-warning btn-lg action-btn-cart">PROCEED TO CHECKOUT</button>
+                                <button type="button" className="btn btn-warning btn-lg action-btn-cart">PROCEED TO CHECKOUT</button>
                             </NavLink>
                         </div>
                     </div>

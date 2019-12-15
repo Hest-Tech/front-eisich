@@ -22,6 +22,8 @@ class SignupPage extends React.Component {
     }
 
     render() {
+        const { history } = this.props;
+
         return (
             <div className="sign-up-container">
                 <div className="sign-up__extra-content">
@@ -64,7 +66,6 @@ class SignupPage extends React.Component {
                                     let ref = fire.database().ref().child(`users`);
                                     let data = {
                                         email: values.email,
-                                        password: values.password,
                                         phoneNumber: values.phoneNumber.toString(),
                                         firstName: values.firstName,
                                         lastName: values.lastName
@@ -74,6 +75,7 @@ class SignupPage extends React.Component {
                                         setSubmitting(false);
                                         that.setState(() => ({ error: null }));
                                         resetForm();
+                                        history.push('/');
                                         this.props.dispatch(returnMessages('Account created. Successfully Log in'));
                                         this.props.hidePopUp();
 

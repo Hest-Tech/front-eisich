@@ -5,10 +5,12 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from 'react-redux';
-import clientStorage from '../../utils/clientStorage';
+import { withRouter } from 'react-router-dom';
 
+import clientStorage from '../../utils/clientStorage';
 import { LoginSchema } from '../../utils/validate';
 import { loginUser } from '../../actions/authentication';
+import { loadUser } from '../../actions/authentication';
 import { returnMessages, clearMessages } from '../../actions/resMessages';
 import ForgotPassword from './ForgotPassword';
 import fire from '../../firebase/firebase';
@@ -27,7 +29,7 @@ class LoginPage extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         console.log(this.props.authentication);
     }
 
@@ -35,6 +37,9 @@ class LoginPage extends React.Component {
         this.props.handleResetPassword(undefined); // set resetTitle to undefined
     }
 
+    // redirect() {
+    //     this.props.history.push('/cart');
+    // }
 
     // show reset password
     resetPassword(e) {
@@ -59,6 +64,7 @@ class LoginPage extends React.Component {
     }
 
     render() {
+        const { history } = this.props;
         return (
             <div>
                 {this.state.resetPopUp ? <ForgotPassword hideResetPassword={this.hideResetPassword} /> : <div
@@ -84,17 +90,24 @@ class LoginPage extends React.Component {
                                             console.log("logged in ");
                                             setSubmitting(false);
 
-                                            // Wesley
-
-                                            // fetch logged in user from db
-                                            // console.log the user
-
                                             this.setState(() => ({ error: null }));
 
-                                            // console.log((this.props.dispatch(loginUser(values, 'You have been successfully logged in'))));
-                                            this.props.dispatch(returnMessages('You have been successfully logged in'));
-                                            resetForm();
-                                            this.props.hidePopUp()
+                                            // this.props.dispatch(returnMessages('You have been successfully logged in'));
+
+                                            this.props.hidePopUp();
+
+                                            let userId = fire.auth().currentUser.uid;
+                                            return fire.database()
+                                                .ref('/users/' + userId)
+                                                .once('value')
+                                                .then(snapshot => {
+                                                    window.location.reload()
+                                                    let userData = snapshot.val();
+                                                    this.props.dispatch(loadUser(userData));
+                                                    let storeUser = new clientStorage();
+                                                    let user = JSON.stringify(userData);
+                                                    storeUser.setCookie('user', user, 1);
+                                                });
                                         })
                                             .catch(error => {
                                                 this.setState(() => ({ error: error.message }));
@@ -153,6 +166,7 @@ class LoginPage extends React.Component {
                                             <button
                                                 type="submit"
                                                 className="btn btn-success btn-block"
+                                                // onClick={this.redirect.bind(this)}
                                                 disabled={isSubmitting}
                                             >
                                                 {isSubmitting ? <div className="spinner-border text-warning"></div> : "Login"}
@@ -197,4 +211,4 @@ const mapStateToProps = (state) => ({
     resMessages: state.resMessages
 });
 
-export default connect(mapStateToProps)(LoginPage);
+export default withRouter(connect(mapStateToProps)(LoginPage));

@@ -137,7 +137,7 @@ export default class ProductItemPage extends React.Component {
                                         </div>
                                     </span>
                                     <span className="size-check">
-                                        <p>SELECT SIZE:</p>
+                                        <p>NO. OF PIECES:</p>
                                     </span>
                                     <div className="size-range qty">
                                         <button className="btn btn-sm"><i className="fas fa-minus"></i></button>

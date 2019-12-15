@@ -24,8 +24,9 @@ export const registerSuccess = ({} = {}) => dispatch => {
 
 
 // Check token & load user
-export const loadUser = () => ({
-    type: 'LOAD_USER'
+export const loadUser = (payload) => ({
+    type: 'LOAD_USER',
+    payload
 });
 
 // login success
@@ -34,15 +35,21 @@ export const loginUser = (payload) => ({
     payload
 });
 
-
-
-
 // logout success
-export const logoutUser = (cname) => ({
-    type: LOGOUT_SUCCESS,
-    eraseCookie: clientStore.eraseCookie,
-    cname
+export const logoutUser = () => ({
+    type: LOGOUT_SUCCESS
 });
+
+
+
+
+
+
+
+
+
+
+
 
 // reset password
 export const resetPassword = ({ email }) => ({

@@ -60,6 +60,7 @@ h2 {
   .carousel-control-prev,
   .main-nav-bar__container,
   .shopping-options,
+  .cart-info-side,
   .side-menu-container {
     display: none;
   }
@@ -67,7 +68,7 @@ h2 {
     display: flex;
   }
 
-  .block-mobile {
+  .block-mobile, .checkout-mobile-footer {
     display: block;
   }
 }
