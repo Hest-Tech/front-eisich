@@ -1,13 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { connect } from 'react-redux';
 
 import dress from '../assets/images/dress.png';
 import iphone from '../assets/images/iphone.png';
+import { CheckoutSchema } from '../utils/validate';
+import JengaPaymentGateway from '../paymentGateways/jengaPaymentGateway';
+
+const payment = new JengaPaymentGateway();
 
 
 export default class CheckoutPage extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {
@@ -83,80 +89,194 @@ export default class CheckoutPage extends React.Component {
                             </div>
                             <div className="col-md-8 order-md-1">
                                 <h4 className="mb-3 text-muted">Billing address</h4>
-                                <form className="checkout-address-form">
-                                    <div className="form-row">
-                                        <div className="form-group col-md-6">
-                                            <label className="checkout-label text-muted" htmlhtmlFor="checkout-label inputFirstName4">First Name *</label>
-                                            <input type="text" className="form-control" id="inputEmail4" placeholder="First Name" />
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label className="checkout-label text-muted" htmlhtmlFor="checkout-label inputLastName4">Last Name *</label>
-                                            <input type="text" className="form-control" id="inputLastName4" placeholder="Last Name" />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="checkout-label text-muted" htmlhtmlFor="checkout-label inputFirstName4">Phone Number *</label>
-                                        <input type="number" className="form-control" id="inputEmail4" placeholder="Phone Number" />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="checkout-label text-muted" htmlhtmlFor="checkout-label exampleFormControlTextarea1">Delivery Address *</label>
-                                        <textarea
-                                            className="form-control"
-                                            id="exampleFormControlTextarea1"
-                                            placeholder="Street Name / Building / Apartment No. / Floor"
-                                            rows="3"
-                                        ></textarea>
-                                    </div>
-                                    <div className="form-row">
-                                        <div className="col-md-6 select-county">
-                                            <label className="checkout-label col-md-10 text-muted" htmlFor="inlineFormCustomSelect">County/Region *</label>
-                                            <select className="col-md-10" id="inlineFormCustomSelect">
-                                                <option selected>Nairobi</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                        <div className="col-md-6 select-city">
-                                            <label className="checkout-label col-md-10 text-muted" htmlFor="inlineFormCustomSelect">City *</label>
-                                            <select className="col-md-10" id="inlineFormCustomSelect">
-                                                <option selected>Nairobi</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <h4 className="mb-3 text-muted checkout-title-txt">Payment Options</h4>
-                                    <div className="payment-options">
-                                        <div className="payment-options__background">
-                                            <div className="form-check-item">
-                                                <input className="form-check-input-radio payment-radio" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
-                                                <div className="payment-option-det">
-                                                    <label className="form-check-label-radio" for="exampleRadios1">Jenga: Airtel Money, Mpesa, Cards</label>
-                                                    <p>This is a PREPAID order. Detailed payment instructions will be provided at the next step.</p>
-                                                    <ol>
-                                                        <li>Your Money is SAFE! We will refund you within 48 hours if your delivery fails or the product is faulty. For more details check our Return Policy</li>
-
-                                                        <li>Please check beforehand if you have money on your Credit/Debit card or Mpesa/EazzyPay</li>
-
-                                                        <li>If you do not complete the check-out step on the next screen, your order will not go through</li>
-                                                    </ol>
+                                <Formik
+                                    className="checkout-address-form"
+                                    initialValues={{
+                                        firstName: "",
+                                        lastName: "",
+                                        phoneNumber: "",
+                                        address: "",
+                                        county: "",
+                                        city: "",
+                                        exampleRadios: "",
+                                    }}
+                                    validationSchema={CheckoutSchema}
+                                    onSubmit={(values, { setSubmitting, resetForm }) => {
+                                        console.log(values);
+                                    }}
+                                >
+                                    {({ values, errors, touched, isSubmitting, filters }) => (
+                                        <Form>
+                                            <div className="form-row">
+                                                <div className="form-group col-md-6">
+                                                    <label className="checkout-label text-muted" htmlFor="checkout-label inputFirstName4">First Name *</label>
+                                                    <Field
+                                                        name="firstName"
+                                                        type="text"
+                                                        className={`form-control ${
+                                                            touched.firstName && errors.firstName ? "is-invalid" : ""
+                                                            }`}
+                                                        id="inputEmail4"
+                                                        placeholder="First Name"
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="firstName"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
+                                                <div className="form-group col-md-6">
+                                                    <label className="checkout-label text-muted" htmlFor="checkout-label inputLastName4">Last Name *</label>
+                                                    <Field
+                                                        name="lastName"
+                                                        type="text"
+                                                        className={`form-control ${
+                                                            touched.lastName && errors.lastName ? "is-invalid" : ""
+                                                            }`}
+                                                        id="inputLastName4"
+                                                        placeholder="Last Name"
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="lastName"
+                                                        className="invalid-feedback"
+                                                    />
                                                 </div>
                                             </div>
-                                            <div className="form-check-item">
-                                                <input className="form-check-input-radio payment-radio" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-                                                <div className="payment-option-det">
-                                                    <label className="form-check-label-radio" for="exampleRadios2">Cash On Delivery</label>
-                                                    <p>If you select Cash On Delivery, you can pay for your package when our Delivery Associates bring it to your door step or when you pick it up at one of our Pickup Stations.</p><br />
-                                                    <p><strong>IMPORTANT: </strong>Please carry the exact amount in Kenyan Shillings as our Delivery Associates and Pickup Station staff do not carry petty cash.</p>
-                                                    <p>We encourage you to Pay Online - it saves you time & money</p>
+                                            <div className="form-group">
+                                                <label className="checkout-label text-muted" htmlFor="checkout-label inputFirstName4">Phone Number *</label>
+                                                <Field
+                                                    name="phoneNumber"
+                                                    type="number"
+                                                    className={`form-control ${
+                                                        touched.phoneNumber && errors.phoneNumber ? "is-invalid" : ""
+                                                        }`}
+                                                    id="inputEmail4"
+                                                    placeholder="Phone Number"
+                                                />
+                                                <ErrorMessage
+                                                    component="div"
+                                                    name="phoneNumber"
+                                                    className="invalid-feedback"
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className="checkout-label text-muted" htmlFor="checkout-label exampleFormControlTextarea1">Delivery Address *</label>
+                                                <Field
+                                                    name="address"
+                                                    className={`form-control ${
+                                                        touched.address && errors.address ? "is-invalid" : ""
+                                                        }`}
+                                                    id="exampleFormControlTextarea1"
+                                                    placeholder="Street Name / Building / Apartment No. / Floor"
+                                                    rows="3"
+                                                ></Field>
+                                                <ErrorMessage
+                                                    component="div"
+                                                    name="address"
+                                                    className="invalid-feedback"
+                                                />
+                                            </div>
+                                            <div className="form-row">
+                                                <div className="col-md-6 select-county">
+                                                    <label className="checkout-label col-md-10 text-muted" htmlFor="inlineFormCustomSelect">County/Region *</label>
+                                                    <Field
+                                                        as="select"
+                                                        name="county"
+                                                        className={`col-md-10 form-control ${
+                                                            touched.county && errors.county ? "is-invalid" : ""
+                                                            }`}
+                                                        id="inlineFormCustomSelect"
+                                                    >
+                                                        <option defaultValue="Nairobi">Nairobi</option>
+                                                        <option defaultValue="1">One</option>
+                                                        <option defaultValue="2">Two</option>
+                                                        <option defaultValue="3">Three</option>
+                                                    </Field>
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="county"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
+                                                <div className="col-md-6 select-city">
+                                                    <label className="checkout-label col-md-10 text-muted" htmlFor="inlineFormCustomSelect">City *</label>
+                                                    <Field
+                                                        as="select"
+                                                        name="city"
+                                                        className={`col-md-10 form-control ${
+                                                            touched.city && errors.city ? "is-invalid" : ""
+                                                            }`}
+                                                        id="inlineFormCustomSelect"
+                                                    >
+                                                        <option defaultValue="Nairobi">Nairobi</option>
+                                                        <option defaultValue="1">One</option>
+                                                        <option defaultValue="2">Two</option>
+                                                        <option defaultValue="3">Three</option>
+                                                    </Field>
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="city"
+                                                        className="invalid-feedback"
+                                                    />
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <button className="btn btn-warning btn-lg btn-block checkout-btn" type="submit">Continue to checkout</button>
-                                </form>
+                                            <h4 className="mb-3 text-muted checkout-title-txt">Payment Options</h4>
+                                            <div className="payment-options">
+                                                <div className="payment-options__background">
+
+                                                    <div className="form-check form-check-item">
+                                                        <Field
+                                                            className={`form-check-input-radio payment-radio ${
+                                                                touched.jenga && errors.jenga ? "is-invalid" : ""
+                                                                }`}
+                                                            type="radio"
+                                                            name="exampleRadios"
+                                                            id="exampleRadios1"
+                                                            defaultValue="jenga"
+                                                            checked={values.exampleRadios === 'jenga'}
+                                                        />
+                                                        <div className="payment-option-det">
+                                                            <label className="form-check-label-radio" htmlFor="exampleRadios1">Jenga: Airtel Money, Mpesa, Cards</label>
+                                                            <div className="invalid-feedback">
+                                                                You must agree before submitting.
+                                                            </div>
+                                                            <p>This is a PREPAID order. Detailed payment instructions will be provided at the next step.</p>
+                                                            <ol>
+                                                                <li>Your Money is SAFE! We will refund you within 48 hours if your delivery fails or the product is faulty. For more details check our Return Policy</li>
+
+                                                                <li>Please check beforehand if you have money on your Credit/Debit card or Mpesa/EazzyPay</li>
+
+                                                                <li>If you do not complete the check-out step on the next screen, your order will not go through</li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-check form-check-item">
+
+                                                        <Field
+                                                            className={`form-check-input-radio payment-radio ${
+                                                                touched.cashOnDelivery && errors.cashOnDelivery ? "is-invalid" : ""
+                                                                }`}
+                                                            type="radio"
+                                                            name="exampleRadios"
+                                                            id="exampleRadios2"
+                                                            defaultValue="cashOnDelivery"
+                                                            checked={values.exampleRadios === 'cashOnDelivery'}
+                                                        />
+                                                        <div className="payment-option-det">
+                                                            <label className="form-check-label-radio" htmlFor="exampleRadios2">Cash On Delivery</label>
+                                                            <p>If you select Cash On Delivery, you can pay for your package when our Delivery Associates bring it to your door step or when you pick it up at one of our Pickup Stations.</p><br />
+                                                            <p><strong>IMPORTANT: </strong>Please carry the exact amount in Kenyan Shillings as our Delivery Associates and Pickup Station staff do not carry petty cash.</p>
+                                                            <p>We encourage you to Pay Online - it saves you time & money</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button className="btn btn-warning btn-lg btn-block checkout-btn" type="submit">Continue to checkout</button>
+                                        </Form>
+                                    )}
+                                </Formik>
+
                             </div>
                         </div>
                     </div>

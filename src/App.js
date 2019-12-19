@@ -12,13 +12,22 @@ import { setTextFilter } from './actions/filters';
 import { loadUser } from './actions/authentication';
 import { returnMessages } from './actions/resMessages';
 import clientStorage from './utils/clientStorage';
+import ErrorBoundary from './components/ErrorBoundary'
 
 
 const store = configureStore();
+let token = null;
 
 fire.auth().onAuthStateChanged(user => {
     if (user) {
-        console.log('---> ', user)
+
+        user.getIdToken(/* forceRefresh */ true)
+            .then(idToken => {
+                token = idToken;
+                console.log('=> Token: ', token);
+            })
+            .catch(error => console.log('=> error: ', error));
+
         let userId = user.uid;
         return fire.database()
             .ref('/users/' + userId)
@@ -41,11 +50,13 @@ fire.auth().onAuthStateChanged(user => {
 
 const jsx = (
     <Provider store={store}>
-        <AppRouter />
+        <ErrorBoundary><AppRouter /></ErrorBoundary>
     </Provider>
 );
-console.log('mounted')
+
+
 ReactDOM.render(jsx, document.getElementById('root'));
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

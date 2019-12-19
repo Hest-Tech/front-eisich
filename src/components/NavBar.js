@@ -96,7 +96,7 @@ class NavBar extends React.Component {
     }
 
     componentDidUpdate() {
-        
+
         console.log('Component just updated');
     }
 
@@ -181,18 +181,39 @@ class NavBar extends React.Component {
                                             </div>}
                                         </span>
                                         <div className="dropdown-menu authenticated-user-dropdown" style={{ opacity: 1 }}>
-                                            <a className="dropdown-item" href="#">Link 1</a>
-                                            <a className="dropdown-item" href="#">Link 2</a>
-                                            <a className="dropdown-item" href="#">Link 3</a>
+                                            <NavLink
+                                                className="dropdown-item profile-link"
+                                                to="/account"
+                                                // style={{}}
+                                            >
+                                                <i className="far fa-user"></i>
+                                                <span>Account</span>
+                                            </NavLink>
+                                            <NavLink
+                                                className="dropdown-item profile-link"
+                                                to="/orders"
+                                                // style={{}}
+                                            >
+                                                <i className="fas fa-cart-arrow-down"></i>
+                                                <span>Orders</span>
+                                            </NavLink>
+                                            <NavLink
+                                                className="dropdown-item profile-link"
+                                                to="/wishlist"
+                                                // style={{}}
+                                            >
+                                                <i className="far fa-heart"></i>
+                                                <span>Saved Items</span>
+                                            </NavLink>
                                             <div className="dropdown-divider"></div>
                                             <span className="login-btn-background">
                                                 {this.props.authentication.isAuthenticated || this.state.authenticatedUser ? <button
-                                                    className="btn btn-warning dropdown-item"
+                                                    className="btn btn-warning dropdown-item-btn"
                                                     onClick={this.handleSignOut}
                                                 >
                                                     Logout
                                                 </button> : <button
-                                                        className="btn btn-warning dropdown-item"
+                                                        className="btn btn-warning dropdown-item-btn"
                                                         onClick={this.showLoginPopUp}
                                                     >
                                                         Log In

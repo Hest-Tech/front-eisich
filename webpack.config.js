@@ -1,5 +1,15 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv');
+
+// env setup
+// const env = dotenv.config().parsed;
+
+// const envKeys = Object.keys(env).reduce((prev, next) => {
+//     prev[`process.env.${next}`] = JSON.stringify(env[next]);
+//     return prev;
+// }, {});
+//-----------------
 
 console.log(path.join(__dirname, '/public/dist'))
 
@@ -12,25 +22,25 @@ module.exports = {
     },
     module: {
         rules: [{
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                }
-            },
-            {
-                test: /\.s?css$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader'
-                ],
-            },
-            {
-                test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
-                exclude: /node_modules/,
-                use: ['file-loader?name=[name].[ext]'],
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+                loader: "babel-loader"
             }
+        },
+        {
+            test: /\.s?css$/,
+            use: [
+                'style-loader',
+                'css-loader',
+                'sass-loader'
+            ],
+        },
+        {
+            test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+            exclude: /node_modules/,
+            use: ['file-loader?name=[name].[ext]'],
+        }
         ]
     },
     plugins: [

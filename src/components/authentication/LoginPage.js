@@ -37,10 +37,6 @@ class LoginPage extends React.Component {
         this.props.handleResetPassword(undefined); // set resetTitle to undefined
     }
 
-    // redirect() {
-    //     this.props.history.push('/cart');
-    // }
-
     // show reset password
     resetPassword(e) {
         e.preventDefault();
@@ -64,7 +60,6 @@ class LoginPage extends React.Component {
     }
 
     render() {
-        const { history } = this.props;
         return (
             <div>
                 {this.state.resetPopUp ? <ForgotPassword hideResetPassword={this.hideResetPassword} /> : <div

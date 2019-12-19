@@ -9,6 +9,7 @@ import NavBar from '../NavBar';
 import MobileMenu from './MobileMenu';
 import MobileNav from './MobileNav';
 import { clearMessages } from '../../actions/resMessages';
+import ErrorBoundary from '../ErrorBoundary';
 
 
 class HomePage extends React.Component {
@@ -46,7 +47,9 @@ class HomePage extends React.Component {
 				{this.state.popMsg && <div className="alert alert-success home-page-alert" role="alert">
 					{this.state.popMsg}
 				</div>}
-				<NavBar />
+				<ErrorBoundary>
+					<NavBar />
+				</ErrorBoundary>
 				<div className="App jumbotron">
 					<Header />
 					<MobileMenu />

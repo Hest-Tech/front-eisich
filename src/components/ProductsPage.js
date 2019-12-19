@@ -173,7 +173,7 @@ const ProductsPage = () => (
                                 </small>
                             </nav>
                             <form className="multi-range-field-option">
-                                <input type="text" className="form-control" value="0" />
+                                <input type="text" className="form-control" defaultValue="0" />
                                 <input
                                     id="multi"
                                     className="multi-range"
@@ -182,14 +182,17 @@ const ProductsPage = () => (
                                     max="250000"
                                     step="1500"
                                 />
-                                <input type="text" className="form-control" value="KSH12,500" />
+                                <input type="text" className="form-control" defaultValue="KSH12,500" />
                             </form>
                             <label>Sort by:
-                            <select className="select-dropdown text-muted small">
-                                    <option className="text-muted small" selected>All items</option>
-                                    <option className="text-muted small" value="size">Size</option>
-                                    <option className="text-muted small" value="price">Price</option>
-                                    <option className="text-muted small" value="age">Age</option>
+                            <select
+                                defaultValue="All items"
+                                className="select-dropdown text-muted small"
+                            >
+                                    <option className="text-muted small">All items</option>
+                                    <option className="text-muted small" defaultValue="size">Size</option>
+                                    <option className="text-muted small" defaultValue="price">Price</option>
+                                    <option className="text-muted small" defaultValue="age">Age</option>
                                 </select>
                             </label>
                         </div>
