@@ -6,12 +6,9 @@ import { connect } from 'react-redux';
 import dress from '../assets/images/dress.png';
 import iphone from '../assets/images/iphone.png';
 import { CheckoutSchema } from '../utils/validate';
-import JengaPaymentGateway from '../paymentGateways/jengaPaymentGateway';
-
-const payment = new JengaPaymentGateway();
 
 
-export default class CheckoutPage extends React.Component {
+class CheckoutPage extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -102,7 +99,31 @@ export default class CheckoutPage extends React.Component {
                                     }}
                                     validationSchema={CheckoutSchema}
                                     onSubmit={(values, { setSubmitting, resetForm }) => {
-                                        console.log(values);
+                                        // resetForm();
+
+                                        const payload = {
+                                            phoneNumber: `254${values.phoneNumber}`,
+                                            shortCode: "174379",
+                                            amount: "1",
+                                            vendor: "174379",
+                                            exampleRadios: values.exampleRadios.toString(),
+                                        }
+                                        console.log(payload);
+
+                                        return fetch('https://e8c9f650.ngrok.io/lipaNaMpesa', {
+                                            method: 'POST',
+                                            body: JSON.stringify(payload),
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            }
+                                        }).then(res => {
+                                            if (res.ok) return res.json();
+                                            throw new Error('Request Failed!');
+                                        }, netError => console.log(netError)
+                                        ).then(jsonResponse => {
+                                            setSubmitting(false);
+                                            console.log(jsonResponse);
+                                        })
                                     }}
                                 >
                                     {({ values, errors, touched, isSubmitting, filters }) => (
@@ -255,11 +276,43 @@ export default class CheckoutPage extends React.Component {
 
                                                         <Field
                                                             className={`form-check-input-radio payment-radio ${
-                                                                touched.cashOnDelivery && errors.cashOnDelivery ? "is-invalid" : ""
+                                                                touched.lipaNaMpesa && errors.lipaNaMpesa ? "is-invalid" : ""
                                                                 }`}
                                                             type="radio"
                                                             name="exampleRadios"
                                                             id="exampleRadios2"
+                                                            defaultValue="lipaNaMpesa"
+                                                            checked={values.exampleRadios === 'lipaNaMpesa'}
+                                                        />
+                                                        <div className="payment-option-det">
+                                                            <label className="form-check-label-radio" htmlFor="exampleRadios2">Lipa Na Mpesa</label>
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-check form-check-item">
+
+                                                        <Field
+                                                            className={`form-check-input-radio payment-radio ${
+                                                                touched.payBill && errors.payBill ? "is-invalid" : ""
+                                                                }`}
+                                                            type="radio"
+                                                            name="exampleRadios"
+                                                            id="exampleRadios3"
+                                                            defaultValue="payBill"
+                                                            checked={values.exampleRadios === 'payBill'}
+                                                        />
+                                                        <div className="payment-option-det">
+                                                            <label className="form-check-label-radio" htmlFor="exampleRadios2">Paybill</label>
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-check form-check-item">
+
+                                                        <Field
+                                                            className={`form-check-input-radio payment-radio ${
+                                                                touched.cashOnDelivery && errors.cashOnDelivery ? "is-invalid" : ""
+                                                                }`}
+                                                            type="radio"
+                                                            name="exampleRadios"
+                                                            id="exampleRadios3"
                                                             defaultValue="cashOnDelivery"
                                                             checked={values.exampleRadios === 'cashOnDelivery'}
                                                         />
@@ -294,3 +347,9 @@ export default class CheckoutPage extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    authentication: state.authentication
+});
+
+export default connect(mapStateToProps)(CheckoutPage);
