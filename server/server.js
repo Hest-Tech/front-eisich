@@ -4,33 +4,29 @@ var cors = require('cors');
 
 const lipaNaMpesa = require('./payment-gateways/daraja/lipaNaMpesa')
 const hook = require('./payment-gateways/daraja/webHook');
+const { ValidateMpesaData } = require('./payment-gateways/daraja/validate');
 
 // create an express app and configure it with bodyParser middleware
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
-app.post("/", (req, res) => {
-    console.log(req.body) // populated!
-    // res.send(200, req.body);
-});
+const validateNum = new ValidateMpesaData();
 
 app.post('/lipaNaMpesa', (req, res) => {
-    console.log('lipaNaMpesa')
     try {
-        switch(req.body.exampleRadios) {
+        switch (req.body.exampleRadios) {
             case 'lipaNaMpesa':
-                return lipaNaMpesa.processLipaNaMpesaRequest(req.body);
+                let validateData = validateNum.validateMpesaReq(req.body, res);
+                let lipaNaMpesaReq = lipaNaMpesa.processLipaNaMpesaRequest(req.body, res);
+                return validateData ? validateData : lipaNaMpesaReq;
             default:
                 return;
         }
     } catch (e) {
         console.log(e);
     }
-    res.json({
-        "status": 200,
-        "message": 'Success'
-    });
+    
     console.log('-->', req.body);
 });
 

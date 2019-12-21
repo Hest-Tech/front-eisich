@@ -110,7 +110,7 @@ class CheckoutPage extends React.Component {
                                         }
                                         console.log(payload);
 
-                                        return fetch('https://e8c9f650.ngrok.io/lipaNaMpesa', {
+                                        return fetch('https://def1d844.ngrok.io/lipaNaMpesa', {
                                             method: 'POST',
                                             body: JSON.stringify(payload),
                                             headers: {
