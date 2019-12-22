@@ -1,0 +1,58 @@
+.account-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.account-menu-links {
+    display: flex;
+    flex-direction: column;
+    border-bottom: .1rem solid $light-grey;
+}
+
+.acc-link {
+    padding: $m-padding*1.2 $l-padding;
+    color: #3b3b3b;
+    display: flex;
+}
+
+.acc-link span {
+    // display: flex;
+    align-items: center;
+    flex: 15%;
+}
+
+.acc-link p {
+    flex: 85%;
+    font-size: $s-font-size*1.3;
+}
+
+.acc-link span i {
+    font-size: $m-font-size;
+}
+
+.acc-link:hover {
+    color: $base-color;
+}
+
+.active {
+    color: $base-color;
+}
+
+.account-menu-forms {
+    border-bottom: .1rem solid $light-grey;
+}
+
+.acc-menu-btn {
+    padding: $m-padding 0;
+    text-align: center;
+}
+
+.acc-menu-btn button {
+    border: none;
+    color: $base-color;
+}
+
+.acc-menu-btn button:hover {
+    background: #FEEFDE;
+    color: $base-color;
+}

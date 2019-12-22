@@ -1,0 +1,30 @@
+.account-overview-background {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: red;
+    height: 100%;
+}
+
+.account-overview-title {
+    font-size: $m-font-size*1.2;
+}
+
+.detail-address {
+    display: flex;
+    background: blue;
+    // height: 70%;
+    width: 100%;
+}
+
+.acc-overview {
+    border: .1rem solid $light-grey;
+    flex: 50%;
+}
+
+.user-info {
+    font-size: $s-font-size*1.2;
+}

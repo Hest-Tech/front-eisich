@@ -7,9 +7,14 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import HomePage from '../components/home/HomePage';
-import OrdersPage from '../components/account/OrdersPage';
-import ProfilePage from '../components/account/ProfilePage';
-import WishlistPage from '../components/account/WishlistPage';
+import AccountPage from '../components/account/AccountPage';
+import AccountOrders from '../components/account/AccountOrders';
+import AccountCoupons from '../components/account/AccountCoupons';
+import AccountPendingReviews from '../components/account/AccountPendingReviews';
+import ChangePassword from '../components/account/ChangePassword';
+import AddressBook from '../components/account/AddressBook';
+import UpdateAccount from '../components/account/UpdateAccount';
+import AccountWishlist from '../components/account/AccountWishlist';
 import HelpPage from '../components/HelpPage';
 import NotFoundPage from '../components/NotFoundPage';
 import CheckoutPage from '../components/CheckoutPage';
@@ -26,9 +31,14 @@ const AppRouter = () => (
         <div className="App">
             <Switch>
                 <Route path="/" component={HomePage} exact={true} />
-                <Route path="/account" component={ProfilePage} />
-                <Route path="/orders" component={OrdersPage} />
-                <Route path="/wishlist" component={WishlistPage} />
+                <Route path="/customer/account" component={AccountPage} />
+                <Route path="/customer/orders" component={AccountOrders} />
+                <Route path="/customer/wishlist" component={AccountWishlist} />
+                <Route path="/customer/pending-reviews" component={AccountPendingReviews} />
+                <Route path="/customer/coupons" component={AccountCoupons} />
+                <Route path="/customer/change-password" component={ChangePassword} />
+                <Route path="/customer/address" component={AddressBook} />
+                <Route path="/customer/profile/edit" component={UpdateAccount} />
                 <Route path="/products" component={ProductsPage} />
                 <Route path="/cart" component={CartPage} />
                 <Route path="/checkout" component={CheckoutPage} />
@@ -37,7 +47,9 @@ const AppRouter = () => (
                 <Route path="/help" component={HelpPage} />
                 <Route component={NotFoundPage} />
             </Switch>
-            <Footer />
+            <ErrorBoundary>
+                <Footer />
+            </ErrorBoundary>
         </div>
     </BrowserRouter>
 );

@@ -13,6 +13,7 @@ ul,
 body {
   margin: 0;
   position: relative;
+  font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
 }
 
 body {
@@ -43,6 +44,10 @@ a {
   bottom: 50%;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+
 h3,
 h2 {
   margin: 0;
@@ -50,6 +55,10 @@ h2 {
 
 .jumbotron {
   margin-bottom: 0;
+}
+
+.router-nav-link {
+  text-decoration: none !important;
 }
 
 

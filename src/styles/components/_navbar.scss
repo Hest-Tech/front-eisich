@@ -231,7 +231,13 @@
 }
 
 .dropdown-item-btn {
-    width: 80%;
+    // width: 80%;
+    border: none;
+}
+
+.dropdown-item-btn:hover {
+    color: $base-color;
+    background: #FEEEDD;
 }
 
 .authenticated-user__btn p {
@@ -253,6 +259,14 @@
 
 .login {
     display: flex;
+}
+
+.dropdown-item {
+    background: $white;
+}
+
+.dropdown-item.active {
+    background: $base-color;
 }
 
 .profile-link {

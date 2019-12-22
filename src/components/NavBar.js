@@ -183,24 +183,24 @@ class NavBar extends React.Component {
                                         <div className="dropdown-menu authenticated-user-dropdown" style={{ opacity: 1 }}>
                                             <NavLink
                                                 className="dropdown-item profile-link"
-                                                to="/account"
-                                                // style={{}}
+                                                to="/customer/account"
+                                            // style={{}}
                                             >
                                                 <i className="far fa-user"></i>
                                                 <span>Account</span>
                                             </NavLink>
                                             <NavLink
                                                 className="dropdown-item profile-link"
-                                                to="/orders"
-                                                // style={{}}
+                                                to="/customer/orders"
+                                            // style={{}}
                                             >
-                                                <i className="fas fa-cart-arrow-down"></i>
+                                                <i className="fas fa-luggage-cart"></i>
                                                 <span>Orders</span>
                                             </NavLink>
                                             <NavLink
                                                 className="dropdown-item profile-link"
-                                                to="/wishlist"
-                                                // style={{}}
+                                                to="/customer/wishlist"
+                                            // style={{}}
                                             >
                                                 <i className="far fa-heart"></i>
                                                 <span>Saved Items</span>
@@ -208,12 +208,14 @@ class NavBar extends React.Component {
                                             <div className="dropdown-divider"></div>
                                             <span className="login-btn-background">
                                                 {this.props.authentication.isAuthenticated || this.state.authenticatedUser ? <button
-                                                    className="btn btn-warning dropdown-item-btn"
+                                                    type="button"
+                                                    className="btn btn-light dropdown-item-btn"
                                                     onClick={this.handleSignOut}
                                                 >
                                                     Logout
                                                 </button> : <button
-                                                        className="btn btn-warning dropdown-item-btn"
+                                                        type="button"
+                                                        className="btn btn-light dropdown-item-btn"
                                                         onClick={this.showLoginPopUp}
                                                     >
                                                         Log In
