@@ -39,7 +39,7 @@ class AccountMenu extends React.Component {
                             <span>
                                 <i className="far fa-heart"></i>
                             </span>
-                            <p>Save Items</p>
+                            <p>Saved Items</p>
                         </NavLink>
                         <NavLink className="router-nav-link acc-link pending-reviews-link"
                             to="/customer/pending-reviews"

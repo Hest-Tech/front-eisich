@@ -1,30 +1,78 @@
-.account-overview-background {
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: red;
-    height: 100%;
-}
-
 .account-overview-title {
     font-size: $m-font-size*1.2;
 }
 
 .detail-address {
     display: flex;
-    background: blue;
-    // height: 70%;
-    width: 100%;
+    justify-content: space-between;
+    // background: blue;
+    padding-top: 2%;
+    height: 50%;
+}
+
+.detail-address span {
+    flex: 4%;
 }
 
 .acc-overview {
     border: .1rem solid $light-grey;
-    flex: 50%;
+    border-radius: .5rem;
+    flex: 48%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.border {
+    flex: 2%;
+    border: none;
 }
 
 .user-info {
     font-size: $s-font-size*1.2;
+}
+
+.edit-option {
+    display: flex;
+    justify-content: space-between;
+    padding: $s-padding;
+    border-bottom: 1px solid $light-grey;
+}
+
+.edit-option i {
+    font-size: $m-font-size;
+    color: $base-color;
+    cursor: pointer;
+    padding: $m-padding;
+    border-radius: 50%;
+}
+
+.edit-option p {
+    padding: $m-padding;
+}
+
+.edit-option i:hover {
+    background: #FEEFDE;
+}
+
+.det-info {
+    // background: red;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.acc-det-info {
+    font-size: $m-font-size;
+    padding-left: $m-padding;
+}
+
+.overview-address {
+    padding: $m-padding;
+}
+
+.overview-change-pass button {
+    font-size: $m-font-size*.8;
+    border-radius: .5rem;
 }

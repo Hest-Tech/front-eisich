@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import NavBar from '../NavBar';
 import AccountMenu from './AccountMenu';
+import box from '../../assets/images/box.png';
 
 
 class AccountOrders extends React.Component {
@@ -24,8 +25,23 @@ class AccountOrders extends React.Component {
                     </div>
                     <span></span>
                     <div className="accout-detail-sec acc-sec">
-                        <h1>Account orders</h1>
-
+                        <div className="account-det-background">
+                            <h1 className="account-overview-title">Account orders</h1>
+                            <div className="no-pending-orders">
+                                <div className="no-pending-background">
+                                    <div className="no-orders-icon">
+                                        <img src={box} alt="empty box" className="empty-box" />
+                                    </div><br />
+                                    <div className="no-orders-info">
+                                        <p className="acc-info-1">You have placed no orders yet!</p><br />
+                                        <p className="acc-info-2">All your orders will be saved here for you to access their state anytime.</p>
+                                    </div><br />
+                                    <div className="continue-shopping-btn">
+                                        <NavLink to="/" className="order-continue-shopping">CONTINUE SHOPPING</NavLink>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

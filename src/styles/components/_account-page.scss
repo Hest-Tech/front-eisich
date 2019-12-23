@@ -33,3 +33,12 @@
     flex: 74%;
     background: $white;
 }
+
+.account-det-background {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    // background: red;
+    height: 100%;
+}
