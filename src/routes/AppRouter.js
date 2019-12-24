@@ -4,7 +4,8 @@
 
 
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import HomePage from '../components/home/HomePage';
 import AccountPage from '../components/account/AccountPage';
@@ -25,9 +26,10 @@ import CartPage from '../components/CartPage';
 import ProductItemPage from '../components/ProductItemPage';
 import ErrorBoundary from '../components/ErrorBoundary';
 
+export const history = createBrowserHistory();
 
 const AppRouter = () => (
-    <BrowserRouter>
+    <Router history={history}>
         <div className="App">
             <Switch>
                 <Route path="/" component={HomePage} exact={true} />
@@ -51,7 +53,7 @@ const AppRouter = () => (
                 <Footer />
             </ErrorBoundary>
         </div>
-    </BrowserRouter>
+    </Router>
 );
 
 export default AppRouter;

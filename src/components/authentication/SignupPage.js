@@ -10,6 +10,7 @@ import fire from '../../firebase/firebase';
 import { validationSchema } from '../../utils/validate';
 import clientStorage from '../../utils/clientStorage';
 import { returnMessages } from '../../actions/resMessages';
+import { registerSuccess } from '../../actions/authentication';
 
 
 class SignupPage extends React.Component {
@@ -22,7 +23,6 @@ class SignupPage extends React.Component {
     }
 
     render() {
-        const { history } = this.props;
 
         return (
             <div className="sign-up-container">
@@ -39,8 +39,8 @@ class SignupPage extends React.Component {
                     </div>
                 </div>
                 <div className="sign-up__details">
-                    {this.state.error && <div className="alert alert-danger" role="alert">
-                        {this.state.error}
+                    {this.props.resMessages.msg && <div className="alert alert-danger home-page-alert" role="alert">
+                        {this.props.resMessages.msg}
                     </div>}
                     <b className="sign-up__title">Sign Up</b>
                     {/** formik validation form */}
@@ -58,48 +58,13 @@ class SignupPage extends React.Component {
                         validationSchema={validationSchema}
                         onSubmit={(values, { setSubmitting, resetForm }) => {
                             setSubmitting(true);
-                            let that = this
-                            fire.auth()
-                                .createUserWithEmailAndPassword(values.email, values.password)
-                                .then(() => {
-                                    let user = fire.auth().currentUser;
-                                    let ref = fire.database().ref().child(`users`);
-                                    let data = {
-                                        email: values.email,
-                                        phoneNumber: values.phoneNumber.toString(),
-                                        firstName: values.firstName,
-                                        lastName: values.lastName
-                                    }
-                                    ref.child(user.uid).set(data).then(ref => {
-                                        console.log('saved');
-                                        setSubmitting(false);
-                                        that.setState(() => ({ error: null }));
-                                        resetForm();
-                                        history.push('/');
-                                        this.props.dispatch(returnMessages('Account created. Successfully Log in'));
-                                        this.props.hidePopUp();
 
-                                        let userData = {
-                                            email: values.email,
-                                            phoneNumber: values.phoneNumber.toString(),
-                                            firstName: values.firstName,
-                                            lastName: values.lastName
-                                        }
-                                        let storeUser = new clientStorage();
-                                        let user = JSON.stringify(userData);
-                                        storeUser.setCookie('user', user, 1);
-                                    }, error => console.log(error));
-                                })
-                                .catch(error => {
-                                    that.setState(() => ({ error: error.message }));
-                                    setSubmitting(false);
-                                    console.log('---->', error.message);
-                                    console.log(error);
-                                });
+                            this.props.registerSuccess(values, setSubmitting)
+
                             // return registerSuccess(values); // dispatch
                         }}
                     >
-                        {({ values, errors, touched, isSubmitting, filters }) => (
+                        {({ touched, errors, isSubmitting, values, filters }) => (
                             <Form className="sign-up__form">
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
@@ -231,7 +196,7 @@ class SignupPage extends React.Component {
                                 </label>
                             </Form>
                         )}
-                    </Formik >
+                    </Formik>
                     <div className="form-row">
                         <div className="form-group col-md-12">
                             <div className="or-seperator"><i>or</i></div>
@@ -268,7 +233,11 @@ class SignupPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    filters: state.filters
+    resMessages: state.resMessages
 })
 
-export default connect(mapStateToProps)(SignupPage);
+const mapDispatchToProps = (dispatch) => ({
+    registerSuccess: (payload, setSubmitting) => dispatch(registerSuccess(payload, setSubmitting))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupPage);

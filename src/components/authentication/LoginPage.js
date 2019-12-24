@@ -5,15 +5,10 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
-import clientStorage from '../../utils/clientStorage';
 import { LoginSchema } from '../../utils/validate';
 import { loginUser } from '../../actions/authentication';
-import { loadUser } from '../../actions/authentication';
-import { returnMessages, clearMessages } from '../../actions/resMessages';
 import ForgotPassword from './ForgotPassword';
-import fire from '../../firebase/firebase';
 
 
 class LoginPage extends React.Component {
@@ -24,8 +19,7 @@ class LoginPage extends React.Component {
         this.hideResetPassword = this.hideResetPassword.bind(this);
 
         this.state = {
-            resetPopUp: undefined,
-            error: null
+            resetPopUp: undefined
         }
     }
 
@@ -53,12 +47,6 @@ class LoginPage extends React.Component {
         this.setState(() => ({ resetPopUp: undefined }));
     }
 
-    handleHideMsg() {
-        setTimeout(() => {
-            this.props.dispatch(clearMessages())
-        }, 5000);
-    }
-
     render() {
         return (
             <div>
@@ -67,11 +55,7 @@ class LoginPage extends React.Component {
                     <div className="row">
                         <div className="col-xs-6">
                             <div className="well">
-                                {this.state.error && <div className="alert alert-danger" role="alert">
-                                    {this.state.error}
-                                </div>}
-                                {this.handleHideMsg()}
-                                {this.props.resMessages.msg && <div className="alert alert-success home-page-alert" role="alert">
+                                {this.props.resMessages.msg && <div className="alert alert-danger home-page-alert" role="alert">
                                     {this.props.resMessages.msg}
                                 </div>}
 
@@ -79,38 +63,10 @@ class LoginPage extends React.Component {
                                     initialValues={{ email: "", password: "", remember: false }}
                                     validationSchema={LoginSchema}
                                     onSubmit={(values, { setSubmitting, resetForm }) => {
-                                        // alert("Form is validated! Submitting the form...");
                                         setSubmitting(true);
-                                        fire.auth().signInWithEmailAndPassword(values.email, values.password).then(res => {
-                                            console.log("logged in ");
-                                            setSubmitting(false);
 
-                                            this.setState(() => ({ error: null }));
-
-                                            // this.props.dispatch(returnMessages('You have been successfully logged in'));
-
-                                            this.props.hidePopUp();
-
-                                            let userId = fire.auth().currentUser.uid;
-                                            return fire.database()
-                                                .ref('/users/' + userId)
-                                                .once('value')
-                                                .then(snapshot => {
-                                                    window.location.reload()
-                                                    let userData = snapshot.val();
-                                                    this.props.dispatch(loadUser(userData));
-                                                    let storeUser = new clientStorage();
-                                                    let user = JSON.stringify(userData);
-                                                    storeUser.setCookie('user', user, 1);
-                                                });
-                                        })
-                                            .catch(error => {
-                                                this.setState(() => ({ error: error.message }));
-                                                console.log('-->', this.state.error);
-                                                setSubmitting(false);
-                                            })
-                                        console.log(values);
-
+                                        this.props.loginUser(values.email, values.password, setSubmitting);
+                                        console.log('==>', this.props.resMessages);
                                     }}
                                 >
                                     {({ touched, errors, isSubmitting, values, filters }) => (
@@ -202,8 +158,11 @@ class LoginPage extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-    authentication: state.authentication,
     resMessages: state.resMessages
 });
 
-export default withRouter(connect(mapStateToProps)(LoginPage));
+const mapDispatchToProps = (dispatch) => ({
+    loginUser: (email, password, setSubmitting) => dispatch(loginUser(email, password, setSubmitting))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

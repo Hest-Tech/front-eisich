@@ -22,10 +22,10 @@ export default class clientStorage {
 
         for (let i = 0; i < ca.length; i++) {
             let c = ca[i];
-            while (c.charAt(0) == ' ') {
+            while (c.charAt(0) === ' ') {
                 c = c.substring(1);
             }
-            if (c.indexOf(name) == 0) {
+            if (c.indexOf(name) === 0) {
                 return c.substring(name.length, c.length);
             }
         }
@@ -33,14 +33,16 @@ export default class clientStorage {
     }
 
     // delete a cookie
-    eraseCookie(cname = 'token') {
+    eraseCookie(cname = 'user') {
+        console.log('deleting cookie..')
         document.cookie = cname + '=; Max-Age=-99999999;';
+        console.log('cookie deleted')
     }
 
     // check for an existing cookie
     checkCookie(cname) {
         let user = this.getCookie(cname);
-        if (user != "") {
+        if (user !== "") {
             // Check if token is still valid - onload
             // check if the token exists in the database
             // Automatically log in the user

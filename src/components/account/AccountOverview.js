@@ -17,7 +17,7 @@ class AccountOverview extends React.Component {
                         <div className="acc-overview account-det-overview">
                             <div className="edit-option">
                                 <p>ACCOUNT DETAILS</p>
-                                <NavLink to="/customer/profile/edit"><i class="far fa-edit"></i></NavLink>
+                                <NavLink to="/customer/profile/edit"><i className="far fa-edit"></i></NavLink>
                             </div>
                             <div className="det-info">
                                 <div className="acc-det-info">
@@ -33,7 +33,7 @@ class AccountOverview extends React.Component {
                         <div className="acc-overview account-address-overview">
                             <div className="edit-option">
                                 <p>ADDRESS BOOK</p>
-                                <NavLink to="/customer/address"><i class="far fa-edit"></i></NavLink>
+                                <NavLink to="/customer/address"><i className="far fa-edit"></i></NavLink>
                             </div>
                             <div className="overview-address">
                                 <p>Your default shipping address</p>

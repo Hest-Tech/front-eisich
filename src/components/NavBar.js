@@ -69,7 +69,7 @@ class NavBar extends React.Component {
                 storeUser.eraseCookie('user');
                 this.props.dispatch(logoutUser());
                 console.log('Signed out')
-                window.location.reload()
+                // window.location.reload()
             })
             .catch(error => {
                 console.log(error);

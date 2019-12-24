@@ -61,15 +61,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding: $m-padding*1.5;
 }
 
 .acc-det-info {
     font-size: $m-font-size;
-    padding-left: $m-padding;
 }
 
 .overview-address {
-    padding: $m-padding;
+    padding: $m-padding*1.5;
 }
 
 .overview-change-pass button {
