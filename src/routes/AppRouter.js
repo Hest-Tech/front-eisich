@@ -25,6 +25,7 @@ import Footer from '../components/Footer';
 import CartPage from '../components/CartPage';
 import ProductItemPage from '../components/ProductItemPage';
 import ErrorBoundary from '../components/ErrorBoundary';
+import PrivateRoute from './PrivateRoute';
 
 export const history = createBrowserHistory();
 
@@ -33,17 +34,17 @@ const AppRouter = () => (
         <div className="App">
             <Switch>
                 <Route path="/" component={HomePage} exact={true} />
-                <Route path="/customer/account" component={AccountPage} />
-                <Route path="/customer/orders" component={AccountOrders} />
-                <Route path="/customer/wishlist" component={AccountWishlist} />
-                <Route path="/customer/pending-reviews" component={AccountPendingReviews} />
-                <Route path="/customer/coupons" component={AccountCoupons} />
-                <Route path="/customer/change-password" component={ChangePassword} />
-                <Route path="/customer/address" component={AddressBook} />
-                <Route path="/customer/profile/edit" component={UpdateAccount} />
+                <PrivateRoute path="/customer/account" component={AccountPage} />
+                <PrivateRoute path="/customer/orders" component={AccountOrders} />
+                <PrivateRoute path="/customer/wishlist" component={AccountWishlist} />
+                <PrivateRoute path="/customer/pending-reviews" component={AccountPendingReviews} />
+                <PrivateRoute path="/customer/coupons" component={AccountCoupons} />
+                <PrivateRoute path="/customer/change-password" component={ChangePassword} />
+                <PrivateRoute path="/customer/address" component={AddressBook} />
+                <PrivateRoute path="/customer/profile/edit" component={UpdateAccount} />
                 <Route path="/products" component={ProductsPage} />
                 <Route path="/cart" component={CartPage} />
-                <Route path="/checkout" component={CheckoutPage} />
+                <PrivateRoute path="/checkout" component={CheckoutPage} />
                 <Route path="/about" component={AboutPage} />
                 <Route path="/product" component={ProductItemPage} />
                 <Route path="/help" component={HelpPage} />

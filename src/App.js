@@ -9,7 +9,7 @@ import './App.scss';
 import AppRouter, { history } from './routes/AppRouter';
 import configureStore from './store/configureStore';
 import { setTextFilter } from './actions/filters';
-import { loadUser } from './actions/authentication';
+import { loadUser, unloadUser } from './actions/authentication';
 import { returnMessages } from './actions/resMessages';
 import clientStorage from './utils/clientStorage';
 import ErrorBoundary from './components/ErrorBoundary'
@@ -40,6 +40,7 @@ fire.auth().onAuthStateChanged(user => {
         renderApp();
         console.log(user)
         let userId = user.uid;
+        store.dispatch(loadUser(userId))
         return fire.database()
             .ref('/users/' + userId)
             .once('value')
@@ -55,6 +56,7 @@ fire.auth().onAuthStateChanged(user => {
         // User is signed in.
     } else {
         renderApp();
+        store.dispatch(unloadUser());
         history.push('/');
     }
 });

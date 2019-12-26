@@ -3,10 +3,8 @@
  */
 
 import {
-    USER_LOADED,
-    USER_LOADING,
-    AUTH_ERROR,
-    LOGIN_SUCCESS,
+    LOAD_USER,
+    UNLOAD_USER,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
@@ -15,6 +13,7 @@ import {
 import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
 import { returnMessages, clearMessages } from './resMessages';
+
 
 // register success
 export const registerSuccess = ({
@@ -47,11 +46,15 @@ export const registerSuccess = ({
                 let storeUser = new clientStorage();
                 let user = JSON.stringify(userData);
                 storeUser.setCookie('user', user, 1);
+                dispatch({
+                    type: REGISTER_SUCCESS,
+                    payload: userData
+                })
             }, error => console.log(error));
         })
         .catch(error => {
             dispatch(
-                returnMessages(error.code, error.message, 'REGISTER_FAIL')
+                returnMessages(error.code, error.message, REGISTER_FAIL)
             );
             setTimeout(() => {
                 dispatch(clearMessages())
@@ -62,14 +65,10 @@ export const registerSuccess = ({
         });
 };
 
-
-
-
-
 // Check token & load user
-export const loadUser = (payload) => ({
-    type: 'LOAD_USER',
-    payload
+export const loadUser = uid => ({
+    type: LOAD_USER,
+    uid
 });
 
 // login success
@@ -101,7 +100,7 @@ export const loginUser = (
         })
         .catch(error => {
             dispatch(
-                returnMessages(error.code, error.message, 'LOGIN_FAIL')
+                returnMessages(error.code, error.message, LOGIN_FAIL)
             );
             setTimeout(() => {
                 dispatch(clearMessages())
@@ -110,6 +109,10 @@ export const loginUser = (
             setSubmitting(false);
         })
 };
+
+export const unloadUser = () => ({
+    type: UNLOAD_USER
+});
 
 // logout success
 export const logoutUser = () => ({
