@@ -10,16 +10,22 @@ import fire from '../../firebase/firebase';
 import { validationSchema } from '../../utils/validate';
 import clientStorage from '../../utils/clientStorage';
 import { returnMessages } from '../../actions/resMessages';
-import { registerSuccess } from '../../actions/authentication';
+import { registerSuccess, loginForm } from '../../actions/authentication';
 
 
 class SignupPage extends React.Component {
     constructor(props) {
         super(props);
+        this.login = this.login.bind(this);
 
         this.state = {
             error: null
         }
+    }
+
+    login(e) {
+        e.preventDefault();
+        return this.props.loginForm();
     }
 
     render() {
@@ -224,7 +230,7 @@ class SignupPage extends React.Component {
                         </div>
                     </div>
                     <div className="switch-to-login">
-                        <p>Already have an account? <a href="" onClick={this.props.handleSwithAuth}>Login</a> instead</p>
+                        <p>Already have an account? <a href="" onClick={this.login}>Login</a> instead</p>
                     </div>
                 </div>
             </div>
@@ -233,11 +239,13 @@ class SignupPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    resMessages: state.resMessages
+    resMessages: state.resMessages,
+    authentication: state.authentication
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    registerSuccess: (payload, setSubmitting) => dispatch(registerSuccess(payload, setSubmitting))
+    registerSuccess: (payload, setSubmitting) => dispatch(registerSuccess(payload, setSubmitting)),
+    loginForm: () => dispatch(loginForm())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupPage);

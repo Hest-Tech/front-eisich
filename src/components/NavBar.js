@@ -6,6 +6,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+// import { store } from '../App';
+import { openAuthPopUp } from '../actions/authentication';
 import call from '../assets/images/call.svg';
 import policy from '../assets/images/policy.svg';
 import save from '../assets/images/save-money.svg';
@@ -67,7 +69,7 @@ class NavBar extends React.Component {
             .then(() => {
                 let storeUser = new clientStorage();
                 storeUser.eraseCookie('user');
-                this.props.dispatch(logoutUser());
+                this.props.logoutUser();
                 console.log('Signed out')
                 // window.location.reload()
             })
@@ -216,7 +218,8 @@ class NavBar extends React.Component {
                                                 </button> : <button
                                                         type="button"
                                                         className="btn btn-light dropdown-item-btn"
-                                                        onClick={this.showLoginPopUp}
+                                                        // onClick={this.showLoginPopUp}
+                                                        onClick={this.props.openAuthPopUp}
                                                     >
                                                         Log In
                                                 </button>}
@@ -255,4 +258,9 @@ const mapStateToProps = (state) => ({
     authentication: state.authentication
 });
 
-export default connect(mapStateToProps)(NavBar);
+const mapDispatchToProps = (dispatch) => ({
+    openAuthPopUp: () => dispatch(openAuthPopUp()),
+    logoutUser: () => dispatch(logoutUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

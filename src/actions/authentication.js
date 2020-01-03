@@ -8,7 +8,12 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    LOGIN_FORM,
+    SIGNUP_FORM,
+    RESET_PASS_FORM,
+    CLOSE_AUTH_POPUP,
+    OPEN_AUTH_POPUP
 } from './types';
 import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
@@ -119,9 +124,30 @@ export const logoutUser = () => ({
     type: LOGOUT_SUCCESS
 });
 
+// close form
+export const openAuthPopUp = () => ({
+    type: OPEN_AUTH_POPUP
+});
 
+// pop login form
+export const loginForm = () => ({
+    type: LOGIN_FORM
+});
 
+// pop register form
+export const signupForm = () => ({
+    type: SIGNUP_FORM
+});
 
+// pop register form
+export const resetPassForm = () => ({
+    type: RESET_PASS_FORM
+});
+
+// close form
+export const closeAuthPopUp = () => ({
+    type: CLOSE_AUTH_POPUP
+});
 
 
 

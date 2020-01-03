@@ -14,12 +14,13 @@ const PrivateRoute = ({
             isAuthenticated ? (
                 <Component {...props} />
             ) : (
-                    <Redirect to='/' />
-                    // <AuthenticationModal
-                    //     loginPopUp={this.state.loginPopUp}
-                    //     hideAuthPopUp={this.hideAuthPopUp}
-                    // />
-
+                    <React.Fragment>
+                        <Redirect to='/' />
+                        <AuthenticationModal
+                            // loginPopUp={this.state.loginPopUp}
+                            // hideAuthPopUp={this.hideAuthPopUp}
+                        />
+                    </React.Fragment>
                 )
         )}
         />

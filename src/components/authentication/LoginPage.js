@@ -7,51 +7,32 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from 'react-redux';
 
 import { LoginSchema } from '../../utils/validate';
-import { loginUser } from '../../actions/authentication';
-import ForgotPassword from './ForgotPassword';
+import { resetPassForm, signupForm } from '../../actions/authentication';
+import ResetPassword from './ResetPassword';
 
 
 class LoginPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.resetPassword = this.resetPassword.bind(this);
-        this.hideResetPassword = this.hideResetPassword.bind(this);
-
-        this.state = {
-            resetPopUp: undefined
-        }
+        this.resetPass = this.resetPass.bind(this);
+        this.register = this.register.bind(this);
     }
 
-    componentDidMount() {
-        console.log(this.props.authentication);
-    }
-
-    componentWillUnmount() {
-        this.props.handleResetPassword(undefined); // set resetTitle to undefined
-    }
-
-    // show reset password
-    resetPassword(e) {
+    resetPass(e) {
         e.preventDefault();
-        this.props.handleResetPassword(true);
-        this.setState((prevState) => ({
-            resetPopUp: !prevState.resetPopUp
-        }));
+        return this.props.resetPassForm();
     }
 
-    // hide reset password
-    hideResetPassword(e) {
+    register(e) {
         e.preventDefault();
-        this.props.handleResetPassword(undefined);
-        this.setState(() => ({ resetPopUp: undefined }));
+        return this.props.signupForm();
     }
 
     render() {
         return (
-            <div>
-                {this.state.resetPopUp ? <ForgotPassword hideResetPassword={this.hideResetPassword} /> : <div
-                    className="modal-body">
+            <React.Fragment>
+                <div className="modal-body">
                     <div className="row">
                         <div className="col-xs-6">
                             <div className="well">
@@ -125,11 +106,37 @@ class LoginPage extends React.Component {
                                             <a
                                                 href=""
                                                 className="btn btn-default btn-block forgot-pass"
-                                                onClick={this.resetPassword}
+                                                onClick={this.resetPass}
                                             >Forgot password?</a>
                                         </Form>
                                     )}
                                 </Formik>
+                                <div className="form-row">
+                                    <div className="form-group col-md-12">
+                                        <div className="or-seperator"><i>or</i></div>
+                                        <p className="text-center">Login with your social media account</p>
+                                        <div className="text-center social-btn">
+                                            <button
+                                                // onClick={renderProps.onClick}
+                                                className="btn btn-primary"
+                                            >
+                                                <i className="fa fa-facebook"></i>&nbsp; Facebook
+                                            </button>
+                                            <button
+                                                // onClick={renderProps.onClick}
+                                                className="btn btn-info"
+                                            >
+                                                <i className="fa fa-twitter"></i>&nbsp; Twitter
+                                            </button>
+                                            <button
+                                                // onClick={renderProps.onClick}
+                                                className="btn btn-danger"
+                                            >
+                                                <i className="fa fa-google" aria-hidden="true"></i> Google
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="col-xs-6">
@@ -142,7 +149,7 @@ class LoginPage extends React.Component {
                             </ul>
                             <p
                                 className="register-btn"
-                                onClick={this.props.handleSwithAuth}>
+                                onClick={this.register}>
                                 <button
                                     className="btn btn-info btn-block m-font-size"
                                 >
@@ -151,18 +158,20 @@ class LoginPage extends React.Component {
                             </p>
                         </div>
                     </div>
-                </div>}
-            </div>
+                </div>
+            </React.Fragment>
         );
     }
 };
 
 const mapStateToProps = (state) => ({
-    resMessages: state.resMessages
+    resMessages: state.resMessages,
+    authentication: state.authentication
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loginUser: (email, password, setSubmitting) => dispatch(loginUser(email, password, setSubmitting))
+    resetPassForm: () => dispatch(resetPassForm()),
+    signupForm: () => dispatch(signupForm())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

@@ -18,11 +18,13 @@ import ErrorBoundary from './components/ErrorBoundary'
 // console.log(store.dispatch(loginUser({email:'demo@email.com',password:'password'},'Successfully logged in')));
 // store.dispatch(sortByAmount(user));
 
-const store = configureStore();
+export const store = configureStore();
 // console.log(store.dispatch(returnMessages('Logged', 'in','successfully')));
 const jsx = (
     <Provider store={store}>
-        <ErrorBoundary><AppRouter /></ErrorBoundary>
+        <ErrorBoundary>
+            <AppRouter />
+        </ErrorBoundary>
     </Provider>
 );
 let hasRendered = false;

@@ -6,14 +6,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-class ForgotPassword extends React.Component {
+import { loginForm } from '../../actions/authentication';
+
+
+class ResetPassword extends React.Component {
 
     constructor(props) {
-        super(props)
+        super(props);
+        this.login = this.login.bind(this);
     }
 
-    componentDidMount() {
-        console.log(this.props.filters.text)
+    login(e) {
+        e.preventDefault();
+        return this.props.loginForm();
     }
 
     render() {
@@ -39,7 +44,7 @@ class ForgotPassword extends React.Component {
                     <p>Remember Password ? <a
                         id="loginModal1"
                         href=""
-                        onClick={this.props.hideResetPassword} // back to login
+                        onClick={this.login} // back to login
                     >Login Here!</a></p>
                 </div>
 
@@ -49,7 +54,11 @@ class ForgotPassword extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    filters: state.filters
-})
+    authentication: state.authentication
+});
 
-export default connect(mapStateToProps)(ForgotPassword);
+const mapDispatchToProps = (dispatch) => ({
+    loginForm: () => dispatch(loginForm())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);
