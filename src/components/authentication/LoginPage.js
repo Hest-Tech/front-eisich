@@ -7,8 +7,14 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from 'react-redux';
 
 import { LoginSchema } from '../../utils/validate';
-import { resetPassForm, signupForm } from '../../actions/authentication';
+import {
+    resetPassForm,
+    signupForm,
+    loginUser,
+    closeAuthPopUp
+} from '../../actions/authentication';
 import ResetPassword from './ResetPassword';
+import { history } from '../../routes/AppRouter';
 
 
 class LoginPage extends React.Component {
@@ -48,6 +54,8 @@ class LoginPage extends React.Component {
 
                                         this.props.loginUser(values.email, values.password, setSubmitting);
                                         console.log('==>', this.props.resMessages);
+                                        // this.props.closeAuthPopUp();
+                                        history.push('/customer/account');
                                     }}
                                 >
                                     {({ touched, errors, isSubmitting, values, filters }) => (
@@ -171,7 +179,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     resetPassForm: () => dispatch(resetPassForm()),
-    signupForm: () => dispatch(signupForm())
+    signupForm: () => dispatch(signupForm()),
+    closeAuthPopUp: () => dispatch(closeAuthPopUp()),
+    loginUser: (email, password, setSubmitting) => dispatch(loginUser(email, password, setSubmitting))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

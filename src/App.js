@@ -19,6 +19,8 @@ import ErrorBoundary from './components/ErrorBoundary'
 // store.dispatch(sortByAmount(user));
 
 export const store = configureStore();
+const storeUser = new clientStorage();
+
 // console.log(store.dispatch(returnMessages('Logged', 'in','successfully')));
 const jsx = (
     <Provider store={store}>
@@ -48,11 +50,9 @@ fire.auth().onAuthStateChanged(user => {
             .once('value')
             .then(snapshot => {
                 let userData = snapshot.val();
-                let storeUser = new clientStorage();
                 let user = JSON.stringify(userData);
                 storeUser.setCookie('user', user, 1);
                 console.log(userData)
-                history.push('/customer/account');
             });
         // store.dispatch(loadUser());
         // User is signed in.
@@ -60,6 +60,7 @@ fire.auth().onAuthStateChanged(user => {
         renderApp();
         store.dispatch(unloadUser());
         history.push('/');
+        storeUser.eraseCookie('user');
     }
 });
 

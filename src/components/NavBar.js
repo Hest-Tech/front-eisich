@@ -21,31 +21,25 @@ import AuthenticationModal from './authentication/AuthenticationModal';
 import unitedStates from '../assets/images/united-states.png';
 import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
-import { logoutUser } from '../actions/authentication';
+import { logoutUser, signOutUser } from '../actions/authentication';
 
 
 class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.showLoginPopUp = this.showLoginPopUp.bind(this);
-        this.hideAuthPopUp = this.hideAuthPopUp.bind(this);
-        this.toggleAuthDropDown = this.toggleAuthDropDown.bind(this);
-        this.handleSignOut = this.handleSignOut.bind(this);
+        // this.showLoginPopUp = this.showLoginPopUp.bind(this);
+        // this.hideAuthPopUp = this.hideAuthPopUp.bind(this);
+        // this.toggleAuthDropDown = this.toggleAuthDropDown.bind(this);
+        // this.handleSignOut = this.handleSignOut.bind(this);
 
         const fetchUser = new clientStorage();
         let userCookie = fetchUser.getCookie('user');
 
         this.state = {
-            loginPopUp: undefined,
             authDropDown: undefined,
             authenticatedUser: userCookie ? JSON.parse(userCookie) : undefined
         };
-    }
-
-    // Display log in pop up modal
-    showLoginPopUp() {
-        this.setState(prevState => ({ loginPopUp: !prevState.loginPopUp }))
     }
 
     toggleAuthDropDown() {
@@ -58,26 +52,20 @@ class NavBar extends React.Component {
         }
     }
 
-    // Hide log in pop up modal
-    hideAuthPopUp(e) {
-        // e.preventDefault();
-        this.setState(() => ({ loginPopUp: undefined }))
-    }
-
-    handleSignOut() {
-        fire.auth().signOut()
-            .then(() => {
-                let storeUser = new clientStorage();
-                storeUser.eraseCookie('user');
-                this.props.logoutUser();
-                console.log('Signed out')
-                // window.location.reload()
-            })
-            .catch(error => {
-                console.log(error);
-            })
-        console.log('sign out')
-    }
+    // handleSignOut() {
+    //     fire.auth().signOut()
+    //         .then(() => {
+    //             let storeUser = new clientStorage();
+    //             storeUser.eraseCookie('user');
+    //             this.props.logoutUser();
+    //             console.log('Signed out')
+    //             if (window.location.pathname === '/') window.location.reload();
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    //     console.log('sign out')
+    // }
 
     handleLoadUser() {
 
@@ -87,19 +75,6 @@ class NavBar extends React.Component {
         } else {
             this.setState(() => ({ authenticatedUser: undefined }));
         }
-    }
-
-    componentDidMount() {
-        console.log('--> Window object', window.location.href)
-    }
-
-    componentWillUnmount() {
-        console.log('navbar unmouted')
-    }
-
-    componentDidUpdate() {
-
-        console.log('Component just updated');
     }
 
     render() {
@@ -212,7 +187,7 @@ class NavBar extends React.Component {
                                                 {this.props.authentication.isAuthenticated || this.state.authenticatedUser ? <button
                                                     type="button"
                                                     className="btn btn-light dropdown-item-btn"
-                                                    onClick={this.handleSignOut}
+                                                    onClick={this.props.signOutUser}
                                                 >
                                                     Logout
                                                 </button> : <button
@@ -260,7 +235,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     openAuthPopUp: () => dispatch(openAuthPopUp()),
-    logoutUser: () => dispatch(logoutUser())
+    signOutUser: () => dispatch(signOutUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

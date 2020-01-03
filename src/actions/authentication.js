@@ -87,20 +87,18 @@ export const loginUser = (
             console.log("logged in ");
             setSubmitting(false)
 
-            this.props.hidePopUp(); // del this
-
             let userId = fire.auth().currentUser.uid;
 
             return fire.database()
                 .ref('/users/' + userId)
                 .once('value')
                 .then(snapshot => {
-                    window.location.reload()
-                    let userData = snapshot.val();
-                    this.props.dispatch(loadUser(userData));
-                    let storeUser = new clientStorage();
-                    let user = JSON.stringify(userData);
-                    storeUser.setCookie('user', user, 1);
+                    // let userData = snapshot.val();
+                    dispatch(loadUser(userData));
+                    dispatch(closeAuthPopUp());
+                    // let storeUser = new clientStorage();
+                    // let user = JSON.stringify(userData);
+                    // storeUser.setCookie('user', user, 1);
                 });
         })
         .catch(error => {
@@ -114,6 +112,22 @@ export const loginUser = (
             setSubmitting(false);
         })
 };
+
+// logout success
+
+export const signOutUser = () => dispatch => {
+    return fire.auth().signOut()
+        .then(() => {
+            // let storeUser = new clientStorage();
+            // storeUser.eraseCookie('user');
+            dispatch(logoutUser());
+            console.log('Signed out')
+            if (window.location.pathname === '/') window.location.reload();
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}
 
 export const unloadUser = () => ({
     type: UNLOAD_USER
