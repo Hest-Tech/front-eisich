@@ -18,6 +18,7 @@ import {
 import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
 import { returnMessages, clearMessages } from './resMessages';
+import { history } from '../routes/AppRouter';
 
 
 // register success
@@ -79,35 +80,25 @@ export const loadUser = uid => ({
 // login success
 export const loginUser = (
     email,
-    password,
-    setSubmitting
+    password
 ) => dispatch => {
     return fire.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
             console.log("logged in ");
-            setSubmitting(false)
 
             let userId = fire.auth().currentUser.uid;
-
-            return fire.database()
-                .ref('/users/' + userId)
-                .once('value')
-                .then(snapshot => {
-                    // let userData = snapshot.val();
-                    dispatch(loadUser(userData));
-                    dispatch(closeAuthPopUp());
-                    // let storeUser = new clientStorage();
-                    // let user = JSON.stringify(userData);
-                    // storeUser.setCookie('user', user, 1);
-                });
+            if (userId) {
+                dispatch(loadUser(userId));
+                dispatch({ type: LOGIN_SUCCESS });
+                dispatch(
+                    returnMessages('Logged In successfully', 200, 'SUCCESS_LOGIN')
+                );
+            }
         })
         .catch(error => {
             dispatch(
-                returnMessages(error.code, error.message, LOGIN_FAIL)
+                returnMessages(error.message, error.code, 'LOGIN_FIRST')
             );
-            setTimeout(() => {
-                dispatch(clearMessages())
-            }, 5000);
             console.log('-->', error);
             setSubmitting(false);
         })
@@ -121,8 +112,9 @@ export const signOutUser = () => dispatch => {
             // let storeUser = new clientStorage();
             // storeUser.eraseCookie('user');
             dispatch(logoutUser());
+            dispatch(unloadUser());
+            history.push('/');
             console.log('Signed out')
-            if (window.location.pathname === '/') window.location.reload();
         })
         .catch(error => {
             console.log(error);

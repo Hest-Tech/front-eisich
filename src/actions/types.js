@@ -15,4 +15,6 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const GET_MSG = 'GET_MSG';
+export const LOGIN_FIRST = 'LOGIN_FIRST';
 export const CLEAR_MSG = 'CLEAR_MSG';
+export const SUCCESS_LOGIN = 'SUCCESS_LOGIN';

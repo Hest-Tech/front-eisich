@@ -129,10 +129,7 @@ class NavBar extends React.Component {
                         >
                             E-Isich
                         </NavLink>
-                        <AuthenticationModal
-                            loginPopUp={this.state.loginPopUp}
-                            hideAuthPopUp={this.hideAuthPopUp}
-                        />
+                        <AuthenticationModal />
                         <div className="search-input">
                             <div id="custom-search-input">
                                 <div className="input-group col-md-12">

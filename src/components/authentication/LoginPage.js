@@ -35,6 +35,10 @@ class LoginPage extends React.Component {
         return this.props.signupForm();
     }
 
+    componentWillUnMount() {
+        console.log('login modal unmouted')
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -42,8 +46,8 @@ class LoginPage extends React.Component {
                     <div className="row">
                         <div className="col-xs-6">
                             <div className="well">
-                                {this.props.resMessages.msg && <div className="alert alert-danger home-page-alert" role="alert">
-                                    {this.props.resMessages.msg}
+                                {this.props.resMessages.error && <div className="alert alert-danger home-page-alert" role="alert">
+                                    {this.props.resMessages.error}
                                 </div>}
 
                                 <Formik
@@ -52,10 +56,21 @@ class LoginPage extends React.Component {
                                     onSubmit={(values, { setSubmitting, resetForm }) => {
                                         setSubmitting(true);
 
-                                        this.props.loginUser(values.email, values.password, setSubmitting);
-                                        console.log('==>', this.props.resMessages);
+                                        const logInUser = new Promise((resolve, reject) => {
+                                            resolve(this.props.loginUser(values.email, values.password));
+                                        });
+
+                                        Promise.all([
+                                            logInUser.catch(error => console.log(error))
+                                        ]).then(() => {
+                                            resetForm();
+                                            setSubmitting(false);
+                                            this.props.closeAuthPopUp();
+                                            history.push('/customer/account');
+                                        });
+
                                         // this.props.closeAuthPopUp();
-                                        history.push('/customer/account');
+                                        // history.push('/customer/account');
                                     }}
                                 >
                                     {({ touched, errors, isSubmitting, values, filters }) => (
@@ -106,7 +121,6 @@ class LoginPage extends React.Component {
                                             <button
                                                 type="submit"
                                                 className="btn btn-success btn-block"
-                                                // onClick={this.redirect.bind(this)}
                                                 disabled={isSubmitting}
                                             >
                                                 {isSubmitting ? <div className="spinner-border text-warning"></div> : "Login"}
@@ -181,7 +195,7 @@ const mapDispatchToProps = (dispatch) => ({
     resetPassForm: () => dispatch(resetPassForm()),
     signupForm: () => dispatch(signupForm()),
     closeAuthPopUp: () => dispatch(closeAuthPopUp()),
-    loginUser: (email, password, setSubmitting) => dispatch(loginUser(email, password, setSubmitting))
+    loginUser: (email, password) => dispatch(loginUser(email, password))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

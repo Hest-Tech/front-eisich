@@ -49,6 +49,17 @@ export default (state = autheticationReducerDefaultState, action) => {
                 loggingIn: false,
                 resetingPass: true
             }
+        case 'UNLOAD_USER':
+            return {
+                isAuthenticated: null,
+                user: null,
+                uid: null,
+                openAuthPopUp: false,
+                closeAuthPopUp: undefined,
+                registering: false,
+                loggingIn: false,
+                resetingPass: false
+            }
         case 'CLOSE_AUTH_POPUP':
             return {
                 ...state,
@@ -58,8 +69,12 @@ export default (state = autheticationReducerDefaultState, action) => {
                 resetingPass: false,
                 openAuthPopUp: false
             }
-        case 'REGISTER_SUCCESS':
         case 'LOGIN_SUCCESS':
+            return {
+                ...state,
+                isAuthenticated: true
+            };
+        case 'REGISTER_SUCCESS':
             return {
                 ...state,
                 isAuthenticated: true,

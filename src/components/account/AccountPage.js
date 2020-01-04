@@ -16,6 +16,9 @@ class AccountPage extends React.Component {
             <div className="account-page-container account-background">
                 <div className="nav-bar-wrapper">
                     <NavBar />
+                    {this.props.resMessages.msg && <div className="alert alert-success home-page-alert" role="alert">
+                        {this.props.resMessages.msg}
+                    </div>}
                 </div>
                 <div className="account-container">
                     <div className="account-menu-sec acc-sec">
