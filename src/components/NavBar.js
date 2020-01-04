@@ -28,10 +28,6 @@ class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.showLoginPopUp = this.showLoginPopUp.bind(this);
-        // this.hideAuthPopUp = this.hideAuthPopUp.bind(this);
-        // this.toggleAuthDropDown = this.toggleAuthDropDown.bind(this);
-        // this.handleSignOut = this.handleSignOut.bind(this);
 
         const fetchUser = new clientStorage();
         let userCookie = fetchUser.getCookie('user');
@@ -52,33 +48,7 @@ class NavBar extends React.Component {
         }
     }
 
-    // handleSignOut() {
-    //     fire.auth().signOut()
-    //         .then(() => {
-    //             let storeUser = new clientStorage();
-    //             storeUser.eraseCookie('user');
-    //             this.props.logoutUser();
-    //             console.log('Signed out')
-    //             if (window.location.pathname === '/') window.location.reload();
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    //     console.log('sign out')
-    // }
-
-    handleLoadUser() {
-
-        if (user) {
-            let authUser = JSON.parse(user);
-            this.setState(() => ({ authenticatedUser: authUser }))
-        } else {
-            this.setState(() => ({ authenticatedUser: undefined }));
-        }
-    }
-
     render() {
-        // {this.handleLoadUser()}
         return (
             <nav className="main-nav-bar">
                 <div className="main-nav-bar__container">
@@ -149,7 +119,7 @@ class NavBar extends React.Component {
                                         className="dropdown authenticated-user"
                                     >
                                         <span className="dropdown-toggle authenticated-user__btn" data-toggle="dropdown">
-                                            {this.props.authentication.isAuthenticated || this.state.authenticatedUser ? <p><small>Hi, {this.state.authenticatedUser && this.state.authenticatedUser.firstName}</small></p> : <div className="non-authenticated-user">
+                                            {this.props.authentication.isAuthenticated ? <p><small>Hi, {this.props.authentication.displayName}</small></p> : <div className="non-authenticated-user">
                                                 <i className="far fa-user"></i>
                                                 <small className="text-muted">login</small>
                                             </div>}
@@ -181,7 +151,7 @@ class NavBar extends React.Component {
                                             </NavLink>
                                             <div className="dropdown-divider"></div>
                                             <span className="login-btn-background">
-                                                {this.props.authentication.isAuthenticated || this.state.authenticatedUser ? <button
+                                                {this.props.authentication.isAuthenticated ? <button
                                                     type="button"
                                                     className="btn btn-light dropdown-item-btn"
                                                     onClick={this.props.signOutUser}
@@ -190,7 +160,6 @@ class NavBar extends React.Component {
                                                 </button> : <button
                                                         type="button"
                                                         className="btn btn-light dropdown-item-btn"
-                                                        // onClick={this.showLoginPopUp}
                                                         onClick={this.props.openAuthPopUp}
                                                     >
                                                         Log In
@@ -198,14 +167,6 @@ class NavBar extends React.Component {
                                             </span>
                                         </div>
                                     </div>
-                                    {/* {this.state.authenticatedUser === undefined && <span
-                                        className="login"
-                                        onClick={this.showLoginPopUp}
-                                    >
-                                        <img src={user} alt="user" className="navbar__icon-img" />
-                                        <p>Login</p>
-                                        <i className="fas fa-chevron-down login-arrow"></i>
-                                    </span>} */}
                                     <NavLink
                                         to="/cart"
                                         className="link-to-cart"
@@ -227,7 +188,8 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    authentication: state.authentication
+    authentication: state.authentication,
+    isAuthenticated: state.authentication.uid
 });
 
 const mapDispatchToProps = (dispatch) => ({

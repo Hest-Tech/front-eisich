@@ -42,17 +42,20 @@ ReactDOM.render(<div className="spinner-border text-warning"></div>, document.ge
 fire.auth().onAuthStateChanged(user => {
     if (user) {
         renderApp();
-        console.log(user)
         let userId = user.uid;
-        store.dispatch(loadUser(userId))
+
+        console.log(store.dispatch(loadUser()))
         return fire.database()
             .ref('/users/' + userId)
             .once('value')
             .then(snapshot => {
                 let userData = snapshot.val();
-                let user = JSON.stringify(userData);
+                let user = JSON.stringify({
+                    ...userData,
+                    uid: userId
+                });
                 storeUser.setCookie('user', user, 1);
-                console.log(userData)
+                // console.log('=>', JSON.parse(user))
             });
         // store.dispatch(loadUser());
         // User is signed in.
@@ -63,6 +66,7 @@ fire.auth().onAuthStateChanged(user => {
         storeUser.eraseCookie('user');
     }
 });
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

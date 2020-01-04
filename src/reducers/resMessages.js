@@ -13,6 +13,7 @@ export default (state = msgReducerDefaultState, action) => {
     switch (action.type) {
         case 'GET_MSG':
         case 'SUCCESS_LOGIN':
+        case 'SUCCESS_REGISTER':
             return {
                 error: null,
                 msg: action.payload.msg,
@@ -20,6 +21,7 @@ export default (state = msgReducerDefaultState, action) => {
             };
         case 'LOGIN_FIRST':
         case 'LOGIN_FAIL':
+        case 'REGISTER_FAIL':
             return {
                 msg: null,
                 error: action.payload.msg,

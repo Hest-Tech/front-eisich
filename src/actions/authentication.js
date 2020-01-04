@@ -13,13 +13,16 @@ import {
     SIGNUP_FORM,
     RESET_PASS_FORM,
     CLOSE_AUTH_POPUP,
-    OPEN_AUTH_POPUP
+    OPEN_AUTH_POPUP,
+    SUCCESS_REGISTER
 } from './types';
 import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
 import { returnMessages, clearMessages } from './resMessages';
 import { history } from '../routes/AppRouter';
 
+
+const storeUser = new clientStorage();
 
 // register success
 export const registerSuccess = ({
@@ -28,11 +31,10 @@ export const registerSuccess = ({
     phoneNumber,
     email,
     password
-} = {}, setSubmitting) => dispatch => {
+} = {}, setSubmitting, resetForm) => dispatch => {
     return fire.auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-            let user = fire.auth().currentUser;
             let ref = fire.database().ref().child(`users`);
             let data = {
                 email: email,
@@ -40,59 +42,89 @@ export const registerSuccess = ({
                 firstName: firstName,
                 lastName: lastName
             }
-            ref.child(user.uid).set(data).then(ref => {
-                setSubmitting(false);
 
-                let userData = {
-                    email: email,
-                    phoneNumber: phoneNumber.toString(),
-                    firstName: firstName,
-                    lastName: lastName
-                }
-                let storeUser = new clientStorage();
-                let user = JSON.stringify(userData);
-                storeUser.setCookie('user', user, 1);
-                dispatch({
-                    type: REGISTER_SUCCESS,
-                    payload: userData
-                })
-            }, error => console.log(error));
+            fire.auth().onAuthStateChanged(user => {
+              if (user) {
+                user.updateProfile({
+                  displayName: firstName
+                }).then(() => {
+                    console.log(user);
+                    ref.child(user.uid).set(data).then(ref => {
+
+                        let userData = {...data}
+                        let user = JSON.stringify(userData);
+                        storeUser.setCookie('user', user, 1);
+                        dispatch({
+                            type: REGISTER_SUCCESS,
+                            payload: userData,
+                            displayName: firstName
+                        })
+                        dispatch(loadUser());
+                        dispatch(
+                            returnMessages('Registered and Logged In successfully', 200, SUCCESS_REGISTER)
+                        );
+                        setSubmitting(false);
+                        resetForm();
+                        history.push('/customer/account');
+                        dispatch(closeAuthPopUp());
+                    }, error => console.log(error));
+                }).catch(error =>  {
+                    console.log(error);
+                });
+              }
+            });
+
         })
         .catch(error => {
             dispatch(
-                returnMessages(error.code, error.message, REGISTER_FAIL)
+                returnMessages(error.message, error.code, 'REGISTER_FAIL')
             );
-            setTimeout(() => {
-                dispatch(clearMessages())
-            }, 5000);
+            console.log('-->', error);
             setSubmitting(false);
-            console.log('---->', error.message);
-            console.log(error);
         });
 };
 
 // Check token & load user
-export const loadUser = uid => ({
-    type: LOAD_USER,
-    uid
-});
+export const loadUser = () => dispatch => {
+    let user = storeUser.getCookie('user');
+    let _user = fire.auth().currentUser;
+
+    if (user && _user) {
+        user = JSON.parse(user);
+        return dispatch({
+            type: LOAD_USER,
+            user,
+            displayName: _user.displayName
+        })
+    }
+};
 
 // login success
 export const loginUser = (
     email,
-    password
+    password,
+    resetForm,
+    setSubmitting
 ) => dispatch => {
     return fire.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
+            dispatch(loadUser());
+
+            let user = fire.auth().currentUser;
             console.log("logged in ");
 
-            let userId = fire.auth().currentUser.uid;
-            if (userId) {
-                dispatch(loadUser(userId));
-                dispatch({ type: LOGIN_SUCCESS });
+            if (user) {
+                dispatch({
+                    type: 'LOGIN_SUCCESS',
+                    user
+                });
                 dispatch(
                     returnMessages('Logged In successfully', 200, 'SUCCESS_LOGIN')
                 );
+                setSubmitting(false);
+                resetForm();
+                history.push('/customer/account');
+                dispatch(closeAuthPopUp());
             }
         })
         .catch(error => {
@@ -109,8 +141,6 @@ export const loginUser = (
 export const signOutUser = () => dispatch => {
     return fire.auth().signOut()
         .then(() => {
-            // let storeUser = new clientStorage();
-            // storeUser.eraseCookie('user');
             dispatch(logoutUser());
             dispatch(unloadUser());
             history.push('/');

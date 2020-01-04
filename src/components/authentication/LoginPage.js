@@ -55,22 +55,7 @@ class LoginPage extends React.Component {
                                     validationSchema={LoginSchema}
                                     onSubmit={(values, { setSubmitting, resetForm }) => {
                                         setSubmitting(true);
-
-                                        const logInUser = new Promise((resolve, reject) => {
-                                            resolve(this.props.loginUser(values.email, values.password));
-                                        });
-
-                                        Promise.all([
-                                            logInUser.catch(error => console.log(error))
-                                        ]).then(() => {
-                                            resetForm();
-                                            setSubmitting(false);
-                                            this.props.closeAuthPopUp();
-                                            history.push('/customer/account');
-                                        });
-
-                                        // this.props.closeAuthPopUp();
-                                        // history.push('/customer/account');
+                                        this.props.loginUser(values.email, values.password, resetForm, setSubmitting)
                                     }}
                                 >
                                     {({ touched, errors, isSubmitting, values, filters }) => (
@@ -195,7 +180,7 @@ const mapDispatchToProps = (dispatch) => ({
     resetPassForm: () => dispatch(resetPassForm()),
     signupForm: () => dispatch(signupForm()),
     closeAuthPopUp: () => dispatch(closeAuthPopUp()),
-    loginUser: (email, password) => dispatch(loginUser(email, password))
+    loginUser: (email, password, resetForm, setSubmitting) => dispatch(loginUser(email, password, resetForm, setSubmitting))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

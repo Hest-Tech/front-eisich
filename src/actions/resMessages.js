@@ -7,7 +7,9 @@ import {
 	CLEAR_MSG,
 	LOGIN_FIRST,
 	LOGIN_FAIL,
-	SUCCESS_LOGIN
+	SUCCESS_LOGIN,
+	SUCCESS_REGISTER,
+	REGISTER_FAIL
 } from './types';
 
 
@@ -24,6 +26,12 @@ export const returnMessages = (msg, code, id) => dispatch => {
 			    payload
 			});
 			break;
+		case REGISTER_FAIL:
+			dispatch({
+			    type: REGISTER_FAIL,
+			    payload
+			});
+			break;
 		case LOGIN_FAIL:
 			dispatch({
 			    type: LOGIN_FAIL,
@@ -34,12 +42,20 @@ export const returnMessages = (msg, code, id) => dispatch => {
 			dispatch({
 			    type: GET_MSG,
 			    payload
-			})
+			});
+			break;
 		case SUCCESS_LOGIN:
 			dispatch({
 			    type: SUCCESS_LOGIN,
 			    payload
 			});
+			break;
+		case SUCCESS_REGISTER:
+			dispatch({
+			    type: SUCCESS_REGISTER,
+			    payload
+			});
+			break;
 	}
 
     return setTimeout(() => {

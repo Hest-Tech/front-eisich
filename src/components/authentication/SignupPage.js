@@ -45,8 +45,8 @@ class SignupPage extends React.Component {
                     </div>
                 </div>
                 <div className="sign-up__details">
-                    {this.props.resMessages.msg && <div className="alert alert-danger home-page-alert" role="alert">
-                        {this.props.resMessages.msg}
+                    {this.props.resMessages.error && <div className="alert alert-danger home-page-alert" role="alert">
+                        {this.props.resMessages.error}
                     </div>}
                     <b className="sign-up__title">Sign Up</b>
                     {/** formik validation form */}
@@ -64,10 +64,7 @@ class SignupPage extends React.Component {
                         validationSchema={validationSchema}
                         onSubmit={(values, { setSubmitting, resetForm }) => {
                             setSubmitting(true);
-
-                            this.props.registerSuccess(values, setSubmitting)
-
-                            // return registerSuccess(values); // dispatch
+                            this.props.registerSuccess(values, setSubmitting, resetForm)
                         }}
                     >
                         {({ touched, errors, isSubmitting, values, filters }) => (
@@ -244,7 +241,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    registerSuccess: (payload, setSubmitting) => dispatch(registerSuccess(payload, setSubmitting)),
+    registerSuccess: (payload, setSubmitting, resetForm) => dispatch(registerSuccess(payload, setSubmitting, resetForm)),
     loginForm: () => dispatch(loginForm())
 });
 

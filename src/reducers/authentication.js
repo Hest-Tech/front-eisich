@@ -6,7 +6,7 @@
 const autheticationReducerDefaultState = {
     isAuthenticated: null,
     user: null,
-    uid: null,
+    displayName: null,
     openAuthPopUp: false,
     closeAuthPopUp: undefined,
     registering: false,
@@ -19,7 +19,9 @@ export default (state = autheticationReducerDefaultState, action) => {
         case 'LOAD_USER':
             return {
                 ...state,
-                uid: action.uid
+                isAuthenticated: true,
+                displayName: action.displayName,
+                user: action.user
             };
         case 'OPEN_AUTH_POPUP':
             return {
@@ -53,7 +55,6 @@ export default (state = autheticationReducerDefaultState, action) => {
             return {
                 isAuthenticated: null,
                 user: null,
-                uid: null,
                 openAuthPopUp: false,
                 closeAuthPopUp: undefined,
                 registering: false,
@@ -67,24 +68,28 @@ export default (state = autheticationReducerDefaultState, action) => {
                 registering: false,
                 loggingIn: false,
                 resetingPass: false,
-                openAuthPopUp: false
+                openAuthPopUp: false,
+                user: action.user
             }
         case 'LOGIN_SUCCESS':
             return {
                 ...state,
-                isAuthenticated: true
+                isAuthenticated: true,
+                displayName: action.user.displayName
             };
         case 'REGISTER_SUCCESS':
             return {
                 ...state,
                 isAuthenticated: true,
-                user: action.payload
+                user: action.payload,
+                displayName: action.displayName
             };
         case 'LOGOUT_SUCCESS':
             return {
                 ...state,
                 user: null,
                 isAuthenticated: false,
+                displayName: null
             };
         case 'DELETE_USER':
         case 'UPDATE_USER':
