@@ -23,6 +23,7 @@ class LoginPage extends React.Component {
         super(props);
         this.resetPass = this.resetPass.bind(this);
         this.register = this.register.bind(this);
+        this.socialMediaSignIn = this.socialMediaSignIn.bind(this);
     }
 
     resetPass(e) {
@@ -33,6 +34,26 @@ class LoginPage extends React.Component {
     register(e) {
         e.preventDefault();
         return this.props.signupForm();
+    }
+
+    socialMediaSignIn(e) {
+        let socialMedia = e.target.textContent.toLowerCase().trim();
+
+        switch(socialMedia) {
+            case 'google':
+                console.log(socialMedia);
+                this.props.loginUser(socialMedia);
+                this.props.closeAuthPopUp();
+                break;
+            case 'facebook':
+                console.log(socialMedia);
+                this.props.closeAuthPopUp();
+                break;
+            case 'twitter':
+                console.log(socialMedia);
+                this.props.closeAuthPopUp();
+                break;
+        }
     }
 
     componentWillUnMount() {
@@ -55,7 +76,15 @@ class LoginPage extends React.Component {
                                     validationSchema={LoginSchema}
                                     onSubmit={(values, { setSubmitting, resetForm }) => {
                                         setSubmitting(true);
-                                        this.props.loginUser(values.email, values.password, resetForm, setSubmitting)
+
+                                        let user = {
+                                            email: values.email,
+                                            password: values.password,
+                                            resetForm: resetForm,
+                                            setSubmitting: setSubmitting
+                                        };
+
+                                        this.props.loginUser(user, resetForm, setSubmitting)
                                     }}
                                 >
                                     {({ touched, errors, isSubmitting, values, filters }) => (
@@ -124,19 +153,19 @@ class LoginPage extends React.Component {
                                         <p className="text-center">Login with your social media account</p>
                                         <div className="text-center social-btn">
                                             <button
-                                                // onClick={renderProps.onClick}
+                                                onClick={this.socialMediaSignIn}
                                                 className="btn btn-primary"
                                             >
                                                 <i className="fa fa-facebook"></i>&nbsp; Facebook
                                             </button>
                                             <button
-                                                // onClick={renderProps.onClick}
+                                                onClick={this.socialMediaSignIn}
                                                 className="btn btn-info"
                                             >
                                                 <i className="fa fa-twitter"></i>&nbsp; Twitter
                                             </button>
                                             <button
-                                                // onClick={renderProps.onClick}
+                                                onClick={this.socialMediaSignIn}
                                                 className="btn btn-danger"
                                             >
                                                 <i className="fa fa-google" aria-hidden="true"></i> Google
@@ -180,7 +209,7 @@ const mapDispatchToProps = (dispatch) => ({
     resetPassForm: () => dispatch(resetPassForm()),
     signupForm: () => dispatch(signupForm()),
     closeAuthPopUp: () => dispatch(closeAuthPopUp()),
-    loginUser: (email, password, resetForm, setSubmitting) => dispatch(loginUser(email, password, resetForm, setSubmitting))
+    loginUser: (user, resetForm, setSubmitting) => dispatch(loginUser(user, resetForm, setSubmitting))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

@@ -41,6 +41,7 @@ ReactDOM.render(<div className="spinner-border text-warning"></div>, document.ge
 
 fire.auth().onAuthStateChanged(user => {
     if (user) {
+        console.log('logged in')
         renderApp();
         let userId = user.uid;
 
@@ -55,11 +56,9 @@ fire.auth().onAuthStateChanged(user => {
                     uid: userId
                 });
                 storeUser.setCookie('user', user, 1);
-                // console.log('=>', JSON.parse(user))
             });
-        // store.dispatch(loadUser());
-        // User is signed in.
     } else {
+        console.log('logged out');
         renderApp();
         store.dispatch(unloadUser());
         history.push('/');

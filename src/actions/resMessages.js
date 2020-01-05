@@ -60,7 +60,7 @@ export const returnMessages = (msg, code, id) => dispatch => {
 
     return setTimeout(() => {
         dispatch(clearMessages())
-    }, 5000);
+    }, 3000);
 };
 
 // Clear message
