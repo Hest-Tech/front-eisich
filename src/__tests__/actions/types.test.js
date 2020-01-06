@@ -1,0 +1,43 @@
+import {
+    LOGIN_FORM,
+    OPEN_AUTH_POPUP,
+    RESET_PASS_FORM,
+    SIGNUP_FORM,
+    CLOSE_AUTH_POPUP,
+    UNLOAD_USER,
+    LOAD_USER,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    LOGOUT_SUCCESS,
+    REGISTER_SUCCESS,
+    REGISTER_FAIL,
+    GET_MSG,
+    LOGIN_FIRST,
+    CLEAR_MSG,
+    SUCCESS_REGISTER_MSG,
+    SUCCESS_LOGIN_MSG,
+    GET_PRODUCTS,
+    GET_SINGLE_PRODUCT
+} from '../../actions/types';
+
+test('Should set the correct type id', () => {
+    expect(LOGIN_FORM).toBe('LOGIN_FORM')
+    expect(OPEN_AUTH_POPUP).toBe('OPEN_AUTH_POPUP')
+    expect(RESET_PASS_FORM).toBe('RESET_PASS_FORM')
+    expect(SIGNUP_FORM).toBe('SIGNUP_FORM')
+    expect(CLOSE_AUTH_POPUP).toBe('CLOSE_AUTH_POPUP')
+    expect(UNLOAD_USER).toBe('UNLOAD_USER')
+    expect(LOAD_USER).toBe('LOAD_USER')
+    expect(LOGIN_SUCCESS).toBe('LOGIN_SUCCESS')
+    expect(LOGIN_FAIL).toBe('LOGIN_FAIL')
+    expect(LOGOUT_SUCCESS).toBe('LOGOUT_SUCCESS')
+    expect(REGISTER_SUCCESS).toBe('REGISTER_SUCCESS')
+    expect(REGISTER_FAIL).toBe('REGISTER_FAIL')
+    expect(GET_MSG).toBe('GET_MSG')
+    expect(LOGIN_FIRST).toBe('LOGIN_FIRST')
+    expect(CLEAR_MSG).toBe('CLEAR_MSG')
+    expect(SUCCESS_REGISTER_MSG).toBe('SUCCESS_REGISTER_MSG')
+    expect(SUCCESS_LOGIN_MSG).toBe('SUCCESS_LOGIN_MSG')
+    expect(GET_PRODUCTS).toBe('GET_PRODUCTS')
+    expect(GET_SINGLE_PRODUCT).toBe('GET_SINGLE_PRODUCT')
+})

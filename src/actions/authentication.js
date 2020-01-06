@@ -14,16 +14,18 @@ import {
     RESET_PASS_FORM,
     CLOSE_AUTH_POPUP,
     OPEN_AUTH_POPUP,
-    SUCCESS_REGISTER
+    SUCCESS_REGISTER_MSG,
+    LOGIN_SUCCESS,
+    SUCCESS_LOGIN_MSG
 } from './types';
 import fire, { googleAuthProvider } from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
-import { returnMessages, clearMessages } from './resMessages';
+import { returnMessages } from './resMessages';
 import { history } from '../routes/AppRouter';
 
 
 const storeUser = new clientStorage();
-const registerHelperFunc = (displayName, data, dispatch) => {
+export const registerHelperFunc = (displayName, data, dispatch) => {
     return fire.auth().onAuthStateChanged(user => {
         if (user) {
 
@@ -43,12 +45,12 @@ const registerHelperFunc = (displayName, data, dispatch) => {
                         storeUser.setCookie('user', user, 1);
                         dispatch({
                             type: REGISTER_SUCCESS,
-                            payload: userData,
+                            user: userData,
                             displayName
                         })
                         dispatch(loadUser());
                         dispatch(
-                            returnMessages('Registered and Logged In successfully', 200, SUCCESS_REGISTER)
+                            returnMessages('Logged In successfully', 200, SUCCESS_REGISTER_MSG)
                         );
 
                         history.push('/customer/account');
@@ -59,9 +61,6 @@ const registerHelperFunc = (displayName, data, dispatch) => {
                 });
         }
     });
-}
-const loginHelperFunc = () => {
-
 }
 
 // register success
@@ -88,7 +87,7 @@ export const registerSuccess = ({
         })
         .catch(error => {
             dispatch(
-                returnMessages(error.message, error.code, 'REGISTER_FAIL')
+                returnMessages(error.message, error.code, REGISTER_FAIL)
             );
             console.log('-->', error);
             setSubmitting(false);
@@ -97,15 +96,15 @@ export const registerSuccess = ({
 
 // Check token & load user
 export const loadUser = () => dispatch => {
-    let user = storeUser.getCookie('user');
-    let _user = fire.auth().currentUser;
+    let userCookie = storeUser.getCookie('user');
+    let authUser = fire.auth().currentUser;
 
-    if (user && _user) {
-        user = JSON.parse(user);
+    if (userCookie && authUser) {
+        userCookie = JSON.parse(userCookie);
         return dispatch({
             type: LOAD_USER,
-            user,
-            displayName: _user.displayName
+            user: userCookie,
+            displayName: authUser.displayName
         })
     }
 };
@@ -114,13 +113,8 @@ export const loadUser = () => dispatch => {
 export const loginUser = (value, resetForm, setSubmitting) => dispatch => {
     let obj = typeof(value) === 'object' && Object.keys(value).length;
 
-    console.log(value);
-
     if (!!obj) {
-        let {
-            email,
-            password
-        } = value
+        let { email, password } = value;
 
         return fire.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
@@ -131,11 +125,11 @@ export const loginUser = (value, resetForm, setSubmitting) => dispatch => {
 
                 if (user) {
                     dispatch({
-                        type: 'LOGIN_SUCCESS',
-                        user
+                        type: LOGIN_SUCCESS,
+                        displayName: user.displayName
                     });
                     dispatch(
-                        returnMessages('Logged In successfully', 200, 'SUCCESS_LOGIN')
+                        returnMessages('Logged In successfully', 200, SUCCESS_LOGIN_MSG)
                     );
                     setSubmitting(false);
                     resetForm();
@@ -145,29 +139,32 @@ export const loginUser = (value, resetForm, setSubmitting) => dispatch => {
             })
             .catch(error => {
                 dispatch(
-                    returnMessages(error.message, error.code, 'LOGIN_FIRST')
+                    returnMessages(error.message, error.code, LOGIN_FAIL)
                 );
                 console.log('-->', error);
                 setSubmitting(false);
             })
-    } else if (value === 'google') {
-        console.log(value);
-        return fire.auth()
-            .signInWithPopup(googleAuthProvider)
-            .then(result => {
-                let user = result.user;
-                let data = {
-                    displayName: user.displayName,
-                    email: user.email
-                }
-
-                console.log(user);
-                registerHelperFunc(user.displayName, data, dispatch);
-            });
-    } else if (value === 'facebook') {
-        console.log(value);
-    } else if (value === 'twitter') {
-        console.log(value);
+    } else {
+        switch(value) {
+            case 'google':
+                return fire.auth()
+                    .signInWithPopup(googleAuthProvider)
+                    .then(result => {
+                        let user = result.user;
+                        let data = {
+                            displayName: user.displayName,
+                            email: user.email
+                        }
+                        
+                        registerHelperFunc(user.displayName, data, dispatch);
+                    });
+            case 'facebook':
+                console.log(value);
+                break;
+            case 'twitter':
+                console.log(value);
+                break;
+        }
     }
 };
 
@@ -195,7 +192,7 @@ export const logoutUser = () => ({
     type: LOGOUT_SUCCESS
 });
 
-// close form
+// open form
 export const openAuthPopUp = () => ({
     type: OPEN_AUTH_POPUP
 });
@@ -210,7 +207,7 @@ export const signupForm = () => ({
     type: SIGNUP_FORM
 });
 
-// pop register form
+// pop reset password form
 export const resetPassForm = () => ({
     type: RESET_PASS_FORM
 });
@@ -227,24 +224,24 @@ export const closeAuthPopUp = () => dispatch => {
 
 
 
-// reset password
-export const resetPassword = ({ email }) => ({
-    type: 'RESET_PASSWORD',
-    url: '<url>',
-    email
-});
+// // reset password
+// export const resetPassword = ({ email }) => ({
+//     type: 'RESET_PASSWORD',
+//     url: '<url>',
+//     email
+// });
 
-// update user
-export const updateUser = ({ id }, updates) => ({
-    type: 'UPDATE_USER',
-    url: '<url>',
-    id,
-    updates
-})
+// // update user
+// export const updateUser = ({ id }, updates) => ({
+//     type: 'UPDATE_USER',
+//     url: '<url>',
+//     id,
+//     updates
+// })
 
-// delete user
-export const deleteUser = ({ id }) => ({
-    type: 'DELETE_USER',
-    url: '<url>',
-    id
-})
+// // delete user
+// export const deleteUser = ({ id }) => ({
+//     type: 'DELETE_USER',
+//     url: '<url>',
+//     id
+// })

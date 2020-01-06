@@ -36,11 +36,13 @@ class AuthenticationModal extends React.Component {
     }
 
     toggleAuth() {
-        if (this.props.authentication.loggingIn) {
+        const toggle = this.props.authentication;
+
+        if (toggle.loggingIn) {
             return <LoginPage />
-        } else if (this.props.authentication.registering) {
+        } else if (toggle.registering) {
             return <SignupPage />
-        } else if (this.props.authentication.resetingPass) {
+        } else if (toggle.resetingPass) {
             return <ResetPassword />
         }
     }

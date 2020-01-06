@@ -4,7 +4,7 @@
 
 
 const autheticationReducerDefaultState = {
-    isAuthenticated: null,
+    isAuthenticated: undefined,
     user: null,
     displayName: null,
     openAuthPopUp: false,
@@ -42,7 +42,7 @@ export default (state = autheticationReducerDefaultState, action) => {
                 ...state,
                 registering: true,
                 loggingIn: false,
-                resetingPass: false,
+                resetingPass: false
             }
         case 'RESET_PASS_FORM':
             return {
@@ -53,12 +53,13 @@ export default (state = autheticationReducerDefaultState, action) => {
             }
         case 'UNLOAD_USER':
             return {
-                isAuthenticated: null,
+                isAuthenticated: undefined,
                 user: null,
                 openAuthPopUp: false,
                 closeAuthPopUp: undefined,
                 registering: false,
                 loggingIn: false,
+                displayName: null,
                 resetingPass: false
             }
         case 'CLOSE_AUTH_POPUP':
@@ -75,13 +76,13 @@ export default (state = autheticationReducerDefaultState, action) => {
             return {
                 ...state,
                 isAuthenticated: true,
-                displayName: action.user.displayName
+                displayName: action.displayName
             };
         case 'REGISTER_SUCCESS':
             return {
                 ...state,
                 isAuthenticated: true,
-                user: action.payload,
+                user: action.user,
                 displayName: action.displayName
             };
         case 'LOGOUT_SUCCESS':
@@ -91,7 +92,6 @@ export default (state = autheticationReducerDefaultState, action) => {
                 isAuthenticated: false,
                 displayName: null
             };
-        case 'DELETE_USER':
         case 'UPDATE_USER':
         case 'RESET_PASSWORD':
         default:
