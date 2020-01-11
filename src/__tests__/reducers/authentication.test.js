@@ -1,4 +1,16 @@
 import authentication from '../../reducers/authentication';
+import {
+    LOGIN_FORM,
+    OPEN_AUTH_POPUP,
+    RESET_PASS_FORM,
+    SIGNUP_FORM,
+    CLOSE_AUTH_POPUP,
+    UNLOAD_USER,
+    LOAD_USER,
+    LOGIN_SUCCESS,
+    LOGOUT_SUCCESS,
+    REGISTER_SUCCESS
+} from '../../actions/types'
 
 const defaultState = {
     isAuthenticated: undefined,
@@ -21,12 +33,12 @@ const user =  {
 test('Should setup default authentication values', () => {
     const state = authentication(undefined, { type: '@@INIT' });
 
-    expect(state).toEqual({ ...defaultState });
+    expect(state).toStrictEqual({ ...defaultState });
 });
 
 test('Should set user and displayName to a user object and user name values respectively', () => {
     const action = {
-        type: 'LOAD_USER',
+        type: LOAD_USER,
         user,
         displayName: 'John'
     }
@@ -43,7 +55,7 @@ test('Should set user and displayName to a user object and user name values resp
 });
 
 test('Should set closeAuthPopUp to false, openAuthPopUp and loggingIn to true', () => {
-    const state = authentication(defaultState, { type: 'OPEN_AUTH_POPUP' });
+    const state = authentication(defaultState, { type: OPEN_AUTH_POPUP });
 
     expect(state.openAuthPopUp).toBe(true);
     expect(state.closeAuthPopUp).toBe(false);
@@ -52,7 +64,7 @@ test('Should set closeAuthPopUp to false, openAuthPopUp and loggingIn to true', 
 
 test('Should set loggingIn to true, registering and resetingPass to false', () => {
     const currentState = { ...defaultState, openAuthPopUp: true };
-    const state = authentication(currentState, { type: 'LOGIN_FORM' });
+    const state = authentication(currentState, { type: LOGIN_FORM });
 
     expect(state.loggingIn).toBe(true);
     expect(state.registering).toBe(false);
@@ -61,7 +73,7 @@ test('Should set loggingIn to true, registering and resetingPass to false', () =
 
 test('Should set registering to true, logginIn and resetingPass to false', () => {
     const currentState = { ...defaultState, openAuthPopUp: true };
-    const state = authentication(currentState, { type: 'SIGNUP_FORM' });
+    const state = authentication(currentState, { type: SIGNUP_FORM });
 
     expect(state.registering).toBe(true);
     expect(state.loggingIn).toBe(false);
@@ -70,7 +82,7 @@ test('Should set registering to true, logginIn and resetingPass to false', () =>
 
 test('Should set resetingPass to true, registering and loggingIn to false', () => {
     const currentState = { ...defaultState, openAuthPopUp: true };
-    const state = authentication(currentState, { type: 'RESET_PASS_FORM' });
+    const state = authentication(currentState, { type: RESET_PASS_FORM });
 
     expect(state.registering).toBe(false);
     expect(state.loggingIn).toBe(false);
@@ -79,14 +91,14 @@ test('Should set resetingPass to true, registering and loggingIn to false', () =
 
 test('Should set all keys to their default values', () => {
     const currentState = { ...defaultState, openAuthPopUp: true };
-    const state = authentication(currentState, { type: 'UNLOAD_USER' });
+    const state = authentication(currentState, { type: UNLOAD_USER });
 
     expect(state).toEqual({ ...defaultState });
 });
 
 test('Should set closeAuthPopUp to true, openAuthPopUp and loggingIn and registering to false', () => {
     const action = {
-        type: 'CLOSE_AUTH_POPUP',
+        type: CLOSE_AUTH_POPUP,
         user,
         displayName: 'John'
     }
@@ -106,7 +118,7 @@ test('Should set closeAuthPopUp to true, openAuthPopUp and loggingIn and registe
 
 test('Should set authentication to true and displayName to the correct user name', () => {
     const action = {
-        type: 'LOGIN_SUCCESS',
+        type: LOGIN_SUCCESS,
         displayName: 'John'
     }
     const currentState = {
@@ -123,7 +135,7 @@ test('Should set authentication to true and displayName to the correct user name
 
 test('Should set displayName to a correct user name', () => {
     const action = {
-        type: 'REGISTER_SUCCESS',
+        type: REGISTER_SUCCESS,
         user,
         displayName: 'John'
     }
@@ -146,17 +158,18 @@ test('Should set displayName to a correct user name', () => {
     expect(state.displayName).toBe('John');
 });
 
-test('Should set isAuthenticatedto false, user and displayName to null', () => {
+test('Should set isAuthenticated to false, user and displayName to null', () => {
     const currentState = {
         ...defaultState,
         user,
-        displayName: 'John'
+        displayName: 'John',
+        isAuthenticated: true
     }
-    const state = authentication(currentState, { type: 'LOGOUT_SUCCESS' });
+    const state = authentication(currentState, { type: LOGOUT_SUCCESS });
     const newState = {
         ...defaultState,
         isAuthenticated: false
     }
 
     expect(state).toStrictEqual(newState);
-})
+});

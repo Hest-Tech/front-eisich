@@ -11,7 +11,7 @@ import clientStorage from '../utils/clientStorage';
 
 const UserLoggedIn = (openAuthPopUp, returnMessages) => {
     openAuthPopUp()
-    returnMessages('Please login first', 401, 'LOGIN_FIRST')
+    returnMessages('Please login first', 403, 'LOGIN_FIRST')
 }
 
 const PrivateRoute = ({

@@ -13,7 +13,12 @@ const firebaseConfig = {
 };
 
 const fire = firebase.initializeApp(firebaseConfig);
+// const testFire = firebase.initializeTestApp({
+//     databaseName: 'testDb',
+//     auth: { uid: 'john' }
+// });
+const database = fire.database();
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 
-export { googleAuthProvider, fire as default };
+export { googleAuthProvider, database, fire as default };

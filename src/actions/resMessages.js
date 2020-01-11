@@ -3,7 +3,6 @@
  */
 
 import {
-	GET_MSG,
 	CLEAR_MSG,
 	LOGIN_FIRST,
 	LOGIN_FAIL,
@@ -14,7 +13,7 @@ import {
 
 
 // Return message
-export const returnMessages = (msg, code, id) => dispatch => {
+export const returnMessages = (msg, code=undefined, id) => dispatch => {
 
 	const payloadObj = { payload: { msg, code, id } }
 	const payload = payloadObj.payload;
@@ -35,12 +34,6 @@ export const returnMessages = (msg, code, id) => dispatch => {
 		case LOGIN_FAIL:
 			dispatch({
 			    type: LOGIN_FAIL,
-			    payload
-			});
-			break;
-		case GET_MSG:
-			dispatch({
-			    type: GET_MSG,
 			    payload
 			});
 			break;

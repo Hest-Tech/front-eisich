@@ -18,19 +18,20 @@ import {
     LOGIN_SUCCESS,
     SUCCESS_LOGIN_MSG
 } from './types';
-import fire, { googleAuthProvider } from '../firebase/firebase';
+import fire, { googleAuthProvider, database } from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
 import { returnMessages } from './resMessages';
 import { history } from '../routes/AppRouter';
 
 
 const storeUser = new clientStorage();
-export const registerHelperFunc = (displayName, data, dispatch) => {
+
+export const authHelperFunc = (displayName, data, dispatch, id) => {
     return fire.auth().onAuthStateChanged(user => {
         if (user) {
 
             let nameArray = displayName.split(' ');
-            let ref = fire.database().ref().child(`users`);
+            let ref = database.ref().child('users');
 
             displayName = nameArray.length > 1 ? nameArray.slice(0, -1).join(' ') : displayName;
 
@@ -49,9 +50,17 @@ export const registerHelperFunc = (displayName, data, dispatch) => {
                             displayName
                         })
                         dispatch(loadUser());
-                        dispatch(
-                            returnMessages('Logged In successfully', 200, SUCCESS_REGISTER_MSG)
-                        );
+                        switch(id) {
+                            case SUCCESS_REGISTER_MSG:
+                                dispatch(
+                                    returnMessages('Registered and logged In successfully', 200, id)
+                                );
+                                break;
+                            case SUCCESS_LOGIN_MSG:
+                                dispatch(
+                                    returnMessages('Logged In successfully', 200, id)
+                                );
+                        }
 
                         history.push('/customer/account');
                         dispatch(closeAuthPopUp());
@@ -81,7 +90,7 @@ export const registerSuccess = ({
                 lastName: lastName
             }
 
-            registerHelperFunc(firstName, data, dispatch);
+            authHelperFunc(firstName, data, dispatch, SUCCESS_REGISTER_MSG);
             setSubmitting(false);
             resetForm();
         })
@@ -101,11 +110,13 @@ export const loadUser = () => dispatch => {
 
     if (userCookie && authUser) {
         userCookie = JSON.parse(userCookie);
-        return dispatch({
+        dispatch({
             type: LOAD_USER,
             user: userCookie,
             displayName: authUser.displayName
         })
+    } else {
+        dispatch(unloadUser()); // delete this
     }
 };
 
@@ -156,7 +167,7 @@ export const loginUser = (value, resetForm, setSubmitting) => dispatch => {
                             email: user.email
                         }
                         
-                        registerHelperFunc(user.displayName, data, dispatch);
+                        authHelperFunc(user.displayName, data, dispatch, SUCCESS_LOGIN_MSG);
                     });
             case 'facebook':
                 console.log(value);

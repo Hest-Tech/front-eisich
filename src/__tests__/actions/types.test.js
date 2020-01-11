@@ -11,7 +11,6 @@ import {
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    GET_MSG,
     LOGIN_FIRST,
     CLEAR_MSG,
     SUCCESS_REGISTER_MSG,
@@ -33,7 +32,6 @@ test('Should set the correct type id', () => {
     expect(LOGOUT_SUCCESS).toBe('LOGOUT_SUCCESS')
     expect(REGISTER_SUCCESS).toBe('REGISTER_SUCCESS')
     expect(REGISTER_FAIL).toBe('REGISTER_FAIL')
-    expect(GET_MSG).toBe('GET_MSG')
     expect(LOGIN_FIRST).toBe('LOGIN_FIRST')
     expect(CLEAR_MSG).toBe('CLEAR_MSG')
     expect(SUCCESS_REGISTER_MSG).toBe('SUCCESS_REGISTER_MSG')

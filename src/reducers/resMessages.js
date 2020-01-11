@@ -11,7 +11,6 @@ const msgReducerDefaultState = {
 
 export default (state = msgReducerDefaultState, action) => {
     switch (action.type) {
-        case 'GET_MSG':
         case 'SUCCESS_LOGIN_MSG':
         case 'SUCCESS_REGISTER_MSG':
             return {
