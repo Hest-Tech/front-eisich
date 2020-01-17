@@ -9,7 +9,7 @@ import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
 
 
-const UserLoggedIn = (openAuthPopUp, returnMessages) => {
+const userLoggedIn = (openAuthPopUp, returnMessages) => {
     openAuthPopUp()
     returnMessages('Please login first', 403, 'LOGIN_FIRST')
 }
@@ -27,14 +27,14 @@ const PrivateRoute = ({
             ) : (
                 <React.Fragment>
                     <Redirect to="/" />
-                    {UserLoggedIn(openAuthPopUp, returnMessages)}
+                    {userLoggedIn(openAuthPopUp, returnMessages)}
                 </React.Fragment>
             )
         )} />
     );
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.authentication.isAuthenticated
+    isAuthenticated: state.authentication.user.uid
 });
 
 const mapDispatchToProps = (dispatch) => ({

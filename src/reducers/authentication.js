@@ -2,11 +2,15 @@
  * Authentication Reducer
  */
 
+import clientStorage from '../utils/clientStorage';
 
+
+const fetchUser = new clientStorage();
+const userCookie = fetchUser.getCookie('user');
 const autheticationReducerDefaultState = {
-    isAuthenticated: undefined,
-    user: null,
-    displayName: null,
+    isAuthenticated: userCookie ? true : false,
+    user: userCookie ? JSON.parse(userCookie) : {},
+    displayName: userCookie ? JSON.parse(userCookie).firstName : null,
     openAuthPopUp: false,
     closeAuthPopUp: undefined,
     registering: false,
@@ -53,8 +57,8 @@ export default (state = autheticationReducerDefaultState, action) => {
             }
         case 'UNLOAD_USER':
             return {
-                isAuthenticated: undefined,
-                user: null,
+                isAuthenticated: false,
+                user: {},
                 openAuthPopUp: false,
                 closeAuthPopUp: undefined,
                 registering: false,
@@ -69,14 +73,15 @@ export default (state = autheticationReducerDefaultState, action) => {
                 registering: false,
                 loggingIn: false,
                 resetingPass: false,
-                openAuthPopUp: false,
-                user: action.user
+                isAuthenticated: false,
+                openAuthPopUp: false
             }
         case 'LOGIN_SUCCESS':
             return {
                 ...state,
                 isAuthenticated: true,
-                displayName: action.displayName
+                displayName: action.displayName,
+                user: action.user
             };
         case 'REGISTER_SUCCESS':
             return {
@@ -88,7 +93,7 @@ export default (state = autheticationReducerDefaultState, action) => {
         case 'LOGOUT_SUCCESS':
             return {
                 ...state,
-                user: null,
+                user: {},
                 isAuthenticated: false,
                 displayName: null
             };

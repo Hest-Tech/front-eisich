@@ -21,31 +21,17 @@ import AuthenticationModal from './authentication/AuthenticationModal';
 import unitedStates from '../assets/images/united-states.png';
 import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
-import { logoutUser, signOutUser } from '../actions/authentication';
+import { signOutUser, loadUser } from '../actions/authentication';
 
 
 class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
-
-        const fetchUser = new clientStorage();
-        let userCookie = fetchUser.getCookie('user');
-
-        this.state = {
-            authDropDown: undefined,
-            authenticatedUser: userCookie ? JSON.parse(userCookie) : undefined
-        };
     }
 
-    toggleAuthDropDown() {
-        this.setState(this.toggleAuthDropDownState);
-    }
-
-    toggleAuthDropDownState(state) {
-        return {
-            authDropDown: !state.authDropDown
-        }
+    componentDidMount() {
+        this.props.loadUser();
     }
 
     render() {
@@ -188,12 +174,12 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    authentication: state.authentication,
-    isAuthenticated: state.authentication.uid
+    authentication: state.authentication
 });
 
 const mapDispatchToProps = (dispatch) => ({
     openAuthPopUp: () => dispatch(openAuthPopUp()),
+    loadUser: () => dispatch(loadUser()),
     signOutUser: () => dispatch(signOutUser())
 });
 

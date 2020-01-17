@@ -57,6 +57,7 @@ class LoginPage extends React.Component {
     }
 
     componentWillUnMount() {
+        this.props.closeAuthPopUp();
         console.log('login modal unmouted')
     }
 
@@ -83,8 +84,14 @@ class LoginPage extends React.Component {
                                             resetForm: resetForm,
                                             setSubmitting: setSubmitting
                                         };
+                                        let actions = {
+                                            user,
+                                            resetForm,
+                                            setSubmitting,
+                                            action: 'LOGIN_ACTION'
+                                        }
 
-                                        this.props.loginUser(user, resetForm, setSubmitting)
+                                        this.props.loginUser(actions)
                                     }}
                                 >
                                     {({ touched, errors, isSubmitting, values, filters }) => (
@@ -209,7 +216,7 @@ const mapDispatchToProps = (dispatch) => ({
     resetPassForm: () => dispatch(resetPassForm()),
     signupForm: () => dispatch(signupForm()),
     closeAuthPopUp: () => dispatch(closeAuthPopUp()),
-    loginUser: (user, resetForm, setSubmitting) => dispatch(loginUser(user, resetForm, setSubmitting))
+    loginUser: (actions) => dispatch(loginUser(actions))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

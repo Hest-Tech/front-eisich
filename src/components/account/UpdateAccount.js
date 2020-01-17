@@ -14,7 +14,8 @@ class UpdateAccount extends React.Component {
         super(props);
 
         this.state = {
-            value: ""
+            value: "",
+            email: this.props.authentication.user.email || '2547xxxxxxxx'
         }
     }
 
@@ -43,7 +44,7 @@ class UpdateAccount extends React.Component {
                                     firstName: "",
                                     lastName: "",
                                     phoneNumber: this.state.value,
-                                    email: "doe@email.com",
+                                    email: this.state.email,
                                     password: "",
                                     confirmPassword: "",
                                     select: "",

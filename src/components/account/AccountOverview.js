@@ -2,10 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
+// import {  } from '../../actions/authentication';
+
 
 class AccountOverview extends React.Component {
     constructor(props) {
         super(props);
+
+        let user = this.props.authentication.user || {};
+
+        this.state = {
+            email: user.email || 'No email',
+            firstName: user.firstName || 'Anonymous',
+            lastName: user.lastName || 'Anonymous',
+            phoneNumber: user.phoneNumber || '2547xxxxxxxx'
+        }
+    }
+
+    componentWillMount() {
+        console.log(this.props.authentication.user);
     }
 
     render() {
@@ -21,8 +36,8 @@ class AccountOverview extends React.Component {
                             </div>
                             <div className="det-info">
                                 <div className="acc-det-info">
-                                    <p>John Doe</p>
-                                    <p className="user-info text-muted">john@email.com</p>
+                                    <p>{this.state.firstName} {this.state.lastName}</p>
+                                    <p className="user-info text-muted">{this.state.email}</p>
                                 </div>
                                 <div className="overview-change-pass acc-menu-btn">
                                     <button type="button" className="btn btn-light">CHANGE PASSWORD</button>
@@ -37,10 +52,10 @@ class AccountOverview extends React.Component {
                             </div>
                             <div className="overview-address">
                                 <p>Your default shipping address</p>
-                                <p className="user-info text-muted">John Doe</p>
+                                <p className="user-info text-muted">{this.state.firstName} {this.state.lastName}</p>
                                 <p className="user-info text-muted">Address</p>
                                 <p className="user-info text-muted">City</p>
-                                <p className="user-info text-muted">2547xxxxxxxx</p>
+                                <p className="user-info text-muted">{this.state.phoneNumber}</p>
                             </div>
                         </div>
                     </div>

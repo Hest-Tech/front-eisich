@@ -58,7 +58,7 @@ const processLipaNaMpesaRequest = async ({
                         "PartyA": phoneNumber, // number sending money
                         "PartyB": vendor, // organisation receiving the funds
                         "PhoneNumber": phoneNumber, // Number to receive the STK Pin Prompt
-                        "CallBackURL": "https://def1d844.ngrok.io/hooks/mpesa",
+                        "CallBackURL": "https://f3383a3e.ngrok.io/hooks/mpesa",
                         "AccountReference": "test",
                         "TransactionDesc": "test"
                     }

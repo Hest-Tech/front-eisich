@@ -25,11 +25,12 @@ render(<div className="spinner-border text-warning"></div>, document.getElementB
 
 fire.auth().onAuthStateChanged(user => {
     if (user) {
-        console.log('logged in')
+        console.log('logged in', user);
+        console.log('logged in', user.providerData[0]);
         renderApp();
         let userId = user.uid;
 
-        store.dispatch(loadUser())
+        store.dispatch(loadUser());
         return fire.database()
             .ref('/users/' + userId)
             .once('value')
