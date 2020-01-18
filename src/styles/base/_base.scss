@@ -61,6 +61,20 @@ h2 {
   text-decoration: none !important;
 }
 
+.modal-dialog {
+  max-width: 70% !important;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: .9;
+  background-color: #d4d5dd;
+}
+
 
 @media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
   .app-footer,

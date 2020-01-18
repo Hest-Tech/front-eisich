@@ -56,6 +56,7 @@ class AuthenticationModal extends React.Component {
                 contentLabel="Login details"
                 id="login-overlay"
                 className="modal-dialog"
+                overlayClassName="Overlay"
             >
                 <div className="modal-content">
                     <div className="modal-header">

@@ -15,6 +15,7 @@ const autheticationReducerDefaultState = {
     closeAuthPopUp: undefined,
     registering: false,
     loggingIn: false,
+    updateAddress: false,
     resetingPass: false
 }
 
@@ -48,6 +49,11 @@ export default (state = autheticationReducerDefaultState, action) => {
                 loggingIn: false,
                 resetingPass: false
             }
+        case 'UPDATE_ADDRESS_BOOK':
+            return {
+                ...state,
+                updateAddress: !state.updateAddress,
+            }
         case 'RESET_PASS_FORM':
             return {
                 ...state,
@@ -64,6 +70,7 @@ export default (state = autheticationReducerDefaultState, action) => {
                 registering: false,
                 loggingIn: false,
                 displayName: null,
+                updateAddress: false,
                 resetingPass: false
             }
         case 'CLOSE_AUTH_POPUP':
@@ -74,6 +81,7 @@ export default (state = autheticationReducerDefaultState, action) => {
                 loggingIn: false,
                 resetingPass: false,
                 isAuthenticated: false,
+                updateAddress: false,
                 openAuthPopUp: false
             }
         case 'LOGIN_SUCCESS':

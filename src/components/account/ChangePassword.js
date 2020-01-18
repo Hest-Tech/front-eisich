@@ -4,98 +4,132 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import NavBar from '../NavBar';
 import AccountMenu from './AccountMenu';
-import { LoginSchema } from '../../utils/validate';
 import fire from '../../firebase/firebase';
+import { ResetPassSchema } from '../../utils/validate';
 
 
-const ChangePassword = () => (
-    <div className="account-menu-container account-background">
-        <div className="nav-bar-wrapper">
-            <NavBar />
-        </div>
-        <div className="account-container">
-            <div className="account-menu-sec acc-sec">
-                <AccountMenu />
+const ChangePassword = () => {
+
+    const reauthenticate = (currentPassword) => {
+        const user = fire.auth().currentUser;
+        console.log(user);
+        const cred = fire.auth.EmailAuthProvider.credential(user.email, currentPassword);
+        return user.reauthenticateWithCredential(cred);
+    }
+    const changePassword = (currentPassword, newPassword, resetForm) => {
+        reauthenticate(currentPassword)
+            .then(() => {
+                const user = fire.auth().currentUser;
+                user.updatePassword(newPassword)
+                    .then(() => {
+                        console.log("Password updated!");
+                        resetForm();
+                    })
+                    .catch((error) => { console.log('==>', error); });
+            })
+            .catch((error) => { console.log(error); });
+    }
+
+    return (
+        <div className="account-menu-container account-background">
+            <div className="nav-bar-wrapper">
+                <NavBar />
             </div>
-            <span></span>
-            <div className="accout-detail-sec acc-sec">
-                <div className="account-det-background">
-                    <h1 className="account-overview-title">Change Password</h1>
-                    <div className="row">
-                        <Formik
-                            initialValues={{ email: "", password: "", remember: false }}
-                            validationSchema={LoginSchema}
-                            onSubmit={(values, { setSubmitting, resetForm }) => {
-                                console.log(values);
-                            }}
-                        >
-                            {({ touched, errors, isSubmitting, values, filters }) => (
-                                <Form className="col-md-6">
-                                    <div className="form-group">
-                                        <label htmlFor="birthday"><small className="text-muted">Current Password</small></label>
-                                        <Field
-                                            type="password"
-                                            name="currentPassword"
-                                            placeholder="Current Password"
-                                            className={`form-control ${
-                                                touched.password && errors.password ? "is-invalid" : ""
-                                                }`}
-                                        />
-                                        <ErrorMessage
-                                            component="div"
-                                            name="password"
-                                            className="invalid-feedback"
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="birthday"><small className="text-muted">New Password</small></label>
-                                        <Field
-                                            type="password"
-                                            name="newPassword"
-                                            placeholder="Enter New Password"
-                                            className={`form-control ${
-                                                touched.password && errors.password ? "is-invalid" : ""
-                                                }`}
-                                        />
-                                        <ErrorMessage
-                                            component="div"
-                                            name="password"
-                                            className="invalid-feedback"
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="birthday"><small className="text-muted">Retype New Password</small></label>
-                                        <Field
-                                            type="password"
-                                            name="retypeNewPassword"
-                                            placeholder="Retype New Password"
-                                            className={`form-control ${
-                                                touched.password && errors.password ? "is-invalid" : ""
-                                                }`}
-                                        />
-                                        <ErrorMessage
-                                            component="div"
-                                            name="password"
-                                            className="invalid-feedback"
-                                        />
-                                    </div>
-                                    <button
-                                        type="submit"
-                                        className="btn btn-warning btn-block btn-change-pass"
-                                        // onClick={this.redirect.bind(this)}
-                                        disabled={isSubmitting}
-                                    >
-                                        {isSubmitting ? <div className="spinner-border text-warning"></div> : "SUBMIT"}
-                                    </button>
-                                </Form>
-                            )}
-                        </Formik>
+            <div className="account-container">
+                <div className="account-menu-sec acc-sec">
+                    <AccountMenu />
+                </div>
+                <span></span>
+                <div className="accout-detail-sec acc-sec">
+                    <div className="account-det-background">
+                        <h1 className="account-overview-title">Change Password</h1>
+                        <div className="row">
+                            <Formik
+                                initialValues={{
+                                    currentPassword: "",
+                                    newPassword: "",
+                                    confirmPassword: ""
+                                }}
+                                validationSchema={ResetPassSchema}
+                                onSubmit={(values, { setSubmitting, resetForm }) => {
+                                    console.log(values);
+
+                                    const currentPass = values.currentPassword;
+                                    const newPass = values.newPassword;
+
+                                    changePassword(currentPass, newPass, resetForm);
+                                }}
+                            >
+                                {({ touched, errors, isSubmitting, values, filters }) => (
+                                    <Form className="col-md-6">
+                                        <div className="form-group">
+                                            <label htmlFor="currentPassword"><small className="text-muted">Current Password</small></label>
+                                            <Field
+                                                type="password"
+                                                name="currentPassword"
+                                                id="currentPassword"
+                                                placeholder="Current Password"
+                                                className={`form-control ${
+                                                    touched.currentPassword && errors.currentPassword ? "is-invalid" : ""
+                                                    }`}
+                                            />
+                                            <ErrorMessage
+                                                component="div"
+                                                name="currentPassword"
+                                                className="invalid-feedback"
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="newPassword"><small className="text-muted">New Password</small></label>
+                                            <Field
+                                                type="password"
+                                                id="newPassword"
+                                                name="newPassword"
+                                                placeholder="Enter New Password"
+                                                className={`form-control ${
+                                                    touched.newPassword && errors.newPassword ? "is-invalid" : ""
+                                                    }`}
+                                            />
+                                            <ErrorMessage
+                                                component="div"
+                                                name="newPassword"
+                                                className="invalid-feedback"
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="confirmPassword"><small className="text-muted">Retype New Password</small></label>
+                                            <Field
+                                                id="confirmPassword"
+                                                type="password"
+                                                name="confirmPassword"
+                                                placeholder="Confirm password"
+                                                className={`form-control ${
+                                                    touched.confirmPassword && errors.confirmPassword ? "is-invalid" : ""
+                                                    }`}
+                                            />
+                                            <ErrorMessage
+                                                component="div"
+                                                name="confirmPassword"
+                                                className="invalid-feedback"
+                                            />
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            className="btn btn-warning btn-block btn-change-pass"
+                                            disabled={isSubmitting}
+                                        >
+                                            {isSubmitting ? <div className="spinner-border text-warning"></div> : "SUBMIT"}
+                                        </button>
+                                    </Form>
+                                )}
+                            </Formik>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-);
+    );
+}
 
 const mapStateToProps = (state) => ({
     authentication: state.authentication,

@@ -36,6 +36,7 @@ fire.auth().onAuthStateChanged(user => {
             .once('value')
             .then(snapshot => {
                 let userData = snapshot.val();
+                console.log(userData);
                 let user = JSON.stringify({
                     ...userData,
                     uid: userId

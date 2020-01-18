@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 // import {  } from '../../actions/authentication';
+import { addressBookForm } from '../../actions/authentication';
+import AddressBookForm from './AddressBookForm';
 
 
 class AccountOverview extends React.Component {
@@ -40,7 +42,9 @@ class AccountOverview extends React.Component {
                                     <p className="user-info text-muted">{this.state.email}</p>
                                 </div>
                                 <div className="overview-change-pass acc-menu-btn">
+                                <NavLink to="/customer/change-password">
                                     <button type="button" className="btn btn-light">CHANGE PASSWORD</button>
+                                </NavLink>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +52,10 @@ class AccountOverview extends React.Component {
                         <div className="acc-overview account-address-overview">
                             <div className="edit-option">
                                 <p>ADDRESS BOOK</p>
-                                <NavLink to="/customer/address"><i className="far fa-edit"></i></NavLink>
+                                <i
+                                    className="far fa-edit"
+                                    onClick={() => this.props.addressBookForm()}
+                                ></i>
                             </div>
                             <div className="overview-address">
                                 <p>Your default shipping address</p>
@@ -57,6 +64,8 @@ class AccountOverview extends React.Component {
                                 <p className="user-info text-muted">City</p>
                                 <p className="user-info text-muted">{this.state.phoneNumber}</p>
                             </div>
+
+                            {this.props.authentication.updateAddress ? <AddressBookForm /> : null}
                         </div>
                     </div>
                 </div>
@@ -70,4 +79,8 @@ const mapStateToProps = (state) => ({
     resMessages: state.resMessages
 });
 
-export default connect(mapStateToProps)(AccountOverview);
+const mapDispatchToProps = (dispatch) => ({
+    addressBookForm: () => dispatch(addressBookForm())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountOverview);

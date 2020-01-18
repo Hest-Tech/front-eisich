@@ -53,3 +53,15 @@ export const CheckoutSchema = Yup.object().shape({
         .min(8, 'Too Short!')
         .required("Address is required")
 });
+
+export const ResetPassSchema = Yup.object().shape({
+    currentPassword: Yup.string()
+        .min(6, "Password must be 6 characters at minimum")
+        .required("Password is required"),
+    newPassword: Yup.string()
+        .min(6, "Password must be 6 characters at minimum")
+        .required("Password is required"),
+    confirmPassword: Yup.string()
+        .oneOf([Yup.ref('newPassword'), null], "Your passwords don't match")
+        .required('Confirm password is required')
+});

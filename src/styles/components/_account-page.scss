@@ -21,7 +21,8 @@
 
 .account-menu-sec {
     flex: 24.5%;
-    background: $white;
+    height: 100%;
+    // background: $white;
 }
 
 .acc-sec {
@@ -40,5 +41,5 @@
     display: flex;
     flex-direction: column;
     // background: red;
-    height: 100%;
+    height: auto;
 }

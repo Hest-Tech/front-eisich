@@ -16,7 +16,8 @@ import {
     OPEN_AUTH_POPUP,
     SUCCESS_REGISTER_MSG,
     LOGIN_SUCCESS,
-    SUCCESS_LOGIN_MSG
+    SUCCESS_LOGIN_MSG,
+    UPDATE_ADDRESS_BOOK
 } from './types';
 import fire, { googleAuthProvider, database } from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
@@ -252,6 +253,11 @@ export const openAuthPopUp = () => ({
 // pop login form
 export const loginForm = () => ({
     type: LOGIN_FORM
+});
+
+// pop login form
+export const addressBookForm = () => ({
+    type: UPDATE_ADDRESS_BOOK
 });
 
 // pop register form
