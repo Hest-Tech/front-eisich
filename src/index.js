@@ -26,7 +26,8 @@ render(<div className="spinner-border text-warning"></div>, document.getElementB
 fire.auth().onAuthStateChanged(user => {
     if (user) {
         console.log('logged in', user);
-        console.log('logged in', user.providerData[0]);
+        var isAnonymous = user.isAnonymous;
+        console.log('logged in =>', isAnonymous);
         renderApp();
         let userId = user.uid;
 

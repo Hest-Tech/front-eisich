@@ -8,55 +8,62 @@ import {
 	LOGIN_FAIL,
 	SUCCESS_LOGIN_MSG,
 	SUCCESS_REGISTER_MSG,
+	SUCCESS_RESET_PASS_MSG,
 	REGISTER_FAIL
 } from './types';
 
 
 // Return message
-export const returnMessages = (msg, code=undefined, id) => dispatch => {
+export const returnMessages = (msg, code = undefined, id) => dispatch => {
 
 	const payloadObj = { payload: { msg, code, id } }
 	const payload = payloadObj.payload;
 
-	switch(id) {
+	switch (id) {
 		case LOGIN_FIRST:
 			dispatch({
-			    type: LOGIN_FIRST,
-			    payload
+				type: LOGIN_FIRST,
+				payload
 			});
 			break;
 		case REGISTER_FAIL:
 			dispatch({
-			    type: REGISTER_FAIL,
-			    payload
+				type: REGISTER_FAIL,
+				payload
 			});
 			break;
 		case LOGIN_FAIL:
 			dispatch({
-			    type: LOGIN_FAIL,
-			    payload
+				type: LOGIN_FAIL,
+				payload
 			});
 			break;
 		case SUCCESS_LOGIN_MSG:
 			dispatch({
-			    type: SUCCESS_LOGIN_MSG,
-			    payload
+				type: SUCCESS_LOGIN_MSG,
+				payload
 			});
 			break;
 		case SUCCESS_REGISTER_MSG:
 			dispatch({
-			    type: SUCCESS_REGISTER_MSG,
-			    payload
+				type: SUCCESS_REGISTER_MSG,
+				payload
 			});
 			break;
+		case SUCCESS_RESET_PASS_MSG:
+			console.log('Resetting password');
+			dispatch({
+				type: SUCCESS_RESET_PASS_MSG,
+				payload
+			});
 	}
 
-    return setTimeout(() => {
-        dispatch(clearMessages())
-    }, 3000);
+	return setTimeout(() => {
+		dispatch(clearMessages())
+	}, 3000);
 };
 
 // Clear message
 export const clearMessages = () => ({
-    type: CLEAR_MSG
+	type: CLEAR_MSG
 });

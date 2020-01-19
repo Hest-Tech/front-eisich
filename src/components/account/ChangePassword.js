@@ -1,33 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import firebase from 'firebase/app';
 
 import NavBar from '../NavBar';
 import AccountMenu from './AccountMenu';
 import fire from '../../firebase/firebase';
 import { ResetPassSchema } from '../../utils/validate';
+import { history } from '../../routes/AppRouter';
+import { returnMessages } from '../../actions/resMessages';
 
 
-const ChangePassword = () => {
+const ChangePassword = (props) => {
 
     const reauthenticate = (currentPassword) => {
         const user = fire.auth().currentUser;
-        console.log(user);
-        const cred = fire.auth.EmailAuthProvider.credential(user.email, currentPassword);
+        const cred = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
+
         return user.reauthenticateWithCredential(cred);
     }
-    const changePassword = (currentPassword, newPassword, resetForm) => {
+    const changePassword = (currentPassword, newPassword, resetForm, setSubmitting) => {
         reauthenticate(currentPassword)
             .then(() => {
                 const user = fire.auth().currentUser;
+
                 user.updatePassword(newPassword)
                     .then(() => {
                         console.log("Password updated!");
                         resetForm();
+                        setSubmitting(false);
+                        history.push('/customer/account');
+                        props.returnMessages('Password updated successfully', 200, 'SUCCESS_RESET_PASS_MSG')
                     })
-                    .catch((error) => { console.log('==>', error); });
+                    .catch(error => console.log('==>', error));
             })
-            .catch((error) => { console.log(error); });
+            .catch((error) => console.log(error));
     }
 
     return (
@@ -53,11 +60,12 @@ const ChangePassword = () => {
                                 validationSchema={ResetPassSchema}
                                 onSubmit={(values, { setSubmitting, resetForm }) => {
                                     console.log(values);
+                                    setSubmitting(true);
 
                                     const currentPass = values.currentPassword;
                                     const newPass = values.newPassword;
 
-                                    changePassword(currentPass, newPass, resetForm);
+                                    changePassword(currentPass, newPass, resetForm, setSubmitting);
                                 }}
                             >
                                 {({ touched, errors, isSubmitting, values, filters }) => (
@@ -118,7 +126,7 @@ const ChangePassword = () => {
                                             className="btn btn-warning btn-block btn-change-pass"
                                             disabled={isSubmitting}
                                         >
-                                            {isSubmitting ? <div className="spinner-border text-warning"></div> : "SUBMIT"}
+                                            {isSubmitting ? <div className="spinner-border text-success"></div> : "SAVE"}
                                         </button>
                                     </Form>
                                 )}
@@ -136,4 +144,8 @@ const mapStateToProps = (state) => ({
     resMessages: state.resMessages
 });
 
-export default connect(mapStateToProps)(ChangePassword);
+const mapDispatchToProps = (dispatch) => ({
+    returnMessages: (msg, code, id) => dispatch(returnMessages(msg, code, id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);
