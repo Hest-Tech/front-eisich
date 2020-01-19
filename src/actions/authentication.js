@@ -17,7 +17,9 @@ import {
     SUCCESS_REGISTER_MSG,
     LOGIN_SUCCESS,
     SUCCESS_LOGIN_MSG,
-    UPDATE_ADDRESS_BOOK
+    UPDATE_USER_PROFILE,
+    UPDATE_ADDRESS_BOOK,
+    SUCCESS_UPDATE_MSG
 } from './types';
 import fire, { googleAuthProvider, database } from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
@@ -39,7 +41,7 @@ export const authHelperFunc = (action, displayName, data, dispatch, id) => {
                 lastName
             };
             let user = JSON.stringify(userData);
-            console.log('-=>',user);
+            console.log('-=>', user);
 
             storeUser.setCookie('user', user, 1);
 
@@ -127,7 +129,7 @@ export const loadUser = () => dispatch => {
 
     if (userCookie && authUser) {
         userCookie = JSON.parse(userCookie);
-        
+
         return dispatch({
             type: LOAD_USER,
             user: userCookie,
@@ -141,7 +143,7 @@ export const loadUser = () => dispatch => {
 // login success
 export const loginUser = (actions) => dispatch => {
 
-    if (typeof(actions) === 'object') {
+    if (typeof (actions) === 'object') {
         let {
             user,
             resetForm,
@@ -275,31 +277,44 @@ export const closeAuthPopUp = () => dispatch => {
     dispatch({ type: CLOSE_AUTH_POPUP })
 };
 
+// update user
+export const updateAccount = (updates, setSubmitting, resetForm) => dispatch => {
 
+    let user = fire.auth().currentUser;
+    let ref = fire.database().ref('/users/' + userId);
+    let userId = user.uid;
 
-
-
-
-
-
-// // reset password
-// export const resetPassword = ({ email }) => ({
-//     type: 'RESET_PASSWORD',
-//     url: '<url>',
-//     email
-// });
-
-// // update user
-// export const updateUser = ({ id }, updates) => ({
-//     type: 'UPDATE_USER',
-//     url: '<url>',
-//     id,
-//     updates
-// })
-
-// // delete user
-// export const deleteUser = ({ id }) => ({
-//     type: 'DELETE_USER',
-//     url: '<url>',
-//     id
-// })
+    return user.updateProfile({ displayName: updates.firstName })
+        .then(() => {
+            ref.once('value')
+                .then(snapshot => {
+                    let authUser = snapshot.val();
+                    fire.database()
+                        .ref('/users/' + userId)
+                        .set({
+                            ...authUser,
+                            ...updates
+                        }, error => {
+                            if (error) {
+                                // The write failed...
+                                console.log(error);
+                            } else {
+                                console.log('Data updated successfully')
+                                // Data saved successfully!
+                                // setSubmitting(false);
+                                // resetForm();
+                                dispatch({
+                                    type: UPDATE_USER_PROFILE,
+                                    updates
+                                });
+                                history.push('/customer/account');
+                                dispatch(
+                                    returnMessages('Details updated successfully', 200, SUCCESS_UPDATE_MSG)
+                                );
+                            }
+                        });
+                });
+        }).catch(error => {
+            console.log(error);
+        });
+}

@@ -9,7 +9,9 @@ import {
 	SUCCESS_LOGIN_MSG,
 	SUCCESS_REGISTER_MSG,
 	SUCCESS_RESET_PASS_MSG,
-	REGISTER_FAIL
+	REGISTER_FAIL,
+	WRONG_INPUT,
+	SUCCESS_UPDATE_MSG
 } from './types';
 
 
@@ -51,9 +53,20 @@ export const returnMessages = (msg, code = undefined, id) => dispatch => {
 			});
 			break;
 		case SUCCESS_RESET_PASS_MSG:
-			console.log('Resetting password');
 			dispatch({
 				type: SUCCESS_RESET_PASS_MSG,
+				payload
+			});
+			break;
+		case WRONG_INPUT:
+			dispatch({
+				type: SUCCESS_RESET_PASS_MSG,
+				payload
+			});
+			break;
+		case SUCCESS_UPDATE_MSG:
+			dispatch({
+				type: SUCCESS_UPDATE_MSG,
 				payload
 			});
 	}

@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Field, Formik, ErrorMessage } from "formik";
 import InputMask from 'react-input-mask';
+import * as Yup from "yup";
 
 import NavBar from '../NavBar';
 import AccountMenu from './AccountMenu';
-import { validationSchema } from '../../utils/validate';
+import { updateAccountSchema } from '../../utils/validate';
 import fire from '../../firebase/firebase';
+import { updateAccount } from '../../actions/authentication';
 
 
 class UpdateAccount extends React.Component {
@@ -14,16 +16,14 @@ class UpdateAccount extends React.Component {
         super(props);
 
         this.state = {
-            value: "",
+            firstName: this.props.authentication.user.firstName,
+            lastName: this.props.authentication.user.lastName,
+            birthday: this.props.authentication.user.birthday,
+            gender: this.props.authentication.user.gender,
+            phoneNumber: this.props.authentication.user.phoneNumber,
             email: this.props.authentication.user.email || '2547xxxxxxxx'
         }
     }
-
-    // onChange(event) {
-    //     this.setState({
-    //         value: event.target.value
-    //     });
-    // }
 
     render() {
         return (
@@ -43,17 +43,16 @@ class UpdateAccount extends React.Component {
                                 initialValues={{
                                     firstName: "",
                                     lastName: "",
-                                    phoneNumber: this.state.value,
+                                    phoneNumber: this.state.phoneNumber.toString(),
                                     email: this.state.email,
-                                    password: "",
-                                    confirmPassword: "",
-                                    select: "",
-                                    terms: false
+                                    birthday: "",
+                                    gender: ""
                                 }}
-                                validationSchema={validationSchema}
+                                validationSchema={updateAccountSchema}
                                 onSubmit={(values, { setSubmitting, resetForm }) => {
                                     setSubmitting(true);
-                                    resetForm();
+
+                                    this.props.updateAccount(values, setSubmitting, resetForm);
                                 }}
                             >
                                 {({ values, errors, touched, isSubmitting, filters }) => (
@@ -120,22 +119,16 @@ class UpdateAccount extends React.Component {
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <div>
-                                                    <label htmlFor="phone"><small className="text-muted">Phone Number format: +(254) - 7xx - xxx - xxx</small></label>
-                                                    <InputMask mask="+(254) 999 999 999"
-                                                        maskChar=" "
-                                                        value={values.phoneNumber}
-                                                    >
-                                                        {(inputProps) => <Field
-                                                            {...inputProps}
-                                                            type="tel"
-                                                            name="phoneNumber"
-                                                            id="phone"
-                                                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
-                                                            placeholder="Phone number"
-                                                            className={`form-control phone-input-field `}
-                                                            // onChange={this.onChange}
-                                                        />}
-                                                    </InputMask>
+                                                    <label htmlFor="phone"><small className="text-muted">Phone Number (optional)</small></label>
+
+                                                    <Field
+                                                        type="number"
+                                                        name="phoneNumber"
+                                                        placeholder="Phonenumber"
+                                                        className={`form-control ${
+                                                            touched.phoneNumber && errors.phoneNumber ? "is-invalid" : ""
+                                                            }`}
+                                                    />
                                                     <ErrorMessage
                                                         component="div"
                                                         name="phoneNumber"
@@ -165,7 +158,6 @@ class UpdateAccount extends React.Component {
                                                 <div>
                                                     <label htmlFor="birthday"><small className="text-muted">Birthday (optional)</small></label>
                                                     <Field
-                                                        type="number"
                                                         name="birthday"
                                                         id="birthday"
                                                         placeholder="Birthday"
@@ -208,4 +200,8 @@ const mapStateToProps = (state) => ({
     resMessages: state.resMessages
 });
 
-export default connect(mapStateToProps)(UpdateAccount);
+const mapDispatchToProps = (dispatch) => ({
+    updateAccount: (updates) => dispatch(updateAccount(updates)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateAccount);

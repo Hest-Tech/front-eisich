@@ -14,6 +14,7 @@ export default (state = msgReducerDefaultState, action) => {
         case 'SUCCESS_LOGIN_MSG':
         case 'SUCCESS_REGISTER_MSG':
         case 'SUCCESS_RESET_PASS_MSG':
+        case 'SUCCESS_UPDATE_MSG':
             return {
                 error: null,
                 msg: action.payload.msg,

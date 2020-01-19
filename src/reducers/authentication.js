@@ -105,7 +105,16 @@ export default (state = autheticationReducerDefaultState, action) => {
                 isAuthenticated: false,
                 displayName: null
             };
-        case 'UPDATE_USER':
+        case 'UPDATE_USER_PROFILE':
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    ...action.updates
+                },
+                isAuthenticated: true,
+                displayName: action.updates.firstName
+            }
         case 'RESET_PASSWORD':
         default:
             return state;
