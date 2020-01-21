@@ -304,7 +304,7 @@ class CheckoutPage extends React.Component {
                                                             <label className="form-check-label-radio" htmlFor="exampleRadios2">Paybill</label>
                                                         </div>
                                                     </div>
-                                                    <div className="form-check form-check-item">
+                                                    {/* <div className="form-check form-check-item">
 
                                                         <Field
                                                             className={`form-check-input-radio payment-radio ${
@@ -322,7 +322,7 @@ class CheckoutPage extends React.Component {
                                                             <p><strong>IMPORTANT: </strong>Please carry the exact amount in Kenyan Shillings as our Delivery Associates and Pickup Station staff do not carry petty cash.</p>
                                                             <p>We encourage you to Pay Online - it saves you time & money</p>
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                             <button className="btn btn-warning btn-lg btn-block checkout-btn" type="submit">Continue to checkout</button>

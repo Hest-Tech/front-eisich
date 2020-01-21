@@ -28,6 +28,12 @@ class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
+        
+        let user = this.props.authentication.user || {};
+
+        this.state = {
+            displayName: user.firstName || 'Anonymous',
+        }
     }
 
     componentDidMount() {
@@ -105,7 +111,7 @@ class NavBar extends React.Component {
                                         className="dropdown authenticated-user"
                                     >
                                         <span className="dropdown-toggle authenticated-user__btn" data-toggle="dropdown">
-                                            {this.props.authentication.isAuthenticated ? <p><small>Hi, {this.props.authentication.displayName}</small></p> : <div className="non-authenticated-user">
+                                            {this.props.authentication.isAuthenticated ? <p><small>Hi, {this.state.displayName}</small></p> : <div className="non-authenticated-user">
                                                 <i className="far fa-user"></i>
                                                 <small className="text-muted">login</small>
                                             </div>}

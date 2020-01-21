@@ -115,6 +115,16 @@ export default (state = autheticationReducerDefaultState, action) => {
                 isAuthenticated: true,
                 displayName: action.updates.firstName
             }
+        case 'UPDATE_ADDRESS':
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    address: [{ ...action.address }]
+                },
+                isAuthenticated: true,
+                displayName: state.user.firstName
+            }
         case 'RESET_PASSWORD':
         default:
             return state;

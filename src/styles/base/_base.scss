@@ -71,8 +71,21 @@ h2 {
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: .9;
+  opacity: .95;
   background-color: #d4d5dd;
+}
+
+.no-details {
+  // background: red;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.account-det-background {
+  // background: blue;
+  // height: 800px
 }
 
 

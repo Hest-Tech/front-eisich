@@ -19,7 +19,8 @@ import {
     SUCCESS_LOGIN_MSG,
     UPDATE_USER_PROFILE,
     UPDATE_ADDRESS_BOOK,
-    SUCCESS_UPDATE_MSG
+    SUCCESS_UPDATE_MSG,
+    UPDATE_ADDRESS
 } from './types';
 import fire, { googleAuthProvider, database } from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
@@ -101,12 +102,14 @@ export const registerSuccess = ({
     return fire.auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
+            let addressRef = ref.child("address");
             let fullName = `${firstName} ${lastName}`;
             let data = {
                 email,
                 phoneNumber: phoneNumber.toString(),
                 firstName,
-                lastName
+                lastName,
+                address: []
             }
 
             authHelperFunc('REGISTER_ACTION', fullName, data, dispatch, SUCCESS_REGISTER_MSG);
@@ -128,15 +131,36 @@ export const loadUser = () => dispatch => {
     let authUser = fire.auth().currentUser;
 
     if (userCookie && authUser) {
-        userCookie = JSON.parse(userCookie);
+        let userId = authUser.uid;
 
-        return dispatch({
-            type: LOAD_USER,
-            user: userCookie,
-            displayName: authUser.displayName
-        })
+        database
+            .ref('/users/' + userId)
+            .once('value')
+            .then(snapshot => {
+                let userParsedCookie = JSON.parse(userCookie);
+                let userData = snapshot.val();
+                let newUserData = {
+                    ...userParsedCookie,
+                    ...userData
+                }
+                let user = JSON.stringify(newUserData);
+                storeUser.setCookie('user', user, 1);
+                return dispatch({
+                    type: LOAD_USER,
+                    user: userParsedCookie,
+                    displayName: userCookie.firstName
+                })
+            })
+            .catch(error => {
+                dispatch(
+                    returnMessages(error.message, error.code, LOGIN_FAIL)
+                );
+                console.log('-->', error);
+            })
     } else {
-        dispatch(unloadUser()); // delete this
+        // dispatch(unloadUser());
+        history.push('/');
+        // storeUser.eraseCookie('user');
     }
 };
 
@@ -281,8 +305,8 @@ export const closeAuthPopUp = () => dispatch => {
 export const updateAccount = (updates, setSubmitting, resetForm) => dispatch => {
 
     let user = fire.auth().currentUser;
-    let ref = fire.database().ref('/users/' + userId);
     let userId = user.uid;
+    let ref = fire.database().ref('/users/' + userId);
 
     return user.updateProfile({ displayName: updates.firstName })
         .then(() => {
@@ -317,4 +341,48 @@ export const updateAccount = (updates, setSubmitting, resetForm) => dispatch => 
         }).catch(error => {
             console.log(error);
         });
+}
+
+export const addAddress = (address, resetForm, setSubmitting) => dispatch => {
+    let user = fire.auth().currentUser;
+    let userId = user.uid;
+    let ref = fire.database().ref('/users/' + userId);
+
+    ref.once('value')
+        .then(snapshot => {
+            let authUser = snapshot.val();
+            let ref = fire.database().ref().push().key;
+
+            fire.database()
+                .ref('/users/' + userId)
+                .child('address')
+                .child(ref)
+                .set({
+                    ...address
+                }, error => {
+                    if (error) {
+                        // The write failed...
+                        console.log(error);
+                    } else {
+                        console.log('Data updated successfully')
+                        // localStorage.setItem({
+                        //     ...authUser,
+                        //     address: { ...address }
+                        // })
+                        // Data saved successfully!
+                        // setSubmitting(false);
+                        // resetForm();
+                        console.log(authUser);
+                        dispatch({
+                            type: UPDATE_ADDRESS,
+                            address
+                        });
+                        history.push('/customer/account');
+                        dispatch(
+                            returnMessages('Address was saved successfully', 200, SUCCESS_UPDATE_MSG)
+                        );
+                    }
+                });
+        });   
+    
 }

@@ -8,6 +8,7 @@ import { history } from './routes/AppRouter';
 import { loadUser, unloadUser } from './actions/authentication';
 import clientStorage from './utils/clientStorage';
 import configureStore from './store/configureStore';
+// import * as admin from 'firebase-admin';
 
 
 const store = configureStore();
@@ -25,9 +26,6 @@ render(<div className="spinner-border text-warning"></div>, document.getElementB
 
 fire.auth().onAuthStateChanged(user => {
     if (user) {
-        console.log('logged in', user);
-        var isAnonymous = user.isAnonymous;
-        console.log('logged in =>', isAnonymous);
         renderApp();
         let userId = user.uid;
 
@@ -37,7 +35,7 @@ fire.auth().onAuthStateChanged(user => {
             .once('value')
             .then(snapshot => {
                 let userData = snapshot.val();
-                console.log(userData);
+                console.log('==> ',userData);
                 let user = JSON.stringify({
                     ...userData,
                     uid: userId
@@ -47,7 +45,7 @@ fire.auth().onAuthStateChanged(user => {
     } else {
         console.log('logged out');
         renderApp();
-        store.dispatch(unloadUser());
+        // store.dispatch(unloadUser());
         history.push('/');
         storeUser.eraseCookie('user');
     }

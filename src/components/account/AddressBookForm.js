@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import { LoginSchema } from '../../utils/validate';
-import { addressBookForm } from '../../actions/authentication';
+import { addressBookForm, addAddress } from '../../actions/authentication';
 
 
 const customStyles = {
@@ -55,25 +55,28 @@ class AddressBookForm extends React.Component {
                             firstName: this.props.authentication.user.firstName,
                             lastName: this.props.authentication.user.lastName,
                             address: "",
-                            phoneNumber: this.props.authentication.user.phoneNumber
+                            region: "",
+                            city: "",
+                            phoneNumber: this.props.authentication.user.phoneNumber.toString(),
+                            phoneNumber2: "",
+                            info: ""
                         }}
-                        validationSchema={LoginSchema}
+                        // validationSchema={LoginSchema}
                         onSubmit={(values, { setSubmitting, resetForm }) => {
                             setSubmitting(true);
 
-                            let user = {
-                                email: values.email,
-                                password: values.password,
-                                resetForm: resetForm,
-                                setSubmitting: setSubmitting
+                            let addressPayload = {
+                                firstName: values.firstName,
+                                lastName: values.lastName,
+                                address: values.address,
+                                region: values.region,
+                                city: values.city,
+                                phoneNumber: [values.phoneNumber, values.phoneNumber2],
+                                info: values.info
                             };
-                            let actions = {
-                                user,
-                                resetForm,
-                                setSubmitting,
-                                action: 'LOGIN_ACTION'
-                            }
 
+                            this.props.addAddress(addressPayload, resetForm, setSubmitting);
+                            console.log(addressPayload);
                         }}
                     >
                         {({ touched, errors, isSubmitting, values, filters }) => (
@@ -81,11 +84,12 @@ class AddressBookForm extends React.Component {
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
 
-                                        <label htmlFor="email" className="control-label">First Name</label>
+                                        <label htmlFor="firstName" className="control-label">First Name</label>
                                         <div>
                                             <Field
                                                 type="text"
                                                 name="firstName"
+                                                id="firstName"
                                                 placeholder="First Name"
                                                 className={`form-control ${
                                                     touched.firstName && errors.firstName ? "is-invalid" : ""
@@ -100,11 +104,12 @@ class AddressBookForm extends React.Component {
                                     </div>
                                     <div className="form-group col-md-6">
 
-                                        <label htmlFor="email" className="control-label">Last Name</label>
+                                        <label htmlFor="lastName" className="control-label">Last Name</label>
                                         <div>
                                             <Field
                                                 type="text"
                                                 name="lastName"
+                                                id="lastName"
                                                 placeholder="Last Name"
                                                 className={`form-control ${
                                                     touched.lastName && errors.lastName ? "is-invalid" : ""
@@ -121,11 +126,11 @@ class AddressBookForm extends React.Component {
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
 
-                                        <label htmlFor="email" className="control-label">Phone Number</label>
+                                        <label htmlFor="phoneNumber" className="control-label">Phone Number</label>
                                         <div>
                                             <Field
-                                                type="number"
                                                 name="phoneNumber"
+                                                id="phoneNumber"
                                                 placeholder="Phonenumber"
                                                 className={`form-control ${
                                                     touched.phoneNumber && errors.phoneNumber ? "is-invalid" : ""
@@ -140,47 +145,42 @@ class AddressBookForm extends React.Component {
                                     </div>
                                     <div className="form-group col-md-6">
 
-                                        <label htmlFor="email" className="control-label">Additional Phone Number</label>
+                                        <label htmlFor="phoneNumber2" className="control-label">Additional Phone Number</label>
                                         <div>
                                             <Field
-                                                type="number"
                                                 name="phoneNumber2"
+                                                id="phoneNumber2"
                                                 placeholder="Additional Phone Number"
-                                                className={`form-control ${
-                                                    touched.phoneNumber && errors.phoneNumber ? "is-invalid" : ""
-                                                    }`}
+                                                className="form-control"
                                             />
-                                            <ErrorMessage
+                                            {/* <ErrorMessage
                                                 component="div"
                                                 name="phoneNumber"
                                                 className="invalid-feedback"
-                                            />
+                                            /> */}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="email" className="control-label">Address</label>
+                                    <label htmlFor="address" className="control-label">Address</label>
                                     <Field
-                                        type="email"
-                                        name="email"
+                                        name="address"
                                         placeholder="Enter your Address"
-                                        className={`form-control ${
-                                            touched.email && errors.email ? "is-invalid" : ""
-                                            }`}
+                                        className="form-control"
                                     />
                                     <ErrorMessage
                                         component="div"
-                                        name="email"
+                                        name="address"
                                         className="invalid-feedback"
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="password" className="control-label">Additional Information</label>
+                                    <label htmlFor="exampleFormControlTextarea1" className="control-label">Additional Information</label>
                                     <Field
                                         component="textarea"
-                                        name="address"
+                                        name="info"
                                         className={`form-control ${
-                                            touched.address && errors.address ? "is-invalid" : ""
+                                            touched.info && errors.info ? "is-invalid" : ""
                                             }`}
                                         id="exampleFormControlTextarea1"
                                         placeholder="Street Name / Building / Apartment No. / Floor"
@@ -188,9 +188,45 @@ class AddressBookForm extends React.Component {
                                     ></Field>
                                     <ErrorMessage
                                         component="div"
-                                        name="address"
+                                        name="info"
                                         className="invalid-feedback"
                                     />
+                                </div>
+                                <div className="form-row">
+                                    <div className="form-group col-md-6">
+
+                                        <label htmlFor="region" className="control-label">Region</label>
+                                        <div>
+                                            <Field
+                                                as="select"
+                                                id="region"
+                                                name="region"
+                                                className="form-control"
+                                            >
+                                                <option defaultValue="Nairobi">Please select</option>
+                                                <option defaultValue="1">Nairobi</option>
+                                                <option defaultValue="2">Two</option>
+                                                <option defaultValue="3">Three</option>
+                                            </Field>
+                                        </div>
+                                    </div>
+                                    <div className="form-group col-md-6">
+
+                                        <label htmlFor="city" className="control-label">City</label>
+                                        <div>
+                                            <Field
+                                                as="select"
+                                                id="city"
+                                                name="city"
+                                                className="form-control"
+                                            >
+                                                <option defaultValue="Nairobi">Please select</option>
+                                                <option defaultValue="1">Nairobi</option>
+                                                <option defaultValue="2">Two</option>
+                                                <option defaultValue="3">Three</option>
+                                            </Field>
+                                        </div>
+                                    </div>
                                 </div>
                                 <button
                                     type="submit"
@@ -214,6 +250,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    addAddress: () => dispatch(addAddress()),
     addressBookForm: () => dispatch(addressBookForm())
 });
 

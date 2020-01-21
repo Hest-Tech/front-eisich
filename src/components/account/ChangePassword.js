@@ -19,7 +19,7 @@ const ChangePassword = (props) => {
 
         return user.reauthenticateWithCredential(cred);
     }
-    const changePassword = (currentPassword, newPassword, resetForm, setSubmitting) => {
+    const changePasswordValue = (currentPassword, newPassword, resetForm, setSubmitting) => {
         reauthenticate(currentPassword)
             .then(() => {
                 const user = fire.auth().currentUser;
@@ -65,7 +65,7 @@ const ChangePassword = (props) => {
                                     const currentPass = values.currentPassword;
                                     const newPass = values.newPassword;
 
-                                    changePassword(currentPass, newPass, resetForm, setSubmitting);
+                                    changePasswordValue(currentPass, newPass, resetForm, setSubmitting);
                                 }}
                             >
                                 {({ touched, errors, isSubmitting, values, filters }) => (
