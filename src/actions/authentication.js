@@ -19,8 +19,7 @@ import {
     SUCCESS_LOGIN_MSG,
     UPDATE_USER_PROFILE,
     UPDATE_ADDRESS_BOOK,
-    SUCCESS_UPDATE_MSG,
-    UPDATE_ADDRESS
+    SUCCESS_UPDATE_MSG
 } from './types';
 import fire, { googleAuthProvider, database } from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
@@ -102,7 +101,7 @@ export const registerSuccess = ({
     return fire.auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-            let addressRef = ref.child("address");
+            // let addressRef = ref.child("address");
             let fullName = `${firstName} ${lastName}`;
             let data = {
                 email,
@@ -143,11 +142,12 @@ export const loadUser = () => dispatch => {
                     ...userParsedCookie,
                     ...userData
                 }
+                console.log('----------> ',newUserData);
                 let user = JSON.stringify(newUserData);
                 storeUser.setCookie('user', user, 1);
                 return dispatch({
                     type: LOAD_USER,
-                    user: userParsedCookie,
+                    user: newUserData,
                     displayName: userCookie.firstName
                 })
             })
@@ -346,43 +346,37 @@ export const updateAccount = (updates, setSubmitting, resetForm) => dispatch => 
 export const addAddress = (address, resetForm, setSubmitting) => dispatch => {
     let user = fire.auth().currentUser;
     let userId = user.uid;
-    let ref = fire.database().ref('/users/' + userId);
 
-    ref.once('value')
-        .then(snapshot => {
-            let authUser = snapshot.val();
-            let ref = fire.database().ref().push().key;
-
-            fire.database()
-                .ref('/users/' + userId)
-                .child('address')
-                .child(ref)
-                .set({
-                    ...address
-                }, error => {
-                    if (error) {
-                        // The write failed...
-                        console.log(error);
-                    } else {
-                        console.log('Data updated successfully')
-                        // localStorage.setItem({
-                        //     ...authUser,
-                        //     address: { ...address }
-                        // })
-                        // Data saved successfully!
-                        // setSubmitting(false);
-                        // resetForm();
-                        console.log(authUser);
-                        dispatch({
-                            type: UPDATE_ADDRESS,
-                            address
-                        });
-                        history.push('/customer/account');
-                        dispatch(
-                            returnMessages('Address was saved successfully', 200, SUCCESS_UPDATE_MSG)
-                        );
-                    }
+    fire.database()
+        .ref('/users/' + userId)
+        .child('address')
+        .push()
+        .set({
+            ...address
+        }, error => {
+            if (error) {
+                // The write failed...
+                console.log(error);
+            } else {
+                console.log('Data updated successfully')
+                let ref = fire.database().ref('/users/' + userId).child('address');
+                // Data saved successfully!
+                ref.on('child_added', function (data) {
+                    console.log(data);
+                    setSubmitting(false);
+                    resetForm();
+                    dispatch(loadUser());
+                    history.push('/customer/account');
+                    dispatch(closeAuthPopUp());
+                    dispatch(
+                        returnMessages('Address was saved successfully', 200, SUCCESS_UPDATE_MSG)
+                    );
+                    // localStorage.setItem({
+                    //     ...authUser,
+                    //     address: { ...address }
+                    // })
                 });
-        });   
-    
+            }
+        });
+
 }

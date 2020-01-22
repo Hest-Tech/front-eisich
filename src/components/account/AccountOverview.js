@@ -17,7 +17,7 @@ class AccountOverview extends React.Component {
             firstName: user.firstName || 'Anonymous',
             lastName: user.lastName || 'Anonymous',
             phoneNumber: user.phoneNumber || '2547xxxxxxxx',
-            address: user.address.address ? user.address : {}
+            address: user.address ? user.address : {}
         }
     }
 

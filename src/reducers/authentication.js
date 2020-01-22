@@ -7,9 +7,13 @@ import clientStorage from '../utils/clientStorage';
 
 const fetchUser = new clientStorage();
 const userCookie = fetchUser.getCookie('user');
+const parsedCookie = userCookie && JSON.parse(userCookie);
 const autheticationReducerDefaultState = {
     isAuthenticated: userCookie ? true : false,
-    user: userCookie ? JSON.parse(userCookie) : {},
+    user: userCookie ? {
+        ...parsedCookie,
+        address: []
+    } : {},
     displayName: userCookie ? JSON.parse(userCookie).firstName : null,
     openAuthPopUp: false,
     closeAuthPopUp: undefined,
@@ -114,16 +118,6 @@ export default (state = autheticationReducerDefaultState, action) => {
                 },
                 isAuthenticated: true,
                 displayName: action.updates.firstName
-            }
-        case 'UPDATE_ADDRESS':
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    address: [{ ...action.address }]
-                },
-                isAuthenticated: true,
-                displayName: state.user.firstName
             }
         case 'RESET_PASSWORD':
         default:

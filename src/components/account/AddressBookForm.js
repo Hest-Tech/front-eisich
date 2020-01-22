@@ -250,7 +250,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addAddress: () => dispatch(addAddress()),
+    addAddress: (addressPayload, resetForm, setSubmitting) => dispatch(addAddress(addressPayload, resetForm, setSubmitting)),
     addressBookForm: () => dispatch(addressBookForm())
 });
 
