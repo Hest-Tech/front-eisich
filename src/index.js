@@ -30,12 +30,12 @@ fire.auth().onAuthStateChanged(user => {
         let userId = user.uid;
 
         store.dispatch(loadUser());
+        console.log(user);
         return fire.database()
             .ref('/users/' + userId)
             .once('value')
             .then(snapshot => {
                 let userData = snapshot.val();
-                let ref = fire.database().ref().push().key;
                 let user = JSON.stringify({
                     ...userData,
                     uid: userId

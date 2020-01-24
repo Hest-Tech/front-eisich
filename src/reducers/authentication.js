@@ -10,11 +10,8 @@ const userCookie = fetchUser.getCookie('user');
 const parsedCookie = userCookie && JSON.parse(userCookie);
 const autheticationReducerDefaultState = {
     isAuthenticated: userCookie ? true : false,
-    user: userCookie ? {
-        ...parsedCookie,
-        address: []
-    } : {},
-    displayName: userCookie ? JSON.parse(userCookie).firstName : null,
+    user: userCookie ? parsedCookie : null,
+    displayName: userCookie ? parsedCookie.firstName : null,
     openAuthPopUp: false,
     closeAuthPopUp: undefined,
     registering: false,
@@ -108,7 +105,17 @@ export default (state = autheticationReducerDefaultState, action) => {
                 user: {},
                 isAuthenticated: false,
                 displayName: null
-            };
+            }; 
+        case 'SET_DEFAULT_ADDRESS':
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    address: { ...action.payload }
+                },
+                isAuthenticated: true,
+                // displayName: action.payload.firstName
+            }
         case 'UPDATE_USER_PROFILE':
             return {
                 ...state,

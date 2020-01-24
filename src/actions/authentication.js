@@ -19,7 +19,8 @@ import {
     SUCCESS_LOGIN_MSG,
     UPDATE_USER_PROFILE,
     UPDATE_ADDRESS_BOOK,
-    SUCCESS_UPDATE_MSG
+    SUCCESS_UPDATE_MSG,
+    SET_DEFAULT_ADDRESS
 } from './types';
 import fire, { googleAuthProvider, database } from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
@@ -107,8 +108,7 @@ export const registerSuccess = ({
                 email,
                 phoneNumber: phoneNumber.toString(),
                 firstName,
-                lastName,
-                address: []
+                lastName
             }
 
             authHelperFunc('REGISTER_ACTION', fullName, data, dispatch, SUCCESS_REGISTER_MSG);
@@ -142,7 +142,6 @@ export const loadUser = () => dispatch => {
                     ...userParsedCookie,
                     ...userData
                 }
-                console.log('----------> ',newUserData);
                 let user = JSON.stringify(newUserData);
                 storeUser.setCookie('user', user, 1);
                 return dispatch({
@@ -379,4 +378,61 @@ export const addAddress = (address, resetForm, setSubmitting) => dispatch => {
             }
         });
 
+}
+
+export const setDefaultAddress = addressKey => dispatch => {
+    let authUser = fire.auth().currentUser;
+    let userId = authUser.uid;
+
+    return database
+        .ref('/users/' + userId)
+        .once('value')
+        .then(snapshot => {
+            let userRef = snapshot.val();
+            let addressList = Object.entries(userRef.address);
+            let addressRef = {};
+            let newAddressList = [];
+            let newUserRef = {};
+
+            addressList.forEach(address => {
+                address[0] === addressKey ? userRef['address'][addressKey]['default'] = true : userRef['address'][address[0]]['default'] = false; // switch default address
+
+                let addressObj = {}
+                addressRef[address[0]] = address[1];
+
+                // push switched address
+                // newAddressList.push(addressObj);
+            });
+            
+            // let defaultAddressIndex = addressList.findIndex(address => address[1].default === true);
+
+            // // change address arrangement order
+            // newAddressList.splice(0, 0, newAddressList.splice(defaultAddressIndex, 1)[0]);
+            // // flip array to object
+            // newAddressList.forEach(address => {
+            //     let addressListArray = Object.entries(address);
+            //     addressRef[addressListArray[0][0]] = addressListArray[0][1];
+            // });
+
+            newUserRef['/users/' + userId] = {
+                ...userRef,
+                address: { ...addressRef }
+            };
+
+            fire.database().ref().update(newUserRef).then(() => {
+                dispatch({
+                    type: SET_DEFAULT_ADDRESS,
+                    payload: addressRef
+                });
+                console.log(newUserRef);
+                console.log('Address Updated successfully');
+                // history.push('/customer/address')
+                // dispatch(
+                //     returnMessages('Address updated successfully', 200, SUCCESS_UPDATE_MSG)
+                // );
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        });
 }

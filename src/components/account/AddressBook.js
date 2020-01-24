@@ -5,7 +5,12 @@ import { NavLink } from 'react-router-dom';
 import NavBar from '../NavBar';
 import AccountMenu from './AccountMenu';
 import AddressBookForm from './AddressBookForm';
-import { addressBookForm, loadUser } from '../../actions/authentication';
+import { returnMessages } from '../../actions/resMessages';
+import {
+    addressBookForm,
+    loadUser,
+    setDefaultAddress
+} from '../../actions/authentication';
 import goodReview from '../../assets/images/good-review.png';
 
 
@@ -14,16 +19,49 @@ class AddressBook extends React.Component {
     constructor(props) {
         super(props);
         let user = this.props.authentication.user || {};
+        let addressList = Object.entries(this.props.authentication.user.address || {})
+        let defaultAddressIndex = addressList.findIndex(address => address[1].default === true);
+        
+        addressList.splice(0, 0, addressList.splice(defaultAddressIndex, 1)[0]);
+
+        // default address index to be 0
 
         this.state = {
             userProfile: {
                 email: user.email || 'No email',
                 firstName: user.firstName || 'Anonymous',
                 lastName: user.lastName || 'Anonymous',
-                phoneNumber: user.phoneNumber || '2547xxxxxxxx'
-            }
+                phoneNumber: user.phoneNumber || '2547xxxxxxxx',
+                address: user.address
+            },
+            addresses: Object.keys(this.props.authentication.user.address || {}),
+            addressList
         }
     }
+
+    addressList() {
+        let addressList = Object.entries(this.props.authentication.user.address || {});
+        let defaultAddressIndex = addressList.findIndex(address => address[1].default === true);
+        
+        addressList.splice(0, 0, addressList.splice(defaultAddressIndex, 1)[0]);
+        return addressList;
+    }
+
+    setDefaultAddress(addressIndex) {
+        this.props.setDefaultAddress(addressIndex);
+        // let addressList = Object.entries(this.props.authentication.user.address || {})
+        // let defaultAddressIndex = addressList.findIndex(address => address[1].default === true);
+        
+        // addressList.splice(0, 0, addressList.splice(defaultAddressIndex, 1)[0]);
+        // return this.props.loadUser();
+        // console.log(addressList)
+
+        // return this.setState(() => ({ addressList }));
+    }
+
+    // componentDidMount() {
+    //     console.log(this.state.addressList);
+    // }
 
     render() {
         return (
@@ -39,8 +77,8 @@ class AddressBook extends React.Component {
                     <span></span>
                     <div className="accout-detail-sec acc-sec address-book-content">
                         <div className="account-det-background">
-                            {this.props.authentication.user.address.address ? <div className="new-address-header d-flex justify-content-between align-items-center">
-                                <h1 className="account-overview-title">Address Book (1)</h1>
+                            <div className="new-address-header d-flex justify-content-between align-items-center">
+                                <h1 className="account-overview-title">Address Book{this.state.addresses.length && <span> ({this.state.addresses.length})</span>}</h1>
                                 <button
                                     type="submit"
                                     className="btn btn-warning add-new-address"
@@ -48,31 +86,61 @@ class AddressBook extends React.Component {
                                 >
                                     ADD NEW ADDRESS
                                 </button>
-                            </div> : <h1 className="account-overview-title">Address Book</h1>}
-                            {this.props.authentication.user.address.address ? <div
-                                className="detail-address-container"
-                            >
+                            </div>
+                            {
+                                this.state.addresses.length ? (
+                                    <div className="detail-address-container">
+                                        {
+                                            this.addressList().map((address, i) => {
+                                                return <div
+                                                    className="detail-address-book"
+                                                    key={address[0]}
+                                                >
+                                                    <div className="acc-overview account-address-overview">
+                                                        <div className="overview-address">
+                                                            <p>{address[1].firstName} {address[1].lastName}</p>
+                                                            <p className="user-info text-muted">{address[1].city}</p>
+                                                            <p className="user-info text-muted">{address[1].address}</p>
+                                                            {
+                                                                address[1].phoneNumber.map((num, i) => (
+                                                                    <p
+                                                                        className="user-info text-muted"
+                                                                        key={i}
+                                                                    >
+                                                                        {num}
+                                                                    </p>
+                                                                ))
+                                                            }
+                                                        </div>
+                                                        <div className="address-edit">
 
-                                <div className="detail-address-book">
-                                    <div className="acc-overview account-address-overview">
-                                        <div className="overview-address">
-                                            <p>{this.state.userProfile.firstName} {this.state.userProfile.lastName}</p>
-                                            <p className="user-info text-muted">eastleigh south</p>
-                                            <p className="user-info text-muted">Embakasi East - Embakasi / Utawala, Nairobi</p>
-                                            <p className="user-info text-muted">{this.state.userProfile.phoneNumber}</p>
-                                        </div>
-                                        <div className="edit-option address-edit">
-                                            <p className="text-success">DEFAULT ADDRESS</p>
-                                            <i
-                                                className="far fa-edit"
-                                                onClick={() => this.props.addressBookForm()}
-                                            ></i>
-                                        </div>
+                                                            <div className="address-text-action">
+                                                                <button
+                                                                    type="button"
+                                                                    className={`btn btn-light ${address[1].default === false && `address-txt`}`}
+                                                                    // className="btn btn-light"
+                                                                    disabled={address[1].default === true}
+                                                                    onClick={() => this.props.setDefaultAddress(address[0])}
+                                                                >
+                                                                    SET DEFAULT ADDRESS
+                                                                </button>
+                                                            </div>
+                                                            <div className="address-actions">
+                                                                <i
+                                                                    className="far fa-edit"
+                                                                    onClick={() => this.props.addressBookForm()}
+                                                                ></i>
+                                                                {address[1].default === false && <i className="fas fa-trash-alt"></i>}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            })
+                                        }
                                     </div>
-                                </div>
-                            </div> : <div
-                                className="no-details"
-                            >
+                                ) : (<div
+                                    className="no-details"
+                                >
                                     <div className="no-pending-background">
                                         <div className="no-orders-icon">
                                             <img src={goodReview} alt="empty goodReview" className="empty-box" />
@@ -89,43 +157,8 @@ class AddressBook extends React.Component {
                                             >ADD NEW ADDRESS</button>
                                         </div>
                                     </div>
-                                </div>}
-                            {/* <div className="detail-address-book">
-                                    <div className="acc-overview account-address-overview">
-                                        <div className="overview-address">
-                                            <p>{userProfile.firstName} {userProfile.lastName}</p>
-                                            <p className="user-info text-muted">Address</p>
-                                            <p className="user-info text-muted">City</p>
-                                            <p className="user-info text-muted">{userProfile.phoneNumber}</p>
-                                        </div>
-                                        <div className="edit-option address-edit">
-                                            <p>ADDRESS BOOK</p>
-                                            <i
-                                                className="far fa-edit"
-                                                onClick={() => props.addressBookForm()}
-                                            ></i>
-                                        </div>
-                                        {props.authentication.updateAddress ? <AddressBookForm /> : null}
-                                    </div>
-                                </div> */}
-                            {/* <div className="detail-address-book">
-                                    <div className="acc-overview account-address-overview">
-                                        <div className="overview-address">
-                                            <p>{userProfile.firstName} {userProfile.lastName}</p>
-                                            <p className="user-info text-muted">Address</p>
-                                            <p className="user-info text-muted">City</p>
-                                            <p className="user-info text-muted">{userProfile.phoneNumber}</p>
-                                        </div>
-                                        <div className="edit-option address-edit">
-                                            <p>ADDRESS BOOK</p>
-                                            <i
-                                                className="far fa-edit"
-                                                onClick={() => props.addressBookForm()}
-                                            ></i>
-                                        </div>
-                                        {props.authentication.updateAddress ? <AddressBookForm /> : null}
-                                    </div>
-                                </div> */}
+                                </div>)
+                            }
                         </div>
 
                     </div>
@@ -142,6 +175,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     loadUser: () => dispatch(loadUser()),
+    setDefaultAddress: (addressKey) => dispatch(setDefaultAddress(addressKey)),
+    returnMessages: () => dispatch(returnMessages()),
     addressBookForm: () => dispatch(addressBookForm())
 });
 
