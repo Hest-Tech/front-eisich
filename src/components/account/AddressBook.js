@@ -19,57 +19,39 @@ class AddressBook extends React.Component {
     constructor(props) {
         super(props);
         let user = this.props.authentication.user || {};
-        let addressList = Object.entries(this.props.authentication.user.address || {})
-        let defaultAddressIndex = addressList.findIndex(address => address[1].default === true);
-        
-        addressList.splice(0, 0, addressList.splice(defaultAddressIndex, 1)[0]);
-
-        // default address index to be 0
 
         this.state = {
             userProfile: {
                 email: user.email || 'No email',
                 firstName: user.firstName || 'Anonymous',
                 lastName: user.lastName || 'Anonymous',
-                phoneNumber: user.phoneNumber || '2547xxxxxxxx',
-                address: user.address
-            },
-            addresses: Object.keys(this.props.authentication.user.address || {}),
-            addressList
+                phoneNumber: user.phoneNumber || '2547xxxxxxxx'
+            }
         }
     }
 
     addressList() {
         let addressList = Object.entries(this.props.authentication.user.address || {});
         let defaultAddressIndex = addressList.findIndex(address => address[1].default === true);
-        
+
         addressList.splice(0, 0, addressList.splice(defaultAddressIndex, 1)[0]);
+        
         return addressList;
     }
-
-    setDefaultAddress(addressIndex) {
-        this.props.setDefaultAddress(addressIndex);
-        // let addressList = Object.entries(this.props.authentication.user.address || {})
-        // let defaultAddressIndex = addressList.findIndex(address => address[1].default === true);
-        
-        // addressList.splice(0, 0, addressList.splice(defaultAddressIndex, 1)[0]);
-        // return this.props.loadUser();
-        // console.log(addressList)
-
-        // return this.setState(() => ({ addressList }));
-    }
-
-    // componentDidMount() {
-    //     console.log(this.state.addressList);
-    // }
 
     render() {
         return (
             <div className="account-menu-container account-background">
                 <div className="nav-bar-wrapper">
                     <NavBar />
-                    {this.props.authentication.updateAddress ? <AddressBookForm /> : null}
+                    {this.props.authentication.updateAddress ? <AddressBookForm values={} /> : null}
                 </div>
+                {this.props.resMessages.msg && <div
+                    className="alert alert-success home-page-alert"
+                    role="alert"
+                >
+                    {this.props.resMessages.msg}
+                </div>}
                 <div className="account-container">
                     <div className="account-menu-sec acc-sec">
                         <AccountMenu />
@@ -78,7 +60,7 @@ class AddressBook extends React.Component {
                     <div className="accout-detail-sec acc-sec address-book-content">
                         <div className="account-det-background">
                             <div className="new-address-header d-flex justify-content-between align-items-center">
-                                <h1 className="account-overview-title">Address Book{this.state.addresses.length && <span> ({this.state.addresses.length})</span>}</h1>
+                                <h1 className="account-overview-title">Address Book{this.addressList().length && <span> ({this.addressList().length})</span>}</h1>
                                 <button
                                     type="submit"
                                     className="btn btn-warning add-new-address"
@@ -88,7 +70,7 @@ class AddressBook extends React.Component {
                                 </button>
                             </div>
                             {
-                                this.state.addresses.length ? (
+                                this.addressList().length ? (
                                     <div className="detail-address-container">
                                         {
                                             this.addressList().map((address, i) => {

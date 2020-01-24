@@ -351,7 +351,8 @@ export const addAddress = (address, resetForm, setSubmitting) => dispatch => {
         .child('address')
         .push()
         .set({
-            ...address
+            ...address,
+            default: false
         }, error => {
             if (error) {
                 // The write failed...
@@ -399,20 +400,7 @@ export const setDefaultAddress = addressKey => dispatch => {
 
                 let addressObj = {}
                 addressRef[address[0]] = address[1];
-
-                // push switched address
-                // newAddressList.push(addressObj);
             });
-            
-            // let defaultAddressIndex = addressList.findIndex(address => address[1].default === true);
-
-            // // change address arrangement order
-            // newAddressList.splice(0, 0, newAddressList.splice(defaultAddressIndex, 1)[0]);
-            // // flip array to object
-            // newAddressList.forEach(address => {
-            //     let addressListArray = Object.entries(address);
-            //     addressRef[addressListArray[0][0]] = addressListArray[0][1];
-            // });
 
             newUserRef['/users/' + userId] = {
                 ...userRef,
@@ -426,13 +414,22 @@ export const setDefaultAddress = addressKey => dispatch => {
                 });
                 console.log(newUserRef);
                 console.log('Address Updated successfully');
-                // history.push('/customer/address')
-                // dispatch(
-                //     returnMessages('Address updated successfully', 200, SUCCESS_UPDATE_MSG)
-                // );
+                dispatch(
+                    returnMessages('Default address updated successfully', 200, SUCCESS_UPDATE_MSG)
+                );
             })
             .catch(err => {
                 console.log(err);
             });
         });
+}
+
+export const editAddress = (uid, updates, setSubmitting, resetForm) => {
+
+    setSubmitting(false);
+    resetForm();
+}
+
+export const deleteAddress = (uid, setSubmitting, resetForm) => {
+    
 }

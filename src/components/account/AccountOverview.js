@@ -11,18 +11,20 @@ class AccountOverview extends React.Component {
         super(props);
 
         let user = this.props.authentication.user || {};
+        let defaultUserAddress = Object.entries(this.props.authentication.user.address);
 
         this.state = {
             email: user.email || 'No email',
             firstName: user.firstName || 'Anonymous',
             lastName: user.lastName || 'Anonymous',
             phoneNumber: user.phoneNumber || '2547xxxxxxxx',
-            address: user.address ? user.address : {}
+            address: defaultUserAddress.find(address => address[1].default === true)[1]
         }
     }
 
     componentDidMount() {
         this.props.loadUser();
+        console.log(this.state.address);
     }
 
     render() {
@@ -60,10 +62,17 @@ class AccountOverview extends React.Component {
                             <div className="overview-address">
                                 <p>Your default shipping address</p>
                                 {this.state.address.address ? <div>
-                                    <p className="user-info text-muted">{this.state.firstName} {this.state.lastName}</p>
-                                    <p className="user-info text-muted">{this.state.address.addess}</p>
+                                    <p className="user-info text-muted">{this.state.address.firstName} {this.state.lastName}</p>
+                                    <p className="user-info text-muted">{this.state.address.address}</p>
                                     <p className="user-info text-muted">{this.state.address.city}</p>
-                                    <p className="user-info text-muted">+254{this.state.phoneNumber}</p>
+                                    {this.state.address.phoneNumber.map((num, i) => (
+                                        <span
+                                            className="user-info text-muted"
+                                            key={i}
+                                        >
+                                            +254{num}{i === 0 && <i> / </i>}
+                                        </span>
+                                    ))}
                                 </div> : <p className="user-info text-muted">No address available</p>}
                                 <div className="overview-change-pass acc-menu-btn">
                                     <button
