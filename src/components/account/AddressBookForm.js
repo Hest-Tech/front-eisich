@@ -4,7 +4,11 @@ import Modal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import { LoginSchema } from '../../utils/validate';
-import { addressBookForm, addAddress } from '../../actions/authentication';
+import {
+    addressBookForm,
+    addAddress,
+    editAddress
+} from '../../actions/authentication';
 
 
 const customStyles = {
@@ -21,6 +25,23 @@ class AddressBookForm extends React.Component {
 
     constructor(props) {
         super(props);
+        let addressObj = this.props.editAddress ? this.props.currentDetails : {};
+        let phoneNumberList = addressObj.phoneNumber || [];
+
+        this.state = {
+            firstName: addressObj.firstName || "",
+            lastName: addressObj.lastName || "",
+            address: addressObj.address || "",
+            region: addressObj.region || "",
+            city: addressObj.city || "",
+            phoneNumber: phoneNumberList.length ? phoneNumberList[0] : "",
+            phoneNumber2: phoneNumberList.length ? (phoneNumberList[1] || "") : "",
+            info: addressObj.info || ""
+        }
+    }
+
+    componentDidMount() {
+        console.log(this.props.currentDetails)
     }
 
     render() {
@@ -52,18 +73,20 @@ class AddressBookForm extends React.Component {
                     </div>
                     <Formik
                         initialValues={{
-                            firstName: this.props.authentication.user.firstName,
-                            lastName: this.props.authentication.user.lastName,
-                            address: "",
-                            region: "",
-                            city: "",
-                            phoneNumber: this.props.authentication.user.phoneNumber.toString(),
-                            phoneNumber2: "",
-                            info: ""
+                            firstName: this.state.firstName,
+                            lastName: this.state.lastName,
+                            address: this.state.address,
+                            region: this.state.region,
+                            city: this.state.city,
+                            phoneNumber: this.state.phoneNumber,
+                            phoneNumber2: this.state.phoneNumber2,
+                            info: this.state.info
                         }}
                         // validationSchema={LoginSchema}
                         onSubmit={(values, { setSubmitting, resetForm }) => {
                             setSubmitting(true);
+                            let num1 = values.phoneNumber.toString();
+                            let num2 = values.phoneNumber2.toString();
 
                             let addressPayload = {
                                 firstName: values.firstName,
@@ -71,12 +94,17 @@ class AddressBookForm extends React.Component {
                                 address: values.address,
                                 region: values.region,
                                 city: values.city,
-                                phoneNumber: [values.phoneNumber, values.phoneNumber2],
+                                phoneNumber: [num1, num2],
                                 info: values.info
                             };
+                            console.log(this.props)
 
-                            this.props.addAddress(addressPayload, resetForm, setSubmitting);
-                            console.log(addressPayload);
+                            if (this.props.editAddress) {
+                                this.props.editAddress(this.props.addressId, addressPayload, resetForm, setSubmitting);
+                            } else if (this.props.addAddress) {
+                                this.props.addAddress(addressPayload, resetForm, setSubmitting);
+                            }
+
                         }}
                     >
                         {({ touched, errors, isSubmitting, values, filters }) => (
@@ -251,6 +279,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     addAddress: (addressPayload, resetForm, setSubmitting) => dispatch(addAddress(addressPayload, resetForm, setSubmitting)),
+    editAddress: (addressId, addressPayload, resetForm, setSubmitting) => dispatch(editAddress(addressId, addressPayload, resetForm, setSubmitting)),
     addressBookForm: () => dispatch(addressBookForm())
 });
 

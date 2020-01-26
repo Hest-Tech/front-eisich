@@ -40,7 +40,7 @@ class AccountOverview extends React.Component {
                             </div>
                             <div className="det-info">
                                 <div className="acc-det-info">
-                                    <p>{this.state.firstName} {this.state.lastName}</p>
+                                    <p>{this.state.address.firstName} {this.state.address.lastName}</p>
                                     <p className="user-info text-muted">{this.state.email}</p>
                                 </div>
                                 <div className="overview-change-pass acc-menu-btn">

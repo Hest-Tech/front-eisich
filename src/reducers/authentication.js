@@ -50,7 +50,7 @@ export default (state = autheticationReducerDefaultState, action) => {
                 loggingIn: false,
                 resetingPass: false
             }
-        case 'UPDATE_ADDRESS_BOOK':
+        case 'POP_ADDRESS_BOOK_FORM':
             return {
                 ...state,
                 updateAddress: !state.updateAddress,
@@ -105,7 +105,7 @@ export default (state = autheticationReducerDefaultState, action) => {
                 user: {},
                 isAuthenticated: false,
                 displayName: null
-            }; 
+            };
         case 'SET_DEFAULT_ADDRESS':
             return {
                 ...state,
@@ -127,6 +127,7 @@ export default (state = autheticationReducerDefaultState, action) => {
                 displayName: action.updates.firstName
             }
         case 'RESET_PASSWORD':
+        case 'UPDATE_ADDRESS_BOOK':
         default:
             return state;
     }

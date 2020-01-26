@@ -9,7 +9,8 @@ import { returnMessages } from '../../actions/resMessages';
 import {
     addressBookForm,
     loadUser,
-    setDefaultAddress
+    setDefaultAddress,
+    deleteAddress
 } from '../../actions/authentication';
 import goodReview from '../../assets/images/good-review.png';
 
@@ -19,6 +20,9 @@ class AddressBook extends React.Component {
     constructor(props) {
         super(props);
         let user = this.props.authentication.user || {};
+        this.editAddress = this.editAddress.bind(this);
+        this.addressList = this.addressList.bind(this);
+        this.addAddress = this.addAddress.bind(this);
 
         this.state = {
             userProfile: {
@@ -26,17 +30,54 @@ class AddressBook extends React.Component {
                 firstName: user.firstName || 'Anonymous',
                 lastName: user.lastName || 'Anonymous',
                 phoneNumber: user.phoneNumber || '2547xxxxxxxx'
-            }
+            },
+            address: {},
+            addressId: null,
+            addAddress: false,
+            editAddress: false
         }
     }
 
     addressList() {
+        // set default default addess index to 0
         let addressList = Object.entries(this.props.authentication.user.address || {});
         let defaultAddressIndex = addressList.findIndex(address => address[1].default === true);
 
         addressList.splice(0, 0, addressList.splice(defaultAddressIndex, 1)[0]);
-        
+        console.log(this.props.authentication.user.address);
+
         return addressList;
+    }
+
+    addAddress() {
+        this.setState(prevState => ({
+            addAddress: !prevState.editAddress,
+            editAddress: false,
+        }))
+        this.props.addressBookForm()
+    }
+
+    editAddress(e) {
+        let addressId = e.target.getAttribute('data-address-id');
+        let addressList = this.addressList();
+        let setAddress = {};
+        
+        addressList.forEach(address => {
+            if (address[0] === addressId) {
+                setAddress = { ...address[1] }
+            }
+        });
+
+        this.setState((prevState) => ({
+            address: { ...setAddress },
+            editAddress: !prevState.editAddress,
+            addAddress: false,
+            addressId
+        }));
+
+        console.log('===>',setAddress);
+
+        this.props.addressBookForm();
     }
 
     render() {
@@ -44,7 +85,12 @@ class AddressBook extends React.Component {
             <div className="account-menu-container account-background">
                 <div className="nav-bar-wrapper">
                     <NavBar />
-                    {this.props.authentication.updateAddress ? <AddressBookForm values={} /> : null}
+                    {this.props.authentication.updateAddress ? <AddressBookForm
+                        currentDetails={this.state.address}
+                        addAddress={this.state.addAddress}
+                        editAddress={this.state.editAddress}
+                        addressId={this.state.addressId}
+                    /> : null}
                 </div>
                 {this.props.resMessages.msg && <div
                     className="alert alert-success home-page-alert"
@@ -64,7 +110,7 @@ class AddressBook extends React.Component {
                                 <button
                                     type="submit"
                                     className="btn btn-warning add-new-address"
-                                    onClick={() => this.props.addressBookForm()}
+                                    onClick={this.addAddress}
                                 >
                                     ADD NEW ADDRESS
                                 </button>
@@ -110,9 +156,14 @@ class AddressBook extends React.Component {
                                                             <div className="address-actions">
                                                                 <i
                                                                     className="far fa-edit"
-                                                                    onClick={() => this.props.addressBookForm()}
+                                                                    data-address-id={address[0]}
+                                                                    onClick={this.editAddress}
                                                                 ></i>
-                                                                {address[1].default === false && <i className="fas fa-trash-alt"></i>}
+                                                                {address[1].default === false && <i
+                                                                    className="fas fa-trash-alt"
+                                                                    data-address-id={address[0]}
+                                                                    onClick={() => this.props.deleteAddress(address[0])}
+                                                                ></i>}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -159,7 +210,8 @@ const mapDispatchToProps = (dispatch) => ({
     loadUser: () => dispatch(loadUser()),
     setDefaultAddress: (addressKey) => dispatch(setDefaultAddress(addressKey)),
     returnMessages: () => dispatch(returnMessages()),
-    addressBookForm: () => dispatch(addressBookForm())
+    addressBookForm: () => dispatch(addressBookForm()),
+    deleteAddress: (addressKey) => dispatch(deleteAddress(addressKey))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressBook);

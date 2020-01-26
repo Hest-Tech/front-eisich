@@ -20,7 +20,9 @@ import {
     UPDATE_USER_PROFILE,
     UPDATE_ADDRESS_BOOK,
     SUCCESS_UPDATE_MSG,
-    SET_DEFAULT_ADDRESS
+    SET_DEFAULT_ADDRESS,
+    POP_ADDRESS_BOOK_FORM,
+    DELETE_ADDRESS
 } from './types';
 import fire, { googleAuthProvider, database } from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
@@ -282,7 +284,7 @@ export const loginForm = () => ({
 
 // pop login form
 export const addressBookForm = () => ({
-    type: UPDATE_ADDRESS_BOOK
+    type: POP_ADDRESS_BOOK_FORM
 });
 
 // pop register form
@@ -345,40 +347,30 @@ export const updateAccount = (updates, setSubmitting, resetForm) => dispatch => 
 export const addAddress = (address, resetForm, setSubmitting) => dispatch => {
     let user = fire.auth().currentUser;
     let userId = user.uid;
+    let addressKey = fire.database().ref().push().key;
+    let addressObj = {};
+    let addressLocation = `/users/${userId}/address/${addressKey}`;
 
-    fire.database()
-        .ref('/users/' + userId)
-        .child('address')
-        .push()
-        .set({
-            ...address,
-            default: false
-        }, error => {
-            if (error) {
-                // The write failed...
-                console.log(error);
-            } else {
-                console.log('Data updated successfully')
-                let ref = fire.database().ref('/users/' + userId).child('address');
-                // Data saved successfully!
-                ref.on('child_added', function (data) {
-                    console.log(data);
-                    setSubmitting(false);
-                    resetForm();
-                    dispatch(loadUser());
-                    history.push('/customer/account');
-                    dispatch(closeAuthPopUp());
-                    dispatch(
-                        returnMessages('Address was saved successfully', 200, SUCCESS_UPDATE_MSG)
-                    );
-                    // localStorage.setItem({
-                    //     ...authUser,
-                    //     address: { ...address }
-                    // })
-                });
-            }
+    addressObj[addressLocation] = {
+        ...address,
+        default: false
+    };
+
+    return fire.database()
+        .ref()
+        .update(addressObj)
+        .then(() => {
+            setSubmitting(false);
+            resetForm();
+            dispatch(loadUser());
+            // history.push('/customer/account');
+            dispatch(addressBookForm());
+            dispatch(
+                returnMessages('Address was saved successfully', 200, SUCCESS_UPDATE_MSG)
+            );
+        }).catch(err => {
+            console.log(err);
         });
-
 }
 
 export const setDefaultAddress = addressKey => dispatch => {
@@ -398,7 +390,7 @@ export const setDefaultAddress = addressKey => dispatch => {
             addressList.forEach(address => {
                 address[0] === addressKey ? userRef['address'][addressKey]['default'] = true : userRef['address'][address[0]]['default'] = false; // switch default address
 
-                let addressObj = {}
+                // new address object
                 addressRef[address[0]] = address[1];
             });
 
@@ -417,19 +409,73 @@ export const setDefaultAddress = addressKey => dispatch => {
                 dispatch(
                     returnMessages('Default address updated successfully', 200, SUCCESS_UPDATE_MSG)
                 );
-            })
-            .catch(err => {
+            }).catch(err => {
                 console.log(err);
             });
         });
 }
 
-export const editAddress = (uid, updates, setSubmitting, resetForm) => {
+export const editAddress = (
+    addressId,
+    updates,
+    setSubmitting,
+    resetForm
+) => dispatch => {
+    let authUser = fire.auth().currentUser;
+    let userId = authUser.uid;
+    let url = `/users/${userId}/address/${addressId}`;
+    let newUserRef = {};
 
-    setSubmitting(false);
-    resetForm();
+    // console.log('==>', newUserRef);
+    database
+        .ref(`${url}`)
+        .once('value')
+        .then(snapshot => {
+            let userAddressRef = snapshot.val();
+
+            newUserRef[url] = {
+                ...userAddressRef,
+                ...updates
+            };
+
+            return fire.database()
+                .ref()
+                .update(newUserRef)
+                .then(() => {
+                    dispatch({
+                        type: UPDATE_ADDRESS_BOOK,
+                        updates
+                    });
+                    // console.log(newUserRef);
+                    setSubmitting(false);
+                    resetForm();
+                    dispatch(loadUser());
+                    dispatch(addressBookForm());
+                    dispatch(
+                        returnMessages('Address was updated successfully', 200, SUCCESS_UPDATE_MSG)
+                    );
+                }).catch(err => {
+                    console.log(err);
+                });
+        });
 }
 
-export const deleteAddress = (uid, setSubmitting, resetForm) => {
-    
+export const deleteAddress = (addressId) => dispatch => {
+    let authUser = fire.auth().currentUser;
+    let userId = authUser.uid;
+    let url = `/users/${userId}/address/${addressId}`;
+    console.log(addressId)
+
+    return fire.database()
+        .ref(`${url}`)
+        .remove()
+        .then(() => {
+            dispatch({ type: DELETE_ADDRESS });
+            dispatch(loadUser());
+            dispatch(
+                returnMessages('Address was deleted successfully', 200, SUCCESS_UPDATE_MSG)
+            );
+        }).catch(err => {
+            console.log(err);
+        });
 }
