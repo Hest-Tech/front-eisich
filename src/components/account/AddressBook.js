@@ -119,8 +119,8 @@ class AddressBook extends React.Component {
                                 this.addressList().length ? (
                                     <div className="detail-address-container">
                                         {
-                                            this.addressList().map((address, i) => {
-                                                return <div
+                                            this.addressList().map((address, i) => (
+                                                <div
                                                     className="detail-address-book"
                                                     key={address[0]}
                                                 >
@@ -168,7 +168,7 @@ class AddressBook extends React.Component {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            })
+                                            ))
                                         }
                                     </div>
                                 ) : (<div

@@ -3,39 +3,37 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 
 import bags from '../../assets/images/bags.jpg';
 import electronics from '../../assets/images/electronics.jpg';
 import shoes from '../../assets/images/shoes.jpg';
 import MenuBar from './MenuBar';
 import SideBar from './SideBar';
+import {
+    loadProductCategories,
+    loadProductSubCategories
+} from '../../actions/products';
 
 
-export default class Header extends React.Component {
+class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.toggleDisplay = this.toggleDisplay.bind(this);
 
         this.state = {
-            display: false
+            subCategories: []
         }
     }
 
-    toggleDisplay() {
-        this.setState(this.toggleDisplayState);
-    }
-
-    toggleDisplayState(state) {
-        return {
-            display: !state.display
-        };
+    componentDidMount() {
+        // console.log(this.props.products.productCategories)
     }
 
     render() {
         return (
             <header className="d-flex App-header">
                 <div className="header-sec-container">
-                    <MenuBar toggleDisplay={this.toggleDisplay} />
+                    <MenuBar />
                     <div className="carousel-wrapper">
                         <div
                             id="slider"
@@ -68,11 +66,63 @@ export default class Header extends React.Component {
                             </a>
                         </div>
 
-                        {this.state.display && <nav
+                        {this.props.products.displaySubCategories && <nav
                             className="extended-menu-bar"
-                            onMouseEnter={this.toggleDisplay}
-                            onMouseLeave={this.toggleDisplay}
+                            onMouseEnter={() => this.props.loadProductSubCategories()}
+                            onMouseLeave={() => this.props.loadProductSubCategories()}
                         >
+                            <div className="extended-menu-bar__container">
+                                {
+                                    this.props.products.productCategories.map((category, i) => {
+                                        // category = JSON.parse(category);
+                                        let subCategory = JSON.parse(category.sub_category);
+                                        let key = i+1;
+                                        let name = `table-column tc-${key}`;
+
+                                        <div
+                                            className={name}
+                                            key={key}
+                                        >
+                                            <div className="table-row tr-1">
+                                                <b className="th">{category.title}</b><hr />
+                                                {
+                                                    subCategory.map((innerCategory, _i) => {
+                                                        <ul
+                                                            className="table-row-list"
+                                                            key={_i}
+                                                        >
+                                                            <li>{innerCategory}</li>
+                                                        </ul>
+                                                   })
+                                                }
+                                            </div>
+                                        </div>
+                                    })
+                                }
+                            </div>
+                        </nav>}
+                    </div>
+                    <SideBar />
+                </div>
+            </header>
+        );
+    }
+};
+
+const mapStateToProps = (state) => ({
+    products: state.products
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    loadProductCategories: () => dispatch(loadProductCategories()),
+    loadProductSubCategories: () => dispatch(loadProductSubCategories())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+/*
+
+    
                             <div className="extended-menu-bar__container">
                                 <div className="table-column tc-1">
                                     <div className="table-row tr-1">
@@ -148,11 +198,21 @@ export default class Header extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                        </nav>}
-                    </div>
-                    <SideBar />
-                </div>
-            </header>
-        );
-    }
-};
+*/
+
+/*
+
+                                                    <div className="table-row tr-2">
+                                                        <b className="th">{category.title}</b><hr />
+                                                        <ul className="table-row-list">
+                                                            <li>Powerbanks</li>
+                                                            <li>Smart Watches</li>
+                                                            <li>Phone Covers & Cases</li>
+                                                            <li>Screen Protectors</li>
+                                                            <li>Chargers & Adaptors</li>
+                                                            <li>Selfie Sticks</li>
+                                                            <li>Phone Batteries</li>
+                                                            <li>Accessories Under 1,000</li>
+                                                        </ul>
+                                                    </div>
+*/

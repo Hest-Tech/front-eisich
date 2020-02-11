@@ -97,7 +97,7 @@ const SizeChart = (props) => (
                         <td>88</td>
                     </tr>
                     <tr>
-                        <th scope="row">XXL</th>
+                        <th scope="row">XXXL</th>
                         <td>14</td>
                         <td>16</td>
                         <td>117</td>

@@ -7,7 +7,8 @@ import { LoginSchema } from '../../utils/validate';
 import {
     addressBookForm,
     addAddress,
-    editAddress
+    editAddress,
+    loadUser
 } from '../../actions/authentication';
 
 
@@ -41,7 +42,12 @@ class AddressBookForm extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.currentDetails)
+        this.props.loadUser();
+        console.log(this.props.editAddress)
+    }
+
+    componentWillUnmount() {
+        console.log('--->', this.props.authentication.user.address)
     }
 
     render() {
@@ -104,7 +110,6 @@ class AddressBookForm extends React.Component {
                             } else if (this.props.addAddress) {
                                 this.props.addAddress(addressPayload, resetForm, setSubmitting);
                             }
-
                         }}
                     >
                         {({ touched, errors, isSubmitting, values, filters }) => (
@@ -280,7 +285,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     addAddress: (addressPayload, resetForm, setSubmitting) => dispatch(addAddress(addressPayload, resetForm, setSubmitting)),
     editAddress: (addressId, addressPayload, resetForm, setSubmitting) => dispatch(editAddress(addressId, addressPayload, resetForm, setSubmitting)),
-    addressBookForm: () => dispatch(addressBookForm())
+    addressBookForm: () => dispatch(addressBookForm()),
+    loadUser: () => dispatch(loadUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressBookForm);

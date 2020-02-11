@@ -1,8 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import {
+    loadProductCategories,
+    loadProductSubCategories
+} from '../../actions/products';
 
 
-export default class MenuBar extends React.Component {
+class MenuBar extends React.Component {
     constructor(props) {
         super(props);
         this.handleMouseHover = this.handleMouseHover.bind(this);
@@ -12,9 +18,10 @@ export default class MenuBar extends React.Component {
         }
     }
 
-    handleMouseHover() {
+    handleMouseHover(name) {
+        console.log('name: ', name);
         this.setState(this.toggleHoverState);
-        this.props.toggleDisplay();
+        this.props.loadProductSubCategories(name);
     }
 
     toggleHoverState(state) {
@@ -23,153 +30,57 @@ export default class MenuBar extends React.Component {
         };
     }
 
+    componentDidMount() {
+        // this.props.loadProductCategories();
+    }
+
+    componentDidUpdate() {
+
+    }
+
     render() {
         return (
             <div className="menu-bar-container container-fluid menu-container menu-bar-wrapper">
-
-                <nav className="container-fluid__container">
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-bar-chart mr-2"></i>
-                            Phones & Tablets
+                <nav className="container-fluid__container category-nav">
+                    <div className="category-nav__wrapper">
+                        <small className="text-muted categories">Categories</small>
+                        <div className="category-items">
+                            {
+                                this.props.products.mainCategories.map((category, i) => (
+                                    <NavLink
+                                        className="menu-link"
+                                        to='/'
+                                        style={{ textDecoration: 'none' }}
+                                        key={i}
+                                    >
+                                        <div
+                                            className="menu-bar-div"
+                                            onMouseEnter={() => this.handleMouseHover(category.name)}
+                                            // onMouseLeave={this.handleMouseHover}
+                                            // data-sku={category.clothesSku ? category.clothesSku : null}
+                                        >
+                                            <i className="fa fa-area-chart mr-2"></i>
+                                            {category.name}
+                                        </div>
+                                    </NavLink>
+                                ))
+                            }
                         </div>
-                    </NavLink>
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-pie-chart mr-2"></i>
-                            Computing
-                        </div>
-                    </NavLink>
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-line-chart mr-2"></i>
-                            Furniture
-                        </div>
-                    </NavLink>
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-area-chart mr-2"></i>
-                            Jewelery
-                        </div>
-                    </NavLink>
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-area-chart mr-2"></i>
-                            Home & Living
-                        </div>
-                    </NavLink>
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-bar-chart mr-2"></i>
-                            Industrial Supply
-                        </div>
-                    </NavLink>
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-pie-chart mr-2"></i>
-                            Kitchen Appliances
-                        </div>
-                    </NavLink>
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-line-chart mr-2"></i>
-                            Fashion
-                        </div>
-                    </NavLink>
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-area-chart mr-2"></i>
-                            Baby Products
-                        </div>
-                    </NavLink>
-                    <NavLink
-                        className="menu-link"
-                        to="/products"
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <div
-                            className="menu-bar-div"
-                            onMouseEnter={this.handleMouseHover}
-                            onMouseLeave={this.handleMouseHover}
-                        >
-                            <i className="fa fa-area-chart mr-2"></i>
-                            Sports
-                        </div>
-                    </NavLink>
+                    </div>
                 </nav>
             </div>
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    products: state.products
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    loadProductCategories: () => dispatch(loadProductCategories()),
+    loadProductCategory: () => dispatch(loadProductCategory()),
+    loadProductSubCategories: (name) => dispatch(loadProductSubCategories(name))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);

@@ -3,6 +3,14 @@
 */
 
 @import "../base/settings";
+@import '../../../node_modules/icomoon-scss-mixins/scss/mixins.scss';
+
+/*
+@include icomoon('icomoon', '../../assets/fonts/icomoon', (
+  icon-shirt: "\e900"
+))
+*/
+
 
 html {
   font-size: 62.5%; // root size

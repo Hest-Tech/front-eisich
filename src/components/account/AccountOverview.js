@@ -18,13 +18,30 @@ class AccountOverview extends React.Component {
             firstName: user.firstName || 'Anonymous',
             lastName: user.lastName || 'Anonymous',
             phoneNumber: user.phoneNumber || '2547xxxxxxxx',
-            address: defaultUserAddress.find(address => address[1].default === true)[1]
+            address: defaultUserAddress.find(address => address[1].default === true)[1],
+            addressId: defaultUserAddress.find(address => address[1].default === true)[0],
+            editAddressAction: true,
+            addAddressAction: false
         }
     }
 
     componentDidMount() {
         this.props.loadUser();
         console.log(this.state.address);
+        // console.log('==>', this.state.addressId);
+    }
+
+    componentDidUpdate() {
+        // this.props.loadUser();
+        console.log('==> ',this.props.authentication.user.address);
+    }
+
+    editAddress(e) {
+        let addressId = e.target.getAttribute('data-address-id');
+        let user = this.props.authentication.user || {};
+        let defaultUserAddress = Object.entries(this.props.authentication.user.address);
+this.props.addressBookForm()
+
     }
 
     render() {
@@ -40,7 +57,7 @@ class AccountOverview extends React.Component {
                             </div>
                             <div className="det-info">
                                 <div className="acc-det-info">
-                                    <p>{this.state.address.firstName} {this.state.address.lastName}</p>
+                                    <p>{this.state.firstName} {this.state.lastName}</p>
                                     <p className="user-info text-muted">{this.state.email}</p>
                                 </div>
                                 <div className="overview-change-pass acc-menu-btn">
@@ -56,13 +73,14 @@ class AccountOverview extends React.Component {
                                 <p className="text-bold">ADDRESS BOOK</p>
                                 {this.state.address.address && <i
                                     className="far fa-edit"
-                                    onClick={() => this.props.addressBookForm()}
+                                    onClick={this.editAddress}
+                                    data-address-id={this.state.addressId}
                                 ></i>}
                             </div>
                             <div className="overview-address">
                                 <p>Your default shipping address</p>
-                                {this.state.address.address ? <div>
-                                    <p className="user-info text-muted">{this.state.address.firstName} {this.state.lastName}</p>
+                                {this.state.address.address ? <div className="default-address-details">
+                                    <p className="user-info text-muted">{this.state.address.firstName} {this.state.address.lastName}</p>
                                     <p className="user-info text-muted">{this.state.address.address}</p>
                                     <p className="user-info text-muted">{this.state.address.city}</p>
                                     {this.state.address.phoneNumber.map((num, i) => (
@@ -74,16 +92,21 @@ class AccountOverview extends React.Component {
                                         </span>
                                     ))}
                                 </div> : <p className="user-info text-muted">No address available</p>}
-                                <div className="overview-change-pass acc-menu-btn">
+                                {!!this.state.address.address !== true && <div className="overview-change-pass acc-menu-btn">
                                     <button
                                         type="button"
                                         className="btn btn-light"
                                         onClick={() => this.props.addressBookForm()}
-                                    >ADD AN ADDRESS</button>
-                                </div>
+                                    >ADD A DEFAULT ADDRESS</button>
+                                </div>}
                             </div>
 
-                            {this.props.authentication.updateAddress ? <AddressBookForm /> : null}
+                            {this.props.authentication.updateAddress ? <AddressBookForm
+                                currentDetails={this.state.address}
+                                editAddress={this.state.editAddressAction}
+                                addAddress={this.state.addAddressAction}
+                                addressId={this.state.addressId}
+                            /> : null}
                         </div>
                     </div>
                 </div>

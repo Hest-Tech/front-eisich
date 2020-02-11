@@ -1,16 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-var cors = require('cors');
+const cors = require('cors');
+const router = express.Router();
 
-const lipaNaMpesa = require('./payment-gateways/daraja/lipaNaMpesa')
+const db = require('./database/dbConfig');
+const lipaNaMpesa = require('./payment-gateways/daraja/lipaNaMpesa');
 const hook = require('./payment-gateways/daraja/webHook');
 const { ValidateMpesaData } = require('./payment-gateways/daraja/validate');
+const { port } = require('./config/config');
+const PORT = port || 5000;
+
 
 // create an express app and configure it with bodyParser middleware
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+
+app.use('/api/v1', require('./routes/categories'));
+
 const validateNum = new ValidateMpesaData();
 
 app.post('/lipaNaMpesa', (req, res) => {
@@ -26,7 +34,7 @@ app.post('/lipaNaMpesa', (req, res) => {
     } catch (e) {
         console.log(e);
     }
-    
+
     console.log('-->', req.body);
 });
 
@@ -38,12 +46,9 @@ app.post('/hooks/mpesa', (req, res) => {
     }
 });
 
-const server = app.listen(5000, () => {
-    let port = server.address().port;
-    console.log(`server listening on port ${port}`);
-});
+app.listen(PORT, console.log(`server listening on port ${PORT}`));
 
 
-module.exports = {
-    app
-}
+// module.exports = {
+//     app
+// }

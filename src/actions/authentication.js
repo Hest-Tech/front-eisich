@@ -283,9 +283,12 @@ export const loginForm = () => ({
 });
 
 // pop login form
-export const addressBookForm = () => ({
-    type: POP_ADDRESS_BOOK_FORM
-});
+export const addressBookForm = () => dispatch => {
+    dispatch(loadUser());
+    dispatch({
+        type: POP_ADDRESS_BOOK_FORM
+    });
+};
 
 // pop register form
 export const signupForm = () => ({
@@ -426,7 +429,7 @@ export const editAddress = (
     let url = `/users/${userId}/address/${addressId}`;
     let newUserRef = {};
 
-    // console.log('==>', newUserRef);
+    console.log('===>', updates);
     database
         .ref(`${url}`)
         .once('value')
