@@ -19,14 +19,12 @@ router.get('/mainCategories', async (req, res) => {
 
 router.get("/subCategories/:sku", async (req, res) => {
     try {
-    	const query = `SELECT "id" FROM "MainCategories" WHERE MainCategory.sku = ${req.params.sku}`
-    	// const mainCategoryId = await db.MainCategory.findAll({
-    	// 	attributes: ['id'],
-    	// 	where: {
-    	// 		sku: req.params.sku
-    	// 	}
-    	// })
-    	const mainCategoryId = sequelize.query(query);
+    	const mainCategoryId = await db.MainCategory.findAll({
+    		attributes: ['id'],
+    		where: {
+    			sku: req.params.sku
+    		}
+    	})
         const subCategories = await db.SubCategory.findAll({
             attributes: ['name', 'sku', 'path'],
             where: {
