@@ -19,7 +19,7 @@ router.get('/mainCategories', async (req, res) => {
 
 router.get("/subCategories/:sku", async (req, res) => {
     try {
-    	const mainCategoryId = await db.MainCategory.findAll({
+    	const mainCategoryId = await db.MainCategory.findOne({
     		attributes: ['id'],
     		where: {
     			sku: req.params.sku
