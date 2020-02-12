@@ -19,14 +19,43 @@ import {
 class Header extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            subCategories: []
-        }
+        this.handleCategories = this.handleCategories.bind(this);
     }
 
-    componentDidMount() {
-        // console.log(this.props.products.productCategories)
+    componentDidUpdate() {
+        // console.log(this.props.products.subCategories)
+    }
+
+    handleCategories(categoryList) {
+        console.log(categoryList.length)
+        return !!categoryList.length ? (
+
+            categoryList.map((category, i) => {
+                // category = JSON.parse(category);
+                // let subCategory = JSON.parse(category.sub_category);
+                let key = i+1;
+                let name = `table-column tc-${key}`;
+
+                <div
+                    className={name}
+                    key={key}
+                >
+                    <div className="table-row tr-1">
+                        <b className="th">{category.name}</b><hr />
+                        {
+                           //  subCategory.map((innerCategory, _i) => {
+                           //      <ul
+                           //          className="table-row-list"
+                           //          key={_i}
+                           //      >
+                           //          <li>{innerCategory}</li>
+                           //      </ul>
+                           // })
+                        }
+                    </div>
+                </div>
+            })
+        ) : (<h1>List not found!</h1>)
     }
 
     render() {
@@ -73,31 +102,8 @@ class Header extends React.Component {
                         >
                             <div className="extended-menu-bar__container">
                                 {
-                                    this.props.products.productCategories.map((category, i) => {
-                                        // category = JSON.parse(category);
-                                        let subCategory = JSON.parse(category.sub_category);
-                                        let key = i+1;
-                                        let name = `table-column tc-${key}`;
-
-                                        <div
-                                            className={name}
-                                            key={key}
-                                        >
-                                            <div className="table-row tr-1">
-                                                <b className="th">{category.title}</b><hr />
-                                                {
-                                                    subCategory.map((innerCategory, _i) => {
-                                                        <ul
-                                                            className="table-row-list"
-                                                            key={_i}
-                                                        >
-                                                            <li>{innerCategory}</li>
-                                                        </ul>
-                                                   })
-                                                }
-                                            </div>
-                                        </div>
-                                    })
+                                    this.handleCategories(this.props.products.subCategories)
+                                    // ['one', 'two', 'three'].map((i, _i) => <h1 key={_i}>{i}</h1>)
                                 }
                             </div>
                         </nav>}

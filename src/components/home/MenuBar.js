@@ -4,38 +4,39 @@ import { connect } from 'react-redux';
 
 import {
     loadProductCategories,
-    loadProductSubCategories
+    loadProductSubCategories,
+    hideSubCategories,
+    displaySubCategories
 } from '../../actions/products';
 
 
 class MenuBar extends React.Component {
     constructor(props) {
         super(props);
-        this.handleMouseHover = this.handleMouseHover.bind(this);
+        this.onMouseEnter = this.onMouseEnter.bind(this);
+        this.onMouseLeave = this.onMouseLeave.bind(this);
+    }
 
-        this.state = {
-            isHovering: false
+    onMouseEnter(name) {
+        // this.setState(this.toggleHoverState);
+        if (name === undefined) {
+            this.props.hideSubCategories();
+        } else {
+            this.props.loadProductSubCategories(name)
         }
+        // console.log('Enter: ', this.props.products.displaySubCategories);
     }
 
-    handleMouseHover(name) {
-        console.log('name: ', name);
-        this.setState(this.toggleHoverState);
-        this.props.loadProductSubCategories(name);
+    onMouseLeave() {
+        // console.log('Leave: ', this.props.products.displaySubCategories);
     }
 
-    toggleHoverState(state) {
-        return {
-            isHovering: !state.isHovering,
-        };
+    onNavMouseEnter() {
+        !!this.props.products.subCategories.length ? this.props.displaySubCategories() : this.props.hideSubCategories();    
     }
 
-    componentDidMount() {
-        // this.props.loadProductCategories();
-    }
-
-    componentDidUpdate() {
-
+    onNavMouseLeave() {
+        this.props.hideSubCategories();
     }
 
     render() {
@@ -50,13 +51,15 @@ class MenuBar extends React.Component {
                                     <NavLink
                                         className="menu-link"
                                         to='/'
-                                        style={{ textDecoration: 'none' }}
+                                        onMouseEnter={() => this.onNavMouseEnter()}
+                                        onMouseLeave={() => this.onNavMouseLeave()}
+                                        style={{ textDecoration: 'none',background:'green' }}
                                         key={i}
                                     >
                                         <div
                                             className="menu-bar-div"
-                                            onMouseEnter={() => this.handleMouseHover(category.name)}
-                                            // onMouseLeave={this.handleMouseHover}
+                                            onMouseEnter={() => this.onMouseEnter(category.name)}
+                                            onMouseLeave={() => this.onMouseLeave()}
                                             // data-sku={category.clothesSku ? category.clothesSku : null}
                                         >
                                             <i className="fa fa-area-chart mr-2"></i>
@@ -79,7 +82,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     loadProductCategories: () => dispatch(loadProductCategories()),
-    loadProductCategory: () => dispatch(loadProductCategory()),
+    displaySubCategories: () => dispatch(displaySubCategories()),
+    hideSubCategories: () => dispatch(hideSubCategories()),
     loadProductSubCategories: (name) => dispatch(loadProductSubCategories(name))
 })
 
