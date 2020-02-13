@@ -28,11 +28,12 @@ class MenuBar extends React.Component {
     }
 
     onMouseLeave() {
+        this.props.hideSubCategories();
         // console.log('Leave: ', this.props.products.displaySubCategories);
     }
 
     onNavMouseEnter() {
-        !!this.props.products.subCategories.length ? this.props.displaySubCategories() : this.props.hideSubCategories();    
+        !!this.props.products.subCategories.length && this.props.displaySubCategories();    
     }
 
     onNavMouseLeave() {
@@ -46,21 +47,21 @@ class MenuBar extends React.Component {
                     <div className="category-nav__wrapper">
                         <small className="text-muted categories">Categories</small>
                         <div className="category-items">
-                            {
+                            {                                
                                 this.props.products.mainCategories.map((category, i) => (
                                     <NavLink
                                         className="menu-link"
-                                        to='/'
+                                        to={category.path}
                                         onMouseEnter={() => this.onNavMouseEnter()}
                                         onMouseLeave={() => this.onNavMouseLeave()}
-                                        style={{ textDecoration: 'none',background:'green' }}
+                                        style={{ textDecoration: 'none' }}
                                         key={i}
                                     >
                                         <div
                                             className="menu-bar-div"
                                             onMouseEnter={() => this.onMouseEnter(category.name)}
-                                            onMouseLeave={() => this.onMouseLeave()}
-                                            // data-sku={category.clothesSku ? category.clothesSku : null}
+                                            style={this.props.products.displaySubCategories ? {color: '#E9BD4C'} : {color: '#505050'}}
+                                            // onMouseLeave={() => this.onMouseLeave()}
                                         >
                                             <i className="fa fa-area-chart mr-2"></i>
                                             {category.name}

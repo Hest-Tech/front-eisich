@@ -55,17 +55,40 @@
   border-left: 1px solid #ddd;
   border-radius: 0 0.5rem 0.5rem 0;
   padding: 0 1%;
+  // flex-direction: column;
   display: flex;
+}
+
+hr {
+  color: $dark-grey;
 }
 
 .extended-menu-bar__container {
   display: flex;
   width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.category-column {
+  display: flex;
+}
+
+.category-column__inner {
+  flex: 30%;
+  // margin: $s-margin;
+  // background: green;  
+}
+
+.category-link {
+  color: $dark-grey !important;
+  text-decoration: none !important;
 }
 
 .table-column {
-  width: 33%;
-  height: 100%;
+  // width: 33%;
+  // height: auto;
   padding: 0 $m-padding;
   display: flex;
   flex-direction: column;

@@ -21,6 +21,7 @@ export default (state = productsReducerDefaultState, action) => {
             return {
                 ...state,
                 displaySubCategories: true,
+                color: '#E9BD4C',
                 subCategories: action.payload
             }
         case 'DISPLAY_SUB_CATEGORIES':
@@ -31,8 +32,8 @@ export default (state = productsReducerDefaultState, action) => {
         case 'HIDE_SUB_CATEGORIES':
             return {
                 ...state,
-                displaySubCategories: false,
-                subCategories: []
+                displaySubCategories: false
+                // subCategories: []
             }
         default:
             return state;

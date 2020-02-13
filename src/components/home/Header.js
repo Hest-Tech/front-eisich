@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import bags from '../../assets/images/bags.jpg';
 import electronics from '../../assets/images/electronics.jpg';
@@ -12,50 +13,19 @@ import MenuBar from './MenuBar';
 import SideBar from './SideBar';
 import {
     loadProductCategories,
-    loadProductSubCategories
+    loadProductSubCategories,
+    displaySubCategories,
+    hideSubCategories
 } from '../../actions/products';
 
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.handleCategories = this.handleCategories.bind(this);
     }
 
     componentDidUpdate() {
         // console.log(this.props.products.subCategories)
-    }
-
-    handleCategories(categoryList) {
-        console.log(categoryList.length)
-        return !!categoryList.length ? (
-
-            categoryList.map((category, i) => {
-                // category = JSON.parse(category);
-                // let subCategory = JSON.parse(category.sub_category);
-                let key = i+1;
-                let name = `table-column tc-${key}`;
-
-                <div
-                    className={name}
-                    key={key}
-                >
-                    <div className="table-row tr-1">
-                        <b className="th">{category.name}</b><hr />
-                        {
-                           //  subCategory.map((innerCategory, _i) => {
-                           //      <ul
-                           //          className="table-row-list"
-                           //          key={_i}
-                           //      >
-                           //          <li>{innerCategory}</li>
-                           //      </ul>
-                           // })
-                        }
-                    </div>
-                </div>
-            })
-        ) : (<h1>List not found!</h1>)
     }
 
     render() {
@@ -97,13 +67,53 @@ class Header extends React.Component {
 
                         {this.props.products.displaySubCategories && <nav
                             className="extended-menu-bar"
-                            onMouseEnter={() => this.props.loadProductSubCategories()}
-                            onMouseLeave={() => this.props.loadProductSubCategories()}
+                            onMouseEnter={() => this.props.displaySubCategories()}
+                            onMouseLeave={() => this.props.hideSubCategories()}
                         >
-                            <div className="extended-menu-bar__container">
+                            <div
+                                className="extended-menu-bar__container"
+                            >
                                 {
-                                    this.handleCategories(this.props.products.subCategories)
-                                    // ['one', 'two', 'three'].map((i, _i) => <h1 key={_i}>{i}</h1>)
+                                    !!this.props.products.subCategories.length && this.props.products.subCategories.map(
+                                        (category, i) => {
+                                        // category = JSON.parse(category);
+                                        // let subCategory = JSON.parse(category.sub_category);
+                                            let key = i + 1;
+                                            let name = `table-column category-column tc-${key}`;
+
+                                            return (
+
+                                                <div
+                                                    className={name}
+                                                    key={key}
+                                                >
+                                                    <div className="table-row category-column__inner tr-1">
+                                                        <NavLink
+                                                            to={category.path}
+                                                            className='category-link'
+                                                        >
+                                                            <b className="th">{category.name}</b><hr />
+                                                        </NavLink>
+                                                        {
+                                                            category.innerCategory.map((innerCategory, _i) => (
+                                                                <ul
+                                                                    className="table-row-list"
+                                                                    key={_i}
+                                                                >
+                                                                    <NavLink
+                                                                        to={innerCategory.path}
+                                                                        className='category-link'
+                                                                    >
+                                                                        <li>{innerCategory.name}</li>
+                                                                    </NavLink>
+                                                                </ul>
+                                                           ))
+                                                        }
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                    )
                                 }
                             </div>
                         </nav>}
@@ -115,12 +125,15 @@ class Header extends React.Component {
     }
 };
 
+
 const mapStateToProps = (state) => ({
     products: state.products
 })
 
 const mapDispatchToProps = (dispatch) => ({
     loadProductCategories: () => dispatch(loadProductCategories()),
+    displaySubCategories: () => dispatch(displaySubCategories()),
+    hideSubCategories: () => dispatch(hideSubCategories()),
     loadProductSubCategories: () => dispatch(loadProductSubCategories())
 })
 
