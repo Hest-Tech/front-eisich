@@ -4,16 +4,20 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import dress from '../assets/images/women-dress-removebg.png';
 import NavBar from './NavBar';
+import ProductNotFound from './404/ProductNotFound';
 
 
-const ProductsPage = () => (
+const ProductsPage = (props) => (
     <div className="App">
         <NavBar />
 
-        <div className="products-container">
+        {!!props.products.productsList.length ? <div
+            className="products-container"
+        >
             <nav className="nav-breadcrumb">
                 <span className="nav-breadcrumb__span">
                     <NavLink className="breadcrumb-text" to="/">Home</NavLink>
@@ -398,8 +402,18 @@ const ProductsPage = () => (
                     </nav>
                 </div>
             </div>
-        </div>
+        </div> : <ProductNotFound />}
     </div>
 );
 
-export default ProductsPage;
+const mapStateToProps = (state) => ({
+    products: state.products
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    // openAuthPopUp: () => dispatch(openAuthPopUp()),
+    // loadUser: () => dispatch(loadUser()),
+    // signOutUser: () => dispatch(signOutUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage);

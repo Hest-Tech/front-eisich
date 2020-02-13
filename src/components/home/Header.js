@@ -94,21 +94,21 @@ class Header extends React.Component {
                                                         >
                                                             <b className="th">{category.name}</b><hr />
                                                         </NavLink>
-                                                        {
-                                                            category.innerCategory.map((innerCategory, _i) => (
-                                                                <ul
-                                                                    className="table-row-list"
-                                                                    key={_i}
-                                                                >
+                                                        <ul
+                                                            className="table-row-list category-list-items"
+                                                        >
+                                                            {
+                                                                category.innerCategory.map((innerCategory, _i) => (
                                                                     <NavLink
                                                                         to={innerCategory.path}
                                                                         className='category-link'
+                                                                        key={_i}
                                                                     >
                                                                         <li>{innerCategory.name}</li>
                                                                     </NavLink>
-                                                                </ul>
-                                                           ))
-                                                        }
+                                                               ))
+                                                            }
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             )

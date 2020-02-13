@@ -60,7 +60,7 @@ class MenuBar extends React.Component {
                                         <div
                                             className="menu-bar-div"
                                             onMouseEnter={() => this.onMouseEnter(category.name)}
-                                            style={this.props.products.displaySubCategories ? {color: '#E9BD4C'} : {color: '#505050'}}
+                                            // style={this.props.products.displaySubCategories ? {color: '#E9BD4C'} : {color: '#505050'}}
                                             // onMouseLeave={() => this.onMouseLeave()}
                                         >
                                             <i className="fa fa-area-chart mr-2"></i>

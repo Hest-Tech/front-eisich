@@ -59,35 +59,36 @@
   display: flex;
 }
 
-hr {
-  color: $dark-grey;
-}
-
 .extended-menu-bar__container {
   display: flex;
   width: 100%;
   height: auto;
-  flex-wrap: wrap;
-  flex-direction: column;
+  flex-flow: row wrap;
+  align-content: flex-start;
 }
 
 .category-column {
   display: flex;
+  vertical-align: middle;
+  align-self: flex-start;
 }
 
 .category-column__inner {
-  flex: 30%;
-  // margin: $s-margin;
-  // background: green;  
+  // flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .category-link {
+  // border-bottom: 1px solid $light-grey;
   color: $dark-grey !important;
   text-decoration: none !important;
+  // padding-bottom: $m-padding;
 }
 
 .table-column {
-  // width: 33%;
+  width: 33%;
   // height: auto;
   padding: 0 $m-padding;
   display: flex;

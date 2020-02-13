@@ -6,7 +6,7 @@
 const productsReducerDefaultState = {
     mainCategories: JSON.parse(localStorage.getItem('mainCategories')),
     subCategories: [],
-    products: [],
+    productsList: [],
     displaySubCategories: false
 };
 

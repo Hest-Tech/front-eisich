@@ -17,7 +17,7 @@ import AddressBook from '../components/account/AddressBook';
 import UpdateAccount from '../components/account/UpdateAccount';
 import AccountWishlist from '../components/account/AccountWishlist';
 import HelpPage from '../components/HelpPage';
-import NotFoundPage from '../components/NotFoundPage';
+import NotFoundPage from '../components/404/NotFoundPage';
 import CheckoutPage from '../components/CheckoutPage';
 import ProductsPage from '../components/ProductsPage';
 import AboutPage from '../components/AboutPage';
@@ -42,7 +42,7 @@ const AppRouter = () => (
                 <PrivateRoute path="/customer/change-password" component={ChangePassword} />
                 <PrivateRoute path="/customer/address" component={AddressBook} />
                 <PrivateRoute path="/customer/profile/edit" component={UpdateAccount} />
-                <Route path="/products" component={ProductsPage} />
+                <Route path="/:category" component={ProductsPage} />
                 <Route path="/cart" component={CartPage} />
                 <PrivateRoute path="/checkout" component={CheckoutPage} />
                 <Route path="/about" component={AboutPage} />
