@@ -45,7 +45,7 @@ router.get("/subCategories/:name", async (req, res) => {
 
             const filteredList = parseInnerCategory.filter(
                 innerCategory => innerCategory.subCategoryId === subCategoryId
-                );
+            );
             filteredList.map(i => delete i.subCategoryId)
 
             const subCategoryMatch = {
@@ -64,25 +64,49 @@ router.get("/subCategories/:name", async (req, res) => {
     }
 });
 
+router.get('/products', async (req, res) => {
+    try {
+        const products = await db.Product.findAll({
+                attributes: { exclude: ['id', 'userId', 'createdAt', 'updatedAt'] }
+            })
 
-// router.get('/innerCategories', async (req, res) => {
-//  try {
-//      const mainCategories = await SubCategories.findAll();
+        return res.json({ data: products });
+    } catch (e) {
+        console.log(e);
+    }
+});
 
-//      return res.json({ data: mainCategories });
-//  } catch(e) {
-//      console.log(e);
-//  }
+router.get('/product/:pid', async (req, res) => {
+    try {
+        const pid = req.params.pid;
+        const product = await db.Product.findOne({
+                attributes: { exclude: ['id', 'userId', 'createdAt', 'updatedAt'] },
+                where: { pid }
+            });
+
+        return res.json({ data: product });
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+// router.get('/:name', async (req, res) => {
+//     try {
+//         const products = await db.sequelize.query(`
+//           SELECT *
+//           FROM "MainCategories"
+//           WHERE _search @@ plainto_tsquery('english', :query);
+//         `, {
+//           // model: 'MainCategory',
+//           replacements: { query: `/${req.params.name}/` },
+//           type: db.sequelize.QueryTypes.SELECT
+//         });
+
+//         return res.json({ data: products });
+//     } catch (e) {
+//         console.log(e);
+//     }
 // });
 
-// router.get('/:category', async (req, res) => {
-//  try {
-//      let category = req.params.category
-//      const categories = await Categories.findOne({ where: { name: category } });
-//      return res.json({ data: categories });
-//  } catch(e) {
-//      console.log(e);
-//  }
-// });
 
 module.exports = router;

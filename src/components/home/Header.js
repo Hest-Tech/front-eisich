@@ -92,7 +92,10 @@ class Header extends React.Component {
                                                             to={category.path}
                                                             className='category-link'
                                                         >
-                                                            <b className="th">{category.name}</b><hr />
+                                                            <b
+                                                                className="th"
+                                                                data-sku={category.sku}
+                                                            >{category.name}</b><hr />
                                                         </NavLink>
                                                         <ul
                                                             className="table-row-list category-list-items"
@@ -104,7 +107,11 @@ class Header extends React.Component {
                                                                         className='category-link'
                                                                         key={_i}
                                                                     >
-                                                                        <li>{innerCategory.name}</li>
+                                                                        <li
+                                                                            data-sku={innerCategory.sku}
+                                                                        >
+                                                                            {innerCategory.name}
+                                                                        </li>
                                                                     </NavLink>
                                                                ))
                                                             }

@@ -6,7 +6,8 @@ import {
     loadProductCategories,
     loadProductSubCategories,
     hideSubCategories,
-    displaySubCategories
+    displaySubCategories,
+    fetchProducts
 } from '../../actions/products';
 
 
@@ -15,6 +16,7 @@ class MenuBar extends React.Component {
         super(props);
         this.onMouseEnter = this.onMouseEnter.bind(this);
         this.onMouseLeave = this.onMouseLeave.bind(this);
+        this.fetchCategory = this.fetchCategory.bind(this);
     }
 
     onMouseEnter(name) {
@@ -40,6 +42,13 @@ class MenuBar extends React.Component {
         this.props.hideSubCategories();
     }
 
+    fetchCategory(e) {
+        const sku = e.target.dataset.sku;
+        console.log(sku)
+
+        this.props.fetchProducts(sku);
+    }
+
     render() {
         return (
             <div className="menu-bar-container container-fluid menu-container menu-bar-wrapper">
@@ -48,7 +57,7 @@ class MenuBar extends React.Component {
                         <small className="text-muted categories">Categories</small>
                         <div className="category-items">
                             {                                
-                                this.props.products.mainCategories.map((category, i) => (
+                                !!this.props.products.mainCategories.length && this.props.products.mainCategories.map((category, i) => (
                                     <NavLink
                                         className="menu-link"
                                         to={category.path}
@@ -62,6 +71,8 @@ class MenuBar extends React.Component {
                                             onMouseEnter={() => this.onMouseEnter(category.name)}
                                             // style={this.props.products.displaySubCategories ? {color: '#E9BD4C'} : {color: '#505050'}}
                                             // onMouseLeave={() => this.onMouseLeave()}
+                                            data-sku={category.sku}
+                                            onClick={this.fetchCategory}
                                         >
                                             <i className="fa fa-area-chart mr-2"></i>
                                             {category.name}
@@ -85,6 +96,7 @@ const mapDispatchToProps = (dispatch) => ({
     loadProductCategories: () => dispatch(loadProductCategories()),
     displaySubCategories: () => dispatch(displaySubCategories()),
     hideSubCategories: () => dispatch(hideSubCategories()),
+    fetchProducts: (name) => dispatch(fetchProducts(name)),
     loadProductSubCategories: (name) => dispatch(loadProductSubCategories(name))
 })
 

@@ -42,11 +42,11 @@ const AppRouter = () => (
                 <PrivateRoute path="/customer/change-password" component={ChangePassword} />
                 <PrivateRoute path="/customer/address" component={AddressBook} />
                 <PrivateRoute path="/customer/profile/edit" component={UpdateAccount} />
+                <Route path="/product/:path" component={ProductItemPage} />
                 <Route path="/:category" component={ProductsPage} />
                 <Route path="/cart" component={CartPage} />
                 <PrivateRoute path="/checkout" component={CheckoutPage} />
                 <Route path="/about" component={AboutPage} />
-                <Route path="/product" component={ProductItemPage} />
                 <Route path="/help" component={HelpPage} />
                 <Route component={NotFoundPage} />
             </Switch>

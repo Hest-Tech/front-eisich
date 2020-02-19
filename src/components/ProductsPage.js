@@ -9,12 +9,12 @@ import { connect } from 'react-redux';
 import dress from '../assets/images/women-dress-removebg.png';
 import NavBar from './NavBar';
 import ProductNotFound from './404/ProductNotFound';
+import { fetchProduct } from '../actions/products';
 
 
 const ProductsPage = (props) => (
     <div className="App">
         <NavBar />
-
         {!!props.products.productsList.length ? <div
             className="products-container"
         >
@@ -202,190 +202,42 @@ const ProductsPage = (props) => (
                         </div>
                     </div>
                     <div className="product-items">
-                        <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                            <div className="product__container">
-                                <div className="product-img-wrapper">
-                                    <img src={dress} alt="dress" className="product-img" />
-                                </div>
-                                <div className="product-details">
-                                    <p className="small product-category">Fashion</p>
-                                    <p className="product-details__p">Eleifend mi in nulla posuere sollicitudin aliquam ultrices..</p>
-                                    <span className="product-price-details">
-                                        <div className="product-details-price font-italic">
-                                            <div className="new-prices">
-                                                <p className="font-weight-bold">KSH2,000</p>
-                                                <strike className="text-muted small">KSH2,500</strike>
+
+                        {
+                            props.products.productsList.map((product, i) => {
+                                return (
+                                    <NavLink
+                                        className="product"
+                                        to={`/product${product.path}`}
+                                        key={i}
+                                        onClick={() => props.fetchProduct(product.pid)}
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        <div className="product__container">
+                                            <div className="product-img-wrapper">
+                                                <img src={dress} alt="dress" className="product-img" />
                                             </div>
-                                            <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
-                                        </div>
-                                        <div className="text-warning">
-                                            <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                            <div className="product__container">
-                                <div className="product-img-wrapper">
-                                    <img src={dress} alt="dress" className="product-img" />
-                                </div>
-                                <div className="product-details">
-                                    <p className="small product-category">Fashion</p>
-                                    <p className="product-details__p">Eleifend mi in nulla posuere sollicitudin aliquam ultrices..</p>
-                                    <span className="product-price-details">
-                                        <div className="product-details-price font-italic">
-                                            <div className="new-prices">
-                                                <p className="font-weight-bold">KSH2,000</p>
-                                                <strike className="text-muted small">KSH2,500</strike>
+                                            <div className="product-details">
+                                                <p className="small product-category">Fashion</p>
+                                                <p className="product-details__p">{product.description}</p>
+                                                <span className="product-price-details">
+                                                    <div className="product-details-price font-italic">
+                                                        <div className="new-prices">
+                                                            <p className="font-weight-bold">KSH{product.price}</p>
+                                                            <strike className="text-muted small">KSH2,500</strike>
+                                                        </div>
+                                                        <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
+                                                    </div>
+                                                    <div className="text-warning">
+                                                        <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>
+                                                    </div>
+                                                </span>
                                             </div>
-                                            <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
                                         </div>
-                                        <div className="text-warning">
-                                            <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                            <div className="product__container">
-                                <div className="product-img-wrapper">
-                                    <img src={dress} alt="dress" className="product-img" />
-                                </div>
-                                <div className="product-details">
-                                    <p className="small product-category">Fashion</p>
-                                    <p className="product-details__p">Eleifend mi in nulla posuere sollicitudin aliquam ultrices..</p>
-                                    <span className="product-price-details">
-                                        <div className="product-details-price font-italic">
-                                            <div className="new-prices">
-                                                <p className="font-weight-bold">KSH2,000</p>
-                                                <strike className="text-muted small">KSH2,500</strike>
-                                            </div>
-                                            <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
-                                        </div>
-                                        <div className="text-warning">
-                                            <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                            <div className="product__container">
-                                <div className="product-img-wrapper">
-                                    <img src={dress} alt="dress" className="product-img" />
-                                </div>
-                                <div className="product-details">
-                                    <p className="small product-category">Fashion</p>
-                                    <p className="product-details__p">Eleifend mi in nulla posuere sollicitudin aliquam ultrices..</p>
-                                    <span className="product-price-details">
-                                        <div className="product-details-price font-italic">
-                                            <div className="new-prices">
-                                                <p className="font-weight-bold">KSH2,000</p>
-                                                <strike className="text-muted small">KSH2,500</strike>
-                                            </div>
-                                            <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
-                                        </div>
-                                        <div className="text-warning">
-                                            <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                            <div className="product__container">
-                                <div className="product-img-wrapper">
-                                    <img src={dress} alt="dress" className="product-img" />
-                                </div>
-                                <div className="product-details">
-                                    <p className="small product-category">Fashion</p>
-                                    <p className="product-details__p">Eleifend mi in nulla posuere sollicitudin aliquam ultrices..</p>
-                                    <span className="product-price-details">
-                                        <div className="product-details-price font-italic">
-                                            <div className="new-prices">
-                                                <p className="font-weight-bold">KSH2,000</p>
-                                                <strike className="text-muted small">KSH2,500</strike>
-                                            </div>
-                                            <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
-                                        </div>
-                                        <div className="text-warning">
-                                            <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                            <div className="product__container">
-                                <div className="product-img-wrapper">
-                                    <img src={dress} alt="dress" className="product-img" />
-                                </div>
-                                <div className="product-details">
-                                    <p className="small product-category">Fashion</p>
-                                    <p className="product-details__p">Eleifend mi in nulla posuere sollicitudin aliquam ultrices..</p>
-                                    <span className="product-price-details">
-                                        <div className="product-details-price font-italic">
-                                            <div className="new-prices">
-                                                <p className="font-weight-bold">KSH2,000</p>
-                                                <strike className="text-muted small">KSH2,500</strike>
-                                            </div>
-                                            <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
-                                        </div>
-                                        <div className="text-warning">
-                                            <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                            <div className="product__container">
-                                <div className="product-img-wrapper">
-                                    <img src={dress} alt="dress" className="product-img" />
-                                </div>
-                                <div className="product-details">
-                                    <p className="small product-category">Fashion</p>
-                                    <p className="product-details__p">Eleifend mi in nulla posuere sollicitudin aliquam ultrices..</p>
-                                    <span className="product-price-details">
-                                        <div className="product-details-price font-italic">
-                                            <div className="new-prices">
-                                                <p className="font-weight-bold">KSH2,000</p>
-                                                <strike className="text-muted small">KSH2,500</strike>
-                                            </div>
-                                            <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
-                                        </div>
-                                        <div className="text-warning">
-                                            <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="product" to="/product" style={{ textDecoration: 'none' }} >
-                            <div className="product__container">
-                                <div className="product-img-wrapper">
-                                    <img src={dress} alt="dress" className="product-img" />
-                                </div>
-                                <div className="product-details">
-                                    <p className="small product-category">Fashion</p>
-                                    <p className="product-details__p">Eleifend mi in nulla posuere sollicitudin aliquam ultrices..</p>
-                                    <span className="product-price-details">
-                                        <div className="product-details-price font-italic">
-                                            <div className="new-prices">
-                                                <p className="font-weight-bold">KSH2,000</p>
-                                                <strike className="text-muted small">KSH2,500</strike>
-                                            </div>
-                                            <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
-                                        </div>
-                                        <div className="text-warning">
-                                            <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </NavLink>
+                                    </NavLink>                                        
+                                );
+                            })
+                        }
                     </div>
                     <nav aria-label="Page navigation example" className="pagination products-paginator">
                         <ul className="pagination justify-content-center">
@@ -411,7 +263,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    // openAuthPopUp: () => dispatch(openAuthPopUp()),
+    fetchProduct: (pid) => dispatch(fetchProduct(pid))
     // loadUser: () => dispatch(loadUser()),
     // signOutUser: () => dispatch(signOutUser())
 });

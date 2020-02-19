@@ -14,10 +14,3 @@ module.exports = (sequelize, DataTypes) => {
 
     return MainCategory;
 };
-
-// , {
-        //     foreignKey: 'subCategoryId',
-        //     onDelete: 'CASCADE',
-        // }
-      
-        // MainCategory.belongsTo(models.SubCategory);

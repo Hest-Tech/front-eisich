@@ -3,6 +3,7 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.createTable('MainCategories', {
             id: {
+                allowNull: false,
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 allowNull: false,

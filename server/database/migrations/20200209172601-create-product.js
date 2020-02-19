@@ -8,17 +8,29 @@ module.exports = {
                 allowNull: false,
                 autoIncrement: true,
             },
-            name: {
+            description: {
                 type: Sequelize.STRING
             },
             path: {
                 type: Sequelize.STRING
             },
-            description: {
+            mainCategory: {
+                type: Sequelize.STRING
+            },
+            subCategory: {
+                type: Sequelize.STRING
+            },
+            innerCategory: {
+                type: Sequelize.STRING
+            },
+            pid: {
+                type: Sequelize.STRING
+            },
+            details: {
                 type: Sequelize.TEXT
             },
             userId: {
-                type: Sequelize.INTEGER
+                type: Sequelize.STRING
             },
             price: {
                 type: Sequelize.INTEGER

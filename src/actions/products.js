@@ -10,7 +10,9 @@ import {
     LOAD_MAIN_CATEGORIES,
     LOAD_INNER_CATEGORIES,
     HIDE_SUB_CATEGORIES,
-    DISPLAY_SUB_CATEGORIES
+    DISPLAY_SUB_CATEGORIES,
+    FETCH_PRODUCTS,
+    FETCH_PRODUCT
 } from './types';
 
 const url = "http://localhost:5000/api/v1";
@@ -60,3 +62,39 @@ export const hideSubCategories = () => dispatch => dispatch({
 export const displaySubCategories = () => dispatch => dispatch({
     type: DISPLAY_SUB_CATEGORIES
 });
+
+export const fetchProducts = (sku) => dispatch => {
+    axios
+        .get(`${url}/products`)
+        .then(response => {
+            const products = response.data.data;
+
+            const filteredProducts = products.filter(prod => {
+                return prod.mainCategory === sku || prod.subCategory === sku || prod.innerCategory === sku;
+            })
+
+            localStorage.setItem('products', JSON.stringify(filteredProducts));
+
+            dispatch({
+                type: FETCH_PRODUCTS,
+                payload: filteredProducts
+            })
+            console.log(filteredProducts);
+        })
+        .catch(error => console.log(error))
+}
+
+export const fetchProduct = (pid) => dispatch => {
+    axios
+        .get(`${url}/product/${pid}`)
+        .then(response => {
+            const product = response.data.data;
+
+            localStorage.setItem('product', JSON.stringify(product));
+            dispatch({
+                type: FETCH_PRODUCT,
+                payload: product
+            })
+        })
+        .catch(error => console.log(error))
+}

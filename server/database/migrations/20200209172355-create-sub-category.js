@@ -4,6 +4,7 @@ module.exports = {
         return queryInterface.createTable(
             'SubCategories', {
                 id: {
+                    allowNull: false,
                     type: Sequelize.INTEGER,
                     primaryKey: true,
                     allowNull: false,
@@ -13,7 +14,13 @@ module.exports = {
                     type: Sequelize.UUID
                 },
                 mainCategoryId: {
-                    type: Sequelize.INTEGER
+                    type: Sequelize.INTEGER,
+                    references: { // SubCategories belongsTo MainCategories
+                        model: 'MainCategories',
+                        key: 'id'
+                    },
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
                 },
                 name: {
                     type: Sequelize.STRING

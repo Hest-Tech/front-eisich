@@ -3,6 +3,7 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.createTable('InnerSubCategories', {
             id: {
+                allowNull: false,
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 allowNull: false,
@@ -15,7 +16,13 @@ module.exports = {
                 type: Sequelize.UUID
             },
             subCategoryId: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                references: { // InnerSubCategories belongsTo SubCategories
+                    model: 'SubCategories',
+                    key: 'id'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE'
             },
             name: {
                 type: Sequelize.STRING

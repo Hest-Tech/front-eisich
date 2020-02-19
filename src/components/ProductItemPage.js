@@ -6,6 +6,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Modal from 'react-modal';
+import { connect } from 'react-redux';
 
 import dress from '../assets/images/dress.png';
 import NavBar from './NavBar';
@@ -13,7 +14,7 @@ import SizeChart from './SizeChart';
 import CheckoutPage from './CheckoutPage';
 
 
-export default class ProductItemPage extends React.Component {
+class ProductItemPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -33,6 +34,10 @@ export default class ProductItemPage extends React.Component {
         return {
             chartPopUp: !state.chartPopUp
         }
+    }
+
+    componentDidMount() {
+        console.log(this.props.product)
     }
 
     render() {
@@ -83,9 +88,9 @@ export default class ProductItemPage extends React.Component {
                             <div className="details-background">
                                 <h3 className="product-title-description">Generic Women dress mi in nulla posuere sollicitudin aliquam ultrices</h3>
                                 <div className="new-price-promo">
-                                    <h3>KSH2,000</h3>
+                                    <h3>KSH{this.props.product.price}</h3>
                                     <span className="old-price-range">
-                                        <p className="old-price text-muted"><strike>KSH2,500</strike></p>
+                                        <p className="old-price text-muted"><strike>KSH2,000</strike></p>
                                         <mark>-25%</mark>
                                     </span>
                                 </div>
@@ -169,7 +174,7 @@ export default class ProductItemPage extends React.Component {
                             <div className="basic">Reviews</div>
                         </div>
                         <div className="product-specifications__background">
-                            2019nbspWomen Summer Dress Boho Style Floral Print Chiffon Beach Dress Tunic Sundress Loose Mini Party Dress Vestidos Plus Size 5XL
+                            {this.props.product.details}
 
                             <p>Items: Summer chiffon dress</p>
                             <p>Size: S M L XL XXL XXXL 4XL 5XL</p>
@@ -184,3 +189,14 @@ export default class ProductItemPage extends React.Component {
         );
     }
 }
+
+
+const mapStateToProps = (state) => ({
+    product: state.products.product
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    // fetchProduct: (pid) => dispatch(fetchProduct(pid))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItemPage);

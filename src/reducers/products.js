@@ -4,9 +4,10 @@
 
 
 const productsReducerDefaultState = {
-    mainCategories: JSON.parse(localStorage.getItem('mainCategories')),
+    mainCategories: JSON.parse(localStorage.getItem('mainCategories')) || [],
     subCategories: [],
-    productsList: [],
+    productsList: JSON.parse(localStorage.getItem('products')) || [],
+    product: JSON.parse(localStorage.getItem('product')) || {},
     displaySubCategories: false
 };
 
@@ -21,7 +22,6 @@ export default (state = productsReducerDefaultState, action) => {
             return {
                 ...state,
                 displaySubCategories: true,
-                color: '#E9BD4C',
                 subCategories: action.payload
             }
         case 'DISPLAY_SUB_CATEGORIES':
@@ -33,7 +33,16 @@ export default (state = productsReducerDefaultState, action) => {
             return {
                 ...state,
                 displaySubCategories: false
-                // subCategories: []
+            }
+        case 'FETCH_PRODUCTS':
+            return {
+                ...state,
+                productsList: action.payload
+            }
+        case 'FETCH_PRODUCT':
+            return {
+                ...state,
+                product: action.payload
             }
         default:
             return state;

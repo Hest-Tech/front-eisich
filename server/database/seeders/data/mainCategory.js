@@ -1,66 +1,79 @@
 "use strict"
 
 const uuidv4 = require("uuid/v4")
+const sku = {
+    menSku: uuidv4(),
+    womenSku: uuidv4(),
+    kidsSku: uuidv4(),
+    mobileSku: uuidv4(),
+    officeSku: uuidv4(),
+    homeSku: uuidv4(),
+    jewellerySku: uuidv4(),
+    funSku: uuidv4(),
+    carsSku: uuidv4(),
+    electronicSku: uuidv4()
+};
 
 module.exports = {
+    sku,
 	data: [{
-            sku: uuidv4(),
+            sku: sku.menSku,
             name: "Men's Fashion",
-            path: "men-fashion",
+            path: "/men-fashion/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
-            sku: uuidv4(),
+            sku: sku.womenSku,
             name: "Women's Fashion",
-            path: "women-fashion",
+            path: "/women-fashion/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
-            sku: uuidv4(),
+            sku: sku.kidsSku,
             name: "Kid's & Babies",
-            path: "kids-babies",
+            path: "/kids-babies/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
-            sku: uuidv4(),
+            sku: sku.mobileSku,
             name: 'Mobile Phones & Accessories',
-            path: "mobile-phonees-accessories",
+            path: "/mobile-phonees-accessories/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
-            sku: uuidv4(),
+            sku: sku.officeSku,
             name: 'Computer, Office & Security',
-            path: "computer-office-security",
+            path: "/computer-office-security/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
-            sku: uuidv4(),
+            sku: sku.homeSku,
             name: 'Home & Living',
-            path: "home-living",
+            path: "/home-living/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
-            sku: uuidv4(),
+            sku: sku.jewellerySku,
             name: 'Jewellery',
-            path: "jewellery",
+            path: "/jewellery/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
-            sku: uuidv4(),
+            sku: sku.funSku,
             name: 'Fun & Sports',
-            path: "fun-sports",
+            path: "/fun-sports/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
-            sku: uuidv4(),
+            sku: sku.carsSku,
             name: 'Automobile',
-            path: "automobile",
+            path: "/automobile/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
-            sku: uuidv4(),
+            sku: sku.electronicSku,
             name: 'Consumer Electronics',
-            path: "consumer-electronics",
+            path: "/consumer-electronics/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }]

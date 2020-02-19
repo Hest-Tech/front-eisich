@@ -1,6 +1,6 @@
 'use strict';
 
-const subCategory = require('./categoryData/subCategory');
+const subCategory = require('./data/subCategory');
 
 module.exports = {
     up: (queryInterface, Sequelize) => queryInterface.bulkInsert(
