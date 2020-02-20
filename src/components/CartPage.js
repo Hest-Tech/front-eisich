@@ -5,16 +5,23 @@ import { NavLink } from 'react-router-dom';
 import NavBar from './NavBar';
 import '../assets/images/dress.png';
 import '../assets/images/iphone.png';
-import { removeFromCart } from '../actions/cart';
+import { removeFromCart, updateCartItem } from '../actions/cart';
 
 
 class CartPage extends React.Component {
     constructor(props) {
         super(props);
+        this.setQuantity = this.setQuantity.bind(this);
     }
 
     componentDidMount() {
         console.log(this.props.cart);
+    }
+
+    setQuantity(e, pid) {
+        const quantity = e.target.value;
+
+        this.props.updateCartItem(pid, { quantity });
     }
 
     render() {
@@ -56,8 +63,7 @@ class CartPage extends React.Component {
                                                     </div>
                                                 </div>
                                                 <div className="cart-item-qty qty-border">
-                                                    <select>
-                                                        <option>{item.quantity}</option>
+                                                    <select onChange={(e) => this.setQuantity(e, item.pid)} value={item.quantity}>
                                                         <option>1</option>
                                                         <option>2</option>
                                                         <option>3</option>
@@ -76,7 +82,7 @@ class CartPage extends React.Component {
                                                     <small className="text-success">Saving: {item.saving}</small>
                                                 </div>
                                                 <div className="cart-subtotal">
-                                                    <b>{item.subtotal}</b>
+                                                    <b>{item.newPrice*item.quantity}</b>
                                                 </div>
                                             </div>
                                         );
@@ -131,7 +137,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    removeFromCart: (pid) => dispatch(removeFromCart(pid))
+    removeFromCart: (pid) => dispatch(removeFromCart(pid)),
+    updateCartItem: (pid, updates) => dispatch(updateCartItem(pid, updates))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartPage);

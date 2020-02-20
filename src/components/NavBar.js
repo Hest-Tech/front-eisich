@@ -38,6 +38,7 @@ class NavBar extends React.Component {
 
     componentDidMount() {
         this.props.loadUser();
+        console.log('navbar', this.props.cart)
     }
 
     render() {
@@ -167,7 +168,7 @@ class NavBar extends React.Component {
                                             className='fas fa-cart-plus shopping__icon'
                                             style={{ color: '#000' }}
                                         ></i>
-                                        <span className="badge bg-warning cart-pill">2</span>
+                                        <span className="badge bg-warning cart-pill">{this.props.cart.length}</span>
                                     </NavLink>
                                 </span>
                             </div>
@@ -180,7 +181,8 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    authentication: state.authentication
+    authentication: state.authentication,
+    cart: state.cart.cart
 });
 
 const mapDispatchToProps = (dispatch) => ({

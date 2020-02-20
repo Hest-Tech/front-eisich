@@ -7,7 +7,8 @@ import axios from 'axios';
 import {
     ADD_TO_CART,
     FETCH_CART,
-    REMOVE_ITEM_FROM_CART
+    REMOVE_ITEM_FROM_CART,
+    UPDATE_CART_ITEM
 } from './types';
 import { history } from '../routes/AppRouter';
 

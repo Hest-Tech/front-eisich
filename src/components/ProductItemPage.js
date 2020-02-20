@@ -98,7 +98,7 @@ class ProductItemPage extends React.Component {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const disableBtn = !!cart.length && cart.filter(item => item.pid === this.props.product.pid);
 
-        return !!disableBtn;
+        return !!disableBtn.length;
     }
 
     componentDidMount() {
