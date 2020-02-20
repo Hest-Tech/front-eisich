@@ -43,7 +43,7 @@ const AppRouter = () => (
                 <PrivateRoute path="/customer/address" component={AddressBook} />
                 <PrivateRoute path="/customer/profile/edit" component={UpdateAccount} />
                 <Route path="/product/:path" component={ProductItemPage} />
-                <Route path="/:category" component={ProductsPage} />
+                <Route path="/products/:category" component={ProductsPage} />
                 <Route path="/cart" component={CartPage} />
                 <PrivateRoute path="/checkout" component={CheckoutPage} />
                 <Route path="/about" component={AboutPage} />

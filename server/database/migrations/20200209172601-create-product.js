@@ -20,6 +20,21 @@ module.exports = {
             subCategory: {
                 type: Sequelize.STRING
             },
+            oldPrice: {
+                type: Sequelize.INTEGER
+            },
+            newPrice: {
+                type: Sequelize.INTEGER
+            },
+            pieces: {
+                type: Sequelize.INTEGER
+            },
+            saving: {
+                type: Sequelize.INTEGER
+            },
+            seller: {
+                type: Sequelize.STRING
+            },
             innerCategory: {
                 type: Sequelize.STRING
             },
@@ -29,11 +44,8 @@ module.exports = {
             details: {
                 type: Sequelize.TEXT
             },
-            userId: {
+            sellerId: {
                 type: Sequelize.STRING
-            },
-            price: {
-                type: Sequelize.INTEGER
             },
             createdAt: {
                 allowNull: false,

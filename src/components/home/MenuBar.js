@@ -60,7 +60,7 @@ class MenuBar extends React.Component {
                                 !!this.props.products.mainCategories.length && this.props.products.mainCategories.map((category, i) => (
                                     <NavLink
                                         className="menu-link"
-                                        to={category.path}
+                                        to={`products${category.path}`}
                                         onMouseEnter={() => this.onNavMouseEnter()}
                                         onMouseLeave={() => this.onNavMouseLeave()}
                                         style={{ textDecoration: 'none' }}

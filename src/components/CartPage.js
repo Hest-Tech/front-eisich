@@ -1,13 +1,20 @@
 import React from 'react';
-
-import NavBar from './NavBar';
-import dress from '../assets/images/dress.png';
-import iphone from '../assets/images/iphone.png';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-export default class CartPage extends React.Component {
+import NavBar from './NavBar';
+import '../assets/images/dress.png';
+import '../assets/images/iphone.png';
+import { removeFromCart } from '../actions/cart';
+
+
+class CartPage extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        console.log(this.props.cart);
     }
 
     render() {
@@ -17,7 +24,7 @@ export default class CartPage extends React.Component {
                 <div className="jumbotron">
                     <div className="container cart-page-container">
                         <div className="cart-item-background">
-                            <h3>Cart (2 Items)</h3>
+                            <h3>Cart ({this.props.cart.length} Items)</h3>
                             <div className="cart-item-contents">
                                 <div className="cart-header">
                                     <b className="text-muted item">ITEM</b>
@@ -25,80 +32,56 @@ export default class CartPage extends React.Component {
                                     <b className="text-muted cart-title price">UNIT PRICE</b>
                                     <b className="text-muted cart-title total">SUBTOTAL</b>
                                 </div>
-                                <div className="cart-item">
-                                    <div className="cart-details">
-                                        <div className="cart-img-item">
-                                            <img src={iphone} alt="cart dress" className="cart-image" />
-                                        </div>
-                                        <div className="cart-item-details">
-                                            <small className="text-muted"> Seller: John Doe</small>
-                                            <p className="cart-text"><small>S7 - 8GB - 1GB RAM (8MP+5 MP) Camera - Dual Sim - Black</small></p>
-                                            <div className="cart-action-btn">
-                                                <small className="cart-action add-to-wishlist"><i className="far fa-heart"></i>MOVE TO WISHLIST</small>
-                                                <small className="cart-action remove-from-cart"><i className="fas fa-trash-alt"></i>REMOVE</small>
+                                {
+                                    this.props.cart.map((item, i) => {
+                                        return (
+                                            <div
+                                                className="cart-item"
+                                                key={i}
+                                            >
+                                                <div className="cart-details">
+                                                    <div className="cart-img-item">
+                                                        <img src="dress.png" alt="cart Iphone" className="cart-image" />
+                                                    </div>
+                                                    <div className="cart-item-details">
+                                                        <small className="text-muted">Seller: {item.seller}</small>
+                                                        <p className="cart-text"><small>{item.description}</small></p>
+                                                        <div className="cart-action-btn">
+                                                            <small className="cart-action add-to-wishlist"><i className="far fa-heart"></i>MOVE TO WISHLIST</small>
+                                                            <small
+                                                                className="cart-action remove-from-cart"
+                                                                onClick={() => this.props.removeFromCart(item.pid)}
+                                                            ><i className="fas fa-trash-alt"></i>REMOVE</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="cart-item-qty qty-border">
+                                                    <select>
+                                                        <option>{item.quantity}</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                    </select>
+                                                </div>
+                                                <div className="cart-unit-price price-border">
+                                                    <p className="cart-new-price">{item.newPrice}</p>
+                                                    <p className="cart-old-price text-muted"><strike>{item.oldPrice}</strike></p>
+                                                    <small className="text-success">Saving: {item.saving}</small>
+                                                </div>
+                                                <div className="cart-subtotal">
+                                                    <b>{item.subtotal}</b>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div className="cart-item-qty qty-border">
-                                        <select>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                        </select>
-                                    </div>
-                                    <div className="cart-unit-price price-border">
-                                        <p className="cart-new-price">Ksh 20,000</p>
-                                        <p className="cart-old-price text-muted"><strike>Ksh 22,000</strike></p>
-                                        <small className="text-success">Saving: Ksh 2,000</small>
-                                    </div>
-                                    <div className="cart-subtotal">
-                                        <b>Ksh 20,000</b>
-                                    </div>
-                                </div>
-                                <div className="cart-item">
-                                    <div className="cart-details">
-                                        <div className="cart-img-item">
-                                            <img src={dress} alt="cart Iphone" className="cart-image" />
-                                        </div>
-                                        <div className="cart-item-details">
-                                            <small className="text-muted">Seller: Jane Doe</small>
-                                            <p className="cart-text"><small>Summer Dress Boho Style Floral Print Chiffon</small></p>
-                                            <div className="cart-action-btn">
-                                                <small className="cart-action add-to-wishlist"><i className="far fa-heart"></i>MOVE TO WISHLIST</small>
-                                                <small className="cart-action remove-from-cart"><i className="fas fa-trash-alt"></i>REMOVE</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="cart-item-qty qty-border">
-                                        <select>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                        </select>
-                                    </div>
-                                    <div className="cart-unit-price price-border">
-                                        <p className="cart-new-price">Ksh 2,000</p>
-                                        <p className="cart-old-price text-muted"><strike>Ksh 2,400</strike></p>
-                                        <small className="text-success">Saving: Ksh 400</small>
-                                    </div>
-                                    <div className="cart-subtotal">
-                                        <b>Ksh 2,000</b>
-                                    </div>
-                                </div>
+                                        );
+                                    })
+                                }
                                 <div className="cart-cumulative">
                                     <div className="cart-total-info cart-subtotal-vat">
                                         <div className="subtotal-background">
@@ -141,3 +124,15 @@ export default class CartPage extends React.Component {
         );
     }
 }
+
+
+const mapStateToProps = (state) => ({
+    cart: state.cart.cart
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    removeFromCart: (pid) => dispatch(removeFromCart(pid))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartPage);
+

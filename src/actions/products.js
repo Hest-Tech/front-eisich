@@ -12,7 +12,9 @@ import {
     HIDE_SUB_CATEGORIES,
     DISPLAY_SUB_CATEGORIES,
     FETCH_PRODUCTS,
-    FETCH_PRODUCT
+    FETCH_PRODUCT,
+    ADD_TO_CART,
+    FETCH_CART
 } from './types';
 
 const url = "http://localhost:5000/api/v1";
@@ -40,6 +42,7 @@ export const loadProductCategories = () => dispatch => {
         .catch(error => console.log(error))
 }
 
+// load product categories
 export const loadProductSubCategories = name => dispatch => {
 
     axios
@@ -55,14 +58,17 @@ export const loadProductSubCategories = name => dispatch => {
         .catch(error => console.log(error))
 }
 
+// hide product sub categories
 export const hideSubCategories = () => dispatch => dispatch({
     type: HIDE_SUB_CATEGORIES
 });
 
+// show product sub categories
 export const displaySubCategories = () => dispatch => dispatch({
     type: DISPLAY_SUB_CATEGORIES
 });
 
+// fetch products
 export const fetchProducts = (sku) => dispatch => {
     axios
         .get(`${url}/products`)
@@ -84,11 +90,13 @@ export const fetchProducts = (sku) => dispatch => {
         .catch(error => console.log(error))
 }
 
+// fetch single product
 export const fetchProduct = (pid) => dispatch => {
     axios
         .get(`${url}/product/${pid}`)
         .then(response => {
             const product = response.data.data;
+            console.log('product: ', product);
 
             localStorage.setItem('product', JSON.stringify(product));
             dispatch({
