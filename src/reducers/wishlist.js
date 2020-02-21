@@ -4,17 +4,15 @@
 
 
 const wishReducerDefaultState = {
-    /*This object should contain initial state values*/
-    wishlist: [],
+    wishlist: JSON.parse(localStorage.getItem('wishlist')) || [],
 };
 
 export default (state = wishReducerDefaultState, action) => {
     switch (action.type) {
     	case 'ADD_TO_WISHLIST':
-    		return {
-    			...state,
-                wishlist: state.wishlist.concat(action.payload)
-    		}
+        case 'FETCH_WISHLIST':
+        case 'REMOVE_ITEM_FROM_WISHLIST':
+    		return { wishlist: action.payload }
         default:
             return state;
     }

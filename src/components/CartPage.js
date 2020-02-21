@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import '../assets/images/dress.png';
 import '../assets/images/iphone.png';
 import { removeFromCart, updateCartItem } from '../actions/cart';
+import { addToWishlist } from '../actions/wishlist';
 
 
 class CartPage extends React.Component {
@@ -54,7 +55,10 @@ class CartPage extends React.Component {
                                                         <small className="text-muted">Seller: {item.seller}</small>
                                                         <p className="cart-text"><small>{item.description}</small></p>
                                                         <div className="cart-action-btn">
-                                                            <small className="cart-action add-to-wishlist"><i className="far fa-heart"></i>MOVE TO WISHLIST</small>
+                                                            <small
+                                                                className="cart-action add-to-wishlist"
+                                                                onClick={() => this.props.addToWishlist(item)}
+                                                            ><i className="far fa-heart"></i>MOVE TO WISHLIST</small>
                                                             <small
                                                                 className="cart-action remove-from-cart"
                                                                 onClick={() => this.props.removeFromCart(item.pid)}
@@ -138,6 +142,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     removeFromCart: (pid) => dispatch(removeFromCart(pid)),
+    addToWishlist: (item) => dispatch(addToWishlist(item)),
     updateCartItem: (pid, updates) => dispatch(updateCartItem(pid, updates))
 });
 

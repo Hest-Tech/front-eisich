@@ -6,11 +6,17 @@ import NavBar from '../NavBar';
 import AccountMenu from './AccountMenu';
 import dress from '../../assets/images/dress.png';
 import iphone from '../../assets/images/iphone.png';
+import { removeFromWishlist, fetchWishlist } from '../../actions/wishlist';
 
 
-class AcccountWishlist extends React.Component {
+class AccountWishlist extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        // this.props.fetchWishlist();
+        console.log('wishlist: ', this.props.wishlist)
     }
 
     render() {
@@ -26,44 +32,36 @@ class AcccountWishlist extends React.Component {
                     <span></span>
                     <div className="accout-detail-sec acc-sec">
                         <div className="account-det-background">
-                            <h1 className="account-overview-title">Account wishlist <span>(2)</span></h1>
+                            <h1 className="account-overview-title">Account wishlist <span>({this.props.wishlist.length})</span></h1>
                             <div className="wislist-background">
-                                <div className="wishlist-Item">
-                                    <div className="wishlist-img-background">
-                                        <img className="wishlist-img" src={iphone} alt="Iphone" />
+                            {
+                                this.props.wishlist.map((item, i) => (
+                                    <div
+                                        className="wishlist-Item"
+                                        key={i}
+                                    >
+                                        <div className="wishlist-img-background">
+                                            <img className="wishlist-img" src={iphone} alt="Iphone" />
+                                        </div>
+                                        <div className="wishlist-item-detail">
+                                            <p className="wishlist-text">{item.description}</p>
+                                            <p>KSH {item.newPrice}</p>
+                                        </div>
+                                        <div className="wishlist-item-price">
+                                            <NavLink
+                                                to="/checkout"
+                                                className="wishlist-btn"
+                                            >
+                                                BUY NOW
+                                            </NavLink>
+                                            <button
+                                                className="btn wishlist-remove"
+                                                onClick={() => this.props.removeFromWishlist(item.pid)}
+                                            ><i className="fas fa-trash-alt"></i>REMOVE</button>
+                                        </div>
                                     </div>
-                                    <div className="wishlist-item-detail">
-                                        <p className="wishlist-text">S7 - 8GB - 1GB RAM (8MP+5 MP) Camera - Dual Sim - Black</p>
-                                        <p>KSH 20,000</p>
-                                    </div>
-                                    <div className="wishlist-item-price">
-                                        <NavLink
-                                            to="/checkout"
-                                            className="wishlist-btn"
-                                        >
-                                            BUY NOW
-                                        </NavLink>
-                                        <button className="btn wishlist-remove"><i className="fas fa-trash-alt"></i>REMOVE</button>
-                                    </div>
-                                </div>
-                                <div className="wishlist-Item">
-                                    <div className="wishlist-img-background">
-                                        <img className="wishlist-img" src={dress} alt="Dress" />
-                                    </div>
-                                    <div className="wishlist-item-detail">
-                                        <p className="wishlist-text">Summer Dress Boho Style Floral Print Chiffon <small className="promo-value">25% off</small></p>
-                                        <p>KSH 2,000<br /><strike><small className="text-muted">KSH 2,500</small></strike></p>
-                                    </div>
-                                    <div className="wishlist-item-price">
-                                        <NavLink
-                                            to="/checkout"
-                                            className="wishlist-btn"
-                                        >
-                                            BUY NOW
-                                        </NavLink>
-                                        <button className="btn wishlist-remove"><i className="fas fa-trash-alt"></i>REMOVE</button>
-                                    </div>
-                                </div>
+                                ))
+                            }
                             </div>
                         </div>
                     </div>
@@ -75,7 +73,13 @@ class AcccountWishlist extends React.Component {
 
 const mapStateToProps = (state) => ({
     authentication: state.authentication,
-    resMessages: state.resMessages
+    resMessages: state.resMessages,
+    wishlist: state.wishlist.wishlist
 });
 
-export default connect(mapStateToProps)(AcccountWishlist);
+const mapDispatchToProps = (dispatch) => ({
+    removeFromWishlist: (pid) => dispatch(removeFromWishlist(pid)),
+    fetchWishlist: () => dispatch(fetchWishlist())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountWishlist);
