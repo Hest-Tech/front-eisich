@@ -14,6 +14,7 @@ import { fetchProduct } from '../actions/products';
 
 const ProductsPage = (props) => (
     <div className="App">
+    {console.log(props.products.productsList)}
         <NavBar />
         {!!props.products.productsList.length ? <div
             className="products-container"
@@ -162,7 +163,7 @@ const ProductsPage = (props) => (
                     <div className="products-filter-options">
                         <div className="products-title">
                             <h3 className="display-6">WOMEN'S CLOTHING</h3>
-                            <small className="text-muted">34 products found</small>
+                            <small className="text-muted">{props.products.productsList.length} product{props.products.productsList.length > 1 && 's'} found</small>
                         </div>
                         <div className="products-filter">
                             <nav className="title-sec-paginator">
@@ -223,10 +224,10 @@ const ProductsPage = (props) => (
                                                 <span className="product-price-details">
                                                     <div className="product-details-price font-italic">
                                                         <div className="new-prices">
-                                                            <p className="font-weight-bold">KSH{product.price}</p>
-                                                            <strike className="text-muted small">KSH2,500</strike>
+                                                            <p className="font-weight-bold">KSH{product.newPrice}</p>
+                                                            <strike className="text-muted small">KSH{product.oldPrice}</strike>
                                                         </div>
-                                                        <span className="price-off small font-weight-bold text-warning">20%<br /> OFF</span>
+                                                        <span className="price-off small font-weight-bold text-warning">{((product.saving/product.oldPrice)*100).toFixed(1)}%<br /> OFF</span>
                                                     </div>
                                                     <div className="text-warning">
                                                         <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i>

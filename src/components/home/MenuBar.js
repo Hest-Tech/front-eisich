@@ -44,9 +44,14 @@ class MenuBar extends React.Component {
 
     fetchCategory(e) {
         const sku = e.target.dataset.sku;
-        console.log(sku)
+        const name = e.target.dataset.name;
+        console.log(name);
 
-        this.props.fetchProducts(sku);
+        this.props.fetchProducts(sku, name);
+    }
+
+    componentDidMount() {
+        console.log('mainCategories: ',this.props.products.mainCategories)
     }
 
     render() {
@@ -72,6 +77,7 @@ class MenuBar extends React.Component {
                                             // style={this.props.products.displaySubCategories ? {color: '#E9BD4C'} : {color: '#505050'}}
                                             // onMouseLeave={() => this.onMouseLeave()}
                                             data-sku={category.sku}
+                                            data-name="MAIN_CATEGORY"
                                             onClick={this.fetchCategory}
                                         >
                                             <i className="fa fa-area-chart mr-2"></i>
@@ -96,7 +102,7 @@ const mapDispatchToProps = (dispatch) => ({
     loadProductCategories: () => dispatch(loadProductCategories()),
     displaySubCategories: () => dispatch(displaySubCategories()),
     hideSubCategories: () => dispatch(hideSubCategories()),
-    fetchProducts: (name) => dispatch(fetchProducts(name)),
+    fetchProducts: (sku, name) => dispatch(fetchProducts(sku, name)),
     loadProductSubCategories: (name) => dispatch(loadProductSubCategories(name))
 })
 

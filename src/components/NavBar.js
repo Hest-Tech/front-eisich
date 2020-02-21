@@ -38,7 +38,7 @@ class NavBar extends React.Component {
 
     componentDidMount() {
         this.props.loadUser();
-        console.log('navbar', this.props.cart)
+        // console.log('navbar', this.props.cart)
     }
 
     render() {

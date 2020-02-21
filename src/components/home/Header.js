@@ -15,17 +15,31 @@ import {
     loadProductCategories,
     loadProductSubCategories,
     displaySubCategories,
-    hideSubCategories
+    hideSubCategories,
+    fetchProducts
 } from '../../actions/products';
 
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
+        this.fetchSubCategory = this.fetchSubCategory.bind(this);
+        this.fetchInnerCategory = this.fetchInnerCategory.bind(this);        
     }
 
-    componentDidUpdate() {
-        // console.log(this.props.products.subCategories)
+    fetchSubCategory(e) {
+        const name = e.target.dataset.name;
+        const sku = e.target.dataset.sku;
+
+        this.props.fetchProducts(sku, name);
+        console.log()
+    }
+
+    fetchInnerCategory(e) {
+        const name = e.target.dataset.name;
+        const sku = e.target.dataset.sku;
+
+        this.props.fetchProducts(sku, name);
     }
 
     render() {
@@ -89,30 +103,32 @@ class Header extends React.Component {
                                                 >
                                                     <div className="table-row category-column__inner tr-1">
                                                         <NavLink
-                                                            to={category.path}
-                                                            className='category-link'
+                                                            to={`products${category.path}`}
+                                                            data-name="SUB_CATEGORY"
+                                                            data-sku={category.sku}
+                                                            onClick={this.fetchSubCategory}
+                                                            className='category-link category-title th'
                                                         >
-                                                            <b
-                                                                className="th"
-                                                                data-sku={category.sku}
-                                                            >{category.name}</b><hr />
-                                                        </NavLink>
+                                                            {category.name}
+                                                        </NavLink><hr />
                                                         <ul
                                                             className="table-row-list category-list-items"
                                                         >
                                                             {
                                                                 category.innerCategory.map((innerCategory, _i) => (
-                                                                    <NavLink
-                                                                        to={innerCategory.path}
-                                                                        className='category-link'
+                                                                    <li
                                                                         key={_i}
                                                                     >
-                                                                        <li
+                                                                        <NavLink
+                                                                            to={`products${innerCategory.path}`}
+                                                                            className='category-link'
+                                                                            data-name="INNER_CATEGORY"
                                                                             data-sku={innerCategory.sku}
+                                                                            onClick={this.fetchInnerCategory}
                                                                         >
                                                                             {innerCategory.name}
-                                                                        </li>
-                                                                    </NavLink>
+                                                                        </NavLink>
+                                                                    </li>
                                                                ))
                                                             }
                                                         </ul>
@@ -141,6 +157,7 @@ const mapDispatchToProps = (dispatch) => ({
     loadProductCategories: () => dispatch(loadProductCategories()),
     displaySubCategories: () => dispatch(displaySubCategories()),
     hideSubCategories: () => dispatch(hideSubCategories()),
+    fetchProducts: (sku, name) => dispatch(fetchProducts(sku, name)),
     loadProductSubCategories: () => dispatch(loadProductSubCategories())
 })
 

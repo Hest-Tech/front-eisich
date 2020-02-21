@@ -96,7 +96,7 @@
 }
 
 .table-row {
-  margin: $m-margin 0;
+  margin: $s-margin*.5 0;
 }
 
 .table-row-list {
@@ -108,25 +108,22 @@
   opacity: 0.8;
 }
 
-.table-row-list li,
-.th {
+.table-row-list li {
   cursor: pointer;
 }
 
 .table-row-list li:hover,
-.th:hover {
+.category-title:hover {
   opacity: 1;
-  color: $base-color;
+  color: $base-color !important;
 }
 
-.th {
-  font-weight: 400;
-  // background: blue;
+.category-title {
   width: 100%;
 }
 
 hr {
-  margin: $s-margin 0;
+  margin: $s-margin*.5 0;
 }
 
 @media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {

@@ -69,23 +69,37 @@ export const displaySubCategories = () => dispatch => dispatch({
 });
 
 // fetch products
-export const fetchProducts = (sku) => dispatch => {
+export const fetchProducts = (sku, name) => dispatch => {
     axios
         .get(`${url}/products`)
         .then(response => {
             const products = response.data.data;
+            let filteredProducts;
+            console.log(name, ' : ', products)
 
-            const filteredProducts = products.filter(prod => {
-                return prod.mainCategory === sku || prod.subCategory === sku || prod.innerCategory === sku;
-            })
+            switch(name) {
+                case 'MAIN_CATEGORY':
+                    filteredProducts = products.filter(item => item.mainCategory === sku)
+                    console.log("MAIN_CATEGORY: ", filteredProducts);
+                    break;
+                case 'SUB_CATEGORY':
+                    filteredProducts = products.filter(item => item.subCategory === sku);
+                    console.log("SUB_CATEGORY: ", filteredProducts);
+                    // console.log("SUB_CATEGORY: ", sku);
+                    break;
+                case 'INNER_CATEGORY':
+                    filteredProducts = products.filter(item => item.innerCategory === sku)
+                    console.log("INNER_CATEGORY: ", filteredProducts);
+                    break;
+            }
 
             localStorage.setItem('products', JSON.stringify(filteredProducts));
 
+            console.log(filteredProducts);
             dispatch({
                 type: FETCH_PRODUCTS,
                 payload: filteredProducts
             })
-            console.log(filteredProducts);
         })
         .catch(error => console.log(error))
 }
