@@ -30,16 +30,18 @@ class Header extends React.Component {
     fetchSubCategory(e) {
         const name = e.target.dataset.name;
         const sku = e.target.dataset.sku;
+        const title = e.target.dataset.title;
 
-        this.props.fetchProducts(sku, name);
+        this.props.fetchProducts(sku, name, title);
         console.log()
     }
 
     fetchInnerCategory(e) {
         const name = e.target.dataset.name;
         const sku = e.target.dataset.sku;
+        const title = e.target.dataset.title;
 
-        this.props.fetchProducts(sku, name);
+        this.props.fetchProducts(sku, name, title);
     }
 
     render() {
@@ -106,6 +108,7 @@ class Header extends React.Component {
                                                             to={`products${category.path}`}
                                                             data-name="SUB_CATEGORY"
                                                             data-sku={category.sku}
+                                                            data-title={category.name}
                                                             onClick={this.fetchSubCategory}
                                                             className='category-link category-title th'
                                                         >
@@ -124,6 +127,7 @@ class Header extends React.Component {
                                                                             className='category-link'
                                                                             data-name="INNER_CATEGORY"
                                                                             data-sku={innerCategory.sku}
+                                                                            data-title={innerCategory.name}
                                                                             onClick={this.fetchInnerCategory}
                                                                         >
                                                                             {innerCategory.name}
@@ -157,7 +161,7 @@ const mapDispatchToProps = (dispatch) => ({
     loadProductCategories: () => dispatch(loadProductCategories()),
     displaySubCategories: () => dispatch(displaySubCategories()),
     hideSubCategories: () => dispatch(hideSubCategories()),
-    fetchProducts: (sku, name) => dispatch(fetchProducts(sku, name)),
+    fetchProducts: (sku, name, title) => dispatch(fetchProducts(sku, name, title)),
     loadProductSubCategories: () => dispatch(loadProductSubCategories())
 })
 

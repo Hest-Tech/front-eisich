@@ -19,6 +19,50 @@ import {
 
 const url = "http://localhost:5000/api/v1";
 
+// fetch categories helper
+const fetchCategoriesHelper = (
+    products,
+    name,
+    title,
+    payload,
+    sku,
+    dispatch
+) => {
+    const filteredProducts = products.filter(item => {
+        switch(name) {
+            case 'MAIN_CATEGORY':
+                return item.mainCategory === sku
+            case 'SUB_CATEGORY':
+                return item.subCategory === sku
+            case 'INNER_CATEGORY':
+                return item.innerCategory === sku
+        }
+    });
+    const product = filteredProducts[0] || {}
+    const fetchUrl = `${url}/${name}/${product.mainCategory}/${product.subCategory}/${product.innerCategory}`;
+
+    axios
+        .get(fetchUrl)
+        .then(response => {
+            const data = response.data.data;
+            const newData = !!data.length && data.map(item => ({
+                ...item,
+                title: name
+            }));
+            payload['breadCrumbs'] = newData;
+            payload['title'] = title
+            payload['filteredProducts'] = filteredProducts
+            localStorage.setItem('products', JSON.stringify(payload));
+
+            dispatch({
+                type: FETCH_PRODUCTS,
+                payload
+            })
+        })
+        .catch(error => console.log(error))
+}
+
+
 // load products
 export const loadProductCategories = () => dispatch => {
 
@@ -69,37 +113,32 @@ export const displaySubCategories = () => dispatch => dispatch({
 });
 
 // fetch products
-export const fetchProducts = (sku, name) => dispatch => {
+export const fetchProducts = (sku, name, title) => dispatch => {
     axios
-        .get(`${url}/products`)
+        .get(`${url}/${name}/products`)
         .then(response => {
+            // console.log('response: ', response)
             const products = response.data.data;
+            const mainCategory = response.data.baseCategory;
+            const subCategory = response.data.subCategory;
+            const payload = {};
             let filteredProducts;
-            console.log(name, ' : ', products)
+            let product;
 
             switch(name) {
                 case 'MAIN_CATEGORY':
-                    filteredProducts = products.filter(item => item.mainCategory === sku)
-                    console.log("MAIN_CATEGORY: ", filteredProducts);
-                    break;
                 case 'SUB_CATEGORY':
-                    filteredProducts = products.filter(item => item.subCategory === sku);
-                    console.log("SUB_CATEGORY: ", filteredProducts);
-                    // console.log("SUB_CATEGORY: ", sku);
-                    break;
                 case 'INNER_CATEGORY':
-                    filteredProducts = products.filter(item => item.innerCategory === sku)
-                    console.log("INNER_CATEGORY: ", filteredProducts);
+                    fetchCategoriesHelper(
+                        products,
+                        name,
+                        title,
+                        payload,
+                        sku,
+                        dispatch
+                    );
                     break;
             }
-
-            localStorage.setItem('products', JSON.stringify(filteredProducts));
-
-            console.log(filteredProducts);
-            dispatch({
-                type: FETCH_PRODUCTS,
-                payload: filteredProducts
-            })
         })
         .catch(error => console.log(error))
 }

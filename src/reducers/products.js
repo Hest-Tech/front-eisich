@@ -3,11 +3,17 @@
  */
 
 
+const mainCategories = JSON.parse(localStorage.getItem('mainCategories'));
+const products = JSON.parse(localStorage.getItem('products'));
+const product = JSON.parse(localStorage.getItem('product'));
+
 const productsReducerDefaultState = {
-    mainCategories: JSON.parse(localStorage.getItem('mainCategories')) || [],
+    mainCategories: mainCategories || [],
     subCategories: [],
-    productsList: JSON.parse(localStorage.getItem('products')) || [],
-    product: JSON.parse(localStorage.getItem('product')) || {},
+    productsList: products ? products.filteredProducts : [],
+    productsTitle: products ? products.title : "",
+    product: product || {},
+    breadCrumbs: products ? products.breadCrumbs : [],
     displaySubCategories: false
 };
 
@@ -37,7 +43,9 @@ export default (state = productsReducerDefaultState, action) => {
         case 'FETCH_PRODUCTS':
             return {
                 ...state,
-                productsList: action.payload
+                productsList: action.payload.filteredProducts,
+                productsTitle: action.payload.title,
+                breadCrumbs: action.payload.breadCrumbs
             }
         case 'FETCH_PRODUCT':
             return {

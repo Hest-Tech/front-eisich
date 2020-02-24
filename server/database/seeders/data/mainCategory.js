@@ -37,7 +37,7 @@ module.exports = {
         }, {
             sku: sku.mobileSku,
             name: 'Mobile Phones & Accessories',
-            path: "/mobile-phonees-accessories/",
+            path: "/mobile-phones-accessories/",
             createdAt: new Date(),
             updatedAt: new Date(),
         }, {
