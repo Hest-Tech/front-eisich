@@ -4,15 +4,10 @@ import { connect } from 'react-redux';
 import NavBar from '../../components/NavBar';
 
 
-const CategoryPage = ({ products }) => {
+const ProfilePage = ({ products }) => {
 	return (
 		<Fragment>
 			<NavBar />
-			{
-				!!products.mainCategories.length && products.mainCategories.map((category, i) => {
-					return <b key={i}>{category.name}</b>
-				})
-			}
 		</Fragment>
 	);
 }
@@ -27,4 +22,4 @@ const mapDispatchToProps = (dispatch) => ({
     // signOutUser: () => dispatch(signOutUser())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

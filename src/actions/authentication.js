@@ -158,10 +158,6 @@ export const loadUser = () => dispatch => {
                 );
                 console.log('-->', error);
             })
-    } else {
-        // dispatch(unloadUser());
-        history.push('/');
-        // storeUser.eraseCookie('user');
     }
 };
 

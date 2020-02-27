@@ -65,10 +65,14 @@ class NavBar extends React.Component {
                         </div>
                         <div className="help-login">
                             <div className="help-login__wrapped">
-                                <span className="help">
+                                <NavLink
+                                    className="help"
+                                    to="/help"
+                                    style={{display:'flex'}}
+                                >
                                     <img src={question} alt="question-mark" className="navbar__icon-img" />
                                     <p>Help</p>
-                                </span>
+                                </NavLink>
                                 <span className="language">
                                     <label className="language__label">Language: </label>
                                     <select className="language__select" id="languageSelect">
@@ -168,7 +172,9 @@ class NavBar extends React.Component {
                                             className='fas fa-cart-plus shopping__icon'
                                             style={{ color: '#000' }}
                                         ></i>
-                                        <span className="badge bg-warning cart-pill">{this.props.cart.length}</span>
+                                        <span className="badge bg-warning cart-pill">
+                                            {this.props.authentication.isAuthenticated ? this.props.cart.length : 0}
+                                        </span>
                                     </NavLink>
                                 </span>
                             </div>

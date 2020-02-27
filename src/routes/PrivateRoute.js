@@ -34,7 +34,7 @@ const PrivateRoute = ({
     );
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.authentication.user.uid
+    isAuthenticated: state.isAuthenticated ? state.authentication.user.uid : false
 });
 
 const mapDispatchToProps = (dispatch) => ({

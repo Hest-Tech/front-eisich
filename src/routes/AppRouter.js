@@ -23,9 +23,12 @@ import ProductsPage from '../pages/ProductsPage';
 import AboutPage from '../pages/AboutPage';
 import Footer from '../components/Footer';
 import CartPage from '../pages/CartPage';
+import CategoryPage from '../pages/mobile/CategoryPage';
+import ProfilePage from '../pages/mobile/ProfilePage';
 import ProductItemPage from '../pages/ProductItemPage';
 import ErrorBoundary from '../components/ErrorBoundary';
 import PrivateRoute from './PrivateRoute';
+import MobileNav from '../components/home/MobileNav';
 
 export const history = createBrowserHistory();
 
@@ -42,17 +45,20 @@ const AppRouter = () => (
                 <PrivateRoute path="/customer/change-password" component={ChangePassword} />
                 <PrivateRoute path="/customer/address" component={AddressBook} />
                 <PrivateRoute path="/customer/profile/edit" component={UpdateAccount} />
+                <PrivateRoute path="/checkout" component={CheckoutPage} />
+                <Route path="/cart" component={CartPage} />
+                <Route path="/profile" component={ProfilePage} />
+                <Route path="/category" component={CategoryPage} />
+                <Route path="/about" component={AboutPage} />
                 <Route path="/product/:path" component={ProductItemPage} />
                 <Route path="/products/:category" component={ProductsPage} />
-                <Route path="/cart" component={CartPage} />
-                <PrivateRoute path="/checkout" component={CheckoutPage} />
-                <Route path="/about" component={AboutPage} />
                 <Route path="/help" component={HelpPage} />
                 <Route component={NotFoundPage} />
             </Switch>
             <ErrorBoundary>
                 <Footer />
             </ErrorBoundary>
+            <MobileNav />
         </div>
     </Router>
 );

@@ -7,19 +7,36 @@ import MenFashion from '../components/home/MenFashion';
 import WomenFashion from '../components/home/WomenFashion';
 import NavBar from '../components/NavBar';
 import MobileMenu from '../components/home/MobileMenu';
-import MobileNav from '../components/home/MobileNav';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 
 class HomePage extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
+    constructor(props) {
+        super(props);
+        this.state = {
+            intervalId: 0,
+            delayInMs: 16.66,
+            scrollStepInPx: 50
+        };
+    }
 
-	render() {
-		return (
-			<div className="App">
+    scrollStep() {
+        if (window.pageYOffset === 0) {
+            clearInterval(this.state.intervalId);
+        }
+        window.scroll(0, window.pageYOffset - this.state.scrollStepInPx);
+    }
+
+    scrollToTop() {
+        let intervalId = setInterval(this.scrollStep.bind(this), this.state.delayInMs);
+
+        this.setState({ intervalId });
+    }
+
+    render() {
+        return (
+            <div className="App">
 				<ErrorBoundary>
 					<NavBar />
 				</ErrorBoundary>
@@ -29,11 +46,17 @@ class HomePage extends React.Component {
 					<Trending />
 					<MenFashion />
 					<WomenFashion />
-					<MobileNav />
+					<div
+						className="mobile-scroll"
+						onClick={() => this.scrollToTop()}
+					>
+						<i className="fas fa-chevron-up"></i><br/>
+						<small>BACK TO TOP</small>
+					</div>
 				</div>
 			</div>
-		);
-	}
+        );
+    }
 }
 
 const mapStateToProps = (state) => ({

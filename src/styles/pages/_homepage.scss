@@ -1,0 +1,13 @@
+.mobile-scroll {
+	width: 100%;
+	background: $dark-grey;
+	text-align: center;
+	position: absolute;
+	bottom: 5.5rem;
+	height: 5rem;
+	padding: $s-padding;
+}
+
+.mobile-scroll i, .mobile-scroll small {
+	color: $base-color;
+}
