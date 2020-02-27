@@ -1,6 +1,7 @@
 import React from 'react';
 import 'normalize.css/normalize.css'; // reset css
 import { Provider } from 'react-redux';
+import {ThroughProvider} from 'react-through'
 
 import './App.scss';
 import AppRouter, { history } from './routes/AppRouter';

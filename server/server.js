@@ -2,18 +2,22 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const router = express.Router();
+const path = require('path');
+const favicon = require('express-favicon');
 
 const db = require('./database/dbConfig');
 const lipaNaMpesa = require('./payment-gateways/daraja/lipaNaMpesa');
 const hook = require('./payment-gateways/daraja/webHook');
 const { ValidateMpesaData } = require('./payment-gateways/daraja/validate');
 const { port } = require('./config/config');
+const { mode } = require('./config/config');
 const PORT = port || 5000;
 
 
 // create an express app and configure it with bodyParser middleware
 const app = express();
 app.use(bodyParser.json());
+app.use(favicon(path.join(__dirname, '../build', 'favicon.ico')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
@@ -45,6 +49,15 @@ app.post('/hooks/mpesa', (req, res) => {
         console.log(e);
     }
 });
+
+// console.log('----------------> ', mode);
+// if (mode === "production") {
+    app.use(express.static(path.join(__dirname, '../build')));
+    app.get('/*', (req, res) => {
+        console.log('dirname: ', __dirname)
+        res.sendFile(path.join(__dirname, '../build', 'index.html'));
+    });
+// }
 
 app.listen(PORT, console.log(`server listening on port ${PORT}`));
 

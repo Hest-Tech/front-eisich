@@ -1,0 +1,50 @@
+.no-pending-orders {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.no-pending-background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 75%;
+    width: 50%;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.no-orders-icon {
+    background: $off-white;
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.empty-box {
+    width: 6rem;
+    height: 6rem;
+}
+
+.acc-info-1 {
+    font-size: $m-font-size*.9;
+}
+
+.order-continue-shopping {
+    background: $base-color;
+    color: $white;
+    padding: $m-padding*1.5 $l-padding;
+    border-radius: .5rem;
+    cursor: pointer;
+    opacity: .9;
+    text-decoration: none !important;
+}
+
+.order-continue-shopping:hover {
+    opacity: 1;
+    color: $white;
+}

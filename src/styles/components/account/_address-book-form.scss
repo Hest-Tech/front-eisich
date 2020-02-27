@@ -1,0 +1,31 @@
+.address-book-form {
+    margin: $l-margin;
+}
+
+.address-book-content {
+    background: green;
+    height: auto;
+}
+
+.detail-address-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.address-save-btn {
+    font-size: $m-font-size;
+}
+
+.new-address-header {
+    padding-top: $m-padding;
+}
+
+.new-address-header button {
+    height: 80%;
+}
+
+.detail-address-book {
+    width: 48%;
+    margin-bottom: $l-margin;
+}

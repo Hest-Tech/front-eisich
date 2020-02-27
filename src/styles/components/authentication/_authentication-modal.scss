@@ -1,0 +1,20 @@
+/**
+* This file contains styles for the authentication modal
+*/
+
+
+.modal-header {
+    display: block;
+}
+
+.close span {
+    line-height: 0 !important;
+    font-size: $l-font-size;
+}
+
+.close {
+    outline: 0 !important;
+    display: flex;
+    flex-direction: column;
+}
+

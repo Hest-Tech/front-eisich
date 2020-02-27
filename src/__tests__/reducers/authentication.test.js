@@ -13,13 +13,14 @@ import {
 } from '../../actions/types'
 
 const defaultState = {
-    isAuthenticated: undefined,
+    isAuthenticated: false,
     user: null,
     displayName: null,
     openAuthPopUp: false,
     closeAuthPopUp: undefined,
     registering: false,
     loggingIn: false,
+    updateAddress: false,
     resetingPass: false
 }
 
@@ -90,10 +91,16 @@ test('Should set resetingPass to true, registering and loggingIn to false', () =
 });
 
 test('Should set all keys to their default values', () => {
-    const currentState = { ...defaultState, openAuthPopUp: true };
+    const currentState = {
+        ...defaultState,
+        openAuthPopUp: true
+    };
     const state = authentication(currentState, { type: UNLOAD_USER });
 
-    expect(state).toEqual({ ...defaultState });
+    expect(state).toEqual({
+        ...defaultState,
+        user: {}
+    });
 });
 
 test('Should set closeAuthPopUp to true, openAuthPopUp and loggingIn and registering to false', () => {
@@ -168,7 +175,8 @@ test('Should set isAuthenticated to false, user and displayName to null', () => 
     const state = authentication(currentState, { type: LOGOUT_SUCCESS });
     const newState = {
         ...defaultState,
-        isAuthenticated: false
+        isAuthenticated: false,
+        user: {}
     }
 
     expect(state).toStrictEqual(newState);

@@ -1,0 +1,98 @@
+.checkout-container__header {
+    box-shadow: 0 5px 5px -2px rgba(0,0,0,.2);
+}
+
+.checkout-container__background {
+    margin-top: .5rem;
+    background: #f3f3f3;
+}
+
+.checkout-title-logo {
+    color: $base-color;
+    cursor: pointer;
+}
+
+.checkout-address-form {
+    margin-top: $l-margin;
+}
+
+.select-county select, .select-city select {
+    padding: $m-padding;
+}
+
+.checkout-label {
+    // font-weight: 400;
+    font-size: $s-font-size;
+}
+
+.back-to-cart {
+    color: $base-color;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+.back-to-cart:hover {
+    color: $base-color;
+    opacity: 1;
+}
+
+.cart-link {
+    text-align: center;
+}
+
+.item-desc {
+    padding: 0;
+    width: 100%
+}
+
+.qty-val {
+    text-align: left;
+    padding: 0;
+}
+
+.text-right {
+    padding: 0
+}
+
+.checkout-title-txt, .checkout-btn {
+    margin-top: 3rem;
+}
+
+.payment-options {
+    display: flex;
+    justify-content: center;
+}
+
+.payment-options__background {
+    width: 90%
+}
+
+.form-check-item {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.payment-radio {
+    margin-right: $m-margin !important;
+}
+
+.form-check-label-radio {
+    cursor: pointer;
+}
+
+.payment-option-det {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-mobile-footer {
+    display: none;
+    margin-top: $l-margin;
+}
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+    
+}

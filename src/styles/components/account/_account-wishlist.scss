@@ -1,0 +1,82 @@
+.wislist-background {
+    display: flex;
+    flex-direction: column;
+}
+
+.wishlist-Item {
+    width: 100%;
+    margin: $m-margin 0;
+    border: 1px solid $light-grey;
+    border-radius: .5rem;
+    padding: $m-padding*1.5;
+    display: flex;
+}
+
+.wishlist-img {
+    width: 10rem;
+    height: 10rem;
+}
+
+.wishlist-img-background {
+    flex: 15%;
+}
+
+.promo-value {
+    margin-left: $l-margin;
+    background: #FEEFDE;
+    color: $base-color;
+    padding: $s-padding;
+}
+
+.wishlist-item-price {
+    flex: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.wishlist-item-detail {
+    flex: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.wishlist-remove {
+    color: $base-color;
+}
+
+.wishlist-text {
+    cursor: pointer;
+}
+
+.wishlist-btn {
+    background: $base-color;
+    border: 1px solid $base-color;
+    border-radius: .3rem;
+    font-size: $s-font-size*1.2;
+    letter-spacing: .05rem;
+    color: $white;
+    padding: $m-padding;
+    opacity: .9;
+    width: 80%;
+    text-align: center;
+    text-decoration: none !important;
+}
+
+.wishlist-btn:hover {
+    opacity: 1;
+    color: $white;
+}
+
+.wishlist-remove:hover {
+    background: #FEEFDE;
+    color: $base-color
+}
+
+.wishlist-remove i {
+    // background: red;
+    margin-right: $m-margin;
+    font-size: $m-font-size*.9;
+}

@@ -1,0 +1,24 @@
+/**
+* This file contains styles for the login component
+*/
+
+.m-font-size {
+    font-size: 1.7rem;
+}
+
+.btn-info {
+    color: $white;
+}
+
+.forgot-pass {
+    color: darkcyan;
+    opacity: .7;
+    outline: none;
+    border: none;
+}
+
+.forgot-pass:hover {
+    opacity: 1;
+    color: darkcyan;
+    background: $white;
+}

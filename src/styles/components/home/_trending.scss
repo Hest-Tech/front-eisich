@@ -1,0 +1,231 @@
+/**
+* This file contains styles for the trending component
+*/
+
+.app-trending {
+    height: auto;
+    width: $base-size;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.display-5 {
+    text-align: left;
+    width: 100%;
+    padding: $m-padding;
+}
+
+.app-trending__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+.trending {
+    width: 100%;
+    height: 100%;
+    // background: blue;
+}
+
+.trending__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 90%;
+    background: $white;
+    // margin: 4rem 0;
+}
+
+.trending-img-slider__container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.trending-img, .img-overlay {
+    height: 100%;
+}
+
+.trending-img {
+    cursor: pointer;
+    flex: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $off-white;
+    border-radius: .2rem;
+    position: relative;
+    margin: 1rem;
+}
+
+.trending-img-content {
+    bottom: 0;
+    opacity: .9;
+    width: 100%;
+    color: $dark-grey;
+    padding: $s-padding;
+    background: $off-white;
+    font-family: sans-serif;
+}
+
+.trending-img-content p {
+    font-size: $s-font-size+.4;
+}
+
+.promo-info {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 90%;
+    color: $light-grey;
+    text-align: right;
+}
+
+.promo-info span {
+    background: $base-color;
+    width: 20%;
+    padding: $s-padding;
+    color: $white;
+}
+
+.img-overlay {
+    width: 90%;
+    padding: $m-padding;
+    display: flex;
+    justify-content: center;
+}
+
+.img-overlay img {
+    width: 50%;
+    height: 10rem;
+}
+
+.app-menu-ads {
+    margin: 4rem auto 0 auto;
+}
+
+.menu-ads-img-slider__container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-ads-img-content {
+    font-size: $s-font-size;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-weight: bold;
+    z-index: 1000;
+    color: $off-white;
+}
+
+.menu-img-overlay-div {
+    background: $dark-grey;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+    z-index: 1000;
+    position: absolute;
+}
+
+.menu-img-overlay-div:hover {
+    opacity: .2;
+}
+
+.menu-ads-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 33%;
+}
+
+.menu-img-overlay {
+    position: relative;
+    display: flex;
+}
+
+.menu-ads-img-item {
+    width: 100%;
+    height: 20rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.buy-action-btn:hover {
+    opacity: 1;
+}
+
+.menu-img-2 {
+    margin: 0 .25rem;
+}
+
+.menu-img-1 {
+    margin-right: .5rem;
+}
+
+.menu-img-3 {
+    margin-left: .5rem;
+}
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $small-tablet-width) {
+    .trending-img-slider__container {
+        overflow-x: hidden;
+    }
+    
+    .app-trending {
+        width: 100%;
+    }
+
+    .app-menu-ads {
+        width: 95%;
+        margin: 0;
+    }
+
+    .menu-ads-img-item {
+        height: 15rem;
+        border-radius: 0.8rem;
+    }
+    
+    .menu-img-overlay-div {
+        border-radius: 0.8rem;
+    }
+
+    .menu-ads-img-slider__container {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .menu-ads-img {
+        margin-bottom: $l-margin;
+        border-radius: 0.8rem;
+    }
+
+    .menu-img-1,
+    .menu-img-2,
+    .menu-img-3 {
+        margin: 0;
+    } 
+
+    .app-trending__container, .men-fashion, .women-fashion {
+        display: none;
+    }
+
+    .menu-ads-img-content b {
+        font-size: $s-font-size*.8;
+    }
+    
+    .menu-ads-img-content p {
+        font-size: $m-font-size*.8;
+    }
+}

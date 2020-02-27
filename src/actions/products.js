@@ -114,6 +114,9 @@ export const displaySubCategories = () => dispatch => dispatch({
 
 // fetch products
 export const fetchProducts = (sku, name, title) => dispatch => {
+    console.log('name: ', name)
+    console.log('sku: ', sku)
+    console.log('title: ', title)
     axios
         .get(`${url}/${name}/products`)
         .then(response => {

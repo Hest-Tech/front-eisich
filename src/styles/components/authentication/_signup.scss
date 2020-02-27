@@ -1,0 +1,73 @@
+/**
+* This file contains styles for the signup component
+*/
+
+.sign-up-container {
+    display: flex;
+    padding: $m-padding;
+}
+
+.sign-up__extra-content {
+    flex: 40%;
+}
+
+.sign-up__title {
+    font-size: $m-font-size;
+    width: 100%;
+    text-align: center;
+}
+
+.sign-up__details {
+    flex: 60%;
+    border: 1px solid $light-grey;
+    border-radius: .3rem;
+    padding: $m-padding;
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-up__form, .sign-up__extra-content {
+    padding: $m-padding;
+}
+
+.sign-up__form {
+    display: block;
+}
+
+.switch-to-login {
+    text-align: left;
+}
+
+.or-seperator {
+    margin-top: $l-margin;
+    text-align: center;
+    border-top: .1rem solid #ccc;
+}
+
+.or-seperator i {
+    padding: 0 $m-margin;
+    background: #f7f7f7;
+    position: relative;
+    top: -1.1rem;
+    z-index: 1;
+}
+
+.social-btn .btn {
+    border: none;
+    margin: $m-margin $s-margin 0;
+    opacity: 1;
+}
+
+.social-btn .btn:hover {
+    opacity: 0.9;
+}
+
+.error-paragraph {
+    color: red;
+    font-size: $s-font-size;
+    font-weight: 400;
+}
+
+.terms-checkbox {
+    font-weight: 400;
+}

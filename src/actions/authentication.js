@@ -239,10 +239,10 @@ export const loginUser = (actions) => dispatch => {
                         console.log('=>', err);
                     });
             case 'facebook':
-                console.log(value);
+                // console.log(value);
                 break;
             case 'twitter':
-                console.log(value);
+                // console.log(value);
                 break;
         }
     }

@@ -1,0 +1,38 @@
+.address-edit {
+    border: none;
+    border-top: 1px solid $light-grey;
+    margin: 0 $s-margin;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    // background: red
+}
+
+.address-actions {
+    display: flex;
+    align-items: center;
+}
+
+.address-actions i {
+    // font-size: $m-font-size;
+    color: $base-color;
+    cursor: pointer;
+    padding: $m-padding;
+    border-radius: 50%;
+}
+
+.address-txt {
+    color: $base-color;
+    border: none;
+}
+
+.address-actions i:hover, .address-txt:hover {
+    background: #FEEFDE;
+    color: $base-color;
+}
+
+.address-text-action {
+    // background: green;
+    display: flex;
+    align-items: center;
+}
