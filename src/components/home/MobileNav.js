@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
-const MobileNav = () => {
+const MobileNav = (props) => {
     return (
         <div className="mobile-nav-bar flex-mobile">
             <div className="mobile-nav-bar__background">
@@ -32,6 +33,9 @@ const MobileNav = () => {
                 >
                     <i className="mobile-icon fas fa-cart-arrow-down"></i>
                     <p className="icon-det">Cart</p>
+                    <span className="badge bg-success mobile-cart-pill">
+                        {props.authentication.isAuthenticated ? props.cart.length : 0}
+                    </span>
                 </NavLink>
                 <NavLink
                     to="/profile"
@@ -47,4 +51,15 @@ const MobileNav = () => {
     );
 }
 
-export default MobileNav;
+const mapStateToProps = (state) => ({
+    authentication: state.authentication,
+    cart: state.cart.cart
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    // openAuthPopUp: () => dispatch(openAuthPopUp()),
+    // loadUser: () => dispatch(loadUser()),
+    // signOutUser: () => dispatch(signOutUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MobileNav);

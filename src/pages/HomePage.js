@@ -8,6 +8,7 @@ import WomenFashion from '../components/home/WomenFashion';
 import NavBar from '../components/NavBar';
 import MobileMenu from '../components/home/MobileMenu';
 import ErrorBoundary from '../components/ErrorBoundary';
+import Scroll from '../components/Scroll';
 
 
 class HomePage extends React.Component {
@@ -19,19 +20,6 @@ class HomePage extends React.Component {
             delayInMs: 16.66,
             scrollStepInPx: 50
         };
-    }
-
-    scrollStep() {
-        if (window.pageYOffset === 0) {
-            clearInterval(this.state.intervalId);
-        }
-        window.scroll(0, window.pageYOffset - this.state.scrollStepInPx);
-    }
-
-    scrollToTop() {
-        let intervalId = setInterval(this.scrollStep.bind(this), this.state.delayInMs);
-
-        this.setState({ intervalId });
     }
 
     render() {
@@ -46,13 +34,7 @@ class HomePage extends React.Component {
 					<Trending />
 					<MenFashion />
 					<WomenFashion />
-					<div
-						className="mobile-scroll"
-						onClick={() => this.scrollToTop()}
-					>
-						<i className="fas fa-chevron-up"></i><br/>
-						<small>BACK TO TOP</small>
-					</div>
+					<Scroll />
 				</div>
 			</div>
         );

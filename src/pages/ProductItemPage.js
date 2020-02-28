@@ -25,12 +25,18 @@ class ProductItemPage extends React.Component {
         this.addToCart = this.addToCart.bind(this);
         this.setDiscount = this.setDiscount.bind(this);
         this.setDisableBtn = this.setDisableBtn.bind(this);
+        this.setSize = this.setSize.bind(this);
 
         this.state = {
             chartPopUp: false,
             count: 1,
             availableCount: this.props.product.pieces - 1,
-            img: "dress.png"
+            img: "dress.png",
+            sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+            clicked: '',
+            baseColor: '#E9BD4C',
+            darkGrey: '#505050',
+            lightGrey: '#ddd'
         };
     }
 
@@ -99,6 +105,26 @@ class ProductItemPage extends React.Component {
         const disableBtn = !!cart.length && cart.filter(item => item.pid === this.props.product.pid);
 
         return !!disableBtn.length;
+    }
+
+    setSize(e) {
+        const targetSize = e.target.textContent;
+        console.log(e.target.parentElement);
+
+        // e.target.parentElement.childElements.forEach(el => {
+        //     console.log(el);
+        // })
+
+        // this.setState(() => ({
+        //     clicked: targetSize
+        // }))
+
+        // this.state.sizes.map((size) => {
+        //     if (size === this.state.clicked) {
+        //         e.target.style.color = this.state.darkGrey;
+        //         e.target.style.borderColor = this.state.lightGrey;
+        //     }
+        // })
     }
 
     componentDidMount() {
@@ -175,11 +201,17 @@ class ProductItemPage extends React.Component {
                                         </a>
                                     </span>
                                     <div className="size-range">
-                                        <div className="size_ small">S</div>
-                                        <div className="size_ small">M</div>
-                                        <div className="size_ small">L</div>
-                                        <div className="size_ small">XL</div>
-                                        <div className="size_ small">XXL</div>
+                                        {
+                                            this.state.sizes.map((item, i) => <div
+                                                className="size_ small"
+                                                key={i}
+                                                onClick={this.setSize}
+                                                style={{
+                                                    color: `${this.state.clicked ? this.state.baseColor : this.state.darkGrey}`,
+                                                    borderColor: `${this.state.clicked ? this.state.baseColor : this.state.lightGrey}`
+                                                }}
+                                            >{item}</div>)
+                                        }
                                     </div>
                                     <span className="size-check">
                                         <p>SELECT COLOR:</p>

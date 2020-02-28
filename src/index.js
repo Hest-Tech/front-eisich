@@ -56,7 +56,7 @@ fire.auth().onAuthStateChanged(user => {
         console.log('logged out');
         renderApp();
         // store.dispatch(unloadUser());
-        history.push('/');
+        // history.push('/');
         storeUser.eraseCookie('user');
     }
 });

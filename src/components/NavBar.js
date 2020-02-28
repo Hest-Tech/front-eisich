@@ -43,7 +43,7 @@ class NavBar extends React.Component {
 
     render() {
         return (
-            <nav className="main-nav-bar">
+            <nav>
                 <div className="main-nav-bar__container">
                     <div className="nav-bar-container">
                         <ul className="trust-policy">
@@ -181,7 +181,7 @@ class NavBar extends React.Component {
                         </div>
                     </div>
                 </div>
-            </nav >
+            </nav>
         );
     }
 }

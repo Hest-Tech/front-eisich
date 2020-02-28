@@ -45,11 +45,20 @@
     .active i, .active p {
         color: $base-color;
     }
-    // .active {
-    // }
 
     .mobile-icon-background p {
         font-size: $s-font-size;
         margin: 0;
+    }
+
+    .mobile-cart {
+        position: relative;
+    }
+
+    .mobile-cart-pill {
+        position: absolute;
+        font-size: $s-font-size*.8;
+        right: -40%;
+        top: 0;
     }
 }

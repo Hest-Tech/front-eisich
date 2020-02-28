@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -7,12 +7,17 @@ import '../assets/images/dress.png';
 import '../assets/images/iphone.png';
 import { removeFromCart, updateCartItem } from '../actions/cart';
 import { addToWishlist } from '../actions/wishlist';
+import Scroll from '../components/Scroll';
 
 
 class CartPage extends React.Component {
     constructor(props) {
         super(props);
         this.setQuantity = this.setQuantity.bind(this);
+
+        this.state = {
+            vat: 0
+        }
     }
 
     componentDidMount() {
@@ -25,14 +30,34 @@ class CartPage extends React.Component {
         this.props.updateCartItem(pid, { quantity });
     }
 
+    setCurrency(price) {
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'KES'
+        });
+        return formatter.format(price);
+    }
+
+    setSubTotal() {
+        let total = 0;
+
+        this.props.cart.map(item => {
+            const price = item.newPrice * item.quantity;
+            total += price;
+        })
+
+        return total;
+    }
+
     render() {
         return (
-            <div>
+            <Fragment>
                 <NavBar />
-                <div className="jumbotron">
+                <div className="jumbotron container-jumbotron">
                     <div className="container cart-page-container">
                         <div className="cart-item-background">
-                            <h3>Cart ({this.props.cart.length} Items)</h3>
+                            <h3 className="cart-total-items-h3">Cart ({this.props.cart.length} Items)</h3>
+                            <small className="cart-total-items text-muted">MY CART ({this.props.cart.length} ITEMS)</small>
                             <div className="cart-item-contents">
                                 <div className="cart-header">
                                     <b className="text-muted item">ITEM</b>
@@ -47,23 +72,55 @@ class CartPage extends React.Component {
                                                 className="cart-item"
                                                 key={i}
                                             >
-                                                <div className="cart-details">
-                                                    <div className="cart-img-item">
-                                                        <img src="dress.png" alt="cart Iphone" className="cart-image" />
-                                                    </div>
-                                                    <div className="cart-item-details">
-                                                        <small className="text-muted">Seller: {item.seller}</small>
-                                                        <p className="cart-text"><small>{item.description}</small></p>
-                                                        <div className="cart-action-btn">
-                                                            <small
-                                                                className="cart-action add-to-wishlist"
-                                                                onClick={() => this.props.addToWishlist(item)}
-                                                            ><i className="far fa-heart"></i>MOVE TO WISHLIST</small>
-                                                            <small
-                                                                className="cart-action remove-from-cart"
-                                                                onClick={() => this.props.removeFromCart(item.pid)}
-                                                            ><i className="fas fa-trash-alt"></i>REMOVE</small>
+                                                <div className="cart-details__wrapper">
+                                                    <div className="cart-details">
+                                                        <div className="cart-img-item">
+                                                            <img src="dress.png" alt="cart Iphone" className="cart-image" />
                                                         </div>
+                                                        <div className="cart-item-details">
+                                                            <small className="text-muted">Seller: {item.seller}</small>
+                                                            <p className="cart-text"><small>{item.description}</small></p>
+                                                            <div className="cart-action-btn">
+                                                                <small
+                                                                    className="cart-action add-to-wishlist"
+                                                                    onClick={() => this.props.addToWishlist(item)}
+                                                                ><i className="far fa-heart"></i>WISHLIST</small>
+                                                                <small
+                                                                    className="cart-action remove-from-cart"
+                                                                    onClick={() => this.props.removeFromCart(item.pid)}
+                                                                ><i className="fas fa-trash-alt"></i>REMOVE</small>
+                                                            </div>
+                                                        </div>
+                                                        <div className="cart-mobile-details">
+                                                            <small className="text-muted">Seller: {item.seller}</small>
+                                                            <p className="cart-text"><small>{item.description}</small></p>
+                                                            <div className="cart-promotion-price">
+                                                                <p className="cart-new-price">{this.setCurrency(item.newPrice)}</p>
+                                                                <p className="cart-old-price text-muted"><strike>{this.setCurrency(item.oldPrice)}</strike></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="edit-cart-item">
+                                                        <span className="edit-wishlist-cart">
+                                                            <i
+                                                                className="wishlist-remove-cart"
+                                                                onClick={() => this.props.addToWishlist(item)}
+                                                            >a</i>
+                                                            <i
+                                                                onClick={() => this.props.removeFromCart(item.pid)}
+                                                            >b</i>
+                                                        </span>
+                                                        <span>
+                                                            <i
+                                                                className="add-quantity"
+                                                                // onClick={}
+                                                            >c</i>
+                                                            <i className="quantity-value">{item.quantity}</i>
+                                                            <i
+                                                                className="minus-quantity"
+                                                                // onClick={}
+                                                            >e</i>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div className="cart-item-qty qty-border">
@@ -81,12 +138,12 @@ class CartPage extends React.Component {
                                                     </select>
                                                 </div>
                                                 <div className="cart-unit-price price-border">
-                                                    <p className="cart-new-price">{item.newPrice}</p>
-                                                    <p className="cart-old-price text-muted"><strike>{item.oldPrice}</strike></p>
-                                                    <small className="text-success">Saving: {item.saving}</small>
+                                                    <p className="cart-new-price">{this.setCurrency(item.newPrice)}</p>
+                                                    <p className="cart-old-price text-muted"><strike>{this.setCurrency(item.oldPrice)}</strike></p>
+                                                    <small className="text-success">Saving: {this.setCurrency(item.saving)}</small>
                                                 </div>
                                                 <div className="cart-subtotal">
-                                                    <b>{item.newPrice*item.quantity}</b>
+                                                    <b>{this.setCurrency(item.newPrice*item.quantity)}</b>
                                                 </div>
                                             </div>
                                         );
@@ -96,17 +153,17 @@ class CartPage extends React.Component {
                                     <div className="cart-total-info cart-subtotal-vat">
                                         <div className="subtotal-background">
                                             <span className="subtotal font-weight-bold">Subtotal:</span>
-                                            <span>KSH 22,000</span>
+                                            <span>{this.setCurrency(this.setSubTotal())}</span>
                                         </div>
                                         <div className="subtotal-background">
                                             <span className="text-muted font-weight-bold vat">VAT:</span>
-                                            <span>KSH 0</span>
+                                            <span>{this.setCurrency(this.state.vat)}</span>
                                         </div>
                                     </div>
                                     <div className="cart-total-info cart-total-shipping">
                                         <div className="subtotal-background">
                                             <span className="subtotal font-weight-bold">Total:</span>
-                                            <span className="subtotal-value">KSH 22,000</span>
+                                            <span className="subtotal-value">{this.setCurrency(this.setSubTotal() + this.state.vat)}</span>
                                         </div>
                                         <span className="text-muted cart-shipping-info">Shipping fees not included yet</span>
                                     </div>
@@ -130,7 +187,8 @@ class CartPage extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
+                <Scroll />
+            </Fragment>
         );
     }
 }
@@ -147,4 +205,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartPage);
-
