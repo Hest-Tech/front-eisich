@@ -23,20 +23,10 @@ import {
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.fetchSubCategory = this.fetchSubCategory.bind(this);
-        this.fetchInnerCategory = this.fetchInnerCategory.bind(this);        
+        this.fetchCategory = this.fetchCategory.bind(this);
     }
 
-    fetchSubCategory(e) {
-        const name = e.target.dataset.name;
-        const sku = e.target.dataset.sku;
-        const title = e.target.dataset.title;
-
-        this.props.fetchProducts(sku, name, title);
-        console.log()
-    }
-
-    fetchInnerCategory(e) {
+    fetchCategory(e) {
         const name = e.target.dataset.name;
         const sku = e.target.dataset.sku;
         const title = e.target.dataset.title;
@@ -109,7 +99,7 @@ class Header extends React.Component {
                                                             data-name="SUB_CATEGORY"
                                                             data-sku={category.sku}
                                                             data-title={category.name}
-                                                            onClick={this.fetchSubCategory}
+                                                            onClick={this.fetchCategory}
                                                             className='category-link category-title th'
                                                         >
                                                             {category.name}
@@ -128,7 +118,7 @@ class Header extends React.Component {
                                                                             data-name="INNER_CATEGORY"
                                                                             data-sku={innerCategory.sku}
                                                                             data-title={innerCategory.name}
-                                                                            onClick={this.fetchInnerCategory}
+                                                                            onClick={this.fetchCategory}
                                                                         >
                                                                             {innerCategory.name}
                                                                         </NavLink>

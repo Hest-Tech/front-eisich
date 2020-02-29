@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     const MainCategory = sequelize.define('MainCategory', {
         sku: DataTypes.STRING,
         name: DataTypes.STRING,
+        related: DataTypes.STRING,
         path: DataTypes.STRING
     }, {});
     MainCategory.associate = function(models) {

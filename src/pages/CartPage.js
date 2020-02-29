@@ -103,23 +103,24 @@ class CartPage extends React.Component {
                                                     <div className="edit-cart-item">
                                                         <span className="edit-wishlist-cart">
                                                             <i
-                                                                className="wishlist-remove-cart"
+                                                                className="far fa-heart wishlist-remove-cart"
                                                                 onClick={() => this.props.addToWishlist(item)}
-                                                            >a</i>
+                                                            ></i>
                                                             <i
+                                                                className="fas fa-trash-alt"
                                                                 onClick={() => this.props.removeFromCart(item.pid)}
-                                                            >b</i>
+                                                            ></i>
                                                         </span>
                                                         <span>
                                                             <i
-                                                                className="add-quantity"
+                                                                className="fas fa-minus-circle minus-quantity"
                                                                 // onClick={}
-                                                            >c</i>
+                                                            ></i>
                                                             <i className="quantity-value">{item.quantity}</i>
                                                             <i
-                                                                className="minus-quantity"
+                                                                className="fas fa-plus-circle add-quantity"
                                                                 // onClick={}
-                                                            >e</i>
+                                                            ></i>
                                                         </span>
                                                     </div>
                                                 </div>

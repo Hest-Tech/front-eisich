@@ -93,7 +93,7 @@ export const loadProductSubCategories = name => dispatch => {
         .get(`${url}/subCategories/${name}`)
         .then(response => {
             const subCategories = response.data.data;
-            // console.log('subCategories: ', subCategories)
+            console.log('subCategories: ', subCategories)
             dispatch({
                 type: LOAD_SUB_CATEGORIES,
                 payload: subCategories

@@ -14,67 +14,82 @@ const sku = {
     electronicSku: uuidv4()
 };
 
+const clothesSku = uuidv4();
+const data = [{
+    sku: sku.menSku,
+    name: "Men's Fashion",
+    clothesSku,
+    path: "/men-fashion/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}, {
+    sku: sku.womenSku,
+    name: "Women's Fashion",
+    clothesSku,
+    path: "/women-fashion/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}, {
+    sku: sku.kidsSku,
+    name: "Kid's & Babies",
+    clothesSku,
+    path: "/kids-babies/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}, {
+    sku: sku.mobileSku,
+    name: 'Mobile Phones & Accessories',
+    related: uuidv4(),
+    path: "/mobile-phones-accessories/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}, {
+    sku: sku.officeSku,
+    name: 'Computer, Office & Security',
+    related: uuidv4(),
+    path: "/computer-office-security/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}, {
+    sku: sku.homeSku,
+    name: 'Home & Living',
+    related: uuidv4(),
+    path: "/home-living/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}, {
+    sku: sku.jewellerySku,
+    name: 'Jewellery',
+    related: uuidv4(),
+    path: "/jewellery/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}, {
+    sku: sku.funSku,
+    name: 'Fun & Sports',
+    related: uuidv4(),
+    path: "/fun-sports/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}, {
+    sku: sku.carsSku,
+    name: 'Automobile',
+    related: uuidv4(),
+    path: "/automobile/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}, {
+    sku: sku.electronicSku,
+    name: 'Consumer Electronics',
+    related: uuidv4(),
+    path: "/consumer-electronics/",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}]
+
+
+
 module.exports = {
     sku,
-	data: [{
-            sku: sku.menSku,
-            name: "Men's Fashion",
-            path: "/men-fashion/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }, {
-            sku: sku.womenSku,
-            name: "Women's Fashion",
-            path: "/women-fashion/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }, {
-            sku: sku.kidsSku,
-            name: "Kid's & Babies",
-            path: "/kids-babies/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }, {
-            sku: sku.mobileSku,
-            name: 'Mobile Phones & Accessories',
-            path: "/mobile-phones-accessories/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }, {
-            sku: sku.officeSku,
-            name: 'Computer, Office & Security',
-            path: "/computer-office-security/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }, {
-            sku: sku.homeSku,
-            name: 'Home & Living',
-            path: "/home-living/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }, {
-            sku: sku.jewellerySku,
-            name: 'Jewellery',
-            path: "/jewellery/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }, {
-            sku: sku.funSku,
-            name: 'Fun & Sports',
-            path: "/fun-sports/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }, {
-            sku: sku.carsSku,
-            name: 'Automobile',
-            path: "/automobile/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }, {
-            sku: sku.electronicSku,
-            name: 'Consumer Electronics',
-            path: "/consumer-electronics/",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }]
+    data
 }

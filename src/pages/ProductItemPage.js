@@ -12,6 +12,7 @@ import NavBar from '../components/NavBar';
 import SizeChart from '../components/SizeChart';
 import CheckoutPage from './CheckoutPage';
 import { addToCart } from '../actions/cart';
+import Scroll from '../components/Scroll';
 import '../assets/images/dress.png';
 
 
@@ -177,9 +178,9 @@ class ProductItemPage extends React.Component {
                         </div>
                         <div className="product-item__details">
                             <div className="details-background">
-                                <h3 className="product-title-description">{this.props.product.details}</h3>
+                                <h3 className="product-title-description">{this.props.product.description}</h3>
                                 <div className="new-price-promo">
-                                    <h3>KSH{this.props.product.newPrice}</h3>
+                                    <h3 className="product-price">KSH{this.props.product.newPrice}</h3>
                                     <span className="old-price-range">
                                         <p className="old-price text-muted"><strike>KSH {this.props.product.oldPrice}</strike></p>
                                         <mark>-{this.setDiscount()}%</mark>
@@ -294,6 +295,7 @@ class ProductItemPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Scroll />
             </div>
         );
     }

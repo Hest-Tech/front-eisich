@@ -3,7 +3,7 @@
 const uuidv4 = require("uuid/v4");
 const sku = {};
 
-let data = [{
+const data = [{
         name: 'Outerwear & Jackets', //(1)
         path: "/outerwear-jackets/",
         sku: uuidv4(),

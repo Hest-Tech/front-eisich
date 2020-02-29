@@ -2,7 +2,7 @@
  * This file contains Products Page component
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -11,6 +11,7 @@ import NavBar from '../components/NavBar';
 import ProductNotFound from './ProductNotFound';
 import { fetchProduct, fetchProducts } from '../actions/products';
 import { history } from '../routes/AppRouter';
+import Scroll from '../components/Scroll';
 
 
 const ProductsPage = (props) => {
@@ -200,7 +201,7 @@ const ProductsPage = (props) => {
                     <div className="products-container__products">
                         <div className="products-filter-options">
                             <div className="products-title">
-                                <h3 className="display-6">{props.products.productsTitle}</h3>
+                                <h3 className="display-6 products-title-h3">{props.products.productsTitle}</h3>
                                 <small className="text-muted">{props.products.productsList.length} product{props.products.productsList.length > 1 && 's'} found</small>
                             </div>
                             <div className="products-filter">
@@ -227,17 +228,18 @@ const ProductsPage = (props) => {
                                     />
                                     <input type="text" className="form-control" defaultValue="KSH12,500" />
                                 </form>
-                                <label>Sort by:
-                                <select
-                                    defaultValue="All items"
-                                    className="select-dropdown text-muted small"
-                                >
+                                <label className="sort-by-filter">Sort by:
+                                    <select
+                                        defaultValue="All items"
+                                        className="select-dropdown text-muted small"
+                                    >
                                         <option className="text-muted small">All items</option>
                                         <option className="text-muted small" defaultValue="size">Size</option>
                                         <option className="text-muted small" defaultValue="price">Price</option>
                                         <option className="text-muted small" defaultValue="age">Age</option>
                                     </select>
                                 </label>
+                                <p className="product-filter-btn">Filters</p>
                             </div>
                         </div>
                         <div className="product-items">
@@ -294,6 +296,7 @@ const ProductsPage = (props) => {
                     </div>
                 </div>
             </div> : <ProductNotFound />}
+            <Scroll />
         </div>
     );
 }
