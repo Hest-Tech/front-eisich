@@ -89,6 +89,7 @@ class ProductItemPage extends React.Component {
         const product = {
             pid: this.props.product.pid,
             img: this.state.img,
+            imgLink: this.props.product.imgLink,
             description: this.props.product.description,
             seller: this.props.product.seller,
             quantity: this.state.count,
@@ -151,7 +152,7 @@ class ProductItemPage extends React.Component {
                     <div className="product-item-container">
                         <div className="product-item__img">
                             <div className="main-img-background">
-                                <img src="dress.png" alt="main product image" className="main-product-img" />
+                                <img src={`${this.props.product.imgLink}.jpg`} alt="main product image" className="main-product-img" />
                             </div>
                             <span className="product-img-color">
                                 <div className="color-variant">

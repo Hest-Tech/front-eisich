@@ -42,7 +42,7 @@ class AccountWishlist extends React.Component {
                                             key={i}
                                         >
                                             <div className="wishlist-img-background">
-                                                <img className="wishlist-img" src={iphone} alt="Iphone" />
+                                                <img className="wishlist-img" src={`${item.imgLink}.jpg`} alt="Iphone" />
                                             </div>
                                             <div className="wishlist-item-detail">
                                                 <p className="wishlist-text">{item.description}</p>

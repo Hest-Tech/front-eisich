@@ -100,7 +100,7 @@ class CartPage extends React.Component {
                                                 <div className="cart-details__wrapper">
                                                     <div className="cart-details">
                                                         <div className="cart-img-item">
-                                                            <img src="dress.png" alt="cart Iphone" className="cart-image" />
+                                                            <img src={`${item.imgLink}.jpg`} alt="cart Iphone" className="cart-image" />
                                                         </div>
                                                         <div className="cart-item-details">
                                                             <small className="text-muted">Seller: {item.seller}</small>

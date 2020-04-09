@@ -11,6 +11,29 @@ import { CheckoutSchema } from '../utils/validate';
 class CheckoutPage extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            vat: 0,
+        }
+    }
+
+    setCurrency(price) {
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'KES'
+        });
+        return formatter.format(price);
+    }
+
+    setSubTotal() {
+        let total = 0;
+
+        this.props.cart.map(item => {
+            const price = item.newPrice * item.quantity;
+            total += price;
+        })
+
+        return total;
     }
 
     render() {
@@ -30,48 +53,45 @@ class CheckoutPage extends React.Component {
                             <div className="col-md-4 order-md-2 mb-4 cart-info-side">
                                 <h4 className="d-flex justify-content-between align-items-center mb-3">
                                     <span className="text-muted">Your cart</span>
-                                    <span className="badge badge-secondary badge-pill">2</span>
+                                    <span className="badge badge-secondary badge-pill">{this.props.cart.length}</span>
                                 </h4>
                                 <ul className="list-group mb-3">
-                                    <li className="list-group-item d-flex justify-content-between lh-condensed">
-                                        <div className="col-sm-3 col-xs-6 cart-img">
-                                            <img className="img-responsive cart-img-item" src={iphone} />
-                                        </div>
-                                        <div className="col-sm-6 col-xs-2">
-                                            <div className="col-xs-12 small item-desc">S7 - 8GB - 1GB RAM (8MP+5 MP) Camera - Dual Sim - Black</div>
-                                            <div className="col-xs-12 qty-val text-muted"><small className="font-weight-bold">Qty:<span>3</span></small></div>
-                                        </div>
-                                        <div className="col-sm-3 col-xs-6 text-right">
-                                            <small className="font-weight-bold text-muted"><span>KSH </span>50,000</small>
-                                        </div>
-                                    </li>
-                                    <li className="list-group-item d-flex justify-content-between lh-condensed">
-                                        <div className="col-sm-3 col-xs-6 cart-img">
-                                            <img className="img-responsive cart-img-item" src={dress} />
-                                        </div>
-                                        <div className="col-sm-6 col-xs-2">
-                                            <div className="col-xs-12 small item-desc">Summer Dress Boho Style Floral Print Chiffon</div>
-                                            <div className="col-xs-12 qty-val text-muted"><small className="font-weight-bold">Qty:<span>1</span></small></div>
-                                        </div>
-                                        <div className="col-sm-3 col-xs-6 text-right">
-                                            <small className="font-weight-bold text-muted"><span>KSH </span>5,000</small>
-                                        </div>
-                                    </li>
+                                    {
+                                        this.props.cart.map((item, i) => {
+                                            return (
+                                                <li
+                                                    className="list-group-item d-flex justify-content-between lh-condensed"
+                                                    key={i}
+                                                >
+                                                    <div className="col-sm-3 col-xs-6 cart-img">
+                                                        <img className="img-responsive cart-img-item" src={`${item.imgLink}.jpg`} />
+                                                    </div>
+                                                    <div className="col-sm-6 col-xs-2">
+                                                        <div className="col-xs-12 small item-desc">{item.description}</div>
+                                                        <div className="col-xs-12 qty-val text-muted"><small className="font-weight-bold">Qty:<span>{item.quantity}</span></small></div>
+                                                    </div>
+                                                    <div className="col-sm-3 col-xs-6 text-right">
+                                                        <small className="font-weight-bold text-muted">{this.setCurrency(item.newPrice)}</small>
+                                                    </div>
+                                                </li>
+                                            )
+                                        })
+                                    }
                                     <li className="list-group-item d-flex justify-content-between lh-condensed">
                                         <div>
                                             <h5 className="">Subtotal</h5>
                                         </div>
-                                        <span className="">KSH 155,000</span>
+                                        <span className="">{this.setCurrency(this.setSubTotal())}</span>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between lh-condensed">
                                         <div>
                                             <h5 className="">VAT</h5>
                                         </div>
-                                        <span className="">KSH 0</span>
+                                        <span className="">{this.setCurrency(this.state.vat)}</span>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between">
                                         <span>Total</span>
-                                        <strong>KSH 155,000</strong>
+                                        <strong>{this.setCurrency(this.setSubTotal() + this.state.vat)}</strong>
                                     </li>
                                 </ul>
 
@@ -349,6 +369,7 @@ class CheckoutPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+    cart: state.cart.cart,
     authentication: state.authentication
 });
 
