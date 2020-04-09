@@ -9,5 +9,8 @@ module.exports = {
     dev_db_url: process.env.DEV_DATABASE_URL,
     test_db_url: process.env.TEST_DATABASE_URL,
     db_url: process.env.DATABASE_URL,
-    port: process.env.PORT
+    port: process.env.PORT,
+    refresh_token: process.env.IMGUR_REFRESH_TOKEN,
+    client_id: process.env.IMGUR_CLIENT_ID,
+    client_secret: process.env.IMGUR_CLIENT_SECRET
 };

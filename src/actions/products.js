@@ -29,7 +29,7 @@ const fetchCategoriesHelper = (
     dispatch
 ) => {
     const filteredProducts = products.filter(item => {
-        switch(name) {
+        switch (name) {
             case 'MAIN_CATEGORY':
                 return item.mainCategory === sku
             case 'SUB_CATEGORY':
@@ -71,7 +71,7 @@ export const loadProductCategories = () => dispatch => {
         .then(response => {
             const mainCategories = response.data.data;
             const productMainCategories = [];
-            
+
             mainCategories.map(category => {
                 productMainCategories.push(category);
             })
@@ -128,7 +128,7 @@ export const fetchProducts = (sku, name, title) => dispatch => {
             let filteredProducts;
             let product;
 
-            switch(name) {
+            switch (name) {
                 case 'MAIN_CATEGORY':
                 case 'SUB_CATEGORY':
                 case 'INNER_CATEGORY':

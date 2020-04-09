@@ -22,48 +22,93 @@ class AccountWishlist extends React.Component {
     render() {
         return (
             <div className="account-wishlist-container account-background">
-                <div className="nav-bar-wrapper">
-                    <NavBar />
-                </div>
-                <div className="account-container">
-                    <div className="account-menu-sec acc-sec">
-                        <AccountMenu />
+                <div className="wrapper-acc-pg">
+                    <div className="nav-bar-wrapper">
+                        <NavBar />
                     </div>
-                    <span></span>
-                    <div className="accout-detail-sec acc-sec">
-                        <div className="account-det-background">
-                            <h1 className="account-overview-title">Account wishlist <span>({this.props.wishlist.length})</span></h1>
-                            <div className="wislist-background">
-                            {
-                                this.props.wishlist.map((item, i) => (
-                                    <div
-                                        className="wishlist-Item"
-                                        key={i}
-                                    >
-                                        <div className="wishlist-img-background">
-                                            <img className="wishlist-img" src={iphone} alt="Iphone" />
+                    <div className="account-container">
+                        <div className="account-menu-sec acc-sec">
+                            <AccountMenu />
+                        </div>
+                        <span></span>
+                        <div className="accout-detail-sec acc-sec">
+                            <div className="account-det-background">
+                                <h1 className="account-overview-title">Account wishlist <span>({this.props.wishlist.length})</span></h1>
+                                <div className="wislist-background">
+                                {
+                                    this.props.wishlist.map((item, i) => (
+                                        <div
+                                            className="wishlist-Item"
+                                            key={i}
+                                        >
+                                            <div className="wishlist-img-background">
+                                                <img className="wishlist-img" src={iphone} alt="Iphone" />
+                                            </div>
+                                            <div className="wishlist-item-detail">
+                                                <p className="wishlist-text">{item.description}</p>
+                                                <p>KSH {item.newPrice}</p>
+                                            </div>
+                                            <div className="wishlist-item-price">
+                                                <NavLink
+                                                    to="/checkout"
+                                                    className="wishlist-btn"
+                                                >
+                                                    BUY NOW
+                                                </NavLink>
+                                                <button
+                                                    className="btn wishlist-remove"
+                                                    onClick={() => this.props.removeFromWishlist(item.pid)}
+                                                ><i className="fas fa-trash-alt"></i>REMOVE</button>
+                                            </div>
                                         </div>
-                                        <div className="wishlist-item-detail">
-                                            <p className="wishlist-text">{item.description}</p>
-                                            <p>KSH {item.newPrice}</p>
-                                        </div>
-                                        <div className="wishlist-item-price">
-                                            <NavLink
-                                                to="/checkout"
-                                                className="wishlist-btn"
-                                            >
-                                                BUY NOW
-                                            </NavLink>
-                                            <button
-                                                className="btn wishlist-remove"
-                                                onClick={() => this.props.removeFromWishlist(item.pid)}
-                                            ><i className="fas fa-trash-alt"></i>REMOVE</button>
-                                        </div>
-                                    </div>
-                                ))
-                            }
+                                    ))
+                                }
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className="mb-acc-pg">
+                    <div className="nav-bar-wrapper">
+                        <NavBar />
+                    </div>
+                    <div className="section-title">
+                        <NavLink className="section-title-btn" to="/user/profile">
+                            <span>
+                                <i className="fas fa-arrow-left back-btn"></i>
+                            </span>
+                        </NavLink>
+                        <span className="section-title-name"><h1 className="account-overview-title">Account wishlist <span>({this.props.wishlist.length})</span></h1></span>
+                    </div>
+                    <div className="wislist-background">
+                        {
+                            this.props.wishlist.map((item, i) => (
+                                <div
+                                    className="wishlist-Item"
+                                    key={i}
+                                >
+                                    <div className="wishlist-img-background">
+                                        <img className="wishlist-img" src={iphone} alt="Iphone" />
+                                    </div>
+                                    <div className="wishlist-item-detail">
+                                        <p className="wishlist-text">{item.description}</p>
+                                        <p>KSH {item.newPrice}</p>
+                                    </div>
+                                    <div className="wishlist-item-price">
+                                        <NavLink
+                                            to="/checkout"
+                                            className="wishlist-btn"
+                                        >
+                                            BUY NOW
+                                        </NavLink>
+                                        <button
+                                            className="btn wishlist-remove"
+                                            onClick={() => this.props.removeFromWishlist(item.pid)}
+                                        ><i className="fas fa-trash-alt"></i>REMOVE</button>
+                                    </div>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </div>

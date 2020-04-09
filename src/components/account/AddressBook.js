@@ -83,118 +83,134 @@ class AddressBook extends React.Component {
     render() {
         return (
             <div className="account-menu-container account-background">
-                <div className="nav-bar-wrapper">
-                    <NavBar />
-                    {this.props.authentication.updateAddress ? <AddressBookForm
-                        currentDetails={this.state.address}
-                        addAddress={this.state.addAddress}
-                        editAddress={this.state.editAddress}
-                        addressId={this.state.addressId}
-                    /> : null}
-                </div>
-                {this.props.resMessages.msg && <div
-                    className="alert alert-success home-page-alert"
-                    role="alert"
-                >
-                    {this.props.resMessages.msg}
-                </div>}
-                <div className="account-container">
-                    <div className="account-menu-sec acc-sec">
-                        <AccountMenu />
+                <div className="wrapper-acc-pg">
+                    <div className="nav-bar-wrapper">
+                        <NavBar />
+                        {this.props.authentication.updateAddress ? <AddressBookForm
+                            currentDetails={this.state.address}
+                            addAddress={this.state.addAddress}
+                            editAddress={this.state.editAddress}
+                            addressId={this.state.addressId}
+                        /> : null}
                     </div>
-                    <span></span>
-                    <div className="accout-detail-sec acc-sec address-book-content">
-                        <div className="account-det-background">
-                            <div className="new-address-header d-flex justify-content-between align-items-center">
-                                <h1 className="account-overview-title">Address Book{this.addressList().length && <span> ({this.addressList().length})</span>}</h1>
-                                <button
-                                    type="submit"
-                                    className="btn btn-warning add-new-address"
-                                    onClick={this.addAddress}
-                                >
-                                    ADD NEW ADDRESS
-                                </button>
-                            </div>
-                            {
-                                this.addressList().length ? (
-                                    <div className="detail-address-container">
-                                        {
-                                            this.addressList().map((address, i) => (
-                                                <div
-                                                    className="detail-address-book"
-                                                    key={address[0]}
-                                                >
-                                                    <div className="acc-overview account-address-overview">
-                                                        <div className="overview-address">
-                                                            <p>{address[1].firstName} {address[1].lastName}</p>
-                                                            <p className="user-info text-muted">{address[1].city}</p>
-                                                            <p className="user-info text-muted">{address[1].address}</p>
-                                                            {
-                                                                address[1].phoneNumber.map((num, i) => (
-                                                                    <p
-                                                                        className="user-info text-muted"
-                                                                        key={i}
-                                                                    >
-                                                                        {num}
-                                                                    </p>
-                                                                ))
-                                                            }
-                                                        </div>
-                                                        <div className="address-edit">
-
-                                                            <div className="address-text-action">
-                                                                <button
-                                                                    type="button"
-                                                                    className={`btn btn-light ${address[1].default === false && `address-txt`}`}
-                                                                    // className="btn btn-light"
-                                                                    disabled={address[1].default === true}
-                                                                    onClick={() => this.props.setDefaultAddress(address[0])}
-                                                                >
-                                                                    SET DEFAULT ADDRESS
-                                                                </button>
+                    {this.props.resMessages.msg && <div
+                        className="alert alert-success home-page-alert"
+                        role="alert"
+                    >
+                        {this.props.resMessages.msg}
+                    </div>}
+                    <div className="account-container">
+                        <div className="account-menu-sec acc-sec">
+                            <AccountMenu />
+                        </div>
+                        <span></span>
+                        <div className="accout-detail-sec acc-sec address-book-content">
+                            <div className="account-det-background">
+                                <div className="new-address-header d-flex justify-content-between align-items-center">
+                                    <h1 className="account-overview-title">Address Book{this.addressList().length && <span> ({this.addressList().length})</span>}</h1>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-warning add-new-address"
+                                        onClick={this.addAddress}
+                                    >
+                                        ADD NEW ADDRESS
+                                    </button>
+                                </div>
+                                {
+                                    this.addressList().length ? (
+                                        <div className="detail-address-container">
+                                            {
+                                                this.addressList().map((address, i) => (
+                                                    <div
+                                                        className="detail-address-book"
+                                                        key={address[0]}
+                                                    >
+                                                        <div className="acc-overview account-address-overview">
+                                                            <div className="overview-address">
+                                                                <p>{address[1].firstName} {address[1].lastName}</p>
+                                                                <p className="user-info text-muted">{address[1].city}</p>
+                                                                <p className="user-info text-muted">{address[1].address}</p>
+                                                                {
+                                                                    address[1].phoneNumber.map((num, i) => (
+                                                                        <p
+                                                                            className="user-info text-muted"
+                                                                            key={i}
+                                                                        >
+                                                                            {num}
+                                                                        </p>
+                                                                    ))
+                                                                }
                                                             </div>
-                                                            <div className="address-actions">
-                                                                <i
-                                                                    className="far fa-edit"
-                                                                    data-address-id={address[0]}
-                                                                    onClick={this.editAddress}
-                                                                ></i>
-                                                                {address[1].default === false && <i
-                                                                    className="fas fa-trash-alt"
-                                                                    data-address-id={address[0]}
-                                                                    onClick={() => this.props.deleteAddress(address[0])}
-                                                                ></i>}
+                                                            <div className="address-edit">
+
+                                                                <div className="address-text-action">
+                                                                    <button
+                                                                        type="button"
+                                                                        className={`btn btn-light ${address[1].default === false && `address-txt`}`}
+                                                                        // className="btn btn-light"
+                                                                        disabled={address[1].default === true}
+                                                                        onClick={() => this.props.setDefaultAddress(address[0])}
+                                                                    >
+                                                                        SET DEFAULT ADDRESS
+                                                                    </button>
+                                                                </div>
+                                                                <div className="address-actions">
+                                                                    <i
+                                                                        className="far fa-edit"
+                                                                        data-address-id={address[0]}
+                                                                        onClick={this.editAddress}
+                                                                    ></i>
+                                                                    {address[1].default === false && <i
+                                                                        className="fas fa-trash-alt"
+                                                                        data-address-id={address[0]}
+                                                                        onClick={() => this.props.deleteAddress(address[0])}
+                                                                    ></i>}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            ))
-                                        }
-                                    </div>
-                                ) : (<div
-                                    className="no-details"
-                                >
-                                    <div className="no-pending-background">
-                                        <div className="no-orders-icon">
-                                            <img src={goodReview} alt="empty goodReview" className="empty-box" />
-                                        </div><br />
-                                        <div className="no-orders-info">
-                                            <p className="acc-info-1">You have not added an address yet</p><br />
-                                            <p className="acc-info-2">Add your shipping address here for a fast purchase experience!<br />You will be able to add, modify or delete them at any time.</p>
-                                        </div><br />
-                                        <div className="continue-shopping-btn">
-                                            <button
-                                                type="submit"
-                                                className="btn btn-warning add-new-address"
-                                                onClick={this.props.addressBookForm}
-                                            >ADD NEW ADDRESS</button>
+                                                ))
+                                            }
                                         </div>
-                                    </div>
-                                </div>)
-                            }
-                        </div>
+                                    ) : (<div
+                                        className="no-details"
+                                    >
+                                        <div className="no-pending-background">
+                                            <div className="no-orders-icon">
+                                                <img src={goodReview} alt="empty goodReview" className="empty-box" />
+                                            </div><br />
+                                            <div className="no-orders-info">
+                                                <p className="acc-info-1">You have not added an address yet</p><br />
+                                                <p className="acc-info-2">Add your shipping address here for a fast purchase experience!<br />You will be able to add, modify or delete them at any time.</p>
+                                            </div><br />
+                                            <div className="continue-shopping-btn">
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-warning add-new-address"
+                                                    onClick={this.props.addressBookForm}
+                                                >ADD NEW ADDRESS</button>
+                                            </div>
+                                        </div>
+                                    </div>)
+                                }
+                            </div>
 
+                        </div>
                     </div>
+                </div>
+                <div className="mb-acc-pg">
+                    <div className="nav-bar-wrapper">
+                        <NavBar />
+                    </div>
+                    <div className="section-title">
+                        <NavLink className="section-title-btn" to="/user/profile">
+                            <span>
+                                <i className="fas fa-arrow-left back-btn"></i>
+                            </span>
+                        </NavLink>
+                        <span className="section-title-name"><h1 className="account-overview-title">Address Book</h1></span>
+                    </div>
+                    <h1>Hello world</h1>
                 </div>
             </div>
         )

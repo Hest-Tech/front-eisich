@@ -2,14 +2,14 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 100%;
+    // height: 100%;
 }
 
 .no-pending-background {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 75%;
+    height: auto;
     width: 50%;
     justify-content: space-around;
     text-align: center;
@@ -36,7 +36,7 @@
 
 .order-continue-shopping {
     background: $base-color;
-    color: $white;
+    color: $white !important;
     padding: $m-padding*1.5 $l-padding;
     border-radius: .5rem;
     cursor: pointer;
@@ -47,4 +47,34 @@
 .order-continue-shopping:hover {
     opacity: 1;
     color: $white;
+}
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+
+    .section-title {
+        background: $white;
+        display: flex;
+        align-items: center;
+        padding: 0 $m-padding;
+    }
+
+    .section-title-name {
+        // background: blue;
+        text-align: left;
+        flex: 85%;
+        width: 100%;
+        // position: relative;
+    }
+
+    .section-title-btn {
+        // background: green;
+        flex: 15%;
+    }
+
+    .no-pending-background {
+        width: 100%;
+        height: 100%;
+        // background: red;
+    }
 }

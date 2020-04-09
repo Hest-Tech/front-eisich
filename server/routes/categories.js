@@ -70,7 +70,6 @@ router.get('/:name/products', async (req, res) => {
         const products = await db.Product.findAll({
                 attributes: { exclude: ['id', 'userId', 'createdAt', 'updatedAt'] }
             });
-
         return res.json({
             data: products
         });

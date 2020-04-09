@@ -56,11 +56,6 @@ class LoginPage extends React.Component {
         }
     }
 
-    componentDidUnMount() {
-        this.props.closeAuthPopUp();
-        console.log('login modal unmouted')
-    }
-
     render() {
         return (
             <React.Fragment>

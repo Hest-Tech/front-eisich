@@ -1,0 +1,35 @@
+.mobile-authentication__container {
+	padding: $l-padding;
+}
+
+.app-brand {
+	padding: $l-padding;
+	padding-bottom: 0;
+}
+
+.mobile-app-brand {
+	display: flex;
+	justify-content: center;
+	color: $base-color;
+}
+
+.login-register__container {
+	margin: 0 auto;
+	width: 70%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.mobile-auth-link {
+	padding-bottom: $m-padding;
+	color: $dark-grey;
+}
+
+.login-register__container .active {
+	color: $base-color;
+	border-bottom: .2rem solid $base-color;
+}
+
+.login-register {
+	margin-bottom: $l-margin;
+}

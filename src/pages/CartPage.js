@@ -14,9 +14,11 @@ class CartPage extends React.Component {
     constructor(props) {
         super(props);
         this.setQuantity = this.setQuantity.bind(this);
+        this.addQuantity = this.addQuantity.bind(this);
+        this.minusQuantity = this.minusQuantity.bind(this);        
 
         this.state = {
-            vat: 0
+            vat: 0,
         }
     }
 
@@ -28,6 +30,29 @@ class CartPage extends React.Component {
         const quantity = e.target.value;
 
         this.props.updateCartItem(pid, { quantity });
+    }
+
+    // If quantity increases available pieces decrease
+    addQuantity(e, pid) {
+        const target = e.target.previousSibling.textContent;
+        const quantity = parseInt(target);
+        const addPiece = quantity + 1;
+        const availablePieces = this.props.product.pieces;
+
+        const newQuantity = addPiece > availablePieces ? quantity : addPiece;
+        this.props.updateCartItem(pid, { quantity: newQuantity })
+        e.target.previousSibling.textContent = newQuantity;
+    }
+
+    // If quantity decreases available pieces increase
+    minusQuantity(e, pid) {
+        const target = e.target.nextSibling.textContent;
+        const quantity = parseInt(target);
+        const minusPiece = quantity - 1;
+
+        const newQuantity = minusPiece < 1 ? 1 : minusPiece;
+        this.props.updateCartItem(pid, { quantity: newQuantity })
+        e.target.nextSibling.textContent = newQuantity;
     }
 
     setCurrency(price) {
@@ -113,13 +138,13 @@ class CartPage extends React.Component {
                                                         </span>
                                                         <span>
                                                             <i
+                                                                onClick={(e) => this.minusQuantity(e, item.pid)}
                                                                 className="fas fa-minus-circle minus-quantity"
-                                                                // onClick={}
                                                             ></i>
-                                                            <i className="quantity-value">{item.quantity}</i>
+                                                            <b className="quantity-value">{ item.quantity }</b>
                                                             <i
+                                                                onClick={(e) => this.addQuantity(e, item.pid)}
                                                                 className="fas fa-plus-circle add-quantity"
-                                                                // onClick={}
                                                             ></i>
                                                         </span>
                                                     </div>
@@ -196,7 +221,8 @@ class CartPage extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    product: state.products.product
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -24,10 +24,13 @@ import AboutPage from '../pages/AboutPage';
 import Footer from '../components/Footer';
 import CartPage from '../pages/CartPage';
 import CategoryPage from '../pages/mobile/CategoryPage';
+import LoginPage from '../pages/mobile/LoginPage';
+import RegisterPage from '../pages/mobile/RegisterPage';
 import ProfilePage from '../pages/mobile/ProfilePage';
 import ProductItemPage from '../pages/ProductItemPage';
 import ErrorBoundary from '../components/ErrorBoundary';
 import PrivateRoute from './PrivateRoute';
+import MobileRoutes from './MobileRoutes';
 import MobileNav from '../components/home/MobileNav';
 
 export const history = createBrowserHistory();
@@ -46,9 +49,11 @@ const AppRouter = () => (
                 <PrivateRoute path="/customer/address" component={AddressBook} />
                 <PrivateRoute path="/customer/profile/edit" component={UpdateAccount} />
                 <PrivateRoute path="/checkout" component={CheckoutPage} />
-                <Route path="/cart" component={CartPage} />
-                <Route path="/profile" component={ProfilePage} />
-                <Route path="/category" component={CategoryPage} />
+                <PrivateRoute path="/cart" component={CartPage} />
+                <MobileRoutes path="/user/profile" component={ProfilePage} />     /*mobile only*/
+                <MobileRoutes path="/category" component={CategoryPage} />     /*mobile only*/
+                <MobileRoutes path="/user/mobile/login" component={LoginPage} />     /*mobile only*/
+                <MobileRoutes path="/user/mobile/register" component={RegisterPage} />     /*mobile only*/
                 <Route path="/about" component={AboutPage} />
                 <Route path="/product/:path" component={ProductItemPage} />
                 <Route path="/products/:category" component={ProductsPage} />

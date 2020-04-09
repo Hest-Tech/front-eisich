@@ -38,7 +38,7 @@ const MobileNav = (props) => {
                     </span>
                 </NavLink>
                 <NavLink
-                    to="/profile"
+                    to={`${props.authentication.isAuthenticated ? "/user/profile" : "/user/mobile/login"}`}
                     className="mobile-icon-background mobile-account"
                     // onClick={() => }
                     exact

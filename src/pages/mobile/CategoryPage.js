@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import NavBar from '../../components/NavBar';
 import '../../assets/images/iphone.png';
+import '../../assets/images/hipster.png';
 import Scroll from '../../components/Scroll';
 
 import {

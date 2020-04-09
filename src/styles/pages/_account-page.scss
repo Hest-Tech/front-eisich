@@ -2,17 +2,30 @@
     background: $off-white;
 }
 
+.mb-acc-pg {
+    display: none;
+}
+
 .nav-bar-wrapper {
     margin-bottom: $l-margin*1.5;
 }
 
-.account-container {
+.welcome-user {
+    display: none;
+}
+
+.account-container,
+.account-container-mb {
     background: $off-white;
     width: 86%;
     margin: 0 auto;
     padding-bottom: $l-padding;
     display: flex;
     justify-content: space-between;
+}
+
+.account-container-mb {
+    width: 95%;
 }
 
 .account-container span {
@@ -41,4 +54,47 @@
     display: flex;
     flex-direction: column;
     height: auto;
+}
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+    .accout-detail-sec,
+    .account-menu-span,
+    .wrapper-acc-pg {
+        display: none;
+    }
+
+    .account-background {
+        height: 115vh;
+    }
+
+    .mb-acc-pg {
+        display: block;
+        background: $off-white;
+        // background: orange;
+        height: 100%;
+    }
+
+    .back-btn {
+        font-size: $m-font-size;
+    }
+
+    .account-container {
+        // background: red;
+        width: 95%;
+        height: 50%;
+        margin-top: $l-padding;
+        border: none;
+    }
+
+    .account-page-container {
+        padding-bottom: 20rem;
+
+    }
+
+    .account-det-background {
+        // background: blue;
+        width: 100%;
+        height: 100%;
+    }
 }

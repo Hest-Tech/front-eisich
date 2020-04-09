@@ -242,6 +242,7 @@ const ProductsPage = (props) => {
                                 <p className="product-filter-btn">Filters</p>
                             </div>
                         </div>
+                        {console.log(props.products.productsList)}
                         <div className="product-items">
 
                             {
@@ -256,8 +257,9 @@ const ProductsPage = (props) => {
                                         >
                                             <div className="product__container">
                                                 <div className="product-img-wrapper">
-                                                    <img src={dress} alt="dress" className="product-img" />
+                                                    <img src={`${product.imgLink}.jpg`} alt="dress" className="product-img" />
                                                 </div>
+                                                <span className="span"></span>
                                                 <div className="product-details">
                                                     <p className="small product-category">Fashion</p>
                                                     <p className="product-details__p">{product.description}</p>

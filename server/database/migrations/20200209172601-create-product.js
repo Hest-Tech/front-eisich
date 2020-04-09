@@ -8,6 +8,12 @@ module.exports = {
                 allowNull: false,
                 autoIncrement: true,
             },
+            imgId: {
+                type: Sequelize.STRING
+            },
+            imgLink: {
+                type: Sequelize.STRING
+            },
             description: {
                 type: Sequelize.STRING
             },

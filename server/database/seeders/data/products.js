@@ -8,7 +8,8 @@ const innerCategorySku = require("./innerCategory").sku;
 const data = [{
     description: 'Boxer Shorts-6-pieces',
     path: '/boxer-shorts-6-pieces/',
-    // img: '',
+    imgId: 'K5Vd6bW',
+    imgLink: 'https://imgur.com/K5Vd6bW',
     oldPrice: 2000,
     newPrice: 1500,
     saving: 500,
@@ -24,7 +25,8 @@ const data = [{
 }, {
     description: 'Unicorn Abaya',
     path: '/unicorn-abaya/',
-    // img: '',
+    imgId: '4dhco9v',
+    imgLink: 'https://imgur.com/4dhco9v',
     oldPrice: 2000,
     newPrice: 1500,
     saving: 500,
@@ -40,7 +42,8 @@ const data = [{
 }, {
     description: 'Samsung Galaxy S7 Edge',
     path: '/samsung-galaxy-s7-edge/',
-    // img: '',
+    imgId: 'yYUoXWu',
+    imgLink: 'https://imgur.com/yYUoXWu',
     oldPrice: 22000,
     newPrice: 21500,
     saving: 500,
@@ -56,7 +59,8 @@ const data = [{
 }, {
     description: 'Bluetooth Smart Watch',
     path: '/bluetooth-smart-watch/',
-    // img: '',
+    imgId: '1nv2lYW',
+    imgLink: 'https://imgur.com/1nv2lYW',
     oldPrice: 1500,
     newPrice: 1000,
     saving: 500,
@@ -72,7 +76,8 @@ const data = [{
 }, {
     description: 'Apple MacBook Pro',
     path: '/apple-macbook-pro/',
-    // img: '',
+    imgId: '6zTwxol',
+    imgLink: 'https://imgur.com/6zTwxol',
     oldPrice: 239000,
     newPrice: 240000,
     saving: 1000,

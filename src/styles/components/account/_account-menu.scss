@@ -4,6 +4,12 @@
     background: $white;
 }
 
+.acc-title,
+.acc-link-item,
+.acc-link-arrow {
+    display: none;
+}
+
 .account-menu-links {
     display: flex;
     flex-direction: column;
@@ -60,4 +66,107 @@
 .acc-menu-btn button:hover {
     background: #FEEFDE;
     color: $base-color;
+}
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+
+    .acc-det-info,
+    .span-icon,
+    .acc-desk {
+        display: none;
+    }
+
+    .active,
+    .router-nav-link,
+    .acc-link,
+    .account-link {
+        color: $dark-grey !important;
+    }
+
+    .nav-bar-wrapper {
+        margin: 0;
+    }
+
+    .acc-title {
+        display: block;
+        width: 100%;
+    }
+
+    .acc-link-item,
+    .acc-link-arrow {
+        display: block;
+    }
+
+    .welcome-user {
+        display: block;
+        background: $base-color;
+        margin-bottom: $s-margin;
+        padding: $m-padding*1.5;
+    }
+
+    .welcome-user-note {
+        font-size: $m-font-size*.8;
+        font-weight: 600;
+    }
+
+    .user-email-add {
+        font-size: $s-font-size;
+    }
+
+    .welcome-user p {
+        color: $white;
+    }
+
+    .acc-link {
+        display: flex;
+        width: auto;
+    }
+
+    .acc-link-item {
+        // background: red;
+        display: flex;
+        flex: 80%;
+        justify-content: center;
+    }
+
+    .acc-link-arrow {
+        flex: 20%;
+        // background: blue;
+        text-align: right;
+        font-size: $m-font-size;
+    }
+
+    .acc-title {
+        padding: $s-padding 0;
+        margin-top: $s-margin*1.5;
+    }
+
+    .account-menu-links,
+    .account-menu-forms {
+        background: $white;
+    }
+
+    .account-menu-links,
+    .account-menu-forms {
+        box-shadow: .1rem .1rem .8rem .01rem $light-grey;
+        border-radius: .5rem;
+    }
+
+    .account-menu {
+        background: none;
+    }
+
+    .btn-light {
+        background: none;
+    }
+
+    .account-menu-sec {
+        border: none;
+        box-shadow: none;
+    }
+
+    .account-link {
+        border: none;
+    }
 }

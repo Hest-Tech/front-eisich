@@ -312,6 +312,10 @@ select {
         display: none;
     }
 
+    .App {
+        margin-bottom: 5rem;
+    }
+
     .product-filter-btn {
         display: block;
         // background: blue;
@@ -338,7 +342,7 @@ select {
     .products-container {
         width: 100%;
         margin: $m-margin 0;
-        background: green;
+        // background: green;
         // display: flex;
         // flex-direction: column;
     }
@@ -357,6 +361,7 @@ select {
 
     .product {
         // background: grey;
+        padding-bottom: $l-padding;
         width: 100%;
         height: auto;
         border-bottom: .1rem solid $light-grey;
@@ -364,14 +369,18 @@ select {
 
     .product-details {
         flex: 60%;
-        // background: green;
         height: 100%;
     }
 
     .product-img-wrapper {
-        flex: 40%;
-        // background: red;
+        flex: 35%;
         height: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .span {
+        flex: 5%;
     }
 
     .product__container {
@@ -380,6 +389,5 @@ select {
         align-items: flex-start;
         width: 100%;
         height: 15rem;
-        // background: blue;
     }
 }

@@ -7,10 +7,10 @@ const favicon = require('express-favicon');
 
 const db = require('./database/dbConfig');
 const lipaNaMpesa = require('./payment-gateways/daraja/lipaNaMpesa');
+const imgur = require('./imgur/app');
 const hook = require('./payment-gateways/daraja/webHook');
 const { ValidateMpesaData } = require('./payment-gateways/daraja/validate');
-const { port } = require('./config/config');
-const { mode } = require('./config/config');
+const { mode, client_id, port } = require('./config/config');
 const PORT = port || 5000;
 
 
@@ -49,6 +49,25 @@ app.post('/hooks/mpesa', (req, res) => {
         console.log(e);
     }
 });
+
+// app.post('/auth/google/callback', (req, res) => {
+//     try {
+//         console.log('-----------Received Google Photos API webhook-----------');
+
+//         console.log(req.body);
+//         console.log('-----------------------');
+
+//         let message = {
+//             "ResponseCode": 200,
+//             "ResponseDesc": "success"
+//         };
+
+//         res.json(message);
+//     } catch (e) {
+//         console.log(e);
+//     }
+// })
+
 
 // console.log('----------------> ', mode);
 // if (mode === "production") {
