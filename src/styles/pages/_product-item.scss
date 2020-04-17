@@ -28,7 +28,7 @@
     align-items: center;
     width: 80%;
     background: $off-white;
-    cursor: pointer;
+    cursor: zoom-in;
 }
 
 .main-product-img  {
@@ -110,6 +110,11 @@
     align-items: center;
     color: $dark-grey;
     cursor: pointer;
+}
+
+.selected-size {
+    border-color: #E9BD4C;
+    color: #E9BD4C;
 }
 
 .action-btn {

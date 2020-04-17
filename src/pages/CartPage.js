@@ -7,6 +7,7 @@ import '../assets/images/dress.png';
 import '../assets/images/iphone.png';
 import { removeFromCart, updateCartItem } from '../actions/cart';
 import { addToWishlist } from '../actions/wishlist';
+import { setCurrency } from '../actions/products';
 import Scroll from '../components/Scroll';
 
 
@@ -53,14 +54,6 @@ class CartPage extends React.Component {
         const newQuantity = minusPiece < 1 ? 1 : minusPiece;
         this.props.updateCartItem(pid, { quantity: newQuantity })
         e.target.nextSibling.textContent = newQuantity;
-    }
-
-    setCurrency(price) {
-        const formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'KES'
-        });
-        return formatter.format(price);
     }
 
     setSubTotal() {
@@ -120,8 +113,8 @@ class CartPage extends React.Component {
                                                             <small className="text-muted">Seller: {item.seller}</small>
                                                             <p className="cart-text"><small>{item.description}</small></p>
                                                             <div className="cart-promotion-price">
-                                                                <p className="cart-new-price">{this.setCurrency(item.newPrice)}</p>
-                                                                <p className="cart-old-price text-muted"><strike>{this.setCurrency(item.oldPrice)}</strike></p>
+                                                                <p className="cart-new-price">{setCurrency(item.newPrice)}</p>
+                                                                <p className="cart-old-price text-muted"><strike>{setCurrency(item.oldPrice)}</strike></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -164,12 +157,12 @@ class CartPage extends React.Component {
                                                     </select>
                                                 </div>
                                                 <div className="cart-unit-price price-border">
-                                                    <p className="cart-new-price">{this.setCurrency(item.newPrice)}</p>
-                                                    <p className="cart-old-price text-muted"><strike>{this.setCurrency(item.oldPrice)}</strike></p>
-                                                    <small className="text-success">Saving: {this.setCurrency(item.saving)}</small>
+                                                    <p className="cart-new-price">{setCurrency(item.newPrice)}</p>
+                                                    <p className="cart-old-price text-muted"><strike>{setCurrency(item.oldPrice)}</strike></p>
+                                                    <small className="text-success">Saving: {setCurrency(item.saving)}</small>
                                                 </div>
                                                 <div className="cart-subtotal">
-                                                    <b>{this.setCurrency(item.newPrice*item.quantity)}</b>
+                                                    <b>{setCurrency(item.newPrice*item.quantity)}</b>
                                                 </div>
                                             </div>
                                         );
@@ -179,17 +172,17 @@ class CartPage extends React.Component {
                                     <div className="cart-total-info cart-subtotal-vat">
                                         <div className="subtotal-background">
                                             <span className="subtotal font-weight-bold">Subtotal:</span>
-                                            <span>{this.setCurrency(this.setSubTotal())}</span>
+                                            <span>{setCurrency(this.setSubTotal())}</span>
                                         </div>
                                         <div className="subtotal-background">
                                             <span className="text-muted font-weight-bold vat">VAT:</span>
-                                            <span>{this.setCurrency(this.state.vat)}</span>
+                                            <span>{setCurrency(this.state.vat)}</span>
                                         </div>
                                     </div>
                                     <div className="cart-total-info cart-total-shipping">
                                         <div className="subtotal-background">
                                             <span className="subtotal font-weight-bold">Total:</span>
-                                            <span className="subtotal-value">{this.setCurrency(this.setSubTotal() + this.state.vat)}</span>
+                                            <span className="subtotal-value">{setCurrency(this.setSubTotal() + this.state.vat)}</span>
                                         </div>
                                         <span className="text-muted cart-shipping-info">Shipping fees not included yet</span>
                                     </div>

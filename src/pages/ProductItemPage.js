@@ -7,11 +7,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
+import Zoom from 'react-img-zoom'
 
 import NavBar from '../components/NavBar';
 import SizeChart from '../components/SizeChart';
 import CheckoutPage from './CheckoutPage';
 import { addToCart } from '../actions/cart';
+import { setCurrency } from '../actions/products';
 import Scroll from '../components/Scroll';
 import '../assets/images/dress.png';
 
@@ -33,7 +35,8 @@ class ProductItemPage extends React.Component {
             count: 1,
             availableCount: this.props.product.pieces - 1,
             img: "dress.png",
-            sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+            imgLink: `${this.props.product.imgLink}.jpg`,
+            defaultSize: 'M',
             clicked: '',
             baseColor: '#E9BD4C',
             darkGrey: '#505050',
@@ -96,7 +99,8 @@ class ProductItemPage extends React.Component {
             oldPrice: this.props.product.oldPrice,
             newPrice: this.props.product.newPrice,
             saving: this.props.product.saving,
-            subtotal: this.state.count*this.props.product.newPrice
+            subtotal: this.state.count*this.props.product.newPrice,
+            size: this.state.defaultSize
         }
 
         this.props.addToCart(product);
@@ -110,28 +114,20 @@ class ProductItemPage extends React.Component {
     }
 
     setSize(e) {
-        const targetSize = e.target.textContent;
-        console.log(e.target.parentElement);
+        const targetSize = e.target;
+        const parentTargetChildren = document.getElementById('sizes').children;
+        console.log(targetSize.textContent)
 
-        // e.target.parentElement.childElements.forEach(el => {
-        //     console.log(el);
-        // })
-
-        // this.setState(() => ({
-        //     clicked: targetSize
-        // }))
-
-        // this.state.sizes.map((size) => {
-        //     if (size === this.state.clicked) {
-        //         e.target.style.color = this.state.darkGrey;
-        //         e.target.style.borderColor = this.state.lightGrey;
-        //     }
-        // })
+        Array.from(parentTargetChildren).forEach(el => el.classList.remove('selected-size'));
+        targetSize.className += ' selected-size';
+        this.setState({ defaultSize: targetSize.textContent })
     }
 
-    componentDidMount() {
-        console.log(this.props.product)
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.imgId != this.props.product.imgId) {
+    //         this.forceUpdate()
+    //     }
+    // }
 
     render() {
         return (
@@ -152,7 +148,12 @@ class ProductItemPage extends React.Component {
                     <div className="product-item-container">
                         <div className="product-item__img">
                             <div className="main-img-background">
-                                <img src={`${this.props.product.imgLink}.jpg`} alt="main product image" className="main-product-img" />
+                                <Zoom
+                                    img={this.state.imgLink}
+                                    zoomScale={3}
+                                    width={500}
+                                    height={500}
+                                />
                             </div>
                             <span className="product-img-color">
                                 <div className="color-variant">
@@ -181,9 +182,9 @@ class ProductItemPage extends React.Component {
                             <div className="details-background">
                                 <h3 className="product-title-description">{this.props.product.description}</h3>
                                 <div className="new-price-promo">
-                                    <h3 className="product-price">KSH{this.props.product.newPrice}</h3>
+                                    <h3 className="product-price">{setCurrency(this.props.product.newPrice)}</h3>
                                     <span className="old-price-range">
-                                        <p className="old-price text-muted"><strike>KSH {this.props.product.oldPrice}</strike></p>
+                                        <p className="old-price text-muted"><strike>{setCurrency(this.props.product.oldPrice)}</strike></p>
                                         <mark>-{this.setDiscount()}%</mark>
                                     </span>
                                 </div>
@@ -202,18 +203,19 @@ class ProductItemPage extends React.Component {
                                             Size Guide
                                         </a>
                                     </span>
-                                    <div className="size-range">
+                                    <div id="sizes" className="size-range">
                                         {
-                                            this.state.sizes.map((item, i) => <div
-                                                className="size_ small"
-                                                key={i}
-                                                onClick={this.setSize}
-                                                style={{
-                                                    color: `${this.state.clicked ? this.state.baseColor : this.state.darkGrey}`,
-                                                    borderColor: `${this.state.clicked ? this.state.baseColor : this.state.lightGrey}`
-                                                }}
-                                            >{item}</div>)
+                                            // this.state.sizes.map((item, i) => <div
+                                            //     className="size_ small"
+                                            //     key={i}
+                                            //     onClick={this.setSize}
+                                            // >{item}</div>)
                                         }
+                                        <div className="size_ small" onClick={this.setSize}>S</div>
+                                        <div className="size_ small" onClick={this.setSize}>M</div>
+                                        <div className="size_ small" onClick={this.setSize}>L</div>
+                                        <div className="size_ small" onClick={this.setSize}>XL</div>
+                                        <div className="size_ small" onClick={this.setSize}>XXL</div>
                                     </div>
                                     <span className="size-check">
                                         <p>SELECT COLOR:</p>
@@ -221,22 +223,22 @@ class ProductItemPage extends React.Component {
                                     <span className="product-img-color-selector">
                                         <div className="color-variant-selector">
                                             <div className="color-variant-background red">
-                                                <img src={this.state.img} alt="product color variation" className="img-color-variant" />
+                                                <img src={this.state.imgLink} alt="product color variation" className="img-color-variant" />
                                             </div>
                                         </div>
                                         <div className="color-variant-selector">
                                             <div className="color-variant-background orange">
-                                                <img src={this.state.img} alt="product color variation" className="img-color-variant" />
+                                                <img src={this.state.imgLink} alt="product color variation" className="img-color-variant" />
                                             </div>
                                         </div>
                                         <div className="color-variant-selector">
                                             <div className="color-variant-background baige">
-                                                <img src={this.state.img} alt="product color variation" className="img-color-variant" />
+                                                <img src={this.state.imgLink} alt="product color variation" className="img-color-variant" />
                                             </div>
                                         </div>
                                         <div className="color-variant-selector">
                                             <div className="color-variant-background blue">
-                                                <img src={this.state.img} alt="product color variation" className="img-color-variant" />
+                                                <img src={this.state.imgLink} alt="product color variation" className="img-color-variant" />
                                             </div>
                                         </div>
                                     </span>
@@ -308,7 +310,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addToCart: (product) => dispatch(addToCart(product))
+    addToCart: (product) => dispatch(addToCart(product)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductItemPage);

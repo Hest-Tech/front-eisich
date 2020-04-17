@@ -19,6 +19,20 @@ import {
 
 const url = "http://localhost:5000/api/v1";
 
+
+
+export const setCurrency = (num) => {
+    if (isNaN(num) == false) {
+        return (num).toLocaleString("en", {
+            style: "currency",
+            currency: "Ksh",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        });
+    }
+}
+
+
 // fetch categories helper
 const fetchCategoriesHelper = (
     products,
