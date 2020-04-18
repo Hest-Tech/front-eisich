@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use('/api/v1', require('./routes/categories'));
+app.use('/api/v1/products', require('./routes/products'));
 
 const validateNum = new ValidateMpesaData();
 
