@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Modal from 'react-modal';
 
 import NavBar from '../NavBar';
 import AccountMenu from './AccountMenu';
@@ -13,6 +14,17 @@ import {
     deleteAddress
 } from '../../actions/authentication';
 import goodReview from '../../assets/images/good-review.png';
+
+
+const customStyles = {
+    overlay: {
+        zIndex: 1000
+    },
+    content: {
+        top: '2%',
+        width: '70%'
+    }
+};
 
 
 class AddressBook extends React.Component {
@@ -86,12 +98,39 @@ class AddressBook extends React.Component {
                 <div className="wrapper-acc-pg">
                     <div className="nav-bar-wrapper">
                         <NavBar />
-                        {this.props.authentication.updateAddress ? <AddressBookForm
-                            currentDetails={this.state.address}
-                            addAddress={this.state.addAddress}
-                            editAddress={this.state.editAddress}
-                            addressId={this.state.addressId}
-                        /> : null}
+                        {this.props.authentication.updateAddress ? <Modal
+                            style={customStyles}
+                            isOpen={this.props.authentication.updateAddress}
+                            onRequestClose={() => this.props.addressBookForm()}
+                            contentLabel="Login details"
+                            id="login-overlay"
+                            className="modal-dialog"
+                            overlayClassName="Overlay"
+                        >
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <button
+                                        type="button"
+                                        className="close"
+                                        data-dismiss="modal"
+                                        onClick={() => this.props.addressBookForm()}
+                                    >
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+
+                                    <h4
+                                        className="modal-title"
+                                        id="myModalLabel"
+                                    >Edit Address</h4>
+                                </div>
+                                <AddressBookForm
+                                    currentDetails={this.state.address}
+                                    addAddress={this.state.addAddress}
+                                    editAddress={this.state.editAddress}
+                                    addressId={this.state.addressId}
+                                />
+                            </div>
+                        </Modal> : null}
                     </div>
                     {this.props.resMessages.msg && <div
                         className="alert alert-success home-page-alert"
@@ -156,7 +195,7 @@ class AddressBook extends React.Component {
                                                                 </div>
                                                                 <div className="address-actions">
                                                                     <i
-                                                                        className="far fa-edit"
+                                                                        className="far fa-edit dk-edit-btn"
                                                                         data-address-id={address[0]}
                                                                         onClick={this.editAddress}
                                                                     ></i>
@@ -210,7 +249,90 @@ class AddressBook extends React.Component {
                         </NavLink>
                         <span className="section-title-name"><h1 className="account-overview-title">Address Book</h1></span>
                     </div>
-                    <h1>Hello world</h1>
+                    {
+                        this.addressList().length ? (
+                            <div className="detail-address-container">
+                                {
+                                    this.addressList().map((address, i) => (
+                                        <div
+                                            className="detail-address-book"
+                                            key={address[0]}
+                                        >
+                                            <div className="acc-overview account-address-overview">
+                                                <div className="overview-address">
+                                                    <p>{address[1].firstName} {address[1].lastName}</p>
+                                                    <p className="user-info text-muted">{address[1].city}</p>
+                                                    <p className="user-info text-muted">{address[1].address}</p>
+                                                    {
+                                                        address[1].phoneNumber.map((num, i) => (
+                                                            <p
+                                                                className="user-info text-muted"
+                                                                key={i}
+                                                            >
+                                                                {num}
+                                                            </p>
+                                                        ))
+                                                    }
+                                                </div>
+                                                <div className="address-edit">
+
+                                                    <div className="address-text-action">
+                                                        <button
+                                                            type="button"
+                                                            className={`btn btn-light ${address[1].default === false && `address-txt`}`}
+                                                            // className="btn btn-light"
+                                                            disabled={address[1].default === true}
+                                                            onClick={() => this.props.setDefaultAddress(address[0])}
+                                                        >
+                                                            SET DEFAULT ADDRESS
+                                                        </button>
+                                                    </div>
+                                                    <div className="address-actions">
+                                                        <div className="mb-edit-btn">
+                                                            <NavLink
+                                                                to="/customer/address-book/edit"
+                                                                onClick={this.editAddress}
+                                                            >
+                                                                <i
+                                                                    className="far fa-edit"
+                                                                    data-address-id={address[0]}
+                                                                    onClick={this.editAddress}
+                                                                ></i>
+                                                            </NavLink>
+                                                        </div>
+                                                        {address[1].default === false && <i
+                                                            className="fas fa-trash-alt"
+                                                            data-address-id={address[0]}
+                                                            onClick={() => this.props.deleteAddress(address[0])}
+                                                        ></i>}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        ) : (<div
+                            className="no-details"
+                        >
+                            <div className="no-pending-background">
+                                <div className="no-orders-icon">
+                                    <img src={goodReview} alt="empty goodReview" className="empty-box" />
+                                </div><br />
+                                <div className="no-orders-info">
+                                    <p className="acc-info-1">You have not added an address yet</p><br />
+                                    <p className="acc-info-2">Add your shipping address here for a fast purchase experience!<br />You will be able to add, modify or delete them at any time.</p>
+                                </div><br />
+                                <div className="continue-shopping-btn">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-warning add-new-address"
+                                        onClick={this.props.addressBookForm}
+                                    >ADD NEW ADDRESS</button>
+                                </div>
+                            </div>
+                        </div>)
+                    }
                 </div>
             </div>
         )

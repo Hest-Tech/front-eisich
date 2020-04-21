@@ -21,9 +21,9 @@
 (async () => {
     'use strict';
 
-    const { Client } = require('@elastic/elasticsearch');
     const axios = require('axios');
     const url = 'http://localhost:5000/api/v1/products';
+    const { Client } = require('@elastic/elasticsearch');
     const esClient = new Client({
         node: 'http://localhost:9200',
         log: 'error'

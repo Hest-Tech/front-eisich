@@ -40,7 +40,7 @@ class AccountOverview extends React.Component {
         let addressId = e.target.getAttribute('data-address-id');
         let user = this.props.authentication.user || {};
         let defaultUserAddress = Object.entries(this.props.authentication.user.address);
-this.props.addressBookForm()
+        this.props.addressBookForm()
 
     }
 

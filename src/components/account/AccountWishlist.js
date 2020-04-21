@@ -80,19 +80,20 @@ class AccountWishlist extends React.Component {
                         </NavLink>
                         <span className="section-title-name"><h1 className="account-overview-title">Account wishlist <span>({this.props.wishlist.length})</span></h1></span>
                     </div>
-                    <div className="wislist-background">
+                    <div className="mb-wish-bg wislist-background">
                         {
                             this.props.wishlist.map((item, i) => (
                                 <div
                                     className="wishlist-Item"
                                     key={i}
                                 >
-                                    <div className="wishlist-img-background">
-                                        <img className="wishlist-img" src={iphone} alt="Iphone" />
-                                    </div>
-                                    <div className="wishlist-item-detail">
-                                        <p className="wishlist-text">{item.description}</p>
-                                        <p>KSH {item.newPrice}</p>
+                                    <div className="mb-wishlist-det-bg">
+                                        <div className="wishlist-img-background">
+                                            <img className="wishlist-img" src={iphone} alt="Iphone" />
+                                        </div>
+                                        <div className="wishlist-item-detail">
+                                            <p className="wishlist-text">{item.description}<br /><b>KSH {item.newPrice}</b></p>
+                                        </div>
                                     </div>
                                     <div className="wishlist-item-price">
                                         <NavLink

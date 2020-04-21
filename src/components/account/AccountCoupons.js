@@ -40,14 +40,35 @@ const AccountCoupons = () => (
             </div>
         </div>
         <div className="mb-acc-pg">
-            <NavBar />
-            <NavLink
-                to="/user/profile"
-                className=""
-            >
-                <i className="fas fa-arrow-left back-btn"></i>
-            </NavLink>
-            <h1>Hello world</h1>
+            <div className="nav-bar-wrapper">
+                <NavBar />
+            </div>
+            <div className="section-title">
+                <NavLink className="section-title-btn" to="/user/profile">
+                    <span>
+                        <i className="fas fa-arrow-left back-btn"></i>
+                    </span>
+                </NavLink>
+                <span className="section-title-name"><h1 className="account-overview-title">Pending Reviews</h1></span>
+            </div>
+            <div className="account-container">
+                <div className="account-det-background">
+                    <div className="no-pending-orders">
+                        <div className="no-pending-background">
+                            <div className="no-orders-icon">
+                                <img src={coupon} alt="empty goodReview" className="empty-box" />
+                            </div><br />
+                            <div className="no-orders-info">
+                                <p className="acc-info-1">You currently have no available coupons</p><br />
+                                <p className="acc-info-2">All your available E-Isich credit and coupons will be displayed here.</p>
+                            </div><br /><br />
+                            <div className="continue-shopping-btn">
+                                <NavLink to="/" className="order-continue-shopping">CONTINUE SHOPPING</NavLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 );

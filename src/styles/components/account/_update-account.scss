@@ -18,3 +18,25 @@
 .save-btn button {
     padding: $m-padding;
 }
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+	.mb-row {
+		margin-top: $m-margin;
+		padding: $l-padding 0;
+		display: flex;
+		justify-content: center;
+		background: $white;
+	}
+
+	.md-form {	
+		width: 90%;
+	}
+
+	.mb-update-form {
+		display: flex;
+		justify-content: center;
+		margin: $m-margin 0;
+		// background: $white;
+	}
+}

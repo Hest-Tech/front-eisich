@@ -15,6 +15,7 @@ import AccountPendingReviews from '../components/account/AccountPendingReviews';
 import ChangePassword from '../components/account/ChangePassword';
 import AddressBook from '../components/account/AddressBook';
 import UpdateAccount from '../components/account/UpdateAccount';
+import UpdateAddressBook from '../components/account/UpdateAddressBook';
 import AccountWishlist from '../components/account/AccountWishlist';
 import HelpPage from '../pages/HelpPage';
 import NotFoundPage from '../pages/NotFoundPage';
@@ -48,6 +49,7 @@ const AppRouter = () => (
                 <PrivateRoute path="/customer/change-password" component={ChangePassword} />
                 <PrivateRoute path="/customer/address" component={AddressBook} />
                 <PrivateRoute path="/customer/profile/edit" component={UpdateAccount} />
+                <PrivateRoute path="/customer/address-book/edit" component={UpdateAddressBook} />
                 <PrivateRoute path="/checkout" component={CheckoutPage} />
                 <PrivateRoute path="/cart" component={CartPage} />
                 <MobileRoutes path="/user/profile" component={ProfilePage} />     /*mobile only*/

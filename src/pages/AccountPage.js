@@ -34,20 +34,6 @@ class AccountPage extends React.Component {
                         <AccountOverview />
                     </div>
                 </div>
-                <div className="mb-acc-pg">
-                    <div className="nav-bar-wrapper">
-                        <NavBar />
-                    </div>
-                    <div className="section-title">
-                        <NavLink className="section-title-btn" to="/user/profile">
-                            <span>
-                                <i className="fas fa-arrow-left back-btn"></i>
-                            </span>
-                        </NavLink>
-                        <span className="section-title-name"><h1 className="account-overview-title">Account orders</h1></span>
-                    </div>
-                    <h1>Hello world</h1>
-                </div>
             </div>
         );
     }

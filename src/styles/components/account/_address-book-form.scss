@@ -2,6 +2,14 @@
     margin: $l-margin;
 }
 
+.mb-edit-btn {
+    display: none;
+}
+    
+.dk-edit-btn {
+    display: block;
+}
+
 .address-book-content {
     background: green;
     height: auto;
@@ -28,4 +36,29 @@
 .detail-address-book {
     width: 48%;
     margin-bottom: $l-margin;
+}
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+
+    .mb-edit-btn {
+        display: block;
+    }
+
+    .dk-edit-btn {
+        display: none;
+    }
+
+    .detail-address-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .detail-address-book {
+        background: $white;
+        margin-bottom: 0;
+        margin-top: $m-margin;
+        width: 95%;
+    }
 }

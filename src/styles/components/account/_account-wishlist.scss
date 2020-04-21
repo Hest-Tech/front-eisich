@@ -19,6 +19,7 @@
 
 .wishlist-img-background {
     flex: 15%;
+    display: block;
 }
 
 .promo-value {
@@ -79,4 +80,52 @@
     // background: red;
     margin-right: $m-margin;
     font-size: $m-font-size*.9;
+}
+
+
+@media screen and (min-width: $mobile-width) and (max-width: $large-tablet-width) {
+
+    .mb-wishlist-det-bg {
+        display: flex;
+    }
+
+    .wishlist-Item {
+        background: $white;
+        width: 95%;
+        margin-bottom: 0;
+        flex-direction: column;
+    }
+
+    .wislist-background {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .wishlist-item-price {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: $m-margin;
+        padding-top: $m-padding;
+        border-top: .1rem solid $light-grey;
+    }
+
+    .wishlist-btn {
+        font-size: $s-font-size;
+        letter-spacing: 0;
+        padding: $s-padding*1.2;
+        opacity: .9;
+        width: 30%;
+    }
+
+    .wishlist-item-detail {
+        justify-content: space-between;
+    }
+
+    .wishlist-img {
+        width: 8rem;
+        height: 8rem;
+    }
 }

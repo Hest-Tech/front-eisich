@@ -15,23 +15,25 @@ class AccountMenu extends React.Component {
                 <div className="account-menu">
                     <small className="text-muted acc-title">MY ACCOUNT</small>
                     <div className="account-menu-links">
-                        <NavLink
-                            className="router-nav-link acc-link account-link"
-                            to="/customer/account"
-                            activeClassName="active"
-                        >
-                            <span className="span-icon">
-                                <i className="far fa-user"></i>
-                            </span>
-                            <p className="acc-det-info">My E-Isich Account</p>
-                            <div className="acc-link-item">
-                                <span className="span-icon-m">
-                                    <i className="far fa-user"></i>
-                                </span>
-                                <p className="acc-det-info-m">My E-Isich Account</p>
-                            </div>
-                            <i className="fas fa-angle-right acc-link-arrow"></i>
-                        </NavLink>
+                        <div className="dk-acc-link">
+                            <NavLink
+                                className="router-nav-link acc-link account-link"
+                                to="/customer/account"
+                                activeClassName="active"
+                            >
+                                    <span className="span-icon">
+                                        <i className="far fa-user"></i>
+                                    </span>
+                                    <p className="acc-det-info">My E-Isich Account</p>
+                                    <div className="acc-link-item">
+                                        <span className="span-icon-m">
+                                            <i className="far fa-user"></i>
+                                        </span>
+                                        <p className="acc-det-info-m">My E-Isich Account</p>
+                                    </div>
+                                    <i className="fas fa-angle-right acc-link-arrow"></i>
+                            </NavLink>
+                        </div>
                         <NavLink className="router-nav-link acc-link orders-link"
                             to="/customer/orders"
                             activeClassName="active"

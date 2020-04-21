@@ -150,10 +150,12 @@ class ProductItemPage extends React.Component {
                             <div className="main-img-background">
                                 <Zoom
                                     img={this.state.imgLink}
+                                    className="main-product-img-zm"
                                     zoomScale={3}
                                     width={500}
                                     height={500}
                                 />
+                                <img src={this.state.imgLink} alt="main product image" className="main-product-img" />
                             </div>
                             <span className="product-img-color">
                                 <div className="color-variant">

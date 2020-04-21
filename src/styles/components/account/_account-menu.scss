@@ -10,6 +10,10 @@
     display: none;
 }
 
+.dk-acc-link {
+    display: block;
+}
+
 .account-menu-links {
     display: flex;
     flex-direction: column;
@@ -73,7 +77,8 @@
 
     .acc-det-info,
     .span-icon,
-    .acc-desk {
+    .acc-desk,
+    .dk-acc-link {
         display: none;
     }
 
