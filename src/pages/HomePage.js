@@ -43,6 +43,6 @@ class HomePage extends React.Component {
 
 const mapStateToProps = (state) => ({
     resMessages: state.resMessages
-})
+});
 
 export default connect(mapStateToProps)(HomePage);

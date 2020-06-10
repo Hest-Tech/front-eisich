@@ -75,7 +75,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    updateAccount: (updates) => dispatch(updateAccount(updates)),
+    // updateAccount: (updates) => dispatch(updateAccount(updates)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateAccount);

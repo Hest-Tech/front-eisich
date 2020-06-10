@@ -14,7 +14,8 @@ const productsReducerDefaultState = {
     productsTitle: products ? products.title : "",
     product: product || {},
     breadCrumbs: products ? products.breadCrumbs : [],
-    displaySubCategories: false
+    displaySubCategories: false,
+    products: []
 };
 
 export default (state = productsReducerDefaultState, action) => {
@@ -46,6 +47,11 @@ export default (state = productsReducerDefaultState, action) => {
                 productsList: action.payload.filteredProducts,
                 productsTitle: action.payload.title,
                 breadCrumbs: action.payload.breadCrumbs
+            }
+        case 'FETCH_ALL_PRODUCTS':
+            return {
+                ...state,
+                products: action.payload
             }
         case 'FETCH_PRODUCT':
             return {

@@ -193,7 +193,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    registerSuccess: (payload, setSubmitting, resetForm) => dispatch(registerSuccess(payload, setSubmitting, resetForm)),
+    // registerSuccess: (payload, setSubmitting, resetForm) => dispatch(registerSuccess(payload, setSubmitting, resetForm)),
     // openAuthPopUp: () => dispatch(openAuthPopUp()),
     // loadUser: () => dispatch(loadUser()),
     // signOutUser: () => dispatch(signOutUser())

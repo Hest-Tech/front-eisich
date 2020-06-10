@@ -22,22 +22,32 @@ import unitedStates from '../assets/images/united-states.png';
 import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
 import { signOutUser, loadUser } from '../actions/authentication';
+import { setTextFilter } from '../actions/filters';
+import FilterProducts from './FilterProducts';
+import { fetchAllProducts } from '../actions/products';
 
 
 class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
-        
+        this.onTextChange = this.onTextChange.bind(this);
+
         let user = this.props.authentication.user || {};
 
         this.state = {
             displayName: user.firstName || 'Anonymous',
+            text: ''
         }
     }
 
-    componentDidMount() {
+    onTextChange(e) {
+        this.props.setTextFilter(e.target.value)
+    }
+
+    componentWillMount() {
         this.props.loadUser();
+        this.props.fetchAllProducts();
         // console.log('navbar', this.props.cart)
     }
 
@@ -100,13 +110,24 @@ class NavBar extends React.Component {
                         <div className="search-input">
                             <div id="custom-search-input">
                                 <div className="input-group col-md-12">
-                                    <input type="text" className="form-control" placeholder="What're you searching for?" />
+                                    <input
+                                        type="text"
+                                        className="form-control input-bar"
+                                        placeholder="What're you searching for?"
+                                        value={this.props.filters.text}
+                                        onChange={this.onTextChange}
+                                    />
                                     <span className="input-group-btn">
                                         <button className="btn btn-info btn-lg" type="button">
                                             <i className="glyphicon glyphicon-search"></i>
                                         </button>
                                     </span>
                                 </div>
+                            </div>
+                            <div className="search-input-results">
+                                {
+                                    !!this.props.filters.text && <FilterProducts products={this.props.products} />
+                                }
                             </div>
                         </div>
                         <div className="shopping-options">
@@ -188,13 +209,17 @@ class NavBar extends React.Component {
 
 const mapStateToProps = (state) => ({
     authentication: state.authentication,
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    products: state.products,
+    filters: state.filters
 });
 
 const mapDispatchToProps = (dispatch) => ({
     openAuthPopUp: () => dispatch(openAuthPopUp()),
     loadUser: () => dispatch(loadUser()),
-    signOutUser: () => dispatch(signOutUser())
+    signOutUser: () => dispatch(signOutUser()),
+    fetchAllProducts: () => dispatch(fetchAllProducts()),
+    setTextFilter: (text) => dispatch(setTextFilter(text))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

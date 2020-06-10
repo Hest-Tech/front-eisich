@@ -139,10 +139,22 @@
 }
 
 .search-input {
-    height: 100%;
+    height: auto;
     flex: 65%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input-bar {
+    position: relative;
+}
+
+.search-input-results {
+    position: absolute;
+    background: $white;
+    top: 70%;
+    width: 52.5%;
 }
 
 #custom-search-input input{

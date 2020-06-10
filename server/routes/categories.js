@@ -78,7 +78,7 @@ router.get('/:name/products', async (req, res) => {
     }
 });
 
-// 
+// fetch categories' products
 router.get('/:name/:mainSku/:subSku/:innerSku', async (req, res) => {
     try {
         const mainSku = req.params.mainSku || "";

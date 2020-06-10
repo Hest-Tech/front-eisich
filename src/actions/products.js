@@ -11,6 +11,7 @@ import {
     LOAD_INNER_CATEGORIES,
     HIDE_SUB_CATEGORIES,
     DISPLAY_SUB_CATEGORIES,
+    FETCH_ALL_PRODUCTS,
     FETCH_PRODUCTS,
     FETCH_PRODUCT,
     ADD_TO_CART,
@@ -33,7 +34,7 @@ export const setCurrency = (num) => {
 }
 
 
-// fetch categories helper
+// filter products by category sku
 const fetchCategoriesHelper = (
     products,
     name,
@@ -53,10 +54,10 @@ const fetchCategoriesHelper = (
         }
     });
     const product = filteredProducts[0] || {}
-    const fetchUrl = `${url}/${name}/${product.mainCategory}/${product.subCategory}/${product.innerCategory}`;
+    const fetchCategoryUrl = `${url}/${name}/${product.mainCategory}/${product.subCategory}/${product.innerCategory}`;
 
     axios
-        .get(fetchUrl)
+        .get(fetchCategoryUrl)
         .then(response => {
             const data = response.data.data;
             const newData = !!data.length && data.map(item => ({
@@ -126,7 +127,7 @@ export const displaySubCategories = () => dispatch => dispatch({
     type: DISPLAY_SUB_CATEGORIES
 });
 
-// fetch products
+// fetch category products
 export const fetchProducts = (sku, name, title) => dispatch => {
     console.log('name: ', name)
     console.log('sku: ', sku)
@@ -156,6 +157,20 @@ export const fetchProducts = (sku, name, title) => dispatch => {
                     );
                     break;
             }
+        })
+        .catch(error => console.log(error))
+}
+
+// fetch products
+export const fetchAllProducts = () => dispatch => {
+    axios
+        .get(`${url}/products`)
+        .then(response => {
+            const products = response.data.data;
+            dispatch({
+                type: FETCH_ALL_PRODUCTS,
+                payload: products
+            })
         })
         .catch(error => console.log(error))
 }

@@ -1,0 +1,15 @@
+.filtered-results {
+    border: .1rem solid $off-white;
+    border-radius: .3rem;
+	padding: $m-padding;
+}
+
+.search-results {
+	padding: $m-padding 0;
+	// background: green;
+	width: 100%;
+	z-index: 1000;
+}
+
+.search-description {
+}
