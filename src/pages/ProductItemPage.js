@@ -35,7 +35,7 @@ class ProductItemPage extends React.Component {
             count: 1,
             availableCount: this.props.product.pieces - 1,
             img: "dress.png",
-            imgLink: `${this.props.product.imgLink}.jpg`,
+            imgLink: `https://imgur.com/${this.props.product.imgLink}.jpg`,
             defaultSize: 'M',
             clicked: '',
             baseColor: '#E9BD4C',

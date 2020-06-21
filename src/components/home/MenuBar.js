@@ -35,6 +35,7 @@ class MenuBar extends React.Component {
     }
 
     onNavMouseEnter() {
+        // Replace this line with join statements function
         !!this.props.products.subCategories.length && this.props.displaySubCategories();    
     }
 
@@ -46,13 +47,14 @@ class MenuBar extends React.Component {
         const sku = e.target.dataset.sku;
         const name = e.target.dataset.name;
         const title = e.target.dataset.title;
-        // console.log(name);
+
+        localStorage.setItem('selectCategory', JSON.stringify({ sku, name, title }));
 
         this.props.fetchProducts(sku, name, title);
     }
 
     componentDidMount() {
-        console.log('mainCategories: ',this.props.products.mainCategories)
+        // console.log('mainCategories: ', this.props.products.mainCategories)
     }
 
     render() {

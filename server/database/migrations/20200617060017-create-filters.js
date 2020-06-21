@@ -1,34 +1,23 @@
 'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('MainCategories', {
+        return queryInterface.createTable('Filters', {
             id: {
                 allowNull: false,
-                type: Sequelize.INTEGER,
-                primaryKey: true,
-                allowNull: false,
                 autoIncrement: true,
-            },
-            name: {
-                type: Sequelize.STRING
-            },
-            clothesSku: {
-                allowNull: true,
-                type: Sequelize.UUID
-            },
-            sku: {
-                type: Sequelize.UUID
+                primaryKey: true,
+                type: Sequelize.INTEGER
             },
             sort: {
+                type: Sequelize.STRING
+            },
+            sku: {
                 type: Sequelize.STRING
             },
             filters: {
                 type: Sequelize.STRING
             },
-            path: {
-                type: Sequelize.STRING
-            },
-            related: {
+            relatedCategories: {
                 type: Sequelize.STRING
             },
             createdAt: {
@@ -42,6 +31,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('MainCategories');
+        return queryInterface.dropTable('Filters');
     }
 };

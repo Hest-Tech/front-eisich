@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     const MainCategory = sequelize.define('MainCategory', {
         sku: DataTypes.STRING,
         name: DataTypes.STRING,
+        sort: DataTypes.STRING,
+        filters: DataTypes.STRING,
         related: DataTypes.STRING,
         path: DataTypes.STRING
     }, {});

@@ -152,6 +152,88 @@ router.get('/product/:pid', async (req, res) => {
     }
 });
 
+router.get('/:name/:sku', async (req, res) => {
+    const sku = req.params.sku;
+    const name = req.params.name;
+    let category;
+    let displayCategory;
+
+    switch (name) {
+        case 'MAIN_CATEGORY':
+            category = await db.MainCategory.findOne({
+                attributes: [ 'id' ],
+                where: { sku }
+            });
+
+            displayCategory = await db.SubCategory.findAll({
+                attributes: ['id', 'name', 'sku', 'path'],
+                where: {
+                    mainCategoryId: category.id
+                }
+            });
+
+            return res.json({ data: displayCategory });
+        case 'SUB_CATEGORY':
+            category = await db.SubCategory.findOne({
+                attributes: [ 'id' ],
+                where: { sku }
+            });
+
+            displayCategory = await db.InnerSubCategory.findAll({
+                attributes: ['id', 'name', 'sku', 'path'],
+                where: {
+                    mainCategoryId: category.id
+                }
+            });
+
+            return res.json({ data: displayCategory });
+        case 'INNER_CATEGORY':
+            category = await db.InnerSubCategory.findOne({
+                attributes: [ 'id' ],
+                where: { sku }
+            });
+
+            displayCategory = await db.SubCategory.findAll({
+                attributes: ['id', 'name', 'sku', 'path'],
+                where: {
+                    mainCategoryId: category.id
+                }
+            });
+
+            return res.json({ data: displayCategory });
+    }
+})
+
+router.get('/category/:name/:sku', async (req, res) => {
+    const sku = req.params.sku;
+    const name = req.params.name;
+    let category;
+
+    switch (name) {
+        case 'MAIN_CATEGORY':
+            category = await db.MainCategory.findOne({
+                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
+                where: { sku }
+            });
+
+            return res.json({ data: category });
+        case 'SUB_CATEGORY':
+            category = await db.SubCategory.findOne({
+                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
+                where: { sku }
+            });
+
+            return res.json({ data: category });
+        case 'INNER_CATEGORY':
+            category = await db.InnerSubCategory.findOne({
+                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
+                where: { sku }
+            });
+
+            return res.json({ data: category });
+    }
+});
+
 // router.get('/:name', async (req, res) => {
 //     try {
 //         const products = await db.sequelize.query(`

@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
         path: DataTypes.STRING,
         userId: DataTypes.STRING,
         imgId: DataTypes.STRING,
-        imgLink: DataTypes.STRING,
         seller: DataTypes.STRING,
         oldPrice: DataTypes.INTEGER,
         newPrice: DataTypes.INTEGER,

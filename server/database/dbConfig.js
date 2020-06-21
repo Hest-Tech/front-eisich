@@ -13,6 +13,4 @@ const db = new Sequelize(development.url);
     }
 })()
 
-module.exports = {
-    db
-}
+module.exports = { db }

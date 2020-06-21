@@ -22,6 +22,12 @@ module.exports = {
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
                 },
+                sort: {
+                    type: Sequelize.STRING
+                },
+                filters: {
+                    type: Sequelize.STRING
+                },
                 name: {
                     type: Sequelize.STRING
                 },

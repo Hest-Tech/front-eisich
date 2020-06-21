@@ -5,11 +5,20 @@
 }
 
 .search-results {
-	padding: $m-padding 0;
+	// padding: $s-padding 0;
 	// background: green;
 	width: 100%;
-	z-index: 1000;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
 }
 
-.search-description {
+.search-imgLink {
+	width: 5rem;
+	height: 5rem;
+}
+
+.search-results:hover {
+	opacity: .8;
 }

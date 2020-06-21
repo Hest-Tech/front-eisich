@@ -11,9 +11,6 @@ module.exports = {
             imgId: {
                 type: Sequelize.STRING
             },
-            imgLink: {
-                type: Sequelize.STRING
-            },
             description: {
                 type: Sequelize.STRING
             },
@@ -34,6 +31,9 @@ module.exports = {
             },
             pieces: {
                 type: Sequelize.INTEGER
+            },
+            title: {
+                type: Sequelize.STRING
             },
             saving: {
                 type: Sequelize.INTEGER

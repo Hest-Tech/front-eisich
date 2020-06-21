@@ -3,6 +3,11 @@
 const uuidv4 = require("uuid/v4");
 const sku = {};
 
+const clothesFilters = {
+    sort: "['brand']",
+    sideFilters: "['brand', 'color']"
+}
+
 const data = [{
         name: 'Outerwear & Jackets', //(1)
         path: "/outerwear-jackets/",
@@ -320,7 +325,17 @@ const data = [{
         updatedAt: new Date()
     }]
 
-data.map((item, i) => sku[i.toString()] = item.sku)
+data.map((item, i) => {
+    sku[i.toString()] = item.sku
+
+    if (item.mainCategoryId <= 3) {
+        item['sort'] = "['brand']"
+        item['filters'] = "['brand', 'color']"
+    } else {
+        item['sort'] = "[]"
+        item['filters'] = "[]"
+    }
+})
 // console.log(sku);
 
 module.exports = { data, sku }

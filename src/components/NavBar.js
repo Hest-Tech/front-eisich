@@ -22,7 +22,11 @@ import unitedStates from '../assets/images/united-states.png';
 import fire from '../firebase/firebase';
 import clientStorage from '../utils/clientStorage';
 import { signOutUser, loadUser } from '../actions/authentication';
-import { setTextFilter } from '../actions/filters';
+import {
+    setTextFilter,
+    blurResults,
+    focusResults
+} from '../actions/filters';
 import FilterProducts from './FilterProducts';
 import { fetchAllProducts } from '../actions/products';
 
@@ -32,12 +36,15 @@ class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.onTextChange = this.onTextChange.bind(this);
+        this.blurResults = this.blurResults.bind(this);
+        this.focusResults = this.focusResults.bind(this);        
 
         let user = this.props.authentication.user || {};
 
         this.state = {
             displayName: user.firstName || 'Anonymous',
-            text: ''
+            text: '',
+            products: this.props.products.products
         }
     }
 
@@ -45,10 +52,32 @@ class NavBar extends React.Component {
         this.props.setTextFilter(e.target.value)
     }
 
-    componentWillMount() {
+    blurResults(e) {
+        const target = e.target.parentElement.parentElement.nextElementSibling;
+        console.log('searching: ',this.props.filters.clickResult)
+        !this.props.filters.clickResult && this.props.blurResults()
+    }
+
+    focusResults(e) {
+        const target = e.target.parentElement.parentElement.nextElementSibling;
+        // console.log('searching: ',this.props.filters.searching)
+        this.props.focusResults()
+    }
+
+    componentDidMount() {
         this.props.loadUser();
         this.props.fetchAllProducts();
-        // console.log('navbar', this.props.cart)
+    }
+
+    componentDidUpdate() {
+        const target = document.querySelector('.search-input-results');
+
+        if (!this.props.filters.searching) {
+            target.style.visibility = 'hidden';
+        } else {
+            target.style.visibility = 'visible';
+        }
+        // console.log('searching: ',this.props.filters.searching)
     }
 
     render() {
@@ -78,10 +107,15 @@ class NavBar extends React.Component {
                                 <NavLink
                                     className="help"
                                     to="/help"
-                                    style={{display:'flex'}}
+                                    style={{
+                                        display:'flex',
+                                        justifyContent:'center',
+                                        alignItems:'center',
+                                        color: '#505050'
+                                    }}
                                 >
                                     <img src={question} alt="question-mark" className="navbar__icon-img" />
-                                    <p>Help</p>
+                                    <p  style={{marginLeft:'5px'}}>Help</p>
                                 </NavLink>
                                 <span className="language">
                                     <label className="language__label">Language: </label>
@@ -116,6 +150,9 @@ class NavBar extends React.Component {
                                         placeholder="What're you searching for?"
                                         value={this.props.filters.text}
                                         onChange={this.onTextChange}
+                                        onFocus={this.focusResults}
+                                        onBlur={this.blurResults}
+
                                     />
                                     <span className="input-group-btn">
                                         <button className="btn btn-info btn-lg" type="button">
@@ -124,9 +161,13 @@ class NavBar extends React.Component {
                                     </span>
                                 </div>
                             </div>
-                            <div className="search-input-results">
+                            <div
+                                className="search-input-results"
+                            >
                                 {
-                                    !!this.props.filters.text && <FilterProducts products={this.props.products} />
+                                    !!this.props.filters.text && <FilterProducts
+                                        products={this.props.products}
+                                    />
                                 }
                             </div>
                         </div>
@@ -211,7 +252,8 @@ const mapStateToProps = (state) => ({
     authentication: state.authentication,
     cart: state.cart.cart,
     products: state.products,
-    filters: state.filters
+    filters: state.filters,
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -219,7 +261,11 @@ const mapDispatchToProps = (dispatch) => ({
     loadUser: () => dispatch(loadUser()),
     signOutUser: () => dispatch(signOutUser()),
     fetchAllProducts: () => dispatch(fetchAllProducts()),
-    setTextFilter: (text) => dispatch(setTextFilter(text))
+    setTextFilter: (text) => dispatch(setTextFilter(text)),
+    blurResults: () => dispatch(blurResults()),
+    focusResults: () => dispatch(focusResults()),
+    searchResults: () => dispatch(searchResults()),
+    blurSearchResults: () => dispatch(blurSearchResults())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

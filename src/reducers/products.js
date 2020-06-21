@@ -15,6 +15,8 @@ const productsReducerDefaultState = {
     product: product || {},
     breadCrumbs: products ? products.breadCrumbs : [],
     displaySubCategories: false,
+    currentCategory: null,
+    relatedCategory: null,
     products: []
 };
 
@@ -57,6 +59,16 @@ export default (state = productsReducerDefaultState, action) => {
             return {
                 ...state,
                 product: action.payload
+            }
+        case 'CURRENT_CATEGORY':
+            return {
+                ...state,
+                currentCategory: action.payload
+            }
+        case 'RELATED_CATEGORY':
+            return {
+                ...state,
+                relatedCategory: action.payload
             }
         default:
             return state;
