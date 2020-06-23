@@ -84,7 +84,7 @@ const loadRelatedCategoriesHelper = (name, sku, dispatch) => {
         .get(`${url}/${name}/${sku}`)
         .then(res => {
             const category = res.data.data;
-            console.log('currentCategory: ',res)
+            console.log('category ==> ',category)
 
             dispatch({
                 type: 'RELATED_CATEGORY',
@@ -95,10 +95,13 @@ const loadRelatedCategoriesHelper = (name, sku, dispatch) => {
 }
 
 const loadCurrentCategory = (name, sku, dispatch) => {
+    console.log('name: ',name)
+    console.log('sku: ',sku)
     axios
         .get(`${url}/category/${name}/${sku}`)
         .then(res => {
             const category = res.data.data;
+            console.log('currentCategory: ',category)
 
             dispatch({
                 type: 'CURRENT_CATEGORY',
@@ -160,9 +163,6 @@ export const displaySubCategories = () => dispatch => dispatch({
 
 // fetch category products
 export const fetchProducts = (sku, name, title) => dispatch => {
-    console.log('name: ', name)
-    console.log('sku: ', sku)
-    console.log('title: ', title)
     axios
         .get(`${url}/${name}/products`)
         .then(response => {
@@ -226,10 +226,10 @@ export const fetchProduct = (pid) => dispatch => {
 
 export const loadRelatedCategories = () => dispatch => {
     const selectCategory = localStorage.getItem('selectCategory');
+    console.log('selectCategory: ',selectCategory)
 
     if (!!selectCategory) {
         const category = JSON.parse(selectCategory);
-        // console.log('category: ',category)
         const sku = category.sku;
 
 

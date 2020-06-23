@@ -160,77 +160,110 @@ router.get('/:name/:sku', async (req, res) => {
 
     switch (name) {
         case 'MAIN_CATEGORY':
-            category = await db.MainCategory.findOne({
-                attributes: [ 'id' ],
-                where: { sku }
-            });
+            try {
+                const mCategory = await db.MainCategory.findOne({
+                    attributes: [ 'id' ],
+                    where: { sku }
+                })
 
-            displayCategory = await db.SubCategory.findAll({
-                attributes: ['id', 'name', 'sku', 'path'],
-                where: {
-                    mainCategoryId: category.id
-                }
-            });
+                const displaymCategory = await db.SubCategory.findAll({
+                    attributes: ['name', 'sku', 'path', 'sort', 'filters'],
+                    where: {
+                        mainCategoryId: mCategory.id
+                    }
+                });
 
-            return res.json({ data: displayCategory });
+                return res.json({ data: displaymCategory });
+            } catch(e) {
+                console.log(e);
+            }
+            break;
         case 'SUB_CATEGORY':
-            category = await db.SubCategory.findOne({
-                attributes: [ 'id' ],
-                where: { sku }
-            });
+            try {
+                const sCategory = await db.SubCategory.findOne({
+                    attributes: [ 'id' ],
+                    where: { sku }
+                });
+                console.log(name);
+                console.log('sCategory: ', sCategory)
 
-            displayCategory = await db.InnerSubCategory.findAll({
-                attributes: ['id', 'name', 'sku', 'path'],
-                where: {
-                    mainCategoryId: category.id
-                }
-            });
+                const displaysCategory = await db.InnerSubCategory.findAll({
+                    attributes: ['name', 'sku', 'path', 'sort', 'filters'],
+                    where: {
+                        subCategoryId: sCategory.id
+                    }
+                });
 
-            return res.json({ data: displayCategory });
+                return res.json({ data: displaysCategory });
+            } catch(e) {
+                console.log(e);
+            }
+            break;
         case 'INNER_CATEGORY':
-            category = await db.InnerSubCategory.findOne({
-                attributes: [ 'id' ],
-                where: { sku }
-            });
+            try {
+                const iCategory = await db.InnerSubCategory.findOne({
+                    attributes: [ 'subCategoryId' ],
+                    where: { sku }
+                });
+                console.log(name);
+                console.log('iCategory: ', iCategory)
 
-            displayCategory = await db.SubCategory.findAll({
-                attributes: ['id', 'name', 'sku', 'path'],
-                where: {
-                    mainCategoryId: category.id
-                }
-            });
+                const displayiCategory = await db.InnerSubCategory.findAll({
+                    attributes: ['name', 'sku', 'path', 'sort', 'filters'],
+                    where: {
+                        subCategoryId: iCategory.subCategoryId
+                    }
+                });
 
-            return res.json({ data: displayCategory });
+                return res.json({ data: displayiCategory });
+            } catch(e) {
+                console.log(e);
+            }
+            break;
     }
 })
 
 router.get('/category/:name/:sku', async (req, res) => {
     const sku = req.params.sku;
     const name = req.params.name;
-    let category;
 
     switch (name) {
         case 'MAIN_CATEGORY':
-            category = await db.MainCategory.findOne({
-                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
-                where: { sku }
-            });
+            try {
+                const mCategory = await db.MainCategory.findOne({
+                    attributes: ['name', 'sku', 'path', 'sort', 'filters'],
+                    where: { sku }
+                });
 
-            return res.json({ data: category });
+                return res.json({ data: mCategory });
+            } catch(e) {
+                console.log(e);
+            }
+            break;
         case 'SUB_CATEGORY':
-            category = await db.SubCategory.findOne({
-                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
-                where: { sku }
-            });
+            try {
+                const sCategory = await db.SubCategory.findOne({
+                    attributes: ['name', 'sku', 'path', 'sort', 'filters'],
+                    where: { sku }
+                });
 
-            return res.json({ data: category });
+                return res.json({ data: sCategory });
+            } catch(e) {
+                console.log(e);
+            }
+            break;
         case 'INNER_CATEGORY':
-            category = await db.InnerSubCategory.findOne({
-                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
-                where: { sku }
-            });
+            try {
+                const iCategory = await db.InnerSubCategory.findOne({
+                    attributes: ['name', 'sku', 'path', 'sort', 'filters'],
+                    where: { sku }
+                });
 
-            return res.json({ data: category });
+                return res.json({ data: iCategory });
+            } catch(e) {
+                console.log(e);
+            }
+            break;
     }
 });
 

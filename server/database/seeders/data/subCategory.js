@@ -329,11 +329,8 @@ data.map((item, i) => {
     sku[i.toString()] = item.sku
 
     if (item.mainCategoryId <= 3) {
-        item['sort'] = "['brand']"
-        item['filters'] = "['brand', 'color']"
-    } else {
-        item['sort'] = "[]"
-        item['filters'] = "[]"
+        item['sort'] = ['brand']
+        item['filters'] = ['brand', 'color']
     }
 })
 // console.log(sku);

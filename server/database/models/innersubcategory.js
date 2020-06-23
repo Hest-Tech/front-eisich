@@ -4,9 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     const InnerSubCategory = sequelize.define('InnerSubCategory', {
         name: DataTypes.STRING,
         path: DataTypes.STRING,
-        sort: DataTypes.STRING,
-        filters: DataTypes.STRING,
         sku: DataTypes.UUID,
+        subCategoryId: DataTypes.INTEGER
     }, {});
     InnerSubCategory.associate = function(models) {
         

@@ -25,10 +25,12 @@ module.exports = {
                 onDelete: 'CASCADE'
             },
             sort: {
-                type: Sequelize.STRING
+                type: Sequelize.ARRAY(Sequelize.TEXT),
+                allowNull: true,
             },
             filters: {
-                type: Sequelize.STRING
+                type: Sequelize.ARRAY(Sequelize.TEXT),
+                allowNull: true,
             },
             name: {
                 type: Sequelize.STRING

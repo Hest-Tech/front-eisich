@@ -3,11 +3,6 @@
 const uuidv4 = require("uuid/v4");
 const sku = {};
 
-const clothesFilters = {
-    sort: "['brand']",
-    sideFilters: "['brand', 'color']"
-}
-
 const data = [{
     name: "Baseball Caps",
     path: "/baseball-caps/",
@@ -861,11 +856,8 @@ data.map((item, i) => {
     sku[i.toString()] = item.sku;
 
     if (item.subCategoryId <= 13) {
-        item['sort'] = "['brand']"
-        item['filters'] = "['brand', 'color']"
-    } else {
-        item['sort'] = "[]"
-        item['filters'] = "[]"
+        item['sort'] = ['brand']
+        item['filters'] = ['brand', 'color']
     }
 })
 

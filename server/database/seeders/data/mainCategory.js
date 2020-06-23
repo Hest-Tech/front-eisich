@@ -15,8 +15,8 @@ const sku = {
 };
 
 const clothesFilters = {
-    sort: "['brand']",
-    sideFilters: "['brand', 'color']"
+    sort: ['brand'],
+    sideFilters: ['brand', 'color']
 }
 
 const clothesSku = uuidv4();
@@ -54,8 +54,6 @@ const data = [{
     path: "/mobile-phones-accessories/",
     createdAt: new Date(),
     updatedAt: new Date(),
-    sort: "[]",
-    filters: "[]"
 }, {
     sku: sku.officeSku,
     name: 'Computer, Office & Security',
@@ -63,8 +61,6 @@ const data = [{
     path: "/computer-office-security/",
     createdAt: new Date(),
     updatedAt: new Date(),
-    sort: "[]",
-    filters: "[]"
 }, {
     sku: sku.homeSku,
     name: 'Home & Living',
@@ -72,8 +68,6 @@ const data = [{
     path: "/home-living/",
     createdAt: new Date(),
     updatedAt: new Date(),
-    sort: "[]",
-    filters: "[]"
 }, {
     sku: sku.jewellerySku,
     name: 'Jewellery',
@@ -81,8 +75,6 @@ const data = [{
     path: "/jewellery/",
     createdAt: new Date(),
     updatedAt: new Date(),
-    sort: "[]",
-    filters: "[]"
 }, {
     sku: sku.funSku,
     name: 'Fun & Sports',
@@ -90,8 +82,6 @@ const data = [{
     path: "/fun-sports/",
     createdAt: new Date(),
     updatedAt: new Date(),
-    sort: "[]",
-    filters: "[]"
 }, {
     sku: sku.carsSku,
     name: 'Automobile',
@@ -99,8 +89,6 @@ const data = [{
     path: "/automobile/",
     createdAt: new Date(),
     updatedAt: new Date(),
-    sort: "[]",
-    filters: "[]"
 }, {
     sku: sku.electronicSku,
     name: 'Consumer Electronics',
@@ -108,8 +96,6 @@ const data = [{
     path: "/consumer-electronics/",
     createdAt: new Date(),
     updatedAt: new Date(),
-    sort: "[]",
-    filters: "[]"
 }]
 
 

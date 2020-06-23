@@ -31,6 +31,7 @@ class Header extends React.Component {
         const sku = e.target.dataset.sku;
         const title = e.target.dataset.title;
 
+        localStorage.setItem('selectCategory', JSON.stringify({ sku, name, title }));
         this.props.fetchProducts(sku, name, title);
     }
 

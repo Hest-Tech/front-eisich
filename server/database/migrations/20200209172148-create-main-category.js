@@ -20,10 +20,12 @@ module.exports = {
                 type: Sequelize.UUID
             },
             sort: {
-                type: Sequelize.STRING
+                type: Sequelize.ARRAY(Sequelize.TEXT),
+                allowNull: true
             },
             filters: {
-                type: Sequelize.STRING
+                type: Sequelize.ARRAY(Sequelize.TEXT),
+                allowNull: true
             },
             path: {
                 type: Sequelize.STRING

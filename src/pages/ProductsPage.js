@@ -23,12 +23,35 @@ class ProductsPage extends React.Component {
 
     componentDidMount() {
         this.props.loadRelatedCategories();
+        console.log('filters: ',this.props.products.currentCategory)
+    }
+
+    filters(val) {
+        console.log('currentCategory: ',this.props.products.currentCategory)
+        if (!!this.props.products.currentCategory) {
+            const filterList = this.props.products.currentCategory.filters
+            const filter = !!filterList ? filterList : [];
+
+            return filter.includes(val);
+        }
+
+        return false;
+    }
+
+    sort() {
+        let sort = [];
+
+        if (!!this.props.products.currentCategory) {
+            const sortList = this.props.products.currentCategory.sort;
+            sort = !!sortList ? sortList : [];
+        }
+
+        return sort;
     }
 
     render() {
         const itemLength = this.props.products.breadCrumbs.length;
         const subCategories = this.props.products.relatedCategory;
-        const currentCategory = this.props.products.currentCategory;
         const subCategoriesLength = this.props.products.productsList.length;
 
         return (
@@ -88,7 +111,6 @@ class ProductsPage extends React.Component {
                                     <b className="category-title">{this.props.products.productsTitle}</b>
                                     <div className="product-category-sec">
                                         <div className="product-category-sec__wrapped">
-                                        {console.log('currentCategory: ',currentCategory)}
                                             {
                                                 !!subCategories && subCategories.map(subCategory => (
                                                     <span key={subCategory.name}>
@@ -100,65 +122,69 @@ class ProductsPage extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="brand-container">
-                                    <b className="category-title">Brand</b>
-                                    <div className="product-brand">
-                                        <div className="product-brand__wrapped">
-                                            <label className="small product-brand-name">
-                                                <input type="checkbox" />
-                                                <p>Turkish</p>
-                                            </label>
-                                            <label className="small product-brand-name">
-                                                <input type="checkbox" />
-                                                <p>UAE</p>
-                                            </label>
-                                            <label className="small product-brand-name">
-                                                <input type="checkbox" />
-                                                <p>Pakistani</p>
-                                            </label>
-                                            <label className="small product-brand-name">
-                                                <input type="checkbox" />
-                                                <p>SaudiArabia</p>
-                                            </label>
-                                            <label className="small product-brand-name">
-                                                <input type="checkbox" />
-                                                <p>Indonesian</p>
-                                            </label>
+                                {
+                                    this.filters('brand') && <div className="brand-container">
+                                        <b className="category-title">Brand</b>
+                                        <div className="product-brand">
+                                            <div className="product-brand__wrapped">
+                                                <label className="small product-brand-name">
+                                                    <input type="checkbox" />
+                                                    <p>Turkish</p>
+                                                </label>
+                                                <label className="small product-brand-name">
+                                                    <input type="checkbox" />
+                                                    <p>UAE</p>
+                                                </label>
+                                                <label className="small product-brand-name">
+                                                    <input type="checkbox" />
+                                                    <p>Pakistani</p>
+                                                </label>
+                                                <label className="small product-brand-name">
+                                                    <input type="checkbox" />
+                                                    <p>SaudiArabia</p>
+                                                </label>
+                                                <label className="small product-brand-name">
+                                                    <input type="checkbox" />
+                                                    <p>Indonesian</p>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="color-container">
-                                    <b className="category-title">Color</b>
-                                    <div className="product-color">
-                                        <div className="product-color__wrapped product-brand__wrapped">
-                                            <label className="small product-brand-name">
-                                                <span className="color-pallete-item red"></span>
-                                                <input type="checkbox" />
-                                                <p>Red</p>
-                                            </label>
-                                            <label className="small product-brand-name">
-                                                <span className="color-pallete-item navy"></span>
-                                                <input type="checkbox" />
-                                                <p>Navy blue</p>
-                                            </label>
-                                            <label className="small product-brand-name">
-                                                <span className="color-pallete-item orange"></span>
-                                                <input type="checkbox" />
-                                                <p>Orange</p>
-                                            </label>
-                                            <label className="small product-brand-name">
-                                                <span className="color-pallete-item brown"></span>
-                                                <input type="checkbox" />
-                                                <p>Brown</p>
-                                            </label>
-                                            <label className="small product-brand-name">
-                                                <span className="color-pallete-item burlywood"></span>
-                                                <input type="checkbox" />
-                                                <p>Baige</p>
-                                            </label>
+                                }
+                                {
+                                    this.filters('color') && <div className="color-container">
+                                        <b className="category-title">Color</b>
+                                        <div className="product-color">
+                                            <div className="product-color__wrapped product-brand__wrapped">
+                                                <label className="small product-brand-name">
+                                                    <span className="color-pallete-item red"></span>
+                                                    <input type="checkbox" />
+                                                    <p>Red</p>
+                                                </label>
+                                                <label className="small product-brand-name">
+                                                    <span className="color-pallete-item navy"></span>
+                                                    <input type="checkbox" />
+                                                    <p>Navy blue</p>
+                                                </label>
+                                                <label className="small product-brand-name">
+                                                    <span className="color-pallete-item orange"></span>
+                                                    <input type="checkbox" />
+                                                    <p>Orange</p>
+                                                </label>
+                                                <label className="small product-brand-name">
+                                                    <span className="color-pallete-item brown"></span>
+                                                    <input type="checkbox" />
+                                                    <p>Brown</p>
+                                                </label>
+                                                <label className="small product-brand-name">
+                                                    <span className="color-pallete-item burlywood"></span>
+                                                    <input type="checkbox" />
+                                                    <p>Baige</p>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                         </div>
                         <div className="products-container__products">
@@ -199,9 +225,14 @@ class ProductsPage extends React.Component {
                                             className="select-dropdown text-muted small"
                                         >
                                             <option className="text-muted small">All items</option>
-                                            <option className="text-muted small" defaultValue="size">Size</option>
                                             <option className="text-muted small" defaultValue="price">Price</option>
-                                            <option className="text-muted small" defaultValue="age">Age</option>
+                                            {
+                                                this.sort().map(val => (
+                                                    <React.Fragment key={val}>
+                                                        <option>{val}</option>
+                                                    </React.Fragment>
+                                                ))
+                                            }
                                         </select>
                                     </label>
                                     <p className="product-filter-btn">Filters</p>
