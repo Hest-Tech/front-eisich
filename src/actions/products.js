@@ -55,28 +55,44 @@ const fetchCategoriesHelper = (
                 return item.innerCategory === sku
         }
     });
-    const product = filteredProducts[0] || {}
-    const fetchCategoryUrl = `${url}/${name}/${product.mainCategory}/${product.subCategory}/${product.innerCategory}`;
 
-    axios
-        .get(fetchCategoryUrl)
-        .then(response => {
-            const data = response.data.data;
-            const newData = !!data.length && data.map(item => ({
-                ...item,
-                title: name
-            }));
-            payload['breadCrumbs'] = newData;
-            payload['title'] = title
-            payload['filteredProducts'] = filteredProducts
-            localStorage.setItem('products', JSON.stringify(payload));
+    if (!!filteredProducts.length) {
 
-            dispatch({
-                type: FETCH_PRODUCTS,
-                payload
+        console.log('filteredProducts: ',filteredProducts)
+        const product = filteredProducts[0];
+        const fetchCategoryUrl = `${url}/${name}/${product.mainCategory}/${product.subCategory}/${product.innerCategory}`;
+
+        axios
+            .get(fetchCategoryUrl)
+            .then(response => {
+                const data = response.data.data;
+                const newData = !!data.length && data.map(item => ({
+                    ...item,
+                    title: name
+                }));
+                payload['breadCrumbs'] = newData;
+                payload['title'] = title
+                payload['filteredProducts'] = filteredProducts
+                localStorage.setItem('products', JSON.stringify(payload));
+
+                dispatch({
+                    type: FETCH_PRODUCTS,
+                    payload
+                })
             })
+            .catch(error => console.log(error))
+    } else {
+        const payload = {};
+
+        payload['breadCrumbs'] = [];
+        payload['title'] = "";
+        payload['filteredProducts'] = [];
+        
+        dispatch({
+            type: FETCH_PRODUCTS,
+            payload
         })
-        .catch(error => console.log(error))
+    }
 }
 
 const loadRelatedCategoriesHelper = (name, sku, dispatch) => {
@@ -95,8 +111,6 @@ const loadRelatedCategoriesHelper = (name, sku, dispatch) => {
 }
 
 const loadCurrentCategory = (name, sku, dispatch) => {
-    console.log('name: ',name)
-    console.log('sku: ',sku)
     axios
         .get(`${url}/category/${name}/${sku}`)
         .then(res => {
@@ -168,26 +182,18 @@ export const fetchProducts = (sku, name, title) => dispatch => {
         .then(response => {
             // console.log('response: ', response)
             const products = response.data.data;
-            const mainCategory = response.data.baseCategory;
-            const subCategory = response.data.subCategory;
             const payload = {};
-            let filteredProducts;
-            let product;
 
-            switch (name) {
-                case 'MAIN_CATEGORY':
-                case 'SUB_CATEGORY':
-                case 'INNER_CATEGORY':
-                    fetchCategoriesHelper(
-                        products,
-                        name,
-                        title,
-                        payload,
-                        sku,
-                        dispatch
-                    );
-                    break;
-            }
+            // loadCurrentCategory('MAIN_CATEGORY', sku, dispatch);            
+
+            fetchCategoriesHelper(
+                products,
+                name,
+                title,
+                payload,
+                sku,
+                dispatch
+            );
         })
         .catch(error => console.log(error))
 }
@@ -224,6 +230,7 @@ export const fetchProduct = (pid) => dispatch => {
         .catch(error => console.log(error))
 }
 
+// load related categories
 export const loadRelatedCategories = () => dispatch => {
     const selectCategory = localStorage.getItem('selectCategory');
     console.log('selectCategory: ',selectCategory)

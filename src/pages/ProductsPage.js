@@ -15,15 +15,16 @@ import {
     setCurrency,
     loadRelatedCategories
 } from '../actions/products';
+import { sortByPrice } from '../actions/filters';
 import { history } from '../routes/AppRouter';
 import Scroll from '../components/Scroll';
+import selectProducts from '../selectors/products';
 
 
 class ProductsPage extends React.Component {
 
     componentDidMount() {
         this.props.loadRelatedCategories();
-        console.log('filters: ',this.props.products.currentCategory)
     }
 
     filters(val) {
@@ -49,15 +50,48 @@ class ProductsPage extends React.Component {
         return sort;
     }
 
+    fetchCategoryProducts(category) {
+        const selectCategory = localStorage.getItem('selectCategory');
+        const parsedCategory = !!selectCategory ? JSON.parse(selectCategory) : {};
+        let name;
+        console.log('category: ', category);
+
+        switch(parsedCategory.name) {
+            case 'MAIN_CATEGORY':
+                name = 'SUB_CATEGORY'
+                break;
+            case 'SUB_CATEGORY':
+                name = 'INNER_CATEGORY'
+                break;
+            case 'INNER_CATEGORY':
+                name = 'INNER_CATEGORY'
+                break;
+        }
+
+        this.props.fetchProducts(category.sku, name, category.title)
+    }
+
+    sortItems(e) {
+        const sortVal = e.target.value.toLowerCase();
+
+        switch(sortVal) {
+            case 'price':
+                this.props.sortByPrice()
+                break;
+        }
+    }
+
     render() {
+        console.log('this.props: ',this.props)
         const itemLength = this.props.products.breadCrumbs.length;
         const subCategories = this.props.products.relatedCategory;
         const subCategoriesLength = this.props.products.productsList.length;
+        console.log('subCategories: ',subCategories)
 
         return (
             <div className="App">
                 <NavBar />
-                {!!this.props.products.productsList.length ? <div
+                <div
                     className="products-container"
                 >
                     <nav className="nav-breadcrumb">
@@ -108,14 +142,17 @@ class ProductsPage extends React.Component {
                         <div className="products-container__refine">
                             <div className="products-refine">
                                 <div className="product-category-selection">
-                                    <b className="category-title">{this.props.products.productsTitle}</b>
+                                    <b className="category-title">{!!this.props.products.currentCategory && this.props.products.currentCategory.name}</b>
                                     <div className="product-category-sec">
                                         <div className="product-category-sec__wrapped">
                                             {
                                                 !!subCategories && subCategories.map(subCategory => (
                                                     <span key={subCategory.name}>
                                                         <i className="fas fa-angle-right mx2" aria-hidden="true"></i>
-                                                        <p className="small">{subCategory.name}</p>
+                                                        <p
+                                                            className="small"
+                                                            onClick={() => this.fetchCategoryProducts(subCategory)}
+                                                        >{subCategory.name}</p>
                                                     </span>
                                                 ))
                                             }
@@ -190,7 +227,7 @@ class ProductsPage extends React.Component {
                         <div className="products-container__products">
                             <div className="products-filter-options">
                                 <div className="products-title">
-                                    <h3 className="display-6 products-title-h3">{this.props.products.productsTitle}</h3>
+                                    <h3 className="display-6 products-title-h3">{!!this.props.products.currentCategory && this.props.products.currentCategory.name}</h3>
                                     <small className="text-muted">{this.props.products.productsList.length} product{this.props.products.productsList.length > 1 && 's'} found</small>
                                 </div>
                                 <div className="products-filter">   
@@ -223,6 +260,7 @@ class ProductsPage extends React.Component {
                                         <select
                                             defaultValue="All items"
                                             className="select-dropdown text-muted small"
+                                            onChange={(e) => this.sortItems(e)}
                                         >
                                             <option className="text-muted small">All items</option>
                                             <option className="text-muted small" defaultValue="price">Price</option>
@@ -239,8 +277,8 @@ class ProductsPage extends React.Component {
                                 </div>
                             </div>
                             {console.log(this.props.products.productsList)}
-                            <div className="product-items">
-
+                            {
+                                !!this.props.products.productsList.length ? <div className="product-items">
                                 {
                                     this.props.products.productsList.map((product, i) => {
                                         return (
@@ -277,7 +315,10 @@ class ProductsPage extends React.Component {
                                         );
                                     })
                                 }
-                            </div>
+                                </div> : <div className="product-not-found">
+                                    <ProductNotFound />
+                                </div>
+                            }
                             
                             {
                                 subCategoriesLength > 48 && <nav aria-label="Page navigation example" className="pagination products-paginator">
@@ -296,7 +337,7 @@ class ProductsPage extends React.Component {
                             }
                         </div>
                     </div>
-                </div> : <ProductNotFound />}
+                </div>
                 <Scroll />
             </div>
         );
@@ -304,13 +345,14 @@ class ProductsPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    products: state.products
+    products: selectProducts(state.products, state.filters),
 });
 
 const mapDispatchToProps = (dispatch) => ({
     fetchProduct: (pid) => dispatch(fetchProduct(pid)),
     fetchProducts: (sku, name, title) => dispatch(fetchProducts(sku, name, title)),
-    loadRelatedCategories: () => dispatch(loadRelatedCategories())
+    loadRelatedCategories: () => dispatch(loadRelatedCategories()),
+    sortByPrice: () => dispatch(sortByPrice())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage);

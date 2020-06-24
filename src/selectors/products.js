@@ -7,13 +7,18 @@
 // Get visible products
 
 export default (products, { text, sortBy }) => {
-    return !!products.length === true && products.filter(
+	console.log('products reducer: ',products);
+    const filteredItems = !!products.productsList.length ? products.productsList.filter(
         (product) => product.description.toLowerCase().includes(text.toLowerCase())
     ).sort((a, b) => {
-        if (sortBy === 'date') {
-            return a.createdAt < b.createdAt ? 1 : -1;
-        } else if (sortBy === 'amount') {
-            return a.amount < b.amount ? 1 : -1;
+        if (sortBy === 'price') {
+            return a.price > b.price ? 1 : -1;
         }
-    });
+    }) : products.products;
+
+    console.log(filteredItems)
+    return {
+    	...products,
+    	productsList: filteredItems
+    }
 };

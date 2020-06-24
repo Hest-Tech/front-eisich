@@ -37,6 +37,11 @@ export default (state = filterReducerDefaultState, action) => {
                 ...state,
                 clickResult: false
             }
+        case 'SORT_BY_PRICE':
+            return {
+                ...state,
+                sortBy: 'price'
+            }
         default:
             return state;
     }

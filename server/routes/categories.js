@@ -138,6 +138,7 @@ router.get('/:name/:mainSku/:subSku/:innerSku', async (req, res) => {
     }
 })
 
+// fetch a product
 router.get('/product/:pid', async (req, res) => {
     try {
         const pid = req.params.pid;
@@ -152,6 +153,7 @@ router.get('/product/:pid', async (req, res) => {
     }
 });
 
+// fetch related categories
 router.get('/:name/:sku', async (req, res) => {
     const sku = req.params.sku;
     const name = req.params.name;
@@ -223,6 +225,7 @@ router.get('/:name/:sku', async (req, res) => {
     }
 })
 
+// fetch current category
 router.get('/category/:name/:sku', async (req, res) => {
     const sku = req.params.sku;
     const name = req.params.name;
