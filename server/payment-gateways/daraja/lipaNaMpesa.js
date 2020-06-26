@@ -1,15 +1,15 @@
+/*
+* This file contains the logic to handle Lipa Na Mpesa requests
+*/
+
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
 const { pass_key, consumer_key, consumer_secret } = require('../../config/config');
-
 const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-/*
-* openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
-*/
 
 const url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
     auth = "Basic " + Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
@@ -20,7 +20,6 @@ const processLipaNaMpesaRequest = async ({
     amount = null,
     vendor = null
 }, resp) => {
-    let jsonResponse = null;
     await request(
         {
             url,
@@ -29,7 +28,6 @@ const processLipaNaMpesaRequest = async ({
             }
         },
         (error, response, body) => {
-            // Use the body object to extract OAuth access token
             let res = JSON.parse(body);
             let access_token = "Bearer " + res.access_token;
             console.log(access_token);
@@ -39,8 +37,6 @@ const processLipaNaMpesaRequest = async ({
             const b64string = shortCode + pass_key + timestamp;
             const bufferToEncrypt = Buffer.from(b64string);
             const encryptedKey = bufferToEncrypt.toString('base64');
-
-            console.log(encryptedKey.length);
 
             request(
                 {
@@ -64,8 +60,7 @@ const processLipaNaMpesaRequest = async ({
                     }
                 },
                 (error, response, body) => {
-                    // Use the body object to extract the response
-                    console.log(body)
+                    // console.log(body)
                     return resp.json({
                         "status": 200,
                         "message": 'Success',
@@ -75,8 +70,6 @@ const processLipaNaMpesaRequest = async ({
             )
         }
     )
-
-
 }
 
 

@@ -17,7 +17,7 @@ const PORT = port || 5000;
 // create an express app and configure it with bodyParser middleware
 const app = express();
 app.use(bodyParser.json());
-app.use(favicon(path.join(__dirname, '../build', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '..', 'build', 'favicon.ico')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
@@ -69,15 +69,12 @@ app.post('/hooks/mpesa', (req, res) => {
 //     }
 // })
 
+console.log('----------------> ', mode);
+app.use(express.static(path.join(__dirname, '..', 'build')));
 
-// console.log('----------------> ', mode);
-// if (mode === "production") {
-    app.use(express.static(path.join(__dirname, '../build')));
-    app.get('/*', (req, res) => {
-        console.log('dirname: ', __dirname)
-        res.sendFile(path.join(__dirname, '../build', 'index.html'));
-    });
-// }
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'build'));
+});
 
 app.listen(PORT, console.log(`server listening on port ${PORT}`));
 

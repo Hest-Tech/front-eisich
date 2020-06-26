@@ -16,8 +16,8 @@ import { history } from '../routes/AppRouter';
 export const addToWishlist = product => dispatch => {
 	const productList = [];
     const currWishlist = JSON.parse(localStorage.getItem('wishlist'));
-    const newWishlist = !!currWishlist ? currWishlist.concat(product) : productList.push(product) && productList;
-console.log("newWishlist: ", newWishlist)
+    const newWishlist = !!currWishlist ? currWishlist.concat(product) : (productList.push(product) && productList);
+    // console.log("newWishlist: ", newWishlist)
     localStorage.setItem('wishlist', JSON.stringify(newWishlist));
     dispatch({
         type: ADD_TO_WISHLIST,

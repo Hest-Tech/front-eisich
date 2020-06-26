@@ -13,12 +13,13 @@ import {
 import { loadProductCategories } from './actions/products';
 import clientStorage from './utils/clientStorage';
 import configureStore from './store/configureStore';
-// import * as admin from 'firebase-admin';
 
 
 const store = configureStore();
 const storeUser = new clientStorage();
 let hasRendered = false;
+
+render(<div className="spinner-border text-warning"></div>, document.getElementById('root'));
 
 console.log(fire.database().ref().push().key)
 
@@ -30,8 +31,6 @@ const renderApp = () => {
     store.dispatch(loadProductCategories())
     // var ref = fire.database().ref("users");
 }
-
-render(<div className="spinner-border text-warning"></div>, document.getElementById('root'));
 
 fire.auth().onAuthStateChanged(user => {
     if (user) {

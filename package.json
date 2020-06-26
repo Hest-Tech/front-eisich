@@ -39,6 +39,7 @@
     "webpack-build": "webpack",
     "dev-server": "webpack-dev-server --mode=development",
     "build": "react-scripts build",
+    "build:prod": "webpack -p --env production",
     "test": "jest --config=jest.config.json",
     "eject": "react-scripts eject"
   },

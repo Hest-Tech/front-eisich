@@ -264,8 +264,8 @@ const mapDispatchToProps = (dispatch) => ({
     setTextFilter: (text) => dispatch(setTextFilter(text)),
     blurResults: () => dispatch(blurResults()),
     focusResults: () => dispatch(focusResults()),
-    searchResults: () => dispatch(searchResults()),
-    blurSearchResults: () => dispatch(blurSearchResults())
+    // searchResults: () => dispatch(searchResults()),
+    // blurSearchResults: () => dispatch(blurSearchResults())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

@@ -12,6 +12,9 @@ const firebaseConfig = {
     measurementId: "G-HH3D2ZFEQM"
 };
 
+
+console.log('FIREBASE_API_KEY:',process.env.FIREBASE_API_KEY);
+
 const fire = firebase.initializeApp(firebaseConfig);
 // const testFire = firebase.initializeTestApp({
 //     databaseName: 'testDb',

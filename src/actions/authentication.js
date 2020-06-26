@@ -343,6 +343,7 @@ export const updateAccount = (updates, setSubmitting, resetForm) => dispatch => 
         });
 }
 
+// Add an address
 export const addAddress = (address, resetForm, setSubmitting) => dispatch => {
     let user = fire.auth().currentUser;
     let userId = user.uid;
@@ -372,6 +373,7 @@ export const addAddress = (address, resetForm, setSubmitting) => dispatch => {
         });
 }
 
+// Set default address
 export const setDefaultAddress = addressKey => dispatch => {
     let authUser = fire.auth().currentUser;
     let userId = authUser.uid;
@@ -414,6 +416,7 @@ export const setDefaultAddress = addressKey => dispatch => {
         });
 }
 
+// Update address
 export const editAddress = (
     addressId,
     updates,
@@ -459,6 +462,7 @@ export const editAddress = (
         });
 }
 
+// Remove an address
 export const deleteAddress = (addressId) => dispatch => {
     let authUser = fire.auth().currentUser;
     let userId = authUser.uid;

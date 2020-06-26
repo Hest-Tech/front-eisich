@@ -17,7 +17,7 @@ import { history } from '../routes/AppRouter';
 export const addToCart = product => dispatch => {
 	const productList = [];
     const currCart = JSON.parse(localStorage.getItem('cart'));
-    const newCart = !!currCart ? currCart.concat(product) : productList.push(product) && productList;
+    const newCart = !!currCart ? currCart.concat(product) : (productList.push(product) && productList);
 
     localStorage.setItem('cart', JSON.stringify(newCart));
     dispatch({
