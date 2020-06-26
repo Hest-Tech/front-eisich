@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-// const dotenv = require('dotenv');
+const Dotenv = require('dotenv-webpack');
 
 // env setup
 // const env = dotenv.config().parsed;
@@ -53,7 +53,8 @@ module.exports = (env) => {
                 template: path.resolve(__dirname, 'public/index.html'),
                 favicon: 'public/favicon.ico',
                 filename: 'index.html'
-            })
+            }),
+            new Dotenv()
         ],
         devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
         devServer: {

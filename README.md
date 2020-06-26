@@ -11,20 +11,22 @@ Postgres
 
 1. Clone this repo `git clone https://github.com/Hest-Tech/front-eisich.git`
 2. cd into the project folder and run `yarn install`
-3. cd into server folder and run `yarn install`
-4. Run migrations `npx sequelize db:migrate`
-5. Seed data `npx sequelize db:seed:all`
-6. Run server `node server.js`
+3. Create a .env file and copy contents of .env.example
+4. cd into server folder and run `yarn install`
+5. Create a .env file and copy contents of .env.example
+6. Run migrations `npx sequelize db:migrate`
+7. Seed data `npx sequelize db:seed:all`
+8. Run server `node server.js`
 
 ## Front-end
 
-1. Run steps 1 and 5 for setup and installation
+1. Run steps 1 and 7 for setup and installation
 2. Run webpack dev-server `yarn run dev-server`
 3. Run tests `yarn test`
 
-## Back-end
+## Testing
 
-1. Run steps 1 and 6 for setup and installation
+1. Run steps 1 and 7 for setup and installation
 2. Run tests `yarn test`
 
 ## 3rd party APIs
