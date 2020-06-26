@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         sku: DataTypes.STRING,
         name: DataTypes.STRING,
         related: DataTypes.STRING,
+        imgId: DataTypes.STRING,
         path: DataTypes.STRING
     }, {});
     MainCategory.associate = function(models) {

@@ -9,6 +9,7 @@ import {
     displaySubCategories,
     fetchProducts
 } from '../../actions/products';
+import shirt from '../../assets/images/shirt.png';
 
 
 class MenuBar extends React.Component {
@@ -84,7 +85,11 @@ class MenuBar extends React.Component {
                                             data-title={category.name}
                                             onClick={this.fetchCategory}
                                         >
-                                            <i className="fa fa-area-chart mr-2"></i>
+                                            <img style={{
+                                                width:'18px',
+                                                height:'18px',
+                                                margin: '0 8px'
+                                            }} src={`https://imgur.com/${category.imgId}.png`} />
                                             {category.name}
                                         </div>
                                     </NavLink>

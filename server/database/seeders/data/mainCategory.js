@@ -25,6 +25,7 @@ const data = [{
     name: "Men's Fashion",
     clothesSku,
     path: "/men-fashion/",
+    imgId: "Ble0HUf",
     createdAt: new Date(),
     updatedAt: new Date(),
     sort: clothesFilters.sort,
@@ -34,6 +35,7 @@ const data = [{
     name: "Women's Fashion",
     clothesSku,
     path: "/women-fashion/",
+    imgId: "9MOsntN",
     createdAt: new Date(),
     updatedAt: new Date(),
     sort: clothesFilters.sort,
@@ -43,6 +45,7 @@ const data = [{
     name: "Kid's & Babies",
     clothesSku,
     path: "/kids-babies/",
+    imgId: "Ol06FB3",
     createdAt: new Date(),
     updatedAt: new Date(),
     sort: clothesFilters.sort,
@@ -52,6 +55,7 @@ const data = [{
     name: 'Mobile Phones & Accessories',
     related: uuidv4(),
     path: "/mobile-phones-accessories/",
+    imgId: "eDyNl5N",
     createdAt: new Date(),
     updatedAt: new Date(),
 }, {
@@ -59,6 +63,7 @@ const data = [{
     name: 'Computer, Office & Security',
     related: uuidv4(),
     path: "/computer-office-security/",
+    imgId: "afWxv6J",
     createdAt: new Date(),
     updatedAt: new Date(),
 }, {
@@ -66,6 +71,7 @@ const data = [{
     name: 'Home & Living',
     related: uuidv4(),
     path: "/home-living/",
+    imgId: "Y3O5ZMF",
     createdAt: new Date(),
     updatedAt: new Date(),
 }, {
@@ -73,6 +79,7 @@ const data = [{
     name: 'Jewellery',
     related: uuidv4(),
     path: "/jewellery/",
+    imgId: "0XBLFvO",
     createdAt: new Date(),
     updatedAt: new Date(),
 }, {
@@ -80,6 +87,7 @@ const data = [{
     name: 'Fun & Sports',
     related: uuidv4(),
     path: "/fun-sports/",
+    imgId: "5v3XACz",
     createdAt: new Date(),
     updatedAt: new Date(),
 }, {
@@ -87,6 +95,7 @@ const data = [{
     name: 'Automobile',
     related: uuidv4(),
     path: "/automobile/",
+    imgId: "cCqqhLM",
     createdAt: new Date(),
     updatedAt: new Date(),
 }, {
@@ -94,6 +103,7 @@ const data = [{
     name: 'Consumer Electronics',
     related: uuidv4(),
     path: "/consumer-electronics/",
+    imgId: "N7cpl57",
     createdAt: new Date(),
     updatedAt: new Date(),
 }]

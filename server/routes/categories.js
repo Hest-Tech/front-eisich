@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/mainCategories', async (req, res) => {
     try {
         const mainCategories = await db.MainCategory.findAll({
-            attributes: ['name', 'sku', 'path']
+            attributes: ['name', 'sku', 'path', 'imgId']
         });
 
         return res.json({ data: mainCategories });

@@ -19,6 +19,9 @@ module.exports = {
             sku: {
                 type: Sequelize.UUID
             },
+            imgId: {
+                type: Sequelize.STRING
+            },
             sort: {
                 type: Sequelize.ARRAY(Sequelize.TEXT),
                 allowNull: true

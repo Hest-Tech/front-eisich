@@ -134,6 +134,7 @@ export const loadProductCategories = () => dispatch => {
         .then(response => {
             const mainCategories = response.data.data;
             const productMainCategories = [];
+            console.log('mainCategories: ',mainCategories)
 
             mainCategories.map(category => {
                 productMainCategories.push(category);
