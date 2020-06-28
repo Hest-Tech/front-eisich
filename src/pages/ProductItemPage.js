@@ -35,7 +35,7 @@ class ProductItemPage extends React.Component {
             count: 1,
             availableCount: this.props.product.pieces - 1,
             img: "dress.png",
-            imgLink: `https://imgur.com/${this.props.product.imgLink}.jpg`,
+            imgLink: `https://imgur.com/${this.props.product.imgId}.jpg`,
             defaultSize: 'M',
             clicked: '',
             baseColor: '#E9BD4C',
@@ -89,19 +89,21 @@ class ProductItemPage extends React.Component {
     }
 
     addToCart() {
+        const productItem = this.props.product;
+
         const product = {
-            pid: this.props.product.pid,
-            img: this.state.img,
-            imgLink: this.props.product.imgLink,
-            description: this.props.product.description,
-            seller: this.props.product.seller,
+            pid: productItem.pid,
+            imgId: productItem.imgId,
+            description: productItem.description,
+            seller: productItem.seller,
             quantity: this.state.count,
-            oldPrice: this.props.product.oldPrice,
-            newPrice: this.props.product.newPrice,
-            saving: this.props.product.saving,
+            oldPrice: productItem.oldPrice,
+            newPrice: productItem.newPrice,
+            saving: productItem.saving,
             subtotal: this.state.count*this.props.product.newPrice,
-            size: this.state.defaultSize
+            size: !productItem.features.length && productItem.features.size[0]
         }
+
 
         this.props.addToCart(product);
     }
@@ -130,6 +132,7 @@ class ProductItemPage extends React.Component {
     // }
 
     render() {
+        console.log('product: ',this.props.product)
         return (
             <div className="App">
                 <NavBar />
@@ -148,13 +151,14 @@ class ProductItemPage extends React.Component {
                     <div className="product-item-container">
                         <div className="product-item__img">
                             <div className="main-img-background">
-                                <Zoom
+                                {/*<Zoom
                                     img={this.state.imgLink}
                                     className="main-product-img-zm"
                                     zoomScale={3}
                                     width={500}
                                     height={500}
-                                />
+                                />*/}
+                                <img src={this.state.imgLink} style={{width:'500px',height:'500px'}} alt="" />
                                 <img src={this.state.imgLink} alt="main product image" className="main-product-img" />
                             </div>
                             <span className="product-img-color">
@@ -195,30 +199,34 @@ class ProductItemPage extends React.Component {
                                     toggleChartPopUp={this.toggleChartPopUp}
                                 />}
                                 <div className="specification-variation">
-                                    <span className="size-check">
-                                        <p>SELECT SIZE:</p>
-                                        <a
-                                            className="breadcrumb-text"
-                                            href="#"
-                                            onClick={this.toggleChartPopUp}
-                                        >
-                                            Size Guide
-                                        </a>
-                                    </span>
-                                    <div id="sizes" className="size-range">
-                                        {
-                                            // this.state.sizes.map((item, i) => <div
-                                            //     className="size_ small"
-                                            //     key={i}
-                                            //     onClick={this.setSize}
-                                            // >{item}</div>)
-                                        }
-                                        <div className="size_ small" onClick={this.setSize}>S</div>
-                                        <div className="size_ small" onClick={this.setSize}>M</div>
-                                        <div className="size_ small" onClick={this.setSize}>L</div>
-                                        <div className="size_ small" onClick={this.setSize}>XL</div>
-                                        <div className="size_ small" onClick={this.setSize}>XXL</div>
-                                    </div>
+                                    {
+                                        !!this.props.product.features.length && <span className="size-check">
+                                            <p>SELECT SIZE:</p>
+                                            <a
+                                                className="breadcrumb-text"
+                                                href="#"
+                                                onClick={this.toggleChartPopUp}
+                                            >
+                                                Size Guide
+                                            </a>
+                                        </span>
+                                    }
+                                    {
+                                        !!this.props.product.features.length && <div id="sizes" className="size-range">
+                                            {
+                                                // this.state.sizes.map((item, i) => <div
+                                                //     className="size_ small"
+                                                //     key={i}
+                                                //     onClick={this.setSize}
+                                                // >{item}</div>)
+                                            }
+                                            <div className="size_ small" onClick={this.setSize}>S</div>
+                                            <div className="size_ small" onClick={this.setSize}>M</div>
+                                            <div className="size_ small" onClick={this.setSize}>L</div>
+                                            <div className="size_ small" onClick={this.setSize}>XL</div>
+                                            <div className="size_ small" onClick={this.setSize}>XXL</div>
+                                        </div>
+                                    }
                                     <span className="size-check">
                                         <p>SELECT COLOR:</p>
                                     </span>

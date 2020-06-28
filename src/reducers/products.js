@@ -17,6 +17,7 @@ const productsReducerDefaultState = {
     displaySubCategories: false,
     currentCategory: null,
     relatedCategory: null,
+    productFeatures: [],
     products: []
 };
 

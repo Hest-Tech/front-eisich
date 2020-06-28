@@ -12,12 +12,28 @@ import {
 } from './types';
 import { history } from '../routes/AppRouter';
 
+const url = "http://localhost:5000/api/v1";
 
 // add to cart
 export const addToCart = product => dispatch => {
 	const productList = [];
     const currCart = JSON.parse(localStorage.getItem('cart'));
-    const newCart = !!currCart ? currCart.concat(product) : (productList.push(product) && productList);
+    let newCart;
+    // const newCart = !!currCart ? currCart.concat(product) : (productList.push(product) && productList);
+
+    if (!!currCart) {
+        newCart = currCart.concat(product);
+        
+        axios
+            .post(`${url}/add-to-cart`, cartItem)
+            .then((res) => {
+                console.log('res: ',res)
+            })
+            .catch(e => console.log(e))
+    } else {
+        productList.push(product);
+        newCart = productList;
+    }
 
     localStorage.setItem('cart', JSON.stringify(newCart));
     dispatch({

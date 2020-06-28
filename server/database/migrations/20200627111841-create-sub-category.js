@@ -1,8 +1,7 @@
 'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable(
-            'SubCategories', {
+        return queryInterface.createTable('SubCategories', {
                 id: {
                     allowNull: false,
                     type: Sequelize.INTEGER,

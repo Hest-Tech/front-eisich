@@ -19,6 +19,9 @@ const data = [{
     pid: uuidv4(),
     seller: "John Doe",
     title: "Boxers",
+    features: JSON.stringify([{
+        size: ['S', 'M', 'L', 'XL', 'XXL']
+    }]),
     pieces: 10,
     createdAt: new Date(),
     updatedAt: new Date()
@@ -35,6 +38,9 @@ const data = [{
     innerCategory: innerCategorySku['34'],
     pid: uuidv4(),
     title: "Muslim Fashion",
+    features: JSON.stringify([{
+        size: ['S', 'M', 'L', 'XL', 'XXL']
+    }]),
     seller: "Jane Doe",
     pieces: 15,
     createdAt: new Date(),
@@ -52,6 +58,7 @@ const data = [{
     innerCategory: innerCategorySku['61'],
     pid: uuidv4(),
     title: "Mobile Gadgets",
+    features: JSON.stringify([]),
     seller: "John Doe",
     pieces: 20,
     createdAt: new Date(),
@@ -69,6 +76,7 @@ const data = [{
     innerCategory: innerCategorySku['58'],
     pid: uuidv4(),
     title: "Mobile Gadgets",
+    features: JSON.stringify([]),
     seller: "Jane Doe",
     pieces: 8,
     createdAt: new Date(),
@@ -86,6 +94,7 @@ const data = [{
     innerCategory: innerCategorySku['73'],
     pid: uuidv4(),
     title: "Computers",
+    features: JSON.stringify([]),
     seller: "John Doe",
     pieces: 9,
     createdAt: new Date(),

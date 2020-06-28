@@ -126,7 +126,7 @@ const loadCurrentCategory = (name, sku, dispatch) => {
 }
 
 
-// load products
+// load mainCategories
 export const loadProductCategories = () => dispatch => {
 
     axios
@@ -183,6 +183,7 @@ export const fetchProducts = (sku, name, title) => dispatch => {
         .then(response => {
             // console.log('response: ', response)
             const products = response.data.data;
+            console.log('----> ',products);
             const payload = {};
 
             // loadCurrentCategory('MAIN_CATEGORY', sku, dispatch);            
@@ -220,7 +221,6 @@ export const fetchProduct = (pid) => dispatch => {
         .get(`${url}/product/${pid}`)
         .then(response => {
             const product = response.data.data;
-            console.log('product: ', product);
 
             localStorage.setItem('product', JSON.stringify(product));
             dispatch({

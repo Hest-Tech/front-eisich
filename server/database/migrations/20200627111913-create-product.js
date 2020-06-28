@@ -35,6 +35,10 @@ module.exports = {
             title: {
                 type: Sequelize.STRING
             },
+            features: {
+                type: Sequelize.JSON,
+                allowNull: true,
+            },
             saving: {
                 type: Sequelize.INTEGER
             },

@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         userId: DataTypes.STRING,
         imgId: DataTypes.STRING,
         seller: DataTypes.STRING,
+        features: DataTypes.JSON,
         oldPrice: DataTypes.INTEGER,
         newPrice: DataTypes.INTEGER,
         saving: DataTypes.INTEGER,        
@@ -18,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
         pid: DataTypes.STRING
     }, {});
     Product.associate = function(models) {
-        // associations can be defined here
     };
 
     return Product;
 };
+//console.log(Product.getDataValue('features'));

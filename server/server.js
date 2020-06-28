@@ -6,6 +6,7 @@ const path = require('path');
 const favicon = require('express-favicon');
 
 const db = require('./database/dbConfig');
+// console.log(db)
 const lipaNaMpesa = require('./payment-gateways/daraja/lipaNaMpesa');
 const imgur = require('./imgur/app');
 const hook = require('./payment-gateways/daraja/webHook');
@@ -82,3 +83,7 @@ app.listen(PORT, console.log(`server listening on port ${PORT}`));
 // module.exports = {
 //     app
 // }
+
+/*
+* Undo migrations: node_modules/.bin/sequelize db:migrate:undo
+*/
