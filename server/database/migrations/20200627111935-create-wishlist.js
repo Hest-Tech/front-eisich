@@ -8,14 +8,38 @@ module.exports = {
                 allowNull: false,
                 autoIncrement: true,
             },
-            name: {
-                type: Sequelize.STRING
-            },
-            path: {
-                type: Sequelize.STRING
+            pid: {
+                type: Sequelize.INTEGER,
+                references: { // Wishlist hasMany Products
+                    model: 'Products',
+                    key: 'id'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE'
             },
             imgId: {
                 type: Sequelize.STRING
+            },
+            description: {
+                type: Sequelize.TEXT
+            },
+            seller: {
+                type: Sequelize.INTEGER
+            },
+            quantity: {
+                type: Sequelize.INTEGER
+            },
+            oldPrice: {
+                type: Sequelize.INTEGER
+            },
+            newPrice: {
+                type: Sequelize.INTEGER
+            },
+            saving: {
+                type: Sequelize.INTEGER
+            },
+            subTotal: {
+                type: Sequelize.INTEGER
             },
             createdAt: {
                 allowNull: false,

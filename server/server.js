@@ -8,7 +8,7 @@ const favicon = require('express-favicon');
 const db = require('./database/dbConfig');
 // console.log(db)
 const lipaNaMpesa = require('./payment-gateways/daraja/lipaNaMpesa');
-const imgur = require('./imgur/app');
+// const imgur = require('./imgur/app');
 const hook = require('./payment-gateways/daraja/webHook');
 const { ValidateMpesaData } = require('./payment-gateways/daraja/validate');
 const { mode, client_id, port } = require('./config/config');
@@ -24,6 +24,7 @@ app.use(cors());
 
 app.use('/api/v1', require('./routes/categories'));
 app.use('/api/v1/products', require('./routes/products'));
+app.use('/api/v1/cart', require('./routes/cart'));
 
 const validateNum = new ValidateMpesaData();
 

@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
         price: DataTypes.INTEGER
     }, {});
     Cart.associate = function(models) {
-        // associations can be defined here
+        Cart.hasMany(models.Product, {
+            foreignKey: 'pid'
+        });
     };
     return Cart;
 };

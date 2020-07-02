@@ -20,27 +20,34 @@ export const addToCart = product => dispatch => {
     const currCart = JSON.parse(localStorage.getItem('cart'));
     let newCart;
     // const newCart = !!currCart ? currCart.concat(product) : (productList.push(product) && productList);
-
-    if (!!currCart) {
-        newCart = currCart.concat(product);
+    console.log('cart: ', product);
+    // if (!!currCart) {
+    //     newCart = currCart.concat(product);
         
-        axios
-            .post(`${url}/add-to-cart`, cartItem)
-            .then((res) => {
-                console.log('res: ',res)
-            })
-            .catch(e => console.log(e))
-    } else {
-        productList.push(product);
-        newCart = productList;
-    }
+    //     axios
+    //         .get(`${url}/cart/${product.pid}`)
+    //         .then(res => {
+    //             const data = res.data.data;
 
-    localStorage.setItem('cart', JSON.stringify(newCart));
+    //             !data && axios
+    //                 .post(`${url}/cart/add`, product)
+    //                 .then(res => {
+    //                     console.log('res: ',res)
+    //                 })
+    //                 .catch(e => console.log(e))
+    //         })
+    //         .catch(e => console.log(e))
+    // } else {
+    //     productList.push(product);
+    //     newCart = productList;
+    // }
+
+    // localStorage.setItem('cart', JSON.stringify(newCart));
     dispatch({
         type: ADD_TO_CART,
         payload: newCart
     })
-    history.push('/cart');    
+    // history.push('/cart');
 }
 
 // fetch cart

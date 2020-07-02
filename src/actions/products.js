@@ -16,7 +16,6 @@ import {
     FETCH_ALL_PRODUCTS,
     FETCH_PRODUCTS,
     FETCH_PRODUCT,
-    ADD_TO_CART,
     FETCH_CART
 } from './types';
 
@@ -35,72 +34,12 @@ export const setCurrency = (num) => {
     }
 }
 
-
-// filter products by category sku
-const fetchCategoriesHelper = (
-    products,
-    name,
-    title,
-    payload,
-    sku,
-    dispatch
-) => {
-    const filteredProducts = products.filter(item => {
-        switch (name) {
-            case 'MAIN_CATEGORY':
-                return item.mainCategory === sku
-            case 'SUB_CATEGORY':
-                return item.subCategory === sku
-            case 'INNER_CATEGORY':
-                return item.innerCategory === sku
-        }
-    });
-
-    if (!!filteredProducts.length) {
-
-        console.log('filteredProducts: ',filteredProducts)
-        const product = filteredProducts[0];
-        const fetchCategoryUrl = `${url}/${name}/${product.mainCategory}/${product.subCategory}/${product.innerCategory}`;
-
-        axios
-            .get(fetchCategoryUrl)
-            .then(response => {
-                const data = response.data.data;
-                const newData = !!data.length && data.map(item => ({
-                    ...item,
-                    title: name
-                }));
-                payload['breadCrumbs'] = newData;
-                payload['title'] = title
-                payload['filteredProducts'] = filteredProducts
-                localStorage.setItem('products', JSON.stringify(payload));
-
-                dispatch({
-                    type: FETCH_PRODUCTS,
-                    payload
-                })
-            })
-            .catch(error => console.log(error))
-    } else {
-        const payload = {};
-
-        payload['breadCrumbs'] = [];
-        payload['title'] = "";
-        payload['filteredProducts'] = [];
-        
-        dispatch({
-            type: FETCH_PRODUCTS,
-            payload
-        })
-    }
-}
-
 const loadRelatedCategoriesHelper = (name, sku, dispatch) => {
     axios
         .get(`${url}/${name}/${sku}`)
         .then(res => {
             const category = res.data.data;
-            console.log('category ==> ',category)
+            // console.log('category ==> ',category)
 
             dispatch({
                 type: 'RELATED_CATEGORY',
@@ -115,7 +54,7 @@ const loadCurrentCategory = (name, sku, dispatch) => {
         .get(`${url}/category/${name}/${sku}`)
         .then(res => {
             const category = res.data.data;
-            console.log('currentCategory: ',category)
+            // console.log('currentCategory: ',category)
 
             dispatch({
                 type: 'CURRENT_CATEGORY',
@@ -134,7 +73,7 @@ export const loadProductCategories = () => dispatch => {
         .then(response => {
             const mainCategories = response.data.data;
             const productMainCategories = [];
-            console.log('mainCategories: ',mainCategories)
+            // console.log('mainCategories: ',mainCategories)
 
             mainCategories.map(category => {
                 productMainCategories.push(category);
@@ -178,40 +117,81 @@ export const displaySubCategories = () => dispatch => dispatch({
 
 // fetch category products
 export const fetchProducts = (sku, name, title) => dispatch => {
-    axios
-        .get(`${url}/${name}/products`)
-        .then(response => {
-            // console.log('response: ', response)
-            const products = response.data.data;
-            console.log('----> ',products);
-            const payload = {};
 
-            // loadCurrentCategory('MAIN_CATEGORY', sku, dispatch);            
+    const payload = {};
+    const data = localStorage.getItem('allProducts');
+    const products = !!data ? JSON.parse(data) : [];
 
-            fetchCategoriesHelper(
-                products,
-                name,
-                title,
-                payload,
-                sku,
-                dispatch
-            );
+    const filteredProducts = products.filter(item => {
+        switch (name) {
+            case 'MAIN_CATEGORY':
+                return item.mainCategory === sku
+            case 'SUB_CATEGORY':
+                return item.subCategory === sku
+            case 'INNER_CATEGORY':
+                return item.innerCategory === sku
+        }
+    });
+
+    if (!!filteredProducts.length) {
+
+        const product = filteredProducts[0];
+        const fetchCategoryUrl = `
+            ${url}/${name}/${product.mainCategory}/${product.subCategory}/${product.innerCategory}
+        `;
+
+        axios
+            .get(fetchCategoryUrl)
+            .then(response => {
+                const data = response.data.data;
+                console.log('res data: ',data)
+                const newData = !!data.length && data.map(item => ({
+                    ...item,
+                    title: name
+                }));
+                payload['breadCrumbs'] = newData;
+                payload['title'] = title
+                payload['filteredProducts'] = filteredProducts
+                localStorage.setItem('products', JSON.stringify(payload));
+
+                dispatch({
+                    type: FETCH_PRODUCTS,
+                    payload
+                })
+            })
+            .catch(error => console.log(error))
+    } else {
+        const payload = {};
+
+        payload['breadCrumbs'] = [];
+        payload['title'] = "";
+        payload['filteredProducts'] = [];
+        
+        dispatch({
+            type: FETCH_PRODUCTS,
+            payload
         })
-        .catch(error => console.log(error))
+    }
 }
 
 // fetch products
 export const fetchAllProducts = () => dispatch => {
+    let products;
+
     axios
         .get(`${url}/products`)
         .then(response => {
-            const products = response.data.data;
+            products = response.data.data;
             dispatch({
                 type: FETCH_ALL_PRODUCTS,
                 payload: products
             })
+            localStorage.setItem('allProducts',JSON.stringify(products));
+        
         })
         .catch(error => console.log(error))
+
+    return products;
 }
 
 // fetch single product

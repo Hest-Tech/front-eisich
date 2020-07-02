@@ -100,10 +100,9 @@ class ProductItemPage extends React.Component {
             oldPrice: productItem.oldPrice,
             newPrice: productItem.newPrice,
             saving: productItem.saving,
-            subtotal: this.state.count*this.props.product.newPrice,
-            size: !productItem.features.length && productItem.features.size[0]
+            subTotal: this.state.count*this.props.product.newPrice,
+            features: productItem.features
         }
-
 
         this.props.addToCart(product);
     }
@@ -125,11 +124,15 @@ class ProductItemPage extends React.Component {
         this.setState({ defaultSize: targetSize.textContent })
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.imgId != this.props.product.imgId) {
-    //         this.forceUpdate()
-    //     }
-    // }
+    sizeFeature() {
+        const featuresList = this.props.product.features;
+        const features = []; 
+        const keys = !!featuresList && featuresList.map(
+            feature => features.concat(Object.keys(feature))
+        );
+
+        return keys.includes('size');
+    }
 
     render() {
         console.log('product: ',this.props.product)
@@ -200,32 +203,32 @@ class ProductItemPage extends React.Component {
                                 />}
                                 <div className="specification-variation">
                                     {
-                                        !!this.props.product.features.length && <span className="size-check">
-                                            <p>SELECT SIZE:</p>
-                                            <a
-                                                className="breadcrumb-text"
-                                                href="#"
-                                                onClick={this.toggleChartPopUp}
-                                            >
-                                                Size Guide
-                                            </a>
-                                        </span>
-                                    }
-                                    {
-                                        !!this.props.product.features.length && <div id="sizes" className="size-range">
-                                            {
-                                                // this.state.sizes.map((item, i) => <div
-                                                //     className="size_ small"
-                                                //     key={i}
-                                                //     onClick={this.setSize}
-                                                // >{item}</div>)
-                                            }
-                                            <div className="size_ small" onClick={this.setSize}>S</div>
-                                            <div className="size_ small" onClick={this.setSize}>M</div>
-                                            <div className="size_ small" onClick={this.setSize}>L</div>
-                                            <div className="size_ small" onClick={this.setSize}>XL</div>
-                                            <div className="size_ small" onClick={this.setSize}>XXL</div>
-                                        </div>
+                                        this.sizeFeature() && <React.Fragment>
+                                            <span className="size-check">
+                                                <p>SELECT SIZE:</p>
+                                                <a
+                                                    className="breadcrumb-text"
+                                                    href="#"
+                                                    onClick={this.toggleChartPopUp}
+                                                >
+                                                    Size Guide
+                                                </a>
+                                            </span>
+                                            <div id="sizes" className="size-range">
+                                                {
+                                                    // this.state.sizes.map((item, i) => <div
+                                                    //     className="size_ small"
+                                                    //     key={i}
+                                                    //     onClick={this.setSize}
+                                                    // >{item}</div>)
+                                                }
+                                                <div className="size_ small" onClick={this.setSize}>S</div>
+                                                <div className="size_ small" onClick={this.setSize}>M</div>
+                                                <div className="size_ small" onClick={this.setSize}>L</div>
+                                                <div className="size_ small" onClick={this.setSize}>XL</div>
+                                                <div className="size_ small" onClick={this.setSize}>XXL</div>
+                                            </div>
+                                        </React.Fragment>
                                     }
                                     <span className="size-check">
                                         <p>SELECT COLOR:</p>

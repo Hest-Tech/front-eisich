@@ -7,7 +7,7 @@
 // Get visible products
 
 export default (products, { text, sortBy }) => {
-	console.log('products reducer: ',products);
+	// console.log('products reducer: ',products);
     const filteredItems = !!products.productsList.length ? products.productsList.filter(
         (product) => product.description.toLowerCase().includes(text.toLowerCase())
     ).sort((a, b) => {
@@ -16,7 +16,7 @@ export default (products, { text, sortBy }) => {
         }
     }) : products.products;
 
-    console.log(filteredItems)
+    // console.log(filteredItems)
     return {
     	...products,
     	productsList: filteredItems

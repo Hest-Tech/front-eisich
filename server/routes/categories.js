@@ -64,11 +64,29 @@ router.get("/subCategories/:name", async (req, res) => {
 });
 
 // fetch all products
-router.get('/:name/products', async (req, res) => {
+router.get('/products', async (req, res) => {
     try {
         const products = await db.Product.findAll({
-                attributes: { exclude: ['id', 'userId', 'createdAt', 'updatedAt'] }
-            });
+            attributes: [
+                'imgId',
+                'description',
+                'path',
+                'mainCategory',
+                'subCategory',
+                'oldPrice',
+                'newPrice',
+                'pieces',
+                'title',
+                'features',
+                'saving',
+                'seller',
+                'innerCategory',
+                'pid',
+                'details',
+                'sellerId'
+            ],
+        });
+        console.log('===> ',products);
         return res.json({
             data: products
         });
@@ -166,6 +184,8 @@ router.get('/:name/:sku', async (req, res) => {
                     attributes: [ 'id' ],
                     where: { sku }
                 })
+
+                console.log('mcategory: ',mCategory)
 
                 const displaymCategory = await db.SubCategory.findAll({
                     attributes: ['name', 'sku', 'path', 'sort', 'filters'],

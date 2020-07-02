@@ -12,6 +12,7 @@ import ProductNotFound from './ProductNotFound';
 import {
     fetchProduct,
     fetchProducts,
+    fetchAllProducts,
     setCurrency,
     loadRelatedCategories
 } from '../actions/products';
@@ -25,6 +26,7 @@ class ProductsPage extends React.Component {
 
     componentDidMount() {
         this.props.loadRelatedCategories();
+        this.props.fetchAllProducts();
     }
 
     filters(val) {
@@ -82,7 +84,7 @@ class ProductsPage extends React.Component {
     }
 
     render() {
-        console.log('this.props: ',this.props)
+        console.log('this.props: ',this.props.products)
         const itemLength = this.props.products.breadCrumbs.length;
         const subCategories = this.props.products.relatedCategory;
         const subCategoriesLength = this.props.products.productsList.length;
@@ -352,6 +354,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchProduct: (pid) => dispatch(fetchProduct(pid)),
     fetchProducts: (sku, name, title) => dispatch(fetchProducts(sku, name, title)),
     loadRelatedCategories: () => dispatch(loadRelatedCategories()),
+    fetchAllProducts: () => dispatch(fetchAllProducts()),
     sortByPrice: () => dispatch(sortByPrice())
 });
 

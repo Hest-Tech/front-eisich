@@ -11,11 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
 
     Wishlist.associate = function(models) {
-        // Wishlist.hasMany(models.Product, {
-        //     foreignKey: 'productId',
-        //     as: 'products',
-        //     onDelete: 'CASCADE',
-        // });
+        Wishlist.hasMany(models.Product, {
+            foreignKey: 'productId',
+        });
     };
 
     return Wishlist;

@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
         pid: DataTypes.STRING
     }, {});
     Product.associate = function(models) {
+        Product.belongsTo(models.Cart);
+        Product.belongsTo(models.Wishlist);
     };
 
     return Product;
