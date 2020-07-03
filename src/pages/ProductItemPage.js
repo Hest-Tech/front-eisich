@@ -100,8 +100,7 @@ class ProductItemPage extends React.Component {
             oldPrice: productItem.oldPrice,
             newPrice: productItem.newPrice,
             saving: productItem.saving,
-            subTotal: this.state.count*this.props.product.newPrice,
-            features: productItem.features
+            subTotal: this.state.count*this.props.product.newPrice
         }
 
         this.props.addToCart(product);
@@ -130,6 +129,7 @@ class ProductItemPage extends React.Component {
         const keys = !!featuresList && featuresList.map(
             feature => features.concat(Object.keys(feature))
         );
+        console.log(featuresList)
 
         return keys.includes('size');
     }

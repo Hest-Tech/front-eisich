@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Wishlist.associate = function(models) {
         Wishlist.hasMany(models.Product, {
-            foreignKey: 'productId',
+            foreignKey: 'productId'
         });
     };
 

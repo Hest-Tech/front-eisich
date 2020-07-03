@@ -7,7 +7,24 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const products = await db.Product.findAll({
-                attributes: { exclude: ['userId', 'createdAt', 'updatedAt'] }
+                attributes: [
+                    'imgId',
+                    'description',
+                    'path',
+                    'mainCategory',
+                    'subCategory',
+                    'oldPrice',
+                    'newPrice',
+                    'pieces',
+                    'title',
+                    'features',
+                    'saving',
+                    'seller',
+                    'innerCategory',
+                    'pid',
+                    'details',
+                    'sellerId'
+                ]
             });
 
         return res.json({

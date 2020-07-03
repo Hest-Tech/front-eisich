@@ -176,12 +176,11 @@ export const fetchProducts = (sku, name, title) => dispatch => {
 
 // fetch products
 export const fetchAllProducts = () => dispatch => {
-    let products;
-
     axios
         .get(`${url}/products`)
         .then(response => {
-            products = response.data.data;
+            const products = response.data.data;
+
             dispatch({
                 type: FETCH_ALL_PRODUCTS,
                 payload: products
@@ -190,8 +189,6 @@ export const fetchAllProducts = () => dispatch => {
         
         })
         .catch(error => console.log(error))
-
-    return products;
 }
 
 // fetch single product

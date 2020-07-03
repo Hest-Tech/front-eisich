@@ -22,9 +22,9 @@ app.use(favicon(path.join(__dirname, '..', 'build', 'favicon.ico')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use('/api/v1', require('./routes/categories'));
 app.use('/api/v1/products', require('./routes/products'));
 app.use('/api/v1/cart', require('./routes/cart'));
+app.use('/api/v1', require('./routes/categories'));
 
 const validateNum = new ValidateMpesaData();
 

@@ -2,9 +2,8 @@
  * Cart Reducer
  */
 
-
 const cartReducerDefaultState = {
-    cart: JSON.parse(localStorage.getItem('cart')) || []
+    cart: []
 };
 
 export default (state = cartReducerDefaultState, action) => {

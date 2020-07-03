@@ -84,9 +84,8 @@ router.get('/products', async (req, res) => {
                 'pid',
                 'details',
                 'sellerId'
-            ],
+            ]
         });
-        console.log('===> ',products);
         return res.json({
             data: products
         });
@@ -160,9 +159,26 @@ router.get('/product/:pid', async (req, res) => {
     try {
         const pid = req.params.pid;
         const product = await db.Product.findOne({
-                attributes: { exclude: ['id', 'userId', 'createdAt', 'updatedAt'] },
-                where: { pid }
-            });
+            attributes: [
+                'imgId',
+                'description',
+                'path',
+                'mainCategory',
+                'subCategory',
+                'oldPrice',
+                'newPrice',
+                'pieces',
+                'title',
+                'features',
+                'saving',
+                'seller',
+                'innerCategory',
+                'pid',
+                'details',
+                'sellerId'
+            ],
+            where: { pid }
+        });
 
         return res.json({ data: product });
     } catch (e) {

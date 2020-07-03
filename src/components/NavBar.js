@@ -29,6 +29,7 @@ import {
 } from '../actions/filters';
 import FilterProducts from './FilterProducts';
 import { fetchAllProducts } from '../actions/products';
+import { fetchCart } from '../actions/cart';
 
 
 class NavBar extends React.Component {
@@ -67,6 +68,7 @@ class NavBar extends React.Component {
     componentDidMount() {
         this.props.loadUser();
         this.props.fetchAllProducts();
+        this.props.fetchCart();
     }
 
     componentDidUpdate() {
@@ -264,6 +266,7 @@ const mapDispatchToProps = (dispatch) => ({
     setTextFilter: (text) => dispatch(setTextFilter(text)),
     blurResults: () => dispatch(blurResults()),
     focusResults: () => dispatch(focusResults()),
+    fetchCart: () => dispatch(fetchCart())
     // searchResults: () => dispatch(searchResults()),
     // blurSearchResults: () => dispatch(blurSearchResults())
 });

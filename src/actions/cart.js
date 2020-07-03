@@ -12,52 +12,70 @@ import {
 } from './types';
 import { history } from '../routes/AppRouter';
 
-const url = "http://localhost:5000/api/v1";
+const url = "http://localhost:5000/api/v1/cart";
 
 // add to cart
 export const addToCart = product => dispatch => {
-	const productList = [];
+    const productList = [];
     const currCart = JSON.parse(localStorage.getItem('cart'));
-    let newCart;
-    // const newCart = !!currCart ? currCart.concat(product) : (productList.push(product) && productList);
-    console.log('cart: ', product);
-    // if (!!currCart) {
-    //     newCart = currCart.concat(product);
-        
-    //     axios
-    //         .get(`${url}/cart/${product.pid}`)
-    //         .then(res => {
-    //             const data = res.data.data;
+    const newCart = !!currCart ? currCart.concat(product) : (productList.push(product) && productList);
 
-    //             !data && axios
-    //                 .post(`${url}/cart/add`, product)
-    //                 .then(res => {
-    //                     console.log('res: ',res)
-    //                 })
-    //                 .catch(e => console.log(e))
-    //         })
-    //         .catch(e => console.log(e))
-    // } else {
-    //     productList.push(product);
-    //     newCart = productList;
-    // }
+    axios
+        .get(`${url}/${product.pid}`)
+        .then(res => {
+            const pid = res.data.data;
+            // console.log('===========> ', pid);
 
-    // localStorage.setItem('cart', JSON.stringify(newCart));
-    dispatch({
-        type: ADD_TO_CART,
-        payload: newCart
-    })
-    // history.push('/cart');
+            if (!!pid) {
+                const cartProduct = {
+                    ...product,
+                    pid: pid.id
+                };
+
+                axios
+                    .post(`${url}/add/${pid.id}`, cartProduct)
+                    .then(res => {
+                        localStorage.setItem('cart', JSON.stringify(newCart));
+
+                        dispatch({
+                            type: ADD_TO_CART,
+                            payload: newCart
+                        })
+
+                        history.push('/cart');
+                    })
+                    .catch(e => console.log(e))
+            }
+        })
+        .catch(e => console.log('error here: ', e))
 }
 
 // fetch cart
 export const fetchCart = () => dispatch => {
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const storedCart = localStorage.getItem('cart');
 
-    dispatch({
-        type: FETCH_CART,
-        payload: cart
-    });
+    if (!storedCart) {
+        axios
+            .get(url)
+            .then(res => {
+                const cart = res.data.data;
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                dispatch({
+                    type: FETCH_CART,
+                    payload: cart
+                });
+            })
+            .catch(e => console.log(e))
+    } else {
+        const cart = JSON.parse(storedCart);
+
+        dispatch({
+            type: FETCH_CART,
+            payload: cart
+        });
+    }
+
 }
 
 // remove item from cart

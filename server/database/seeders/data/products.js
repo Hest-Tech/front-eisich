@@ -17,7 +17,7 @@ const data = [{
     subCategory: subCategorySku['1'],
     innerCategory: innerCategorySku['5'],
     pid: uuidv4(),
-    seller: "John Doe",
+    seller: 1,
     title: "Boxers",
     features: JSON.stringify([{
         size: ['S', 'M', 'L', 'XL', 'XXL']
@@ -41,7 +41,7 @@ const data = [{
     features: JSON.stringify([{
         size: ['S', 'M', 'L', 'XL', 'XXL']
     }]),
-    seller: "Jane Doe",
+    seller: 1,
     pieces: 15,
     createdAt: new Date(),
     updatedAt: new Date()
@@ -59,7 +59,7 @@ const data = [{
     pid: uuidv4(),
     title: "Mobile Gadgets",
     features: JSON.stringify([]),
-    seller: "John Doe",
+    seller: 1,
     pieces: 20,
     createdAt: new Date(),
     updatedAt: new Date()
@@ -77,7 +77,7 @@ const data = [{
     pid: uuidv4(),
     title: "Mobile Gadgets",
     features: JSON.stringify([]),
-    seller: "Jane Doe",
+    seller: 1,
     pieces: 8,
     createdAt: new Date(),
     updatedAt: new Date()
@@ -95,7 +95,7 @@ const data = [{
     pid: uuidv4(),
     title: "Computers",
     features: JSON.stringify([]),
-    seller: "John Doe",
+    seller: 1,
     pieces: 9,
     createdAt: new Date(),
     updatedAt: new Date()

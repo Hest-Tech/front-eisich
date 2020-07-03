@@ -7,21 +7,38 @@ const router = express.Router();
 router.get('/:pid', async (req, res) => {
     try {
     	const pid = req.params.pid;
-        const cart = await db.Cart.findOne({
-            attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
+        const product = await db.Product.findOne({
+            attributes: ['id'],
             where: { pid }
         });
 
-        return res.json({ data: cart });
+        return res.json({ data: product });
     } catch (e) {
         console.log(e);
     }
 });
 
-router.post('/add', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
+        const cartItems = await db.Cart.findAll({
+            attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+        });
+
+        return res.json({ data: cartItems });
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+router.post('/add/:pid', async (req, res) => {
+    try {
+        const pid = req.params.pid;
     	const cart = req.body;
-    	const saveCart = await Cart.create(cart);
+        const product = await db.Cart.findOne({
+            attributes: ['id'],
+            where: { pid }
+        });
+    	const saveCart = !product ? await db.Cart.create({ ...cart }) : res.status(422);
 
         return res.json({ data: saveCart });
     } catch (e) {

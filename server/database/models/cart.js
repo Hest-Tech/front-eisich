@@ -1,12 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
     const Cart = sequelize.define('Cart', {
-        name: DataTypes.STRING,
-        path: DataTypes.STRING,
+        pid: DataTypes.INTEGER,
+        seller: DataTypes.STRING,
         description: DataTypes.TEXT,
-        userId: DataTypes.INTEGER,
+        quantity: DataTypes.INTEGER,
         imgId: DataTypes.STRING,
-        price: DataTypes.INTEGER
+        oldPrice: DataTypes.INTEGER,
+        newPrice: DataTypes.INTEGER,
+        saving: DataTypes.INTEGER,
+        subTotal: DataTypes.INTEGER
     }, {});
     Cart.associate = function(models) {
         Cart.hasMany(models.Product, {
