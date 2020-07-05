@@ -2,12 +2,15 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Wishlist = sequelize.define('Wishlist', {
-        name: DataTypes.STRING,
-        path: DataTypes.STRING,
+        pid: DataTypes.INTEGER,
+        seller: DataTypes.STRING,
         description: DataTypes.TEXT,
-        userId: DataTypes.INTEGER,
+        quantity: DataTypes.INTEGER,
         imgId: DataTypes.STRING,
-        price: DataTypes.INTEGER,
+        oldPrice: DataTypes.INTEGER,
+        newPrice: DataTypes.INTEGER,
+        saving: DataTypes.INTEGER,
+        subTotal: DataTypes.INTEGER
     }, {});
 
     Wishlist.associate = function(models) {

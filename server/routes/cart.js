@@ -4,6 +4,7 @@ const db = require('../database/models');
 
 const router = express.Router();
 
+// fetch product id
 router.get('/:pid', async (req, res) => {
     try {
     	const pid = req.params.pid;
@@ -18,6 +19,7 @@ router.get('/:pid', async (req, res) => {
     }
 });
 
+// fetch cart
 router.get('/', async (req, res) => {
     try {
         const cartItems = await db.Cart.findAll({
@@ -30,6 +32,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Add to cart
 router.post('/add/:pid', async (req, res) => {
     try {
         const pid = req.params.pid;
@@ -38,13 +41,68 @@ router.post('/add/:pid', async (req, res) => {
             attributes: ['id'],
             where: { pid }
         });
-    	const saveCart = !product ? await db.Cart.create({ ...cart }) : res.status(422);
 
-        return res.json({ data: saveCart });
+        if (!product && await db.Cart.create({ ...cart })) {
+            const cartItems = await db.Cart.findAll({
+                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+            });
+
+            return res.json({ data: cartItems });
+        }
+
+        res.status(400)
     } catch (e) {
         console.log(e);
     }
 });
+
+// update cart
+router.patch('/update/:pid', async (req, res) => {
+    try {
+        const pid = req.params.pid;
+        const updates = req.body;
+        const cart = await db.Cart.update(updates, {
+            where: { pid }
+        });
+
+        if (!!cart[0]) {
+            const cartItems = await db.Cart.findAll({
+                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+            });
+
+            return res.json({ data: cartItems });
+        }
+
+        res.status(400)
+    } catch(e) {
+        console.log(e);
+    }
+})
+
+// delete cart item
+router.delete('/delete/:pid', async (req, res) => {
+    try {
+        const pid = req.params.pid;
+        const cart = await db.Cart.destroy({
+            where: { pid }
+        })
+
+        if (!!cart) {
+
+            const cartItems = await db.Cart.findAll({
+                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+            });
+
+            return res.json({
+                data: cartItems
+            });
+        }
+
+        res.status(400)
+    } catch(e) {
+        console.log(e);
+    }
+})
 
 
 module.exports = router;

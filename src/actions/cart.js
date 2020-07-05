@@ -12,19 +12,15 @@ import {
 } from './types';
 import { history } from '../routes/AppRouter';
 
+
 const url = "http://localhost:5000/api/v1/cart";
 
 // add to cart
 export const addToCart = product => dispatch => {
-    const productList = [];
-    const currCart = JSON.parse(localStorage.getItem('cart'));
-    const newCart = !!currCart ? currCart.concat(product) : (productList.push(product) && productList);
-
     axios
         .get(`${url}/${product.pid}`)
         .then(res => {
             const pid = res.data.data;
-            // console.log('===========> ', pid);
 
             if (!!pid) {
                 const cartProduct = {
@@ -35,6 +31,7 @@ export const addToCart = product => dispatch => {
                 axios
                     .post(`${url}/add/${pid.id}`, cartProduct)
                     .then(res => {
+                        const newCart = res.data.data;
                         localStorage.setItem('cart', JSON.stringify(newCart));
 
                         dispatch({
@@ -47,60 +44,79 @@ export const addToCart = product => dispatch => {
                     .catch(e => console.log(e))
             }
         })
-        .catch(e => console.log('error here: ', e))
+        .catch(e => console.log(e))
 }
 
 // fetch cart
 export const fetchCart = () => dispatch => {
-    const storedCart = localStorage.getItem('cart');
+    const cart = localStorage.getItem('cart');
 
-    if (!storedCart) {
+    if (!cart) {
         axios
             .get(url)
             .then(res => {
-                const cart = res.data.data;
-                localStorage.setItem('cart', JSON.stringify(cart));
+                const cartData = res.data.data;
+                localStorage.setItem('cart', JSON.stringify(cartData));
 
                 dispatch({
                     type: FETCH_CART,
-                    payload: cart
+                    payload: cartData
                 });
             })
             .catch(e => console.log(e))
     } else {
-        const cart = JSON.parse(storedCart);
+        const parsedCart = JSON.parse(cart);
 
         dispatch({
             type: FETCH_CART,
-            payload: cart
+            payload: parsedCart
         });
     }
-
 }
 
 // remove item from cart
 export const removeFromCart = pid => dispatch => {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    const newCart = cart.filter(item => item.pid !== pid);
+    axios
+        .delete(`${url}/delete/${pid}`)
+        .then(res => {
 
-    localStorage.setItem('cart', JSON.stringify(newCart));
-    dispatch({
-        type: REMOVE_ITEM_FROM_CART,
-        payload: newCart
-    })
+            if (res.status === 200) {
+                const updatedCart = res.data.data;
+
+                localStorage.setItem('cart', JSON.stringify(updatedCart));
+                dispatch({
+                    type: REMOVE_ITEM_FROM_CART,
+                    payload: updatedCart
+                })
+            } else if (res.status === 400) {
+                console.log({
+                    error: "Error deleting cart",
+                    status: 400
+                })
+            }
+        })
+        .catch(e => console.log(e))
 }
 
 // update cart item
 export const updateCartItem = (pid, updates) => dispatch => {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    const newCart = cart.map(item => item.pid === pid ? item = {
-        ...item,
-        ...updates
-    } : item);
+    axios
+        .patch(`${url}/update/${pid}`, updates)
+        .then(res => {
+            if (res.status === 200) {
+                const updatedCart = res.data.data;
 
-    localStorage.setItem('cart', JSON.stringify(newCart));
-    dispatch({
-        type: UPDATE_CART_ITEM,
-        payload: newCart
-    })
+                localStorage.setItem('cart', JSON.stringify(updatedCart));
+                dispatch({
+                    type: UPDATE_CART_ITEM,
+                    payload: updatedCart
+                })
+            } else if (res.status === 400) {
+                console.log({
+                    error: "Error updating cart",
+                    status: 400
+                })
+            }
+        })
+        .catch(e => console.log(e))
 }

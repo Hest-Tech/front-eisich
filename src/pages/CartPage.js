@@ -28,7 +28,8 @@ class CartPage extends React.Component {
     }
 
     setQuantity(e, pid) {
-        const quantity = e.target.value;
+        const quantity = parseInt(e.target.value);
+        console.log(quantity);
 
         this.props.updateCartItem(pid, { quantity });
     }
@@ -105,7 +106,7 @@ class CartPage extends React.Component {
                                                                 ><i className="far fa-heart"></i>WISHLIST</small>
                                                                 <small
                                                                     className="cart-action remove-from-cart"
-                                                                    onClick={() => this.props.removeFromCart(item.pid)}
+                                                                    onClick={() => this.props.removeFromCart(parseInt(item.pid))}
                                                                 ><i className="fas fa-trash-alt"></i>REMOVE</small>
                                                             </div>
                                                         </div>
