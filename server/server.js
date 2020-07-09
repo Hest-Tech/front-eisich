@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use('/api/v1/products', require('./routes/products'));
+app.use('/api/v1/wishlist', require('./routes/wishlist'));
 app.use('/api/v1/cart', require('./routes/cart'));
 app.use('/api/v1', require('./routes/categories'));
 

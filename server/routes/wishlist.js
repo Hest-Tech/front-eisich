@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
 
 // Add item to wishlist
 router.post('/add/:pid', async (req, res) => {
-
     try {
         const pid = req.params.pid;
         const wishlist = req.body;
@@ -28,8 +27,9 @@ router.post('/add/:pid', async (req, res) => {
             attributes: ['id'],
             where: { pid }
         });
+        console.log(!!product && 'Duplicate data found')
 
-        if (!product && await db.Cart.create({ ...cart })) {
+        if (!product && await db.Wishlist.create({ ...wishlist })) {
             const wishlistItems = await db.Wishlist.findAll({
                 attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
             });

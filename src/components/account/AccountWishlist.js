@@ -15,7 +15,7 @@ class AccountWishlist extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.fetchWishlist();
+        this.props.fetchWishlist();
         console.log('wishlist: ', this.props.wishlist)
     }
 

@@ -2,9 +2,9 @@
  * Wishlist Reducer
  */
 
-
+const wishlist = localStorage.getItem('wishlist');
 const wishReducerDefaultState = {
-    wishlist: JSON.parse(localStorage.getItem('wishlist')) || [],
+    wishlist: !!wishlist ? JSON.parse(wishlist) : []
 };
 
 export default (state = wishReducerDefaultState, action) => {

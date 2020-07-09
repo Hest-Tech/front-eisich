@@ -16,6 +16,7 @@ class CartPage extends React.Component {
         super(props);
         this.setQuantity = this.setQuantity.bind(this);
         this.addQuantity = this.addQuantity.bind(this);
+        this.checkWishlist = this.checkWishlist.bind(this);
         this.minusQuantity = this.minusQuantity.bind(this);        
 
         this.state = {
@@ -24,7 +25,7 @@ class CartPage extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.cart);
+        console.log(this.props.wishlist);
     }
 
     setQuantity(e, pid) {
@@ -68,6 +69,13 @@ class CartPage extends React.Component {
         return total;
     }
 
+    checkWishlist(wishlist) {
+        const itemExists = this.props.wishlist.find(item => item.description === wishlist.description);
+        console.log('itemExists: ',!!itemExists)
+
+        return !!itemExists;
+    }
+
     render() {
         return (
             <Fragment>
@@ -100,10 +108,16 @@ class CartPage extends React.Component {
                                                             <small className="text-muted">Seller: {item.seller}</small>
                                                             <p className="cart-text"><small>{item.description}</small></p>
                                                             <div className="cart-action-btn">
-                                                                <small
-                                                                    className="cart-action add-to-wishlist"
-                                                                    onClick={() => this.props.addToWishlist(item)}
-                                                                ><i className="far fa-heart"></i>WISHLIST</small>
+                                                                {
+                                                                    this.checkWishlist(item) ? <small>LIKED</small> : <small
+                                                                        className="cart-action add-to-wishlist"
+                                                                        onClick={() => this.props.addToWishlist(item)}
+                                                                        disabled
+                                                                    >
+                                                                        <i className="far fa-heart"></i>
+                                                                        WISHLIST
+                                                                    </small>
+                                                                }
                                                                 <small
                                                                     className="cart-action remove-from-cart"
                                                                     onClick={() => this.props.removeFromCart(parseInt(item.pid))}
@@ -121,10 +135,12 @@ class CartPage extends React.Component {
                                                     </div>
                                                     <div className="edit-cart-item">
                                                         <span className="edit-wishlist-cart">
-                                                            <i
-                                                                className="far fa-heart wishlist-remove-cart"
-                                                                onClick={() => this.props.addToWishlist(item)}
-                                                            ></i>
+                                                            {
+                                                                this.checkWishlist(item) ? <small>LIKED</small> : <i
+                                                                    className="far fa-heart wishlist-remove-cart"
+                                                                    onClick={() => this.props.addToWishlist(item)}
+                                                                ></i>
+                                                            }
                                                             <i
                                                                 className="fas fa-trash-alt"
                                                                 onClick={() => this.props.removeFromCart(item.pid)}
@@ -216,6 +232,7 @@ class CartPage extends React.Component {
 
 const mapStateToProps = (state) => ({
     cart: state.cart.cart,
+    wishlist: state.wishlist.wishlist,
     product: state.products.product
 });
 

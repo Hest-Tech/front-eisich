@@ -13,43 +13,28 @@ import { history } from '../routes/AppRouter';
 
 
 const url = "http://localhost:5000/api/v1/wishlist";
-const cartUrl = "http://localhost:5000/api/v1/cart";
 
 // add to wishlist
 export const addToWishlist = product => dispatch => {
     axios
-        .get(`${cartUrl}/${product.pid}`)
+        .post(`${url}/add/${product.pid}`, product)
         .then(res => {
-            const pid = res.data.data;
+            const newWishlist = res.data.data;
+            localStorage.setItem('wishlist', JSON.stringify(newWishlist));
 
-            if (!!pid) {
-                const wishlistProduct = {
-                    ...product,
-                    pid: pid.id
-                };
+            dispatch({
+                type: ADD_TO_WISHLIST,
+                payload: newWishlist
+            })
 
-                axios
-                    .post(`${url}/add/${pid.id}`, wishlistProduct)
-                    .then(res => {
-                        const newWishlist = res.data.data;
-                        localStorage.setItem('wishlist', JSON.stringify(newWishlist));
-
-                        dispatch({
-                            type: ADD_TO_WISHLIST,
-                            payload: newWishlist
-                        })
-
-                        history.push('/customer/wishlist');
-                    })
-                    .catch(e => console.log(e))
-            }
+            history.push('/customer/wishlist');
         })
         .catch(e => console.log(e))
 }
 
 // fetch wishlist
 export const fetchWishlist = () => dispatch => {
-    const wishlist = localStorage.getItem('cart');
+    const wishlist = localStorage.getItem('wishlist');
 
     if (!wishlist) {
         axios
@@ -66,6 +51,7 @@ export const fetchWishlist = () => dispatch => {
             .catch(e => console.log(e))
     } else {
         const parsedWishlist = JSON.parse(wishlist);
+        console.log('wishlist: ',parsedWishlist)
 
         dispatch({
             type: FETCH_WISHLIST,

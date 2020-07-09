@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const Cart = sequelize.define('Cart', {
         pid: DataTypes.INTEGER,
@@ -11,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         saving: DataTypes.INTEGER,
         subTotal: DataTypes.INTEGER
     }, {});
+    
     Cart.associate = function(models) {
         Cart.hasMany(models.Product, {
             foreignKey: 'pid'
