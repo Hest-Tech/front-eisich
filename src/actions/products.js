@@ -22,7 +22,6 @@ import {
 const url = "http://localhost:5000/api/v1";
 
 
-
 export const setCurrency = (num) => {
     if (isNaN(num) == false) {
         return (num).toLocaleString("en", {
@@ -117,10 +116,14 @@ export const displaySubCategories = () => dispatch => dispatch({
 
 // fetch category products
 export const fetchProducts = (sku, name, title) => dispatch => {
+    fetchAllProducts()
 
     const payload = {};
     const data = localStorage.getItem('allProducts');
     const products = !!data ? JSON.parse(data) : [];
+    console.log('products: ',products)
+    console.log('sku: ',sku)
+    console.log('name: ',name)
 
     const filteredProducts = products.filter(item => {
         switch (name) {
@@ -133,6 +136,8 @@ export const fetchProducts = (sku, name, title) => dispatch => {
         }
     });
 
+    console.log('filteredProducts: ',!!filteredProducts.length)
+
     if (!!filteredProducts.length) {
 
         const product = filteredProducts[0];
@@ -144,12 +149,9 @@ export const fetchProducts = (sku, name, title) => dispatch => {
             .get(fetchCategoryUrl)
             .then(response => {
                 const data = response.data.data;
-                console.log('res data: ',data)
-                const newData = !!data.length && data.map(item => ({
-                    ...item,
-                    title: name
-                }));
-                payload['breadCrumbs'] = newData;
+                console.log('res data: ',response)
+                // const newData = !!data.length && data;
+                payload['breadCrumbs'] = data;
                 payload['title'] = title
                 payload['filteredProducts'] = filteredProducts
                 localStorage.setItem('products', JSON.stringify(payload));
@@ -162,10 +164,12 @@ export const fetchProducts = (sku, name, title) => dispatch => {
             .catch(error => console.log(error))
     } else {
         const payload = {};
+        console.log('FILTER')
 
         payload['breadCrumbs'] = [];
         payload['title'] = "";
         payload['filteredProducts'] = [];
+        payload['products'] = [];
         
         dispatch({
             type: FETCH_PRODUCTS,

@@ -108,18 +108,18 @@ router.get('/:name/:mainSku/:subSku/:innerSku', async (req, res) => {
         switch(req.params.name) {
             case 'MAIN_CATEGORY':
                 mainCategory = await db.MainCategory.findOne({
-                    attributes: [ 'name', 'sku', 'path' ],
+                    attributes: [ 'name', 'sku', 'path', 'title' ],
                     where: { sku: mainSku }
                 });                
                 !!mainCategory && breadCrumbs.push(mainCategory);
                 break;
             case 'SUB_CATEGORY':
                 mainCategory = await db.MainCategory.findOne({
-                    attributes: [ 'name', 'sku', 'path' ],
+                    attributes: [ 'name', 'sku', 'path', 'title' ],
                     where: { sku: mainSku }
                 });
                 subCategory = await db.SubCategory.findOne({
-                    attributes: [ 'name', 'sku', 'path' ],
+                    attributes: [ 'name', 'sku', 'path', 'title' ],
                     where: { sku: subSku }
                 });
 
@@ -128,15 +128,15 @@ router.get('/:name/:mainSku/:subSku/:innerSku', async (req, res) => {
                 break;
             case 'INNER_CATEGORY':
                 mainCategory = await db.MainCategory.findOne({
-                    attributes: [ 'name', 'sku', 'path' ],
+                    attributes: [ 'name', 'sku', 'path', 'title' ],
                     where: { sku: mainSku }
                 });
                 subCategory = await db.SubCategory.findOne({
-                    attributes: [ 'name', 'sku', 'path' ],
+                    attributes: [ 'name', 'sku', 'path', 'title' ],
                     where: { sku: subSku }
                 });
                 innerCategory = await db.InnerSubCategory.findOne({
-                    attributes: [ 'name', 'sku', 'path' ],
+                    attributes: [ 'name', 'sku', 'path', 'title' ],
                     where: { sku: innerSku }
                 });
 

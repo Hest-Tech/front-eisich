@@ -13,6 +13,7 @@ const data = [{
         path: "/outerwear-jackets/",
         sku: uuidv4(),
         mainCategoryId: 1,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -20,6 +21,7 @@ const data = [{
         path: "/underwear-sleepwears/",
         sku: uuidv4(),
         mainCategoryId: 1,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -27,6 +29,7 @@ const data = [{
         path: "/accessories/",
         sku: uuidv4(),
         mainCategoryId: 1,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -34,6 +37,7 @@ const data = [{
         path: "/bottoms/",
         sku: uuidv4(),
         mainCategoryId: 1,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -41,6 +45,7 @@ const data = [{
         path: "/muslim-clothing/",
         sku: uuidv4(),
         mainCategoryId: 1,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -48,6 +53,7 @@ const data = [{
         path: "/muslim-accessories/",
         sku: uuidv4(),
         mainCategoryId: 1,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -55,6 +61,7 @@ const data = [{
         path: "/accessories/",
         sku: uuidv4(),
         mainCategoryId: 2,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -62,6 +69,7 @@ const data = [{
         path: "/tops-sets/",
         sku: uuidv4(),
         mainCategoryId: 2,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -69,6 +77,7 @@ const data = [{
         path: "/weddings-events/",
         sku: uuidv4(),
         mainCategoryId: 2,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -76,6 +85,7 @@ const data = [{
         path: "/bottoms/",
         sku: uuidv4(),
         mainCategoryId: 2,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -83,6 +93,7 @@ const data = [{
         path: "/muslim-clothing/",
         sku: uuidv4(),
         mainCategoryId: 2,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -90,6 +101,7 @@ const data = [{
         path: "/underwear-sleepwears/",
         sku: uuidv4(),
         mainCategoryId: 2,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -97,6 +109,7 @@ const data = [{
         path: "/baby-fashion/",
         sku: uuidv4(),
         mainCategoryId: 3,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -104,6 +117,7 @@ const data = [{
         path: "/baby-toys/",
         sku: uuidv4(),
         mainCategoryId: 3,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -111,6 +125,7 @@ const data = [{
         path: "/bathing-skin-care/",
         sku: uuidv4(),
         mainCategoryId: 3,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -118,6 +133,7 @@ const data = [{
         path: "/diapering/",
         sku: uuidv4(),
         mainCategoryId: 3,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -125,6 +141,7 @@ const data = [{
         path: "/feeding/",
         sku: uuidv4(),
         mainCategoryId: 3,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -132,6 +149,7 @@ const data = [{
         path: "/accessories/",
         sku: uuidv4(),
         mainCategoryId: 4,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -139,6 +157,7 @@ const data = [{
         path: "/mobile-phones/",
         sku: uuidv4(),
         mainCategoryId: 4,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -146,6 +165,7 @@ const data = [{
         path: "/tablets/",
         sku: uuidv4(),
         mainCategoryId: 4,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -153,6 +173,7 @@ const data = [{
         path: "/top-brands/",
         sku: uuidv4(),
         mainCategoryId: 4,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -160,6 +181,7 @@ const data = [{
         path: "/laptops/",
         sku: uuidv4(),
         mainCategoryId: 5,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -167,6 +189,7 @@ const data = [{
         path: "/networking/",
         sku: uuidv4(),
         mainCategoryId: 5,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -174,6 +197,7 @@ const data = [{
         path: "/office-electronics/",
         sku: uuidv4(),
         mainCategoryId: 5,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -181,6 +205,7 @@ const data = [{
         path: "/peripherals/",
         sku: uuidv4(),
         mainCategoryId: 5,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -188,6 +213,7 @@ const data = [{
         path: "/security/",
         sku: uuidv4(),
         mainCategoryId: 5,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -195,6 +221,7 @@ const data = [{
         path: "/storage/",
         sku: uuidv4(),
         mainCategoryId: 5,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -202,6 +229,7 @@ const data = [{
         path: "/furniture/",
         sku: uuidv4(),
         mainCategoryId: 6,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -209,6 +237,7 @@ const data = [{
         path: "/garden/",
         sku: uuidv4(),
         mainCategoryId: 6,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -216,6 +245,7 @@ const data = [{
         path: "/home-decor/",
         sku: uuidv4(),
         mainCategoryId: 6,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -223,6 +253,7 @@ const data = [{
         path: "/home-textiles/",
         sku: uuidv4(),
         mainCategoryId: 6,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -230,6 +261,7 @@ const data = [{
         path: "/household-items/",
         sku: uuidv4(),
         mainCategoryId: 6,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -237,6 +269,7 @@ const data = [{
         path: "/kitchen/",
         sku: uuidv4(),
         mainCategoryId: 6,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -244,6 +277,7 @@ const data = [{
         path: "/fashion-jewellery/",
         sku: uuidv4(),
         mainCategoryId: 7,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -251,6 +285,7 @@ const data = [{
         path: "/men-watches/",
         sku: uuidv4(),
         mainCategoryId: 7,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -258,6 +293,7 @@ const data = [{
         path: "/wedding/",
         sku: uuidv4(),
         mainCategoryId: 7,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -265,6 +301,7 @@ const data = [{
         path: "/women-watches/",
         sku: uuidv4(),
         mainCategoryId: 7,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -272,6 +309,7 @@ const data = [{
         path: "/cycling/",
         sku: uuidv4(),
         mainCategoryId: 8,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -279,6 +317,7 @@ const data = [{
         path: "/sportswear/",
         sku: uuidv4(),
         mainCategoryId: 8,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -286,6 +325,7 @@ const data = [{
         path: "/swimming/",
         sku: uuidv4(),
         mainCategoryId: 8,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -293,6 +333,7 @@ const data = [{
         path: "/automobile/",
         sku: uuidv4(),
         mainCategoryId: 9,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -300,6 +341,7 @@ const data = [{
         path: "/accessory-parts/",
         sku: uuidv4(),
         mainCategoryId: 10,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -307,6 +349,7 @@ const data = [{
         path: "/home-audio-video/",
         sku: uuidv4(),
         mainCategoryId: 10,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -314,6 +357,7 @@ const data = [{
         path: "/camera/",
         sku: uuidv4(),
         mainCategoryId: 10,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }, {
@@ -321,6 +365,7 @@ const data = [{
         path: "/video-games/",
         sku: uuidv4(),
         mainCategoryId: 10,
+        title: "SUB_CATEGORY",
         createdAt: new Date(),
         updatedAt: new Date()
     }]

@@ -51,7 +51,7 @@ const AppRouter = () => (
                 <PrivateRoute path="/customer/profile/edit" component={UpdateAccount} />
                 <PrivateRoute path="/customer/address-book/edit" component={UpdateAddressBook} />
                 <PrivateRoute path="/checkout" component={CheckoutPage} />
-                <Route path="/cart" component={CartPage} />
+                <PrivateRoute path="/cart" component={CartPage} />
                 <MobileRoutes path="/user/profile" component={ProfilePage} />     /*mobile only*/
                 <MobileRoutes path="/category" component={CategoryPage} />     /*mobile only*/
                 <MobileRoutes path="/user/mobile/login" component={LoginPage} />     /*mobile only*/

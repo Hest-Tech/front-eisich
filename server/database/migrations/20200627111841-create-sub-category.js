@@ -12,6 +12,9 @@ module.exports = {
                 sku: {
                     type: Sequelize.UUID
                 },
+                title: {
+                    type: Sequelize.STRING
+                },
                 mainCategoryId: {
                     type: Sequelize.INTEGER,
                     references: { // SubCategories belongsTo MainCategories

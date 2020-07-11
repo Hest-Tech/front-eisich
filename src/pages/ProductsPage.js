@@ -8,29 +8,37 @@ import { connect } from 'react-redux';
 
 import dress from '../assets/images/women-dress-removebg.png';
 import NavBar from '../components/NavBar';
+import RangeSlider from '../components/RangeSlider';
 import ProductNotFound from './ProductNotFound';
 import {
     fetchProduct,
     fetchProducts,
-    fetchAllProducts,
     setCurrency,
     loadRelatedCategories
 } from '../actions/products';
-import { sortByPrice } from '../actions/filters';
+import {
+    sortByPrice,
+    setRangeFilter
+} from '../actions/filters';
 import { history } from '../routes/AppRouter';
 import Scroll from '../components/Scroll';
 import selectProducts from '../selectors/products';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 
 class ProductsPage extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.onRangeValueChange = this.onRangeValueChange.bind(this);
+    }
+
     componentDidMount() {
         this.props.loadRelatedCategories();
-        this.props.fetchAllProducts();
     }
 
     filters(val) {
-        console.log('currentCategory: ',this.props.products.currentCategory)
+        console.log('currentCategory: ', this.props.products.currentCategory)
         if (!!this.props.products.currentCategory) {
             const filterList = this.props.products.currentCategory.filters
             const filter = !!filterList ? filterList : [];
@@ -58,7 +66,7 @@ class ProductsPage extends React.Component {
         let name;
         console.log('category: ', category);
 
-        switch(parsedCategory.name) {
+        switch (parsedCategory.name) {
             case 'MAIN_CATEGORY':
                 name = 'SUB_CATEGORY'
                 break;
@@ -69,6 +77,7 @@ class ProductsPage extends React.Component {
                 name = 'INNER_CATEGORY'
                 break;
         }
+        console.log('name: ', name);
 
         this.props.fetchProducts(category.sku, name, category.title)
     }
@@ -76,23 +85,47 @@ class ProductsPage extends React.Component {
     sortItems(e) {
         const sortVal = e.target.value.toLowerCase();
 
-        switch(sortVal) {
+        switch (sortVal) {
             case 'price':
                 this.props.sortByPrice()
                 break;
         }
     }
 
+    onRangeValueChange(e) {
+        const name = e.target.name;
+        const value = parseInt(e.target.value);
+        const range = [];
+        const currentRange = this.props.filters.range;
+        const currentMax = parseInt(document.querySelector('#max').value);
+        const currentMin = parseInt(document.querySelector('#min').value);
+
+        switch(name) {
+            case 'min':
+                this.props.setRangeFilter(value, currentRange[1])
+                currentRange[0] = value;
+                currentRange[1] = currentMax;
+                break;
+            case 'max':
+                this.props.setRangeFilter(currentRange[0], value)
+                currentRange[0] = currentMin;
+                currentRange[1] = value;
+                break;
+        }
+        console.log(currentRange);
+    }
+
     render() {
-        console.log('this.props: ',this.props.products)
+        console.log('this.props: ', this.props.products)
         const itemLength = this.props.products.breadCrumbs.length;
         const subCategories = this.props.products.relatedCategory;
         const subCategoriesLength = this.props.products.productsList.length;
-        console.log('subCategories: ',subCategories)
+        console.log('subCategories: ', subCategories)
 
         return (
             <div className="App">
                 <NavBar />
+
                 <div
                     className="products-container"
                 >
@@ -115,19 +148,20 @@ class ProductsPage extends React.Component {
                                             <React.Fragment
                                                 key={i}
                                             >
-                                                <a
+                                                <div
                                                     className="breadcrumb-text"
-                                                    href={`http://localhost:8080/products${item.path}`}
+                                                    // href={`http://localhost:8080/products${item.path}`}
                                                     // href='#'
                                                     // data-sku={item.sku}
                                                     style={{color:'#E9BD4C'}}
                                                     onClick={() => {
-                                                        console.log('clicked')
-                                                        this.props.fetchProducts(item.sku, item.name, item.title)
+                                                        // this.fetchCategoryProducts(item)
+                                                        console.log('title: ',item.title)
+                                                        this.props.fetchProducts(item.sku, item.title, item.name);
                                                     }}
                                                 >
                                                     {item.name}
-                                                </a>
+                                                </div>
                                                 {
                                                     i !== this.props.products.breadCrumbs.length - 1 && <i
                                                         className="fas fa-angle-right mx-2"
@@ -247,16 +281,29 @@ class ProductsPage extends React.Component {
                                         </nav>
                                     }
                                     <form className="multi-range-field-option">
-                                        <input type="text" className="form-control" defaultValue="0" />
                                         <input
-                                            id="multi"
-                                            className="multi-range"
-                                            type="range"
-                                            min="0"
-                                            max="250000"
-                                            step="1500"
+                                            type="number"
+                                            className="form-control range-input"
+                                            value={this.props.filters.min}
+                                            onChange={this.onRangeValueChange}
+                                            name="min"
+                                            id="min"
+                                            min={0}
+                                            max={250000}
                                         />
-                                        <input type="text" className="form-control" defaultValue="KSH12,500" />
+                                            <span style={{
+                                                margin: '0 2rem'
+                                            }}><RangeSlider /></span>
+                                        <input
+                                            type="number"
+                                            className="form-control range-input"
+                                            value={this.props.filters.max}
+                                            onChange={this.onRangeValueChange}
+                                            name="max"
+                                            id="max"
+                                            min={0}
+                                            max={250000}
+                                        />
                                     </form>
                                     <label className="sort-by-filter">Sort by:
                                         <select
@@ -278,7 +325,6 @@ class ProductsPage extends React.Component {
                                     <p className="product-filter-btn">Filters</p>
                                 </div>
                             </div>
-                            {console.log(this.props.products.productsList)}
                             {
                                 !!this.props.products.productsList.length ? <div className="product-items">
                                 {
@@ -348,13 +394,14 @@ class ProductsPage extends React.Component {
 
 const mapStateToProps = (state) => ({
     products: selectProducts(state.products, state.filters),
+    filters: state.filters
 });
 
 const mapDispatchToProps = (dispatch) => ({
     fetchProduct: (pid) => dispatch(fetchProduct(pid)),
     fetchProducts: (sku, name, title) => dispatch(fetchProducts(sku, name, title)),
     loadRelatedCategories: () => dispatch(loadRelatedCategories()),
-    fetchAllProducts: () => dispatch(fetchAllProducts()),
+    setRangeFilter: (text) => dispatch(setRangeFilter(text)),
     sortByPrice: () => dispatch(sortByPrice())
 });
 

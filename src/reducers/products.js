@@ -49,6 +49,7 @@ export default (state = productsReducerDefaultState, action) => {
                 ...state,
                 productsList: action.payload.filteredProducts,
                 productsTitle: action.payload.title,
+                products: action.payload.products,
                 breadCrumbs: action.payload.breadCrumbs
             }
         case 'FETCH_ALL_PRODUCTS':

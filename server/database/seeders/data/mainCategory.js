@@ -22,6 +22,7 @@ const clothesFilters = {
 const clothesSku = uuidv4();
 const data = [{
     sku: sku.menSku,
+    title: "MAIN_CATEGORY",
     name: "Men's Fashion",
     clothesSku,
     path: "/men-fashion/",
@@ -32,6 +33,7 @@ const data = [{
     filters: clothesFilters.sideFilters
 }, {
     sku: sku.womenSku,
+    title: "MAIN_CATEGORY",
     name: "Women's Fashion",
     clothesSku,
     path: "/women-fashion/",
@@ -42,6 +44,7 @@ const data = [{
     filters: clothesFilters.sideFilters
 }, {
     sku: sku.kidsSku,
+    title: "MAIN_CATEGORY",
     name: "Kid's & Babies",
     clothesSku,
     path: "/kids-babies/",
@@ -52,6 +55,7 @@ const data = [{
     filters: clothesFilters.sideFilters
 }, {
     sku: sku.mobileSku,
+    title: "MAIN_CATEGORY",
     name: 'Mobile Phones & Accessories',
     related: uuidv4(),
     path: "/mobile-phones-accessories/",
@@ -60,6 +64,7 @@ const data = [{
     updatedAt: new Date(),
 }, {
     sku: sku.officeSku,
+    title: "MAIN_CATEGORY",
     name: 'Computer, Office & Security',
     related: uuidv4(),
     path: "/computer-office-security/",
@@ -68,6 +73,7 @@ const data = [{
     updatedAt: new Date(),
 }, {
     sku: sku.homeSku,
+    title: "MAIN_CATEGORY",
     name: 'Home & Living',
     related: uuidv4(),
     path: "/home-living/",
@@ -76,6 +82,7 @@ const data = [{
     updatedAt: new Date(),
 }, {
     sku: sku.jewellerySku,
+    title: "MAIN_CATEGORY",
     name: 'Jewellery',
     related: uuidv4(),
     path: "/jewellery/",
@@ -84,6 +91,7 @@ const data = [{
     updatedAt: new Date(),
 }, {
     sku: sku.funSku,
+    title: "MAIN_CATEGORY",
     name: 'Fun & Sports',
     related: uuidv4(),
     path: "/fun-sports/",
@@ -92,6 +100,7 @@ const data = [{
     updatedAt: new Date(),
 }, {
     sku: sku.carsSku,
+    title: "MAIN_CATEGORY",
     name: 'Automobile',
     related: uuidv4(),
     path: "/automobile/",
@@ -100,6 +109,7 @@ const data = [{
     updatedAt: new Date(),
 }, {
     sku: sku.electronicSku,
+    title: "MAIN_CATEGORY",
     name: 'Consumer Electronics',
     related: uuidv4(),
     path: "/consumer-electronics/",

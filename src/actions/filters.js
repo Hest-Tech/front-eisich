@@ -24,3 +24,14 @@ export const clickResult = () => ({
 export const hideResult = () => ({
 	type: 'HIDE_RESULT'
 })
+
+export const handleRange = (range) => ({
+	type: 'HANDLE_RANGE',
+	payload: range
+});
+
+export const setRangeFilter = (min, max) => ({
+	type: 'SET_RANGE_FILTER',
+	min,
+	max
+})

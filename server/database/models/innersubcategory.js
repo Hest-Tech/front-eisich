@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     const InnerSubCategory = sequelize.define('InnerSubCategory', {
         name: DataTypes.STRING,
         path: DataTypes.STRING,
+        title: DataTypes.STRING,
         sku: DataTypes.UUID,
         subCategoryId: DataTypes.INTEGER
     }, {});

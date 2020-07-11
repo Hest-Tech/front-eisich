@@ -65,11 +65,9 @@ class NavBar extends React.Component {
         this.props.focusResults()
     }
 
-    componentDidMount() {
-        this.props.loadUser();
-        this.props.fetchAllProducts();
-        this.props.fetchCart();
-    }
+    // componentDidMount() {
+    //     this.props.loadUser();
+    // }
 
     componentDidUpdate() {
         const target = document.querySelector('.search-input-results');

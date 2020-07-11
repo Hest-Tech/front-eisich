@@ -10,7 +10,8 @@ import {
     loadUser,
     unloadUser
 } from './actions/authentication';
-import { loadProductCategories } from './actions/products';
+import { loadProductCategories, fetchAllProducts } from './actions/products';
+import { fetchCart } from './actions/cart';
 import clientStorage from './utils/clientStorage';
 import configureStore from './store/configureStore';
 
@@ -28,7 +29,8 @@ const renderApp = () => {
         render(<App />, document.getElementById('root'));
         hasRendered = true;
     }
-    store.dispatch(loadProductCategories())
+    store.dispatch(loadProductCategories());
+    store.dispatch(fetchAllProducts());
     // var ref = fire.database().ref("users");
 }
 
@@ -38,6 +40,7 @@ fire.auth().onAuthStateChanged(user => {
         let userId = user.uid;
 
         store.dispatch(loadUser());
+        store.dispatch(fetchCart());
         // console.log(user);
         return fire.database()
             .ref('/users/' + userId)

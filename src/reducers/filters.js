@@ -2,8 +2,12 @@
  * Filter Reducer
  */
 
+const range = [0, 250000];
 const filterReducerDefaultState = {
     text: '',
+    min: range[0],
+    max: range[1],
+    range,
     searching: false,
     clickResult: false,
     sortBy: 'All items', // All items, price, size
@@ -41,6 +45,17 @@ export default (state = filterReducerDefaultState, action) => {
             return {
                 ...state,
                 sortBy: 'price'
+            }
+        case 'HANDLE_RANGE':
+            return {
+                ...state,
+                range: action.payload
+            }
+        case 'SET_RANGE_FILTER':
+            return {
+                ...state,
+                min: action.min,
+                max: action.max
             }
         default:
             return state;

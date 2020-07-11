@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     const SubCategory = sequelize.define('SubCategory', {
         sku: DataTypes.STRING,
         name: DataTypes.STRING,
+        title: DataTypes.STRING,
         path: DataTypes.STRING
     }, {});
     SubCategory.associate = function(models) {

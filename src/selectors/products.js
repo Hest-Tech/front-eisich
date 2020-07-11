@@ -6,10 +6,16 @@
 
 // Get visible products
 
-export default (products, { text, sortBy }) => {
-	// console.log('products reducer: ',products);
+export default (products, { text, sortBy, min, max }) => {
     const filteredItems = !!products.productsList.length ? products.productsList.filter(
-        (product) => product.description.toLowerCase().includes(text.toLowerCase())
+        (product) => {
+            const maxPrice = product.newPrice <= max;
+            const minPrice = product.newPrice >= min;
+            const range = maxPrice && minPrice;
+            const textFilter = product.description.toLowerCase().includes(text.toLowerCase());
+
+            return textFilter && range
+        }
     ).sort((a, b) => {
         if (sortBy === 'price') {
             return a.price > b.price ? 1 : -1;
