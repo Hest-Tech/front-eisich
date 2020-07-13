@@ -54,15 +54,11 @@ class NavBar extends React.Component {
     }
 
     blurResults(e) {
-        const target = e.target.parentElement.parentElement.nextElementSibling;
-        console.log('searching: ',this.props.filters.clickResult)
-        !this.props.filters.clickResult && this.props.blurResults()
+        this.props.blurResults();
     }
 
     focusResults(e) {
-        const target = e.target.parentElement.parentElement.nextElementSibling;
-        // console.log('searching: ',this.props.filters.searching)
-        this.props.focusResults()
+        this.props.focusResults();
     }
 
     // componentDidMount() {
@@ -70,13 +66,6 @@ class NavBar extends React.Component {
     // }
 
     componentDidUpdate() {
-        const target = document.querySelector('.search-input-results');
-
-        if (!this.props.filters.searching) {
-            target.style.visibility = 'hidden';
-        } else {
-            target.style.visibility = 'visible';
-        }
         // console.log('searching: ',this.props.filters.searching)
     }
 
@@ -165,9 +154,7 @@ class NavBar extends React.Component {
                                 className="search-input-results"
                             >
                                 {
-                                    !!this.props.filters.text && <FilterProducts
-                                        products={this.props.products}
-                                    />
+                                    (!!this.props.filters.text && this.props.filters.searching) && <FilterProducts />
                                 }
                             </div>
                         </div>

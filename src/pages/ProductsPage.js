@@ -153,11 +153,15 @@ class ProductsPage extends React.Component {
                                                     // href={`http://localhost:8080/products${item.path}`}
                                                     // href='#'
                                                     // data-sku={item.sku}
-                                                    style={{color:'#E9BD4C'}}
+                                                    style={{
+                                                        color:'#E9BD4C',
+                                                        cursor: 'pointer'
+                                                    }}
                                                     onClick={() => {
                                                         // this.fetchCategoryProducts(item)
                                                         console.log('title: ',item.title)
                                                         this.props.fetchProducts(item.sku, item.title, item.name);
+                                                        // history.push(`products${item.path}`)
                                                     }}
                                                 >
                                                     {item.name}

@@ -9,6 +9,7 @@ import NavBar from '../components/NavBar';
 import MobileMenu from '../components/home/MobileMenu';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Scroll from '../components/Scroll';
+import { fetchAllProducts } from '../actions/products';
 
 
 class HomePage extends React.Component {
@@ -20,6 +21,10 @@ class HomePage extends React.Component {
             delayInMs: 16.66,
             scrollStepInPx: 50
         };
+    }
+
+    componentDidMount() {
+        // this.props.fetchAllProducts()
     }
 
     render() {
@@ -45,4 +50,8 @@ const mapStateToProps = (state) => ({
     resMessages: state.resMessages
 });
 
-export default connect(mapStateToProps)(HomePage);
+const mapDispatchToProps = (dispatch) => ({
+    fetchAllProducts: () => dispatch(fetchAllProducts())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

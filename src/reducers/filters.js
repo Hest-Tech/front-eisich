@@ -39,7 +39,7 @@ export default (state = filterReducerDefaultState, action) => {
         case 'HIDE_RESULT':
             return {
                 ...state,
-                clickResult: false
+                text: ''
             }
         case 'SORT_BY_PRICE':
             return {

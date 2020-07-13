@@ -11,7 +11,7 @@ import { history } from '../routes/AppRouter';
 
 const FilterProductItem = ({
 	description,
-	imgLink,
+	imgId,
 	path,
 	pid,
 	fetchProduct,
@@ -20,17 +20,18 @@ const FilterProductItem = ({
 }) => (
 	<Fragment>
 		<div
-            onClick={() => {
-            	console.log('pid: ',pid)
-            	clickResult();
-            	// history.push(`/product${path}`)
-            	fetchProduct(pid)
+            onMouseDown={(e) => {
+            	e.preventDefault();
             	hideResult();
+            	console.log('pid: ',pid)
+            	// clickResult();
+            	history.push(`/product${path}`)
+            	fetchProduct(pid)
             }}
 			className="search-results"
 		>
 			<span className="search-description">{ description }</span>
-			<img className="search-imgLink" src={`${imgLink}.jpg`} alt={ description } />
+			<img className="search-imgLink" src={`https://imgur.com/${imgId}.jpg`} alt={ description } />
 		</div>
 	</Fragment>
 );

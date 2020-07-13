@@ -7,6 +7,7 @@
 // Get visible products
 
 export default (products, { text, sortBy, min, max }) => {
+    console.log('products: ',products);
     const filteredItems = !!products.productsList.length ? products.productsList.filter(
         (product) => {
             const maxPrice = product.newPrice <= max;
@@ -22,7 +23,7 @@ export default (products, { text, sortBy, min, max }) => {
         }
     }) : products.products;
 
-    // console.log(filteredItems)
+    console.log('filteredItems: ',filteredItems)
     return {
     	...products,
     	productsList: filteredItems

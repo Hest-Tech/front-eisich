@@ -42,7 +42,7 @@ export default (state = productsReducerDefaultState, action) => {
         case 'HIDE_SUB_CATEGORIES':
             return {
                 ...state,
-                displaySubCategories: false
+                displaySubCategories: products
             }
         case 'FETCH_PRODUCTS':
             return {

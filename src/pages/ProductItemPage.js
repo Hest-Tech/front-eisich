@@ -155,34 +155,38 @@ class ProductItemPage extends React.Component {
                         <div className="product-item__img">
                             <div className="main-img-background">
                                 {/*<Zoom
-                                    img={this.state.imgLink}
+                                    img={`https://imgur.com/${this.props.product.imgId}.jpg`}
                                     className="main-product-img-zm"
                                     zoomScale={3}
                                     width={500}
                                     height={500}
                                 />*/}
-                                <img src={this.state.imgLink} style={{width:'500px',height:'500px'}} alt="" />
-                                <img src={this.state.imgLink} alt="main product image" className="main-product-img" />
+                                <img
+                                    src={`https://imgur.com/${this.props.product.imgId}.jpg`}
+                                    style={{width:'400px',height:'400px'}}
+                                    alt="main product image"
+                                />
+                                {/*<img src={`https://imgur.com/${this.props.product.imgId}.jpg`} alt="main product image" className="main-product-img" />*/}
                             </div>
                             <span className="product-img-color">
                                 <div className="color-variant">
                                     <div className="color-variant-background red">
-                                        <img src={this.state.img} alt="product color variation" className="img-color-variant" />
+                                        <img src={`https://imgur.com/${this.props.product.imgId}.jpg`} alt="product color variation" className="img-color-variant" />
                                     </div>
                                 </div>
                                 <div className="color-variant">
                                     <div className="color-variant-background orange">
-                                        <img src={this.state.img} alt="product color variation" className="img-color-variant" />
+                                        <img src={`https://imgur.com/${this.props.product.imgId}.jpg`} alt="product color variation" className="img-color-variant" />
                                     </div>
                                 </div>
                                 <div className="color-variant">
                                     <div className="color-variant-background baige">
-                                        <img src={this.state.img} alt="product color variation" className="img-color-variant" />
+                                        <img src={`https://imgur.com/${this.props.product.imgId}.jpg`} alt="product color variation" className="img-color-variant" />
                                     </div>
                                 </div>
                                 <div className="color-variant">
                                     <div className="color-variant-background blue">
-                                        <img src={this.state.img} alt="product color variation" className="img-color-variant" />
+                                        <img src={`https://imgur.com/${this.props.product.imgId}.jpg`} alt="product color variation" className="img-color-variant" />
                                     </div>
                                 </div>
                             </span>
@@ -236,22 +240,22 @@ class ProductItemPage extends React.Component {
                                     <span className="product-img-color-selector">
                                         <div className="color-variant-selector">
                                             <div className="color-variant-background red">
-                                                <img src={this.state.imgLink} alt="product color variation" className="img-color-variant" />
+                                                <img src={`https://imgur.com/${this.props.product.imgId}.jpg`} alt="product color variation" className="img-color-variant" />
                                             </div>
                                         </div>
                                         <div className="color-variant-selector">
                                             <div className="color-variant-background orange">
-                                                <img src={this.state.imgLink} alt="product color variation" className="img-color-variant" />
+                                                <img src={`https://imgur.com/${this.props.product.imgId}.jpg`} alt="product color variation" className="img-color-variant" />
                                             </div>
                                         </div>
                                         <div className="color-variant-selector">
                                             <div className="color-variant-background baige">
-                                                <img src={this.state.imgLink} alt="product color variation" className="img-color-variant" />
+                                                <img src={`https://imgur.com/${this.props.product.imgId}.jpg`} alt="product color variation" className="img-color-variant" />
                                             </div>
                                         </div>
                                         <div className="color-variant-selector">
                                             <div className="color-variant-background blue">
-                                                <img src={this.state.imgLink} alt="product color variation" className="img-color-variant" />
+                                                <img src={`https://imgur.com/${this.props.product.imgId}.jpg`} alt="product color variation" className="img-color-variant" />
                                             </div>
                                         </div>
                                     </span>
