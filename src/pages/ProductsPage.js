@@ -17,6 +17,7 @@ import {
     loadRelatedCategories
 } from '../actions/products';
 import {
+    handleRange,
     sortByPrice,
     setRangeFilter
 } from '../actions/filters';
@@ -30,7 +31,10 @@ class ProductsPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.onRangeValueChange = this.onRangeValueChange.bind(this);
+
+        this.onRangeMinValueChange = this.onRangeMinValueChange.bind(this);
+        this.onRangeMaxValueChange = this.onRangeMaxValueChange.bind(this);
+
     }
 
     componentDidMount() {
@@ -92,27 +96,18 @@ class ProductsPage extends React.Component {
         }
     }
 
-    onRangeValueChange(e) {
-        const name = e.target.name;
+    onRangeMinValueChange(e) {
         const value = parseInt(e.target.value);
-        const range = [];
         const currentRange = this.props.filters.range;
-        const currentMax = parseInt(document.querySelector('#max').value);
-        const currentMin = parseInt(document.querySelector('#min').value);
 
-        switch(name) {
-            case 'min':
-                this.props.setRangeFilter(value, currentRange[1])
-                currentRange[0] = value;
-                currentRange[1] = currentMax;
-                break;
-            case 'max':
-                this.props.setRangeFilter(currentRange[0], value)
-                currentRange[0] = currentMin;
-                currentRange[1] = value;
-                break;
-        }
-        console.log(currentRange);
+        this.props.handleRange([value, currentRange[1]]);
+    }
+
+    onRangeMaxValueChange(e) {
+        const value = parseInt(e.target.value);
+        const currentRange = this.props.filters.range;
+
+        this.props.handleRange([currentRange[0], value]);
     }
 
     render() {
@@ -158,8 +153,7 @@ class ProductsPage extends React.Component {
                                                         cursor: 'pointer'
                                                     }}
                                                     onClick={() => {
-                                                        // this.fetchCategoryProducts(item)
-                                                        console.log('title: ',item.title)
+                                                        console.log(history);
                                                         this.props.fetchProducts(item.sku, item.title, item.name);
                                                         // history.push(`products${item.path}`)
                                                     }}
@@ -289,7 +283,7 @@ class ProductsPage extends React.Component {
                                             type="number"
                                             className="form-control range-input"
                                             value={this.props.filters.min}
-                                            onChange={this.onRangeValueChange}
+                                            onChange={this.onRangeMinValueChange}
                                             name="min"
                                             id="min"
                                             min={0}
@@ -302,7 +296,7 @@ class ProductsPage extends React.Component {
                                             type="number"
                                             className="form-control range-input"
                                             value={this.props.filters.max}
-                                            onChange={this.onRangeValueChange}
+                                            onChange={this.onRangeMaxValueChange}
                                             name="max"
                                             id="max"
                                             min={0}
@@ -406,6 +400,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchProducts: (sku, name, title) => dispatch(fetchProducts(sku, name, title)),
     loadRelatedCategories: () => dispatch(loadRelatedCategories()),
     setRangeFilter: (text) => dispatch(setRangeFilter(text)),
+    handleRange: (range) => dispatch(handleRange(range)),
     sortByPrice: () => dispatch(sortByPrice())
 });
 

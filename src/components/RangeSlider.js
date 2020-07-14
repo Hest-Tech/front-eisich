@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { connect } from 'react-redux';
 
-import { handleRange, setRangeFilter } from '../actions/filters';
+import { handleRange } from '../actions/filters';
 
 const useStyles = makeStyles({
     root: {
@@ -46,8 +46,8 @@ const RangeSlider = (props) => {
     const [value, setValue] = React.useState(props.filters.range);
 
     const handleChange = (event, newValue) => {
+        console.log('range: ',newValue)
         props.handleRange(newValue);
-        props.setRangeFilter(newValue[0], newValue[1])
         setValue(newValue);
     };
 
@@ -55,7 +55,7 @@ const RangeSlider = (props) => {
         <div className={classes.root}>
 
             <PrettoSlider
-                value={value}
+                value={props.filters.range}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
                 getAriaLabel={value => value}
@@ -73,8 +73,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    handleRange: (range) => dispatch(handleRange(range)),
-    setRangeFilter: (min, max) => dispatch(setRangeFilter(min, max))
+    handleRange: (range) => dispatch(handleRange(range))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RangeSlider);

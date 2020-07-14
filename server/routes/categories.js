@@ -186,6 +186,91 @@ router.get('/product/:pid', async (req, res) => {
     }
 });
 
+// fetch category breadcrumbs
+router.get('/breadCrumbs/:name/:sku', async (req, res) => {
+    const sku = req.params.sku;
+    const name = req.params.name;
+    const breadCrumbs = [];
+
+    switch (name) {
+        case 'MAIN_CATEGORY':
+            try {
+                const mainCategory = await db.MainCategory.findOne({
+                    attributes: [ 'id' ],
+                    where: { sku }
+                })
+
+                const subCategory = await db.SubCategory.findOne({
+                    attributes: ['name', 'sku', 'path', 'title'],
+                    where: {
+                        mainCategoryId: mainCategory.id
+                    }
+                });
+
+                !!subCategory && breadCrumbs.push(subCategory);
+
+            } catch(e) {
+                console.log(e);
+            }
+            break;
+        case 'SUB_CATEGORY':
+            try {
+                const subCategory = await db.SubCategory.findOne({
+                    attributes: ['name', 'sku', 'path', 'title', 'mainCategoryId'],
+                    where: { sku }
+                });
+
+                const mainCategory = await db.MainCategory.findOne({
+                    attributes: ['name', 'sku', 'path', 'title'],
+                    where: {
+                        id: subCategory.dataValues.mainCategoryId
+                    }
+                })
+
+                !!mainCategory && breadCrumbs.push(mainCategory);
+                !!subCategory && breadCrumbs.push(subCategory);
+
+            } catch(e) {
+                console.log(e);
+            }
+            break;
+        case 'INNER_CATEGORY':
+            try {
+                const innerCategory = await db.InnerSubCategory.findOne({
+                    attributes: ['name', 'sku', 'path', 'title', 'subCategoryId'],
+                    where: { sku }
+                });
+
+                const subCategory = await db.SubCategory.findOne({
+                    attributes: ['name', 'sku', 'path', 'title', 'mainCategoryId'],
+                    where: {
+                        id: innerCategory.dataValues.subCategoryId
+                    }
+                });
+                console.log(subCategory.dataValues);
+                console.log('mainCategoryId: ',subCategory.mainCategoryId);
+                console.log('name: ',subCategory.name);
+
+                const mainCategory = await db.MainCategory.findOne({
+                    attributes: ['name', 'sku', 'path', 'title'],
+                    where: {
+                        id: subCategory.dataValues.mainCategoryId
+                    }
+                });
+
+                !!mainCategory && breadCrumbs.push(mainCategory);
+                !!subCategory && breadCrumbs.push(subCategory);
+                !!innerCategory && breadCrumbs.push(innerCategory);
+
+            } catch(e) {
+                console.log(e);
+            }
+            break;
+    }
+
+    return res.json({ data: breadCrumbs });
+})
+
 // fetch related categories
 router.get('/:name/:sku', async (req, res) => {
     const sku = req.params.sku;

@@ -132,7 +132,8 @@ export const fetchProducts = (sku, name, title) => dispatch => {
             case 'SUB_CATEGORY':
                 return item.subCategory === sku
             case 'INNER_CATEGORY':
-                return item.innerCategory === sku
+                const productFound = item.innerCategory === sku;
+                return productFound;
         }
     });
 
@@ -166,15 +167,22 @@ export const fetchProducts = (sku, name, title) => dispatch => {
         const payload = {};
         console.log('FILTER')
 
-        payload['breadCrumbs'] = [];
-        payload['title'] = "";
-        payload['filteredProducts'] = [];
-        payload['products'] = [];
-        
-        dispatch({
-            type: FETCH_PRODUCTS,
-            payload
-        })
+        axios
+            .get(`${url}/breadCrumbs/${name}/${sku}`)
+            .then(res => {
+                const data = res.data.data;
+                console.log('breadCrumbs: ',data)
+                payload['breadCrumbs'] = data;
+                payload['title'] = title;
+                payload['filteredProducts'] = [];
+                payload['products'] = [];
+                
+                dispatch({
+                    type: FETCH_PRODUCTS,
+                    payload
+                })
+            })
+            .catch(e => console.log(e));
     }
 }
 

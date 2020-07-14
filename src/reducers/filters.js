@@ -49,13 +49,9 @@ export default (state = filterReducerDefaultState, action) => {
         case 'HANDLE_RANGE':
             return {
                 ...state,
-                range: action.payload
-            }
-        case 'SET_RANGE_FILTER':
-            return {
-                ...state,
-                min: action.min,
-                max: action.max
+                range: action.payload,
+                min: action.payload[0],
+                max: action.payload[1]
             }
         default:
             return state;
