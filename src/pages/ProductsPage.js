@@ -18,8 +18,7 @@ import {
 } from '../actions/products';
 import {
     handleRange,
-    sortByPrice,
-    setRangeFilter
+    sortByPrice
 } from '../actions/filters';
 import { history } from '../routes/AppRouter';
 import Scroll from '../components/Scroll';
@@ -84,6 +83,7 @@ class ProductsPage extends React.Component {
         console.log('name: ', name);
 
         this.props.fetchProducts(category.sku, name, category.title)
+        history.push(`/products${category.path}`)
     }
 
     sortItems(e) {
@@ -145,9 +145,6 @@ class ProductsPage extends React.Component {
                                             >
                                                 <div
                                                     className="breadcrumb-text"
-                                                    // href={`http://localhost:8080/products${item.path}`}
-                                                    // href='#'
-                                                    // data-sku={item.sku}
                                                     style={{
                                                         color:'#E9BD4C',
                                                         cursor: 'pointer'
@@ -155,7 +152,7 @@ class ProductsPage extends React.Component {
                                                     onClick={() => {
                                                         console.log(history);
                                                         this.props.fetchProducts(item.sku, item.title, item.name);
-                                                        // history.push(`products${item.path}`)
+                                                        history.push(`/products${item.path}`)
                                                     }}
                                                 >
                                                     {item.name}
@@ -332,16 +329,25 @@ class ProductsPage extends React.Component {
                                                 className="product"
                                                 to={`/product${product.path}`}
                                                 key={i}
-                                                onClick={() => this.props.fetchProduct(product.pid)}
+                                                onClick={() => this.props.fetchProduct(
+                                                    product.pid,
+                                                    this.props.products.breadCrumbs,
+                                                    {
+                                                        title: 'PRODUCT_ITEM',
+                                                        sku: product.sku,
+                                                        path: product.path,
+                                                        name: product.description
+                                                    }
+                                                )}
                                                 style={{ textDecoration: 'none' }}
                                             >
                                                 <div className="product__container">
                                                     <div className="product-img-wrapper">
-                                                        <img src={`https://imgur.com/${product.imgId}.jpg`} alt="dress" className="product-img" />
+                                                        <img src={`https://imgur.com/${product.imgId}.jpg`} alt={product.description} className="product-img" />
                                                     </div>
                                                     <span className="span"></span>
                                                     <div className="product-details">
-                                                        <p className="small product-category">Fashion</p>
+                                                        <p className="small product-category">{product.label}</p>
                                                         <p className="product-details__p">{product.description}</p>
                                                         <span className="product-price-details">
                                                             <div className="product-details-price font-italic">
@@ -396,10 +402,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchProduct: (pid) => dispatch(fetchProduct(pid)),
+    fetchProduct: (pid, breadCrumbs, newCrumb) => dispatch(fetchProduct(pid, breadCrumbs, newCrumb)),
     fetchProducts: (sku, name, title) => dispatch(fetchProducts(sku, name, title)),
     loadRelatedCategories: () => dispatch(loadRelatedCategories()),
-    setRangeFilter: (text) => dispatch(setRangeFilter(text)),
     handleRange: (range) => dispatch(handleRange(range)),
     sortByPrice: () => dispatch(sortByPrice())
 });

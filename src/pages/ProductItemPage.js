@@ -13,7 +13,8 @@ import NavBar from '../components/NavBar';
 import SizeChart from '../components/SizeChart';
 import CheckoutPage from './CheckoutPage';
 import { addToCart } from '../actions/cart';
-import { setCurrency } from '../actions/products';
+import { setCurrency, fetchProducts } from '../actions/products';
+import { history } from '../routes/AppRouter';
 import Scroll from '../components/Scroll';
 import '../assets/images/dress.png';
 
@@ -103,6 +104,8 @@ class ProductItemPage extends React.Component {
             subTotal: this.state.count*this.props.product.newPrice
         }
 
+        this.sizeFeature() && (product['size'] = this.sizeFeature())
+
         this.props.addToCart(product);
     }
 
@@ -125,31 +128,61 @@ class ProductItemPage extends React.Component {
 
     sizeFeature() {
         const featuresList = this.props.product.features;
-        const features = []; 
-        const keys = !!featuresList && featuresList.map(
-            feature => features.concat(Object.keys(feature))
+        const keys = !!featuresList && featuresList.find(
+            feature => feature.size
         );
-        console.log(featuresList)
 
-        return keys.includes('size');
+        return !!keys ? keys.size : false;
     }
 
     render() {
-        console.log('product: ',this.props.product)
+        const itemLength = this.props.product.breadCrumbs.length;
+
         return (
             <div className="App">
                 <NavBar />
                 <div className="product-item">
                     <nav className="product-nav-breadcrumb">
-                        <span className="nav-breadcrumb__span">
-                            <NavLink className="breadcrumb-text" to="/">Home</NavLink>
-                            <i className="fas fa-angle-right mx-2" aria-hidden="true"></i>
-                            <NavLink className="breadcrumb-text" to="/products">Women's Fashion</NavLink>
-                            <i className="fas fa-angle-right mx-2" aria-hidden="true"></i>
-                            <NavLink className="breadcrumb-text" to="/">Clothing</NavLink>
-                            <i className="fas fa-angle-right mx-2" aria-hidden="true"></i>
-                            <p className="breadcrumb-item active">Dress</p>
-                        </span>
+                        {
+                            this.props.product.breadCrumbs.map(
+                                (item, i) => {
+                                    return i === itemLength - 1 ? (
+                                        <p
+                                            className="text-muted"
+                                            key={i}
+                                            data-sku={item.sku}
+                                        >
+                                            {item.name}
+                                        </p>
+                                    ) : (
+                                        <React.Fragment
+                                            key={i}
+                                        >
+                                            <NavLink
+                                                className="breadcrumb-text"
+                                                style={{
+                                                    color:'#E9BD4C',
+                                                    cursor: 'pointer'
+                                                }}
+                                                to={`/products${item.path}`}
+                                                onClick={() => {
+                                                    console.log(history);
+                                                    this.props.fetchProducts(item.sku, item.title, item.name);
+                                                    // history.go(`products${item.path}`)
+                                                }}
+                                            >
+                                                {item.name}
+                                            </NavLink>
+                                            {
+                                                i !== this.props.product.breadCrumbs.length - 1 && <i
+                                                    className="fas fa-angle-right mx-2"
+                                                    aria-hidden="true"></i>
+                                            }
+                                        </React.Fragment>
+                                    )
+                                }
+                            )
+                        }
                     </nav>
                     <div className="product-item-container">
                         <div className="product-item__img">
@@ -220,17 +253,12 @@ class ProductItemPage extends React.Component {
                                             </span>
                                             <div id="sizes" className="size-range">
                                                 {
-                                                    // this.state.sizes.map((item, i) => <div
-                                                    //     className="size_ small"
-                                                    //     key={i}
-                                                    //     onClick={this.setSize}
-                                                    // >{item}</div>)
+                                                    this.sizeFeature().map(size => <div
+                                                        className="size_ small"
+                                                        key={size}
+                                                        onClick={this.setSize}
+                                                    >{size}</div>)
                                                 }
-                                                <div className="size_ small" onClick={this.setSize}>S</div>
-                                                <div className="size_ small" onClick={this.setSize}>M</div>
-                                                <div className="size_ small" onClick={this.setSize}>L</div>
-                                                <div className="size_ small" onClick={this.setSize}>XL</div>
-                                                <div className="size_ small" onClick={this.setSize}>XXL</div>
                                             </div>
                                         </React.Fragment>
                                     }
@@ -323,12 +351,13 @@ class ProductItemPage extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    product: state.products.product
+    product: state.products.product,
+    products: state.products
 });
 
 const mapDispatchToProps = (dispatch) => ({
     addToCart: (product) => dispatch(addToCart(product)),
-
+    fetchProducts: (sku, name, title) => dispatch(fetchProducts(sku, name, title))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductItemPage);

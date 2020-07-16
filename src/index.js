@@ -21,16 +21,17 @@ const storeUser = new clientStorage();
 let hasRendered = false;
 
 render(<div className="spinner-border text-warning"></div>, document.getElementById('root'));
+store.dispatch(loadProductCategories());
+store.dispatch(fetchAllProducts());
 
 console.log(fire.database().ref().push().key)
 
 const renderApp = () => {
+    
     if (!hasRendered) {
         render(<App />, document.getElementById('root'));
         hasRendered = true;
     }
-    store.dispatch(loadProductCategories());
-    store.dispatch(fetchAllProducts());
     // var ref = fire.database().ref("users");
 }
 

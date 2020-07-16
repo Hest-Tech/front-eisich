@@ -17,7 +17,6 @@ const productsReducerDefaultState = {
     displaySubCategories: false,
     currentCategory: null,
     relatedCategory: null,
-    productFeatures: [],
     products: []
 };
 
@@ -60,7 +59,8 @@ export default (state = productsReducerDefaultState, action) => {
         case 'FETCH_PRODUCT':
             return {
                 ...state,
-                product: action.payload
+                product: action.payload,
+                breadCrumbs: action.payload.breadCrumbs
             }
         case 'CURRENT_CATEGORY':
             return {

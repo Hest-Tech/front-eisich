@@ -20,6 +20,9 @@ module.exports = {
             mainCategory: {
                 type: Sequelize.STRING
             },
+            label: {
+                type: Sequelize.STRING
+            },
             subCategory: {
                 type: Sequelize.STRING
             },

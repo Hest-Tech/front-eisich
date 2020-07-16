@@ -156,6 +156,7 @@ export const fetchProducts = (sku, name, title) => dispatch => {
                 payload['title'] = title
                 payload['filteredProducts'] = filteredProducts
                 localStorage.setItem('products', JSON.stringify(payload));
+                // history.push(`products/${data[data.length].path}`)
 
                 dispatch({
                     type: FETCH_PRODUCTS,
@@ -204,17 +205,22 @@ export const fetchAllProducts = () => dispatch => {
 }
 
 // fetch single product
-export const fetchProduct = (pid) => dispatch => {
-    // dispatch({ type: 'FOCUS_RESULTS' })
+export const fetchProduct = (pid, breadCrumbs, newCrumb) => dispatch => {
     axios
         .get(`${url}/product/${pid}`)
         .then(response => {
             const product = response.data.data;
+            breadCrumbs.push(newCrumb);
 
-            localStorage.setItem('product', JSON.stringify(product));
+            const payload = {
+                ...product,
+                breadCrumbs
+            };
+
+            localStorage.setItem('product', JSON.stringify(payload));
             dispatch({
                 type: FETCH_PRODUCT,
-                payload: product
+                payload
             })
         })
         .catch(error => console.log(error))

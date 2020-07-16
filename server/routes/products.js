@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
                     'subCategory',
                     'oldPrice',
                     'newPrice',
+                    'label',
                     'pieces',
                     'title',
                     'features',

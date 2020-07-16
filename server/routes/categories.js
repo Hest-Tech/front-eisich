@@ -63,37 +63,6 @@ router.get("/subCategories/:name", async (req, res) => {
     }
 });
 
-// fetch all products
-router.get('/products', async (req, res) => {
-    try {
-        const products = await db.Product.findAll({
-            attributes: [
-                'imgId',
-                'description',
-                'path',
-                'mainCategory',
-                'subCategory',
-                'oldPrice',
-                'newPrice',
-                'pieces',
-                'title',
-                'features',
-                'saving',
-                'seller',
-                'innerCategory',
-                'pid',
-                'details',
-                'sellerId'
-            ]
-        });
-        return res.json({
-            data: products
-        });
-    } catch (e) {
-        console.log(e);
-    }
-});
-
 // fetch categories' products
 router.get('/:name/:mainSku/:subSku/:innerSku', async (req, res) => {
     try {

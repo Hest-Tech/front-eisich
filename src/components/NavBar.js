@@ -62,7 +62,7 @@ class NavBar extends React.Component {
     }
 
     // componentDidMount() {
-    //     this.props.loadUser();
+    //     this.props.fetchAllProducts();
     // }
 
     componentDidUpdate() {
