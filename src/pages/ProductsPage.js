@@ -150,7 +150,7 @@ class ProductsPage extends React.Component {
                                                         cursor: 'pointer'
                                                     }}
                                                     onClick={() => {
-                                                        console.log(history);
+                                                        console.log('category: ',item);
                                                         this.props.fetchProducts(item.sku, item.title, item.name);
                                                         history.push(`/products${item.path}`)
                                                     }}

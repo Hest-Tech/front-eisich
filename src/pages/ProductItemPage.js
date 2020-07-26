@@ -13,6 +13,7 @@ import NavBar from '../components/NavBar';
 import SizeChart from '../components/SizeChart';
 import CheckoutPage from './CheckoutPage';
 import { addToCart } from '../actions/cart';
+import { placeOrder } from '../actions/orders';
 import { setCurrency, fetchProducts } from '../actions/products';
 import { history } from '../routes/AppRouter';
 import Scroll from '../components/Scroll';
@@ -30,6 +31,7 @@ class ProductItemPage extends React.Component {
         this.setDiscount = this.setDiscount.bind(this);
         this.setDisableBtn = this.setDisableBtn.bind(this);
         this.setSize = this.setSize.bind(this);
+        this.placeOrder = this.placeOrder.bind(this);
 
         this.state = {
             chartPopUp: false,
@@ -135,6 +137,23 @@ class ProductItemPage extends React.Component {
         return !!keys ? keys.size : false;
     }
 
+    placeOrder() {
+        const productItem = this.props.product;
+        const product = {
+            pid: productItem.pid,
+            imgId: productItem.imgId,
+            description: productItem.description,
+            seller: productItem.seller,
+            quantity: this.state.count,
+            oldPrice: productItem.oldPrice,
+            newPrice: productItem.newPrice,
+            saving: productItem.saving,
+            subTotal: this.state.count*this.props.product.newPrice
+        }
+
+        this.props.placeOrder(product);
+    }
+
     render() {
         const itemLength = this.props.product.breadCrumbs.length;
 
@@ -168,7 +187,6 @@ class ProductItemPage extends React.Component {
                                                 onClick={() => {
                                                     console.log(history);
                                                     this.props.fetchProducts(item.sku, item.title, item.name);
-                                                    // history.go(`products${item.path}`)
                                                 }}
                                             >
                                                 {item.name}
@@ -306,16 +324,17 @@ class ProductItemPage extends React.Component {
                                         <NavLink
                                             className="buy-now"
                                             to="/checkout"
+                                            onClick={this.placeOrder}
                                         >
                                             <button className="btn btn-lg btn-danger">Buy Now</button>
                                         </NavLink>
                                         <NavLink
                                             className="add-to-cart"
                                             to="/cart"
+                                            onClick={this.addToCart}
                                         >
                                             <button
                                                 className="btn btn-lg btn-warning"
-                                                onClick={this.addToCart}
                                                 disabled={this.setDisableBtn()}
                                             >
                                                 Add to Cart
@@ -357,6 +376,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     addToCart: (product) => dispatch(addToCart(product)),
+    placeOrder: (product) => dispatch(placeOrder(product)),
     fetchProducts: (sku, name, title) => dispatch(fetchProducts(sku, name, title))
 });
 

@@ -9,6 +9,7 @@ import { removeFromCart, updateCartItem } from '../actions/cart';
 import { addToWishlist } from '../actions/wishlist';
 import { setCurrency } from '../actions/products';
 import Scroll from '../components/Scroll';
+import { placeOrder } from '../actions/orders';
 
 
 class CartPage extends React.Component {
@@ -17,7 +18,8 @@ class CartPage extends React.Component {
         this.setQuantity = this.setQuantity.bind(this);
         this.addQuantity = this.addQuantity.bind(this);
         this.checkWishlist = this.checkWishlist.bind(this);
-        this.minusQuantity = this.minusQuantity.bind(this);        
+        this.minusQuantity = this.minusQuantity.bind(this);
+        this.placeOrder = this.placeOrder.bind(this);
 
         this.state = {
             vat: 0,
@@ -74,6 +76,12 @@ class CartPage extends React.Component {
         console.log('itemExists: ',!!itemExists)
 
         return !!itemExists;
+    }
+
+    placeOrder() {
+        const product = this.props.cart;
+
+        this.props.placeOrder(product)
     }
 
     render() {
@@ -217,8 +225,12 @@ class CartPage extends React.Component {
                             <NavLink
                                 to="/checkout"
                                 className="checkout-link"
+                                onClick={this.placeOrder}
                             >
-                                <button type="button" className="btn btn-warning btn-lg action-btn-cart">PROCEED TO CHECKOUT</button>
+                                <button
+                                    type="button"
+                                    className="btn btn-warning btn-lg action-btn-cart"
+                                >PROCEED TO CHECKOUT</button>
                             </NavLink>
                         </div>
                     </div>
@@ -239,6 +251,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     removeFromCart: (pid) => dispatch(removeFromCart(pid)),
     addToWishlist: (item) => dispatch(addToWishlist(item)),
+    placeOrder: (product) => dispatch(placeOrder(product)),
     updateCartItem: (pid, updates) => dispatch(updateCartItem(pid, updates))
 });
 

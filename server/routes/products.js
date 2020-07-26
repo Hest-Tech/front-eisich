@@ -4,6 +4,7 @@ const sequelize = require('sequelize');
 const db = require('../database/models');
 const router = express.Router();
 
+// fetch all products
 router.get('/', async (req, res) => {
     try {
         const products = await db.Product.findAll({
@@ -35,5 +36,21 @@ router.get('/', async (req, res) => {
         console.log(e);
     }
 });
+
+// fetch product id
+router.get('/:pid', async (req, res) => {
+    try {
+        const pid = req.params.pid;
+        const product = await db.Product.findOne({
+            attributes: [ 'id', 'pid' ],
+            where: { pid }
+        });
+
+        return res.json({ data: product });
+    } catch (e) {
+        console.log(e);
+    }
+});
+
 
 module.exports = router;

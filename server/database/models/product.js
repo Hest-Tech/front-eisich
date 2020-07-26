@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         mainCategory: DataTypes.STRING,
         subCategory: DataTypes.STRING,
         innerCategory: DataTypes.STRING,
-        pid: DataTypes.STRING
+        pid: DataTypes.UUID
     }, {});
     Product.associate = function(models) {
         Product.belongsTo(models.Cart);

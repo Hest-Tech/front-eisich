@@ -281,7 +281,7 @@ router.get('/:name/:sku', async (req, res) => {
                 const displaysCategory = await db.InnerSubCategory.findAll({
                     attributes: ['name', 'sku', 'path', 'sort', 'filters'],
                     where: {
-                        subCategoryId: sCategory.id
+                        subCategoryId: !!sCategory && sCategory.id
                     }
                 });
 
@@ -297,6 +297,7 @@ router.get('/:name/:sku', async (req, res) => {
                     where: { sku }
                 });
                 console.log(name);
+                console.log(sku);
                 console.log('iCategory: ', iCategory)
 
                 const displayiCategory = await db.InnerSubCategory.findAll({

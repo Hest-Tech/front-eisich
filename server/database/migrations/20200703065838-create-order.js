@@ -10,7 +10,7 @@ module.exports = {
             },
             pid: {
                 type: Sequelize.INTEGER,
-                references: { // Cart hasMany Products
+                references: { // Order hasMany Products
                     model: 'Products',
                     key: 'id'
                 },
@@ -19,6 +19,9 @@ module.exports = {
             },
             imgId: {
                 type: Sequelize.STRING
+            },
+            sku: {
+                type: Sequelize.UUID
             },
             description: {
                 type: Sequelize.TEXT

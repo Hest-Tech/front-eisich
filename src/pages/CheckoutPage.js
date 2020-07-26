@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import dress from '../assets/images/dress.png';
 import iphone from '../assets/images/iphone.png';
 import { CheckoutSchema } from '../utils/validate';
+import { completeOrder } from '../actions/orders';
 
 
 class CheckoutPage extends React.Component {
@@ -117,33 +118,9 @@ class CheckoutPage extends React.Component {
                                         city: "",
                                         exampleRadios: "",
                                     }}
-                                    validationSchema={CheckoutSchema}
-                                    onSubmit={(values, { setSubmitting, resetForm }) => {
-                                        // resetForm();
-
-                                        const payload = {
-                                            phoneNumber: `254${values.phoneNumber}`,
-                                            shortCode: "174379",
-                                            amount: "1",
-                                            vendor: "174379",
-                                            exampleRadios: values.exampleRadios.toString(),
-                                        }
-                                        console.log(payload);
-
-                                        return fetch('https://f3383a3e.ngrok.io/lipaNaMpesa', {
-                                            method: 'POST',
-                                            body: JSON.stringify(payload),
-                                            headers: {
-                                                'Content-Type': 'application/json'
-                                            }
-                                        }).then(res => {
-                                            if (res.ok) return res.json();
-                                            throw new Error('Request Failed!');
-                                        }, netError => console.log(netError)
-                                        ).then(jsonResponse => {
-                                            setSubmitting(false);
-                                            console.log(jsonResponse);
-                                        })
+                                    validationSchema={ CheckoutSchema }
+                                    onSubmit={(values, { setSubmitting }) => {
+                                        this.props.completeOrder(values, setSubmitting, this.props.orders.pendingOrders);
                                     }}
                                 >
                                     {({ values, errors, touched, isSubmitting, filters }) => (
@@ -345,7 +322,10 @@ class CheckoutPage extends React.Component {
                                                     </div> */}
                                                 </div>
                                             </div>
-                                            <button className="btn btn-warning btn-lg btn-block checkout-btn" type="submit">Continue to checkout</button>
+                                            <button
+                                                className="btn btn-warning btn-lg btn-block checkout-btn"
+                                                type="submit"
+                                            >Continue to checkout</button>
                                         </Form>
                                     )}
                                 </Formik>
@@ -370,7 +350,12 @@ class CheckoutPage extends React.Component {
 
 const mapStateToProps = (state) => ({
     cart: state.cart.cart,
+    orders: state.orders,
     authentication: state.authentication
 });
 
-export default connect(mapStateToProps)(CheckoutPage);
+const mapDispatchToProps = (dispatch) => ({
+    completeOrder: (products, setSubmitting, pendingOrders) => dispatch(completeOrder(products, setSubmitting, pendingOrders))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);

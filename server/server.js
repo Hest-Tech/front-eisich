@@ -25,6 +25,7 @@ app.use(cors());
 app.use('/api/v1/products', require('./routes/products'));
 app.use('/api/v1/wishlist', require('./routes/wishlist'));
 app.use('/api/v1/cart', require('./routes/cart'));
+app.use('/api/v1/orders', require('./routes/orders'));
 app.use('/api/v1', require('./routes/categories'));
 
 const validateNum = new ValidateMpesaData();

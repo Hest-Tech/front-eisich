@@ -52,7 +52,7 @@ module.exports = {
                 type: Sequelize.STRING
             },
             pid: {
-                type: Sequelize.STRING
+                type: Sequelize.UUID
             },
             details: {
                 type: Sequelize.TEXT

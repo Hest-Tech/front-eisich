@@ -128,16 +128,19 @@ export const fetchProducts = (sku, name, title) => dispatch => {
     const filteredProducts = products.filter(item => {
         switch (name) {
             case 'MAIN_CATEGORY':
-                return item.mainCategory === sku
+                loadRelatedCategoriesHelper('SUB_CATEGORY', sku, dispatch)
+                loadCurrentCategory('MAIN_CATEGORY', sku, dispatch)
+                return item.mainCategory === sku;
             case 'SUB_CATEGORY':
-                return item.subCategory === sku
+                loadRelatedCategoriesHelper('INNER_CATEGORY', sku, dispatch)
+                loadCurrentCategory('SUB_CATEGORY', sku, dispatch)
+                return item.subCategory === sku;
             case 'INNER_CATEGORY':
-                const productFound = item.innerCategory === sku;
-                return productFound;
+                loadRelatedCategoriesHelper('SUB_CATEGORY', sku, dispatch)
+                loadCurrentCategory('INNER_CATEGORY', sku, dispatch)
+                return item.innerCategory === sku;
         }
     });
-
-    console.log('filteredProducts: ',!!filteredProducts.length)
 
     if (!!filteredProducts.length) {
 
