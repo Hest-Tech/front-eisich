@@ -13,7 +13,7 @@ import NavBar from '../components/NavBar';
 import SizeChart from '../components/SizeChart';
 import CheckoutPage from './CheckoutPage';
 import { addToCart } from '../actions/cart';
-import { placeOrder } from '../actions/orders';
+import { placeOrder, impulsePurchase } from '../actions/orders';
 import { setCurrency, fetchProducts } from '../actions/products';
 import { history } from '../routes/AppRouter';
 import Scroll from '../components/Scroll';
@@ -151,6 +151,7 @@ class ProductItemPage extends React.Component {
             subTotal: this.state.count*this.props.product.newPrice
         }
 
+        this.props.impulsePurchase();
         this.props.placeOrder(product);
     }
 
@@ -376,6 +377,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     addToCart: (product) => dispatch(addToCart(product)),
+    impulsePurchase: () => dispatch(impulsePurchase()),
     placeOrder: (product) => dispatch(placeOrder(product)),
     fetchProducts: (sku, name, title) => dispatch(fetchProducts(sku, name, title))
 });

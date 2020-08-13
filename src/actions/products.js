@@ -38,7 +38,12 @@ const loadRelatedCategoriesHelper = (name, sku, dispatch) => {
         .get(`${url}/${name}/${sku}`)
         .then(res => {
             const category = res.data.data;
-            // console.log('category ==> ',category)
+            console.log('loadRelatedCategoriesHelper ==> ',category)
+            localStorage.setItem('selectCategory', JSON.stringify({
+                name,
+                sku,
+                title: category[0].name
+            }))
 
             dispatch({
                 type: 'RELATED_CATEGORY',
@@ -53,7 +58,7 @@ const loadCurrentCategory = (name, sku, dispatch) => {
         .get(`${url}/category/${name}/${sku}`)
         .then(res => {
             const category = res.data.data;
-            // console.log('currentCategory: ',category)
+            console.log('loadCurrentCategory ==> ',category)
 
             dispatch({
                 type: 'CURRENT_CATEGORY',
@@ -128,19 +133,22 @@ export const fetchProducts = (sku, name, title) => dispatch => {
     const filteredProducts = products.filter(item => {
         switch (name) {
             case 'MAIN_CATEGORY':
-                loadRelatedCategoriesHelper('SUB_CATEGORY', sku, dispatch)
+                loadRelatedCategoriesHelper('MAIN_CATEGORY', sku, dispatch)
                 loadCurrentCategory('MAIN_CATEGORY', sku, dispatch)
                 return item.mainCategory === sku;
             case 'SUB_CATEGORY':
-                loadRelatedCategoriesHelper('INNER_CATEGORY', sku, dispatch)
+                loadRelatedCategoriesHelper('SUB_CATEGORY', sku, dispatch)
                 loadCurrentCategory('SUB_CATEGORY', sku, dispatch)
                 return item.subCategory === sku;
             case 'INNER_CATEGORY':
-                loadRelatedCategoriesHelper('SUB_CATEGORY', sku, dispatch)
+                loadRelatedCategoriesHelper('INNER_CATEGORY', sku, dispatch)
                 loadCurrentCategory('INNER_CATEGORY', sku, dispatch)
                 return item.innerCategory === sku;
         }
     });
+
+    console.log('1. filteredProducts: ',filteredProducts)
+    // console.log('2. ')
 
     if (!!filteredProducts.length) {
 

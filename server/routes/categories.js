@@ -166,7 +166,8 @@ router.get('/breadCrumbs/:name/:sku', async (req, res) => {
             try {
                 const mainCategory = await db.MainCategory.findOne({
                     attributes: [ 'id' ],
-                    where: { sku }
+                    where: { sku },
+                    raw: true
                 })
 
                 const subCategory = await db.SubCategory.findOne({
@@ -186,13 +187,14 @@ router.get('/breadCrumbs/:name/:sku', async (req, res) => {
             try {
                 const subCategory = await db.SubCategory.findOne({
                     attributes: ['name', 'sku', 'path', 'title', 'mainCategoryId'],
-                    where: { sku }
+                    where: { sku },
+                    raw: true
                 });
 
                 const mainCategory = await db.MainCategory.findOne({
                     attributes: ['name', 'sku', 'path', 'title'],
                     where: {
-                        id: subCategory.dataValues.mainCategoryId
+                        id: subCategory.mainCategoryId
                     }
                 })
 
@@ -207,23 +209,25 @@ router.get('/breadCrumbs/:name/:sku', async (req, res) => {
             try {
                 const innerCategory = await db.InnerSubCategory.findOne({
                     attributes: ['name', 'sku', 'path', 'title', 'subCategoryId'],
-                    where: { sku }
+                    where: { sku },
+                    raw: true
                 });
 
                 const subCategory = await db.SubCategory.findOne({
                     attributes: ['name', 'sku', 'path', 'title', 'mainCategoryId'],
                     where: {
-                        id: innerCategory.dataValues.subCategoryId
-                    }
+                        id: innerCategory.subCategoryId
+                    },
+                    raw: true
                 });
-                console.log(subCategory.dataValues);
+                console.log(subCategory);
                 console.log('mainCategoryId: ',subCategory.mainCategoryId);
                 console.log('name: ',subCategory.name);
 
                 const mainCategory = await db.MainCategory.findOne({
                     attributes: ['name', 'sku', 'path', 'title'],
                     where: {
-                        id: subCategory.dataValues.mainCategoryId
+                        id: subCategory.mainCategoryId
                     }
                 });
 
@@ -252,7 +256,8 @@ router.get('/:name/:sku', async (req, res) => {
             try {
                 const mCategory = await db.MainCategory.findOne({
                     attributes: [ 'id' ],
-                    where: { sku }
+                    where: { sku },
+                    raw: true
                 })
 
                 console.log('mcategory: ',mCategory)
@@ -273,7 +278,8 @@ router.get('/:name/:sku', async (req, res) => {
             try {
                 const sCategory = await db.SubCategory.findOne({
                     attributes: [ 'id' ],
-                    where: { sku }
+                    where: { sku },
+                    raw: true
                 });
                 console.log(name);
                 console.log('sCategory: ', sCategory)
@@ -282,8 +288,10 @@ router.get('/:name/:sku', async (req, res) => {
                     attributes: ['name', 'sku', 'path', 'sort', 'filters'],
                     where: {
                         subCategoryId: !!sCategory && sCategory.id
-                    }
+                    },
+                    raw: true
                 });
+                console.log('displaysCategory: ', displaysCategory)
 
                 return res.json({ data: displaysCategory });
             } catch(e) {
@@ -294,7 +302,8 @@ router.get('/:name/:sku', async (req, res) => {
             try {
                 const iCategory = await db.InnerSubCategory.findOne({
                     attributes: [ 'subCategoryId' ],
-                    where: { sku }
+                    where: { sku },
+                    raw: true
                 });
                 console.log(name);
                 console.log(sku);
@@ -319,13 +328,16 @@ router.get('/:name/:sku', async (req, res) => {
 router.get('/category/:name/:sku', async (req, res) => {
     const sku = req.params.sku;
     const name = req.params.name;
+    console.log('sku: ',sku)
+    console.log('name: ',name)
 
     switch (name) {
         case 'MAIN_CATEGORY':
             try {
                 const mCategory = await db.MainCategory.findOne({
                     attributes: ['name', 'sku', 'path', 'sort', 'filters'],
-                    where: { sku }
+                    where: { sku },
+                    raw: true
                 });
 
                 return res.json({ data: mCategory });
@@ -337,8 +349,10 @@ router.get('/category/:name/:sku', async (req, res) => {
             try {
                 const sCategory = await db.SubCategory.findOne({
                     attributes: ['name', 'sku', 'path', 'sort', 'filters'],
-                    where: { sku }
+                    where: { sku },
+                    raw: true
                 });
+                console.log('OVER HERE: ',sCategory)
 
                 return res.json({ data: sCategory });
             } catch(e) {
@@ -349,7 +363,8 @@ router.get('/category/:name/:sku', async (req, res) => {
             try {
                 const iCategory = await db.InnerSubCategory.findOne({
                     attributes: ['name', 'sku', 'path', 'sort', 'filters'],
-                    where: { sku }
+                    where: { sku },
+                    raw: true
                 });
 
                 return res.json({ data: iCategory });

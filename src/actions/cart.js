@@ -14,6 +14,7 @@ import { history } from '../routes/AppRouter';
 
 
 const url = "http://localhost:5000/api/v1/cart";
+const rootUrl = "http://localhost:5000/api/v1";
 
 // add to cart
 export const addToCart = product => dispatch => {
@@ -25,7 +26,8 @@ export const addToCart = product => dispatch => {
             if (!!pid) {
                 const cartProduct = {
                     ...product,
-                    pid: pid.id
+                    pid: pid.id,
+                    sku: product.pid
                 };
 
                 axios

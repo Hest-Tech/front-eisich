@@ -177,7 +177,7 @@ class ProductsPage extends React.Component {
                                     <div className="product-category-sec">
                                         <div className="product-category-sec__wrapped">
                                             {
-                                                !!subCategories && subCategories.map(subCategory => (
+                                                !!this.props.products.relatedCategory && this.props.products.relatedCategory.map(subCategory => (
                                                     <span key={subCategory.name}>
                                                         <i className="fas fa-angle-right mx2" aria-hidden="true"></i>
                                                         <p

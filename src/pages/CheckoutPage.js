@@ -120,7 +120,7 @@ class CheckoutPage extends React.Component {
                                     }}
                                     validationSchema={ CheckoutSchema }
                                     onSubmit={(values, { setSubmitting }) => {
-                                        this.props.completeOrder(values, setSubmitting, this.props.orders.pendingOrders);
+                                        this.props.completeOrder(values, setSubmitting, this.props.orders);
                                     }}
                                 >
                                     {({ values, errors, touched, isSubmitting, filters }) => (

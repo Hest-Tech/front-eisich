@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/add", async (req, res) => {
 	try {
     	const requestedOrders = req.body;
-        console.log('-------> ',requestedOrders)
+        
         if (await db.Orders.bulkCreate(requestedOrders)) {
             const orderItems = await db.Orders.findAll({
                 attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
@@ -24,45 +24,23 @@ router.post("/add", async (req, res) => {
 	}
 });
 
-// filter out duplicate orders
+// sort out orders
 router.get("/:orders", async (req, res) => {
     try {
         const ordersList = JSON.parse(req.params.orders);
-        const sortedOrders = []
-        const allOrders = await db.Orders.findAll({
-            attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
-            raw: true
-        });
+        const sortedOrders = [];
         
         for (const order of ordersList) {
-            // fetch sorted orders(no duplicates)
-            const currentOrders = await db.Orders.findOne({
-                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
-                where: {
-                    [Op.not]: [
-                        { sku: order.pid }
-                    ]
-                },
-                raw: true
-            });
             // fetch product's id & pid
             const product = await db.Product.findOne({
                 attributes: [ 'id', 'pid' ],
                 where: { pid: order.pid },
                 raw: true
             });
-            console.log("product: ",product);
-            const noCurrentOrders = !allOrders.length && !currentOrders;
 
-            if (noCurrentOrders) {
-                order['pid'] = product.id
-                order['sku'] = product.pid
-                sortedOrders.push(order)
-            } else if (!!currentOrders) {
-                currentOrders['pid'] = product.id
-                currentOrders['sku'] = product.pid
-                sortedOrders.push(currentOrders)
-            }
+            order['pid'] = product.id
+            order['sku'] = product.pid
+            sortedOrders.push(order)
         }
 
         console.log('==> ',sortedOrders)
@@ -99,4 +77,38 @@ router.get("/add/:pid", async (req, res) => {
         console.log(e);
     }
 });
+
+
+
+
+
+
+for (const order of ordersList) {
+            const currentOrders = await db.Orders.findOne({
+                attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
+                where: {
+                    [Op.not]: [
+                        { sku: order.pid }
+                    ]
+                },
+                raw: true
+            });
+            // fetch product's id & pid
+            const product = await db.Product.findOne({
+                attributes: [ 'id', 'pid' ],
+                where: { pid: order.pid },
+                raw: true
+            });
+            const noCurrentOrders = !allOrders.length && !currentOrders;
+
+            if (noCurrentOrders) {
+                order['pid'] = product.id
+                order['sku'] = product.pid
+                sortedOrders.push(order)
+            } else if (!!currentOrders) {
+                currentOrders['pid'] = product.id
+                currentOrders['sku'] = product.pid
+                sortedOrders.push(currentOrders)
+            }
+        }
 */

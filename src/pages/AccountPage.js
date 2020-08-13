@@ -12,7 +12,12 @@ class AccountPage extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+    }
+
     render() {
+        console.log('this.props.resMessages.msg')
+        console.log(this.props.resMessages.msg)
         return (
             <div className="account-page-container account-background">
                 <div className="wrapper-acc-pg">

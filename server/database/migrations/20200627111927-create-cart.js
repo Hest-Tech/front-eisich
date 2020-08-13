@@ -20,6 +20,9 @@ module.exports = {
             imgId: {
                 type: Sequelize.STRING
             },
+            sku: {
+                type: Sequelize.UUID
+            },
             description: {
                 type: Sequelize.TEXT
             },

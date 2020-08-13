@@ -42,7 +42,7 @@ const AppRouter = () => (
             <Switch>
                 <Route path="/" component={HomePage} exact={true} />
                 <PrivateRoute path="/customer/account" component={AccountPage} />
-                <PrivateRoute path="/customer/orders" component={AccountOrders} />
+                /*PRIVATE_ROUTES*/<Route path="/customer/orders" component={AccountOrders} />
                 <PrivateRoute path="/customer/wishlist" component={AccountWishlist} />
                 <PrivateRoute path="/customer/pending-reviews" component={AccountPendingReviews} />
                 <PrivateRoute path="/customer/coupons" component={AccountCoupons} />
@@ -50,8 +50,8 @@ const AppRouter = () => (
                 <PrivateRoute path="/customer/address" component={AddressBook} />
                 <PrivateRoute path="/customer/profile/edit" component={UpdateAccount} />
                 <PrivateRoute path="/customer/address-book/edit" component={UpdateAddressBook} />
-                <Route path="/checkout" component={CheckoutPage} />
-                <Route path="/cart" component={CartPage} />
+                /*PRIVATE_ROUTES*/<Route path="/checkout" component={CheckoutPage} />
+                /*PRIVATE_ROUTES*/<Route path="/cart" component={CartPage} />
                 <MobileRoutes path="/user/profile" component={ProfilePage} />     /*mobile only*/
                 <MobileRoutes path="/category" component={CategoryPage} />     /*mobile only*/
                 <MobileRoutes path="/user/mobile/login" component={LoginPage} />     /*mobile only*/
