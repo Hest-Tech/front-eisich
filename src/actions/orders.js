@@ -9,20 +9,31 @@ import {
     LOAD_CURRENT_ORDERS,
     CANCEL_ORDER,
     IMPULSE_PURCHASE,
-    PURCHASE_CART_ITEMS
+    PURCHASE_CART_ITEMS,
+    CLEAR_CART
 } from './types';
-import { removeFromCart, fetchCart } from './cart';
+import {
+	removeFromCart,
+	fetchCart,
+	clearOutCart
+} from './cart';
 import { history } from '../routes/AppRouter';
 import { returnMessages } from './resMessages';
+import fire from '../firebase/firebase';
+
 
 const url = "http://localhost:5000/api/v1/orders";
 const rootUrl = "http://localhost:5000/api/v1";
+const user = fire.auth().currentUser;
+const userID = !!user ? user.uid : null;
 
 
 // load current orders
  
 // place an order
 export const placeOrder = (product, cart) => dispatch => {
+	const status = "pending";
+	product['status'] = status;
     const purchaseType = prompt(
     	"You've requested to purchase one product. Would you like to purchase the rest of your carted items?"
 	);
@@ -35,7 +46,8 @@ export const placeOrder = (product, cart) => dispatch => {
 				const newProduct = {
 					...item,
 					pid: item.sku,
-					productId: item.pid
+					productId: item.pid,
+					status
 				}
 
 				return newProduct;
@@ -57,13 +69,15 @@ export const impulsePurchase = () => ({ type: IMPULSE_PURCHASE });
 // purchase carted items
 export const purchaseCartItems = () => dispatch => {
 	fetchCart();
+	const status = "pending";
 
 	const cartItems = localStorage.getItem('cart');
 	const payload = !!cartItems ? JSON.parse(cartItems).map(item => {
 		const newProduct = {
 			...item,
 			pid: item.sku,
-			productId: item.pid
+			productId: item.pid,
+			status
 		}
 
 		return newProduct;
@@ -108,17 +122,13 @@ export const completeOrder = (values, setSubmitting, storeOrders) => dispatch =>
 					const data = res.data.data;
 
 					if (!storeOrders.impulsePurchase) {
-						console.log('CART_PURCHASE')
-					} else {
 						/* CLEAR OUT THE CART HERE */
-						/*
-							axios
-								.delete(`${url}`)
-								.then(res => {
-									localStorage.remove('cart')
-								})
-						*/
-						console.log('IMPULSE_PURCHASE: ', storeOrders.impulsePurchase)
+						console.log('CART_PURCHASE')
+						clearOutCart();
+						dispatch({
+			                type: CLEAR_CART,
+			                payload: []
+			            });
 					}
 
 					switch(values.exampleRadios) {

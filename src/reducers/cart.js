@@ -2,17 +2,17 @@
  * Cart Reducer
  */
 
-const cartReducerDefaultState = {
-    cart: []
-};
+const cart = localStorage.getItem('cart');
+const cartItem = !cart ? [] : JSON.parse(cart);
 
-export default (state = cartReducerDefaultState, action) => {
+export default (state = cartItem, action) => {
     switch (action.type) {
     	case 'ADD_TO_CART':
         case 'FETCH_CART':
         case 'REMOVE_ITEM_FROM_CART':
+        case 'CLEAR_CART':
         case 'UPDATE_CART_ITEM':
-            return { cart: action.payload }
+            return action.payload
         default:
             return state;
     }

@@ -53,7 +53,7 @@ const MobileNav = (props) => {
 
 const mapStateToProps = (state) => ({
     authentication: state.authentication,
-    cart: state.cart.cart
+    cart: state.cart
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -12,5 +12,6 @@ module.exports = {
     port: process.env.PORT,
     refresh_token: process.env.IMGUR_REFRESH_TOKEN,
     client_id: process.env.IMGUR_CLIENT_ID,
-    client_secret: process.env.IMGUR_CLIENT_SECRET
+    client_secret: process.env.IMGUR_CLIENT_SECRET,
+    google_application_credentials: process.env.GOOGLE_APPLICATION_CREDENTIALS
 };

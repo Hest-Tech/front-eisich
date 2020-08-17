@@ -11,7 +11,7 @@ const lipaNaMpesa = require('./payment-gateways/daraja/lipaNaMpesa');
 // const imgur = require('./imgur/app');
 const hook = require('./payment-gateways/daraja/webHook');
 const { ValidateMpesaData } = require('./payment-gateways/daraja/validate');
-const { mode, client_id, port } = require('./config/config');
+const { mode, client_id, port, google_application_credentials } = require('./config/config');
 const PORT = port || 5000;
 
 

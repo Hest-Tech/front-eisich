@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         saving: DataTypes.INTEGER,
         subTotal: DataTypes.INTEGER,
         address: DataTypes.JSON,
+        userID: DataTypes.UUID,
+        status: DataTypes.STRING, // pending, processing, complete, cancelled
         delivery: DataTypes.JSON
     }, {});
     Orders.associate = function(models) {

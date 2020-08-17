@@ -17,6 +17,9 @@ module.exports = {
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE'
             },
+            userID: {
+                type: Sequelize.STRING    
+            },
             imgId: {
                 type: Sequelize.STRING
             },

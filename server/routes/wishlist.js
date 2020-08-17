@@ -6,10 +6,12 @@ const router = express.Router();
 
 
 // Fetch from Wishlist
-router.get('/', async (req, res) => {
+router.get('/:userID', async (req, res) => {
     try {
+        const userID = req.params.userID
         const wishlist = await db.Wishlist.findAll({
-            attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+            attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
+            where: { userID }
         });
 
         return res.json({ data: wishlist });
@@ -45,11 +47,12 @@ router.post('/add/:pid', async (req, res) => {
 
 
 // delete wishlist item
-router.delete('/delete/:pid', async (req, res) => {
+router.delete('/delete/:pid/:userID', async (req, res) => {
     try {
         const pid = req.params.pid;
+        const userID = req.params.userID;
         const wishlist = await db.Wishlist.destroy({
-            where: { pid }
+            where: { pid, userID }
         })
 
         console.log('wishlist: ',wishlist)

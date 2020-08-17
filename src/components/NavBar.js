@@ -61,9 +61,9 @@ class NavBar extends React.Component {
         this.props.focusResults();
     }
 
-    // componentDidMount() {
-    //     this.props.fetchAllProducts();
-    // }
+    componentDidMount() {
+        console.log('this.props.cart: ',this.props.cart)
+    }
 
     componentDidUpdate() {
         // console.log('searching: ',this.props.filters.searching)
@@ -213,9 +213,11 @@ class NavBar extends React.Component {
                                             </span>
                                         </div>
                                     </div>
+                                    {console.log('this.props.cart: ',this.props.cart)}
                                     <NavLink
                                         to="/cart"
                                         className="link-to-cart"
+                                        onClick={() => this.props.fetchCart()}
                                     >
                                         <i
                                             className='fas fa-cart-plus shopping__icon'
@@ -237,10 +239,9 @@ class NavBar extends React.Component {
 
 const mapStateToProps = (state) => ({
     authentication: state.authentication,
-    cart: state.cart.cart,
+    cart: state.cart,
     products: state.products,
-    filters: state.filters,
-
+    filters: state.filters
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -251,8 +252,7 @@ const mapDispatchToProps = (dispatch) => ({
     setTextFilter: (text) => dispatch(setTextFilter(text)),
     blurResults: () => dispatch(blurResults()),
     focusResults: () => dispatch(focusResults()),
-    fetchCart: () => dispatch(fetchCart())
-    // searchResults: () => dispatch(searchResults()),
+    fetchCart: () => dispatch(fetchCart()),
     // blurSearchResults: () => dispatch(blurSearchResults())
 });
 

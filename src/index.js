@@ -21,10 +21,6 @@ const storeUser = new clientStorage();
 let hasRendered = false;
 
 render(<div className="spinner-border text-warning"></div>, document.getElementById('root'));
-store.dispatch(loadProductCategories());
-store.dispatch(fetchAllProducts());
-
-console.log(fire.database().ref().push().key)
 
 const renderApp = () => {
     
@@ -36,13 +32,16 @@ const renderApp = () => {
 }
 
 fire.auth().onAuthStateChanged(user => {
+    store.dispatch(loadProductCategories());
+    store.dispatch(fetchAllProducts());
+    store.dispatch(fetchCart());
+
     if (user) {
         renderApp();
         let userId = user.uid;
 
         store.dispatch(loadUser());
-        store.dispatch(fetchCart());
-        // console.log(user);
+
         return fire.database()
             .ref('/users/' + userId)
             .once('value')

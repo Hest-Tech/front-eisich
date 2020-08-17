@@ -19,6 +19,7 @@ class CartPage extends React.Component {
         this.addQuantity = this.addQuantity.bind(this);
         this.checkWishlist = this.checkWishlist.bind(this);
         this.minusQuantity = this.minusQuantity.bind(this);
+        this.placeOrder = this.placeOrder.bind(this);
 
         this.state = {
             vat: 0,
@@ -26,7 +27,7 @@ class CartPage extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.wishlist);
+        console.log('this.props.cart: ',this.props.cart);
     }
 
     setQuantity(e, pid) {
@@ -82,6 +83,8 @@ class CartPage extends React.Component {
     }
 
     render() {
+        console.log('this.props.cart: ',this.props.cart);
+
         return (
             <Fragment>
                 <NavBar />
@@ -240,7 +243,7 @@ class CartPage extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    cart: state.cart.cart,
+    cart: state.cart,
     wishlist: state.wishlist.wishlist,
     product: state.products.product
 });

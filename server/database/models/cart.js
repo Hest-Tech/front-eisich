@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         oldPrice: DataTypes.INTEGER,
         newPrice: DataTypes.INTEGER,
         saving: DataTypes.INTEGER,
+        userID: DataTypes.UUID,
         subTotal: DataTypes.INTEGER
     }, {});
     
